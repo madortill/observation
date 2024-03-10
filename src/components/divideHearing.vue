@@ -22,7 +22,7 @@
                      <div class="holes hole-bottom"></div>
                  </div>
              </div>
-             <div id="circle" @click="clickedCircle" :style="`--hue: ${(timesPressed) * 15 + 130}deg`">לחצו עליי</div>
+             <div id="circle" v-show="circleVisible" @click="isCircleVisible" :style="`--hue: ${(changeColor) * 15 + 130}deg`">לחצו עליי</div>
          </div>
          <div class="secondPart">
  
@@ -37,34 +37,38 @@
  export default {
      props: ["chapter"],
      data() {
-         return {
-             subSubjectTitle: ["דברים קורים בנפרד", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
-             subjectCounter: 0,
-             circleVisible: true,
-             timesPressed: 0
-         };        
+        return {
+            subSubjectTitle: ["דברים קורים בנפרד", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
+            subjectCounter: 0,
+            circleVisible: false,
+            changeColor: 0, 
+            totalTime: 0
+        };        
      },
      methods: {
-         updateCounter() {
-             this.subjectCounter++; 
-         },
-         clickedCircle() {
-             this.timesPressed+= 3;
-             this.circleVisible = false;
-         }
+        updateCounter() {
+            this.subjectCounter++; 
+        },
+        isCircleVisible(event) {
+            let randomTime = Math.random() * (9 - 1) + 1;
+            this.totalTime = randomTime * 1000;
+        
+            if (this.circleVisible && event !== undefined) {
+                this.changeColor+= 3;
+                this.circleVisible = false;
+                
+                setTimeout(() => {
+                    this.circleVisible = true;
+                }, this.totalTime);
+            } else {
+                setTimeout(() => {
+                    this.circleVisible = true;
+                }, this.totalTime);
+            }
+        }
      },
-     computed: {
-         isVisible() {
-             if (this.circleVisible === true) {
-                 setTimeout (() => {
-                     return this.circleVisible = false;
-                 }, 2000)
-             } else {
-                 setTimeout(() => {
-                     return this.circleVisible = true;
-                 }, 5000);
-             }
-         }
+     mounted() {
+        this.isCircleVisible();
      }
  }
  </script>

@@ -33,7 +33,6 @@
     methods: {
       changeSubject(event) {
         this.currentSubSubject = event.currentTarget.innerText;
-        console.log(event)
       }
     }
   }
