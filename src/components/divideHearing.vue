@@ -60,10 +60,10 @@
                 כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.
             </div>
             <div class="buttonCont">
-                <button class="buttons" @click="nextSubject">
+                <button class="buttons" @click="$emit('backToHomePage', '')">
                     ממשיכים
                 </button>
-                <button v-show="showBackButton" class="buttons">
+                <button v-show="showBackButton" class="buttons" @click="prevSubject">
                     חוזרים
                 </button>
             </div>
@@ -130,9 +130,14 @@
         nextSubject() {
             clearInterval(this.timer);
             this.subjectCounter++;
-
-            if (this.subjectCounter === 3) {
-                this.$emit()
+            if (this.subjectCounter === 2) {
+                this.showBackButton = true;
+            }
+        },
+        prevSubject() {
+            this.subjectCounter--;
+            if (this.subjectCounter === 1) {
+                this.showBackButton = false;
             }
         },
         countDownTimer () {

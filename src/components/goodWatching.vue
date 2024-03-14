@@ -9,22 +9,26 @@
         subjectsArr: [{
             title: "חלוקת קשב",
             subtitle: "",
-            text: ["דברים קורים בנפרד", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"]
+            text: ["דברים קורים בנפרד", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"], 
+            beenThere: false
           },
           {
             title: "בחירת מיקום",
             subtitle: "בחירת מיקום המתצפת",
-            text: ["הוראות בטיחות", "מאפיינים אישיים של המדריך", "רואה ולא נראה"]
+            text: ["הוראות בטיחות", "מאפיינים אישיים של המדריך", "רואה ולא נראה"], 
+            beenThere: false
           },
           {
             title: "רישום ותיעוד",
             subtitle: "דף תצפית ״טוב״",
-            text: ["התייחסות הכנת שיעור והגשתו", "תקף, מהימן ופרקטי - בר הכללה"]
+            text: ["התייחסות הכנת שיעור והגשתו", "תקף, מהימן ופרקטי - בר הכללה"], 
+            beenThere: false
           },
           {
             title: "התערבות",
             subtitle: "2 סוגי התערבות",
-            text: ["עקיפה", "ישירה"]
+            text: ["עקיפה", "ישירה"], 
+            beenThere: false
           }],
           currentSubSubject: ""
     }
@@ -36,6 +40,10 @@
     methods: {
       changeSubject(event) {
         this.currentSubSubject = event.currentTarget.innerText;
+      }, 
+      backToHomePage(newSub) {
+        this.currentSubSubject = newSub;
+        
       }
     }
   }
@@ -57,7 +65,7 @@
             </div>
           </div>
       </div>
-        <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" />
+        <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
         <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" />
     </div>
 
