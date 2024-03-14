@@ -1,5 +1,7 @@
 <script>
   import DivideHearing from './divideHearing.vue'
+  import SittingPlacement from './sittingPlacement.vue';
+
   export default {
     props: ["chapter"],
     data() {
@@ -28,7 +30,8 @@
     }
     },
     components: {
-      DivideHearing
+      DivideHearing,
+      SittingPlacement
     },
     methods: {
       changeSubject(event) {
@@ -55,6 +58,7 @@
           </div>
       </div>
         <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" />
+        <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" />
     </div>
 
 </template>

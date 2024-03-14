@@ -41,10 +41,32 @@
             </div>
         </div>
         <div v-else-if="subjectCounter === 1" class="secondPart">
-            
+            <div class="explanation">
+                עלייך לשים לב במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br>
+                לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.
+            </div>
+            <div class="buttonCont">
+                <button class="buttons" @click="nextSubject">
+                    ממשיכים
+                </button>
+                <button v-show="showBackButton" class="buttons">
+                    חוזרים
+                </button>
+            </div>
         </div>
         <div v-else class="thirdPart">
-            
+            <div class="explanation-2">
+                שים לב כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br>
+                כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.
+            </div>
+            <div class="buttonCont">
+                <button class="buttons" @click="nextSubject">
+                    ממשיכים
+                </button>
+                <button v-show="showBackButton" class="buttons">
+                    חוזרים
+                </button>
+            </div>
         </div>
     </div>
         
@@ -65,7 +87,9 @@
             circleClicked: 0,
             continued: false,
             top: 0,
-            left: 0
+            left: 0,
+            interval: null,
+            timer: null
         };        
      },
      methods: {
@@ -74,16 +98,17 @@
             this.countDownTimer()
         },
         isCircleVisible(event) {
-            
-
             this.top = Math.floor(Math.random() * (70 - 2) + 2);
             this.left = Math.floor(Math.random() * (70 - 2) + 2);
-            
             
             if (this.circleVisible && event !== undefined) {
                 this.changeColor+= 3;
                 this.circleVisible = false;
                 this.circleClicked++;
+
+                if (this.circleClicked === 3) {
+                    this.nextSubject();
+                }
                 
                 setTimeout(() => {
                     this.circleVisible = true;
@@ -91,28 +116,30 @@
 
             } else if (this.circleVisible) {
 
-                
                 setTimeout(() => {
                     this.circleVisible = false;
                 }, 2000);
-                
             } else {
                 this.changeColor+= 3;
                 
                 setTimeout(() => {
                     this.circleVisible = true;
                 }, this.totalTime);
-
             }
         },
-        finishedFirstGame() {
-          if (this.circleClicked === 3 || this.totalTime === 0)  {
+        nextSubject() {
+            clearInterval(this.timer);
+            this.subjectCounter++;
 
-          }
+            if (this.subjectCounter === 3) {
+                this.$emit()
+            }
         },
         countDownTimer () {
-            if (this.countDown > 0) {
-                setTimeout(() => {
+            if (this.countDown === 0) {
+                this.nextSubject();
+            } else if (this.countDown > 0) {
+                this.timer = setTimeout(() => {
                     this.countDown -= 1
                     if (this.countDown < 10) {
                         this.countDown = `0${this.countDown}`;
@@ -129,7 +156,10 @@
 
             this.isCircleVisible();
         }, 3000)
-    }
+    },
+    // destroyed() {
+    //     clearInterval(this.interval)
+    //     }
  }
  </script>
  
@@ -169,15 +199,33 @@
  .gameInfo {
     display: flex;
     flex-direction: row;
+    position: absolute;
+    font-size: 3rem;
+    bottom: 80vh; 
+    width: 100vw;
+    align-items: center;
+    justify-content: space-around;
  }
 
- .instructions {
+ .explanation-2 {
+    width: 50vw;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.671);
+    font-size: 2rem;
+    padding: 4vw;
+    animation: floatAnimation 3s ease-in-out infinite;
+    border-radius: 2rem;
+    line-height: 1.5;
+ }
+
+ .instructions, .explanation {
     width: 50vw;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     height: 40vh;
     font-size: 2rem;
     padding: 1.75vw;
+    animation: floatAnimation 3s ease-in-out infinite;
     border-radius: 2rem;
     line-height: 1.5;
  }
@@ -249,6 +297,7 @@
     left: 10vw;
     bottom: 10px;
     right: 10px;
+    width: 100%;
     color: rgb(134, 134, 134);
     line-height: 25px;
     font-family: 'Indie Flower';
@@ -302,23 +351,53 @@
     justify-content: space-evenly;
  }
 
- .timer {
-    color:black;
-    font-size: 3rem;
-    position: absolute;
-    bottom: 80vh; 
+ .secondPart ,.thirdPart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 75vh;
+    direction: rtl;
  }
  
-   @keyframes animationColors {
-     0% {
-         background-color: hsl(var(--hue),50%,75%);
-     } 
-     50% {
-         background-color: hsl(var(--hue),40%,40%);
-     }
-     100% {
-         background-color: hsl(var(--hue),50%,75%);
-     }
-   }
+@keyframes animationColors {
+    0% {
+        background-color: hsl(var(--hue),50%,75%);
+    } 
+    50% {
+        background-color: hsl(var(--hue),40%,40%);
+    }
+    100% {
+        background-color: hsl(var(--hue),50%,75%);
+    }
+}
+
+@-moz-keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+   @keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
  </style>
  
