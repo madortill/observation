@@ -43,8 +43,6 @@ export default {
 .startingButton {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    /* background-image: url("src/assets/buttonDesign.svg"); */
-    /* background-repeat: no-repeat; */
     background-color: #6f9cb8;
     text-align: center;
     cursor: pointer;

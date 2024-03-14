@@ -1,36 +1,53 @@
 <template>
     <div class="hearingContainer">
-         <div class="basicTitle">
-             {{ chapter }} - {{ subSubjectTitle[subjectCounter] }}
-         </div>
-         <div class="firstPart">
-             <div class="instructions">
- 
-             </div>
-             <div class="notes-area">
-                 <div class="paper">
-                     <div class="lines">
-                         <div class="text" spellcheck="false">
-                             משימתכם עכשיו לתאר את החופשה הכי חלומית שלכם על הדף.<br /><br />
-                             <div class="text-2" contenteditable spellcheck="false">
-                                 תערכו את הטקסט כאן...
-                             </div>
-                         </div>
-                     </div>
-                     <div class="holes hole-top"></div>
-                     <div class="holes hole-middle"></div>
-                     <div class="holes hole-bottom"></div>
-                 </div>
-             </div>
-             <div id="circle" v-show="circleVisible" @click="isCircleVisible" :style="`--hue: ${(changeColor) * 15 + 130}deg`">לחצו עליי</div>
-         </div>
-         <div class="secondPart">
- 
-         </div>
-         <div class="thirdPart">
- 
-         </div>
+        <div class="basicTitle">
+            {{ chapter }} - {{ subSubjectTitle[subjectCounter] }}
+        </div>
+        <div v-if="subjectCounter === 0" class="firstPart">
+            <div v-if="!continued" class="instructions-cont">
+                <div class="instructions">
+                    לפניכם משחקון שיתרגל התרחשויות של דברים שקורים בנפרד אך באותו הזמן. <br><br>
+                    בחלק הבא יהיה מולכם מטלת כתיבה שעליכם להשלים ב30 שניות. 
+                    תוך כדי יופיע כדור שיופיע על המסך באופן רנדומלי. יהיה עליכם ללחוץ על הכדור 3 פעמים כדי לעבור לשלב הבא.
+                </div>
+                <div class="buttonCont">
+                    <button class="buttons" @click="changeText">
+                        ממשיכים
+                    </button>
+                    <button v-show="showBackButton" class="buttons">
+                        חוזרים
+                    </button>
+                </div>
+            </div>
+            <div v-else class="notes-area">
+                <div class="gameInfo">
+                    <div class="timer">00:{{ countDown }}</div>
+                    <div class="game-points">Score: {{ circleClicked }}</div>
+                </div>
+                <div class="paper">
+                    <div class="lines">
+                        <div class="text" spellcheck="false">
+                            משימתכם עכשיו לתאר את החופשה הכי חלומית שלכם על הדף.<br /><br />
+                            <div class="text-2" contenteditable spellcheck="false">
+                                תערכו את הטקסט כאן...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="holes hole-top"></div>
+                    <div class="holes hole-middle"></div>
+                    <div class="holes hole-bottom"></div>
+                </div>
+                <div id="circle" v-show="circleVisible" @click="isCircleVisible" :style="[`--hue: ${(changeColor) * 15 + 130}deg`,{ top: `${top}vh`, left: `${left}vw`} ]">לחצו עליי</div>
+            </div>
+        </div>
+        <div v-else-if="subjectCounter === 1" class="secondPart">
+            
+        </div>
+        <div v-else class="thirdPart">
+            
+        </div>
     </div>
+        
  </template>
  
  <script>
@@ -39,49 +56,94 @@
      data() {
         return {
             subSubjectTitle: ["דברים קורים בנפרד", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
-            subjectCounter: 0,
             circleVisible: false,
+            showBackButton: false,
             changeColor: 0, 
-            totalTime: 0
+            subjectCounter: 0,
+            totalTime: 0,
+            countDown: 30,
+            circleClicked: 0,
+            continued: false,
+            top: 0,
+            left: 0
         };        
      },
      methods: {
-        updateCounter() {
-            this.subjectCounter++; 
+        changeText() {
+            this.continued = true;
+            this.countDownTimer()
         },
         isCircleVisible(event) {
-            let randomTime = Math.random() * (9 - 1) + 1;
-            this.totalTime = randomTime * 1000;
-        
+            
+
+            this.top = Math.floor(Math.random() * (70 - 2) + 2);
+            this.left = Math.floor(Math.random() * (70 - 2) + 2);
+            
+            
             if (this.circleVisible && event !== undefined) {
                 this.changeColor+= 3;
                 this.circleVisible = false;
+                this.circleClicked++;
                 
                 setTimeout(() => {
                     this.circleVisible = true;
                 }, this.totalTime);
+
+            } else if (this.circleVisible) {
+
+                
+                setTimeout(() => {
+                    this.circleVisible = false;
+                }, 2000);
+                
             } else {
+                this.changeColor+= 3;
+                
                 setTimeout(() => {
                     this.circleVisible = true;
                 }, this.totalTime);
+
+            }
+        },
+        finishedFirstGame() {
+          if (this.circleClicked === 3 || this.totalTime === 0)  {
+
+          }
+        },
+        countDownTimer () {
+            if (this.countDown > 0) {
+                setTimeout(() => {
+                    this.countDown -= 1
+                    if (this.countDown < 10) {
+                        this.countDown = `0${this.countDown}`;
+                    }
+                    this.countDownTimer()
+                }, 1000)
             }
         }
-     },
-     mounted() {
-        this.isCircleVisible();
-     }
+    },
+    mounted() {
+        window.setInterval(() => {
+            let randomTime = Math.random() * (7 - 1) + 1;
+            this.totalTime = randomTime * 1000;
+
+            this.isCircleVisible();
+        }, 3000)
+    }
  }
  </script>
  
  <style scoped>
  .hearingContainer {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: space-between;
-     height: 100vh;
-     direction: rtl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    direction: rtl;
+    overflow: hidden;
  }
+
  .basicTitle {
    margin-top: 3vh;
    font-size: 3rem;
@@ -93,16 +155,66 @@
    margin: 0;
    padding: 0;
  }
+
+ .instructions-cont {
+    margin-top: 17.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 75vh;
+    direction: rtl;
+ }
+
+ .gameInfo {
+    display: flex;
+    flex-direction: row;
+ }
+
+ .instructions {
+    width: 50vw;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.671);
+    height: 40vh;
+    font-size: 2rem;
+    padding: 1.75vw;
+    border-radius: 2rem;
+    line-height: 1.5;
+ }
+
+ .buttons {
+    font-size: 1.65rem;
+    padding: 2vh 3.5vw;
+    background-color: #6f9cb8;
+    text-align: center;
+    margin-bottom: 5vh;
+    cursor: pointer;
+    color: white;
+    border: none;
+    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+}
+
+.buttonCont {
+    width: 85vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.buttons:hover {
+    background-color: #426991;
+}
+
  .paper {
    position: absolute;
    height: 55vh;
    width: 27vw;
    background: rgba(255,255,255,0.9);
    margin: -275px -225px;
-   left: 50%;
-   top: 50%;
    box-shadow: 0px 0px 5px 0px #888;
  }
+
  .paper::before {
    content: '';
    position: absolute;
@@ -111,12 +223,14 @@
    width: 2px;
    background: rgba(255,0,0,0.4);
  }
+
  .lines {
    margin-top: 40px;
    height: calc(100% - 40px);
    width: 100%;
    background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
  }
+
  .text {
    position: absolute;
    top: 65px;
@@ -130,17 +244,18 @@
  }
  
  .text-2 {
-     position: absolute;
-     top: 4.75vh;
-     left: 10vw;
-     bottom: 10px;
-     right: 10px;
-     color: rgb(134, 134, 134);
-     line-height: 25px;
-     font-family: 'Indie Flower';
-     overflow: hidden;
-     outline: none;
+    position: absolute;
+    top: 4.75vh;
+    left: 10vw;
+    bottom: 10px;
+    right: 10px;
+    color: rgb(134, 134, 134);
+    line-height: 25px;
+    font-family: 'Indie Flower';
+    overflow: hidden;
+    outline: none;
  }
+
  .holes {
    position: absolute;
    left: 10px;
@@ -175,9 +290,23 @@
    position: absolute;
    cursor: pointer;
    box-shadow: 0 5px 7px #0003;
-   /* background-color: hsl(var(--hue),50%,75%); */
    animation: animationColors 2s ease-in-out;
    animation-iteration-count: infinite;
+ }
+
+ .notes-area {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+ }
+
+ .timer {
+    color:black;
+    font-size: 3rem;
+    position: absolute;
+    bottom: 80vh; 
  }
  
    @keyframes animationColors {

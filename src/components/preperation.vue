@@ -3,18 +3,27 @@
         <div class="prepareTitle">
             {{ chapter }}
         </div>
-        <div class="">
-                <div class="textt" v-show="this.textContent === 0">
-                    <div class="prevText">
-                        <div>
-                            טרם תחילת התצפית, עלייך להערך מראש על מנת שתוכל לאסוף את הנתונים בצורה מדויקת וברורה.
-                        </div>
-                        <div>
-                            זכור - הכנה עצמית תקבע את אופן ההכנה שלך לביצוע תצפית.
-                        </div>
+        <div>
+            <div class="textt" v-show="this.textContent === 0">
+                <div class="prevText">
+                    <div>
+                        <br>
+                        טרם תחילת התצפית, עלייך להערך מראש על מנת שתוכל לאסוף את הנתונים בצורה מדויקת וברורה.
                     </div>
-                    <button class="buttons" @click="changeText">ממשיכים</button>
+                    <br><br>
+                    <div>
+                        זכור - הכנה עצמית תקבע את אופן ההכנה שלך לביצוע תצפית.
+                    </div>
                 </div>
+                <div class="buttonCont">
+                    <button class="buttons" @click="changeText">
+                        ממשיכים
+                    </button>
+                    <button v-if="showBackButton" class="buttons">
+                        חוזרים
+                    </button>
+                </div>
+            </div>
             <div v-show="this.textContent === 1" class="flexCont">
                 <div :class="startAnimation ? 'storyTextCont introAni': 'storyTextCont'"><div class="storyText">הנך ניגש לתצפית. מה תביא?</div></div>
                 <div class="instructions">
@@ -38,7 +47,8 @@
                 }" @dragover="allowDrop" id='dragArea' @dragstart="onDragging" >
                 </div>
             </div>
-            <button v-show="this.correctCounter === 4" class="buttons-con" @click="$emit('changeCurrentScreen')">
+            
+            <button v-show="this.correctCounter === 4" class="buttons-continue" @click="$emit('changeCurrentScreen')">
                 ממשיכים
             </button>
         </div>
@@ -114,7 +124,8 @@ export default {
             },
         ], 
         correctCounter: 0,
-        textContent: 0, 
+        textContent: 0,
+        showBackButton: false,
         startAnimation: false
         };        
     },
@@ -186,14 +197,23 @@ export default {
 </script>
 
 <style scoped>
+.prepare {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    direction: rtl;
+    overflow: hidden;
+}
 
 .textt {
     display: flex;
-    height: 100vh;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    margin-top: 10vh;
+    justify-content: space-between;
+    height: 75vh;
+    direction: rtl;
 }
 
 @keyframes floatAnimation {
@@ -223,7 +243,7 @@ export default {
     right: 0vw;
 }
 
-.buttons-con {
+.buttons-continue {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
     background-color: #6f9cb8;
@@ -238,7 +258,27 @@ export default {
     box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
 }
 
-.buttons-con:hover {
+.buttons {
+    font-size: 1.65rem;
+    padding: 2vh 3.5vw;
+    background-color: #6f9cb8;
+    text-align: center;
+    margin-bottom: 5vh;
+    cursor: pointer;
+    color: white;
+    border: none;
+    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+}
+
+.buttonCont {
+    width: 85vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.buttons:hover {
     background-color: #426991;
 }
 
@@ -252,40 +292,29 @@ export default {
     margin-top: 3vh;
     font-size: 3rem;
     font-weight: 600;
-    text-align: center;
-}
-
-.buttons {
-    font-size: 1.65rem;
-    padding: 2vh 3.5vw;
-    background-color: #6f9cb8;
-    text-align: center;
-    margin-bottom: 5vh;
-    cursor: pointer;
-    color: white;
-    border: none;
-    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
-    margin-right: 73.4vw;
-    margin-bottom: 12vh;
-}
-
-.buttons:hover {
-    background-color: #426991;
 }
 
 .prevText {
-    background-color: rgba(255, 255, 255, 0.677);
+    /* background-color: rgba(255, 255, 255, 0.677);
     padding: 3vh;
     width: 70vw;
     height: 30vh;
     border-radius: 5rem;
     font-size: 2rem;
     text-align: center;
-    direction: rtl;
-    display: flex;
+    direction: rtl; */
+    width: 50vw;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.671);
+    height: 40vh;
+    font-size: 2rem;
+    padding: 1vw;
+    border-radius: 2rem;
+    line-height: 1.5;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-evenly; */
     animation: floatAnimation 3s ease-in-out infinite;
 }
 
@@ -296,14 +325,6 @@ export default {
     justify-content: flex-start;
     flex-wrap: wrap;
     margin-top: 10vh;
-}
-
-.prepare {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-    direction: rtl;
 }
 
 #draggable-container {
