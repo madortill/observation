@@ -42,8 +42,14 @@
         this.currentSubSubject = event.currentTarget.innerText;
       }, 
       backToHomePage(newSub) {
-        this.currentSubSubject = newSub;
-        
+        this.currentSubSubject = "";
+        for (let i = 0; i < this.subjectsArr.length; i++) {
+          if (this.subjectsArr[i]["title"] === newSub) {
+            this.subjectsArr[i]["beenThere"] = true;
+            console.log(this.subjectsArr[i]);
+            break;
+          }
+        }
       }
     }
   }
@@ -57,10 +63,10 @@
           </div>
           <div class="mainText">
             <div v-for="(sub, index) in subjectsArr" :key="index" class="subjectCont">
-              <div class="subjectCicle" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="changeSubject">{{ sub.title }}</div>
-              <div class="subjectExplain">
+              <div :class="sub.beenThere ? 'beenThere' : 'subjectCicle'" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="changeSubject">{{ sub.title }}</div>
+              <div :class="sub.beenThere ? 'beenThere1' : 'subjectExplain'">
                 <div v-if="sub.subtitle" class="subtitle">{{ sub.subtitle }}</div>
-                <div v-for="(item, index) in sub.text" class="item-text">{{ item }}</div>
+                <ul><li v-for="(item, index) in sub.text" :key="index" :class="sub.beenThere ? 'item-text-disabled' : 'item-text'">{{ item }}</li></ul>
               </div>
             </div>
           </div>
@@ -81,6 +87,7 @@
   height: 100vh;
   direction: rtl;
 }
+
 .basicTitle {
   margin-top: 3vh;
   font-size: 3rem;
@@ -106,7 +113,7 @@
 }
 
 .subjectExplain {
-  background-color: #7d7d7d7f;
+  background-color: #ffffff7f;
   border-radius: 2vh;
   padding: 2.5vh 4vw;
   width: 15vw;
@@ -120,7 +127,39 @@
 }
 
 .item-text {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
+}
+
+.item-text-disabled {
+  font-size: 1.2rem;
+  color: rgb(142, 142, 142);
+}
+
+.beenThere {
+  pointer-events: none;
+  width: 5rem;
+  height: 6rem;
+  border-radius: 50%;
+  text-align: center;
+  color: #413f3f;
+  font-size: 2.5rem;
+  font-weight: 550;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 7px #0003;
+  transition: all .3s ease;
+  position: fixed;
+  padding: 3.5%;
+  background-color: #a0a0a0;
+}
+
+.beenThere1 {
+  background-color: #cacaca7f;
+  border-radius: 2vh;
+  padding: 2.5vh 4vw;
+  width: 15vw;
+  margin-right: 9vw;
 }
 
 .subjectCicle {

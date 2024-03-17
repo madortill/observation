@@ -42,7 +42,7 @@
         </div>
         <div v-else-if="subjectCounter === 1" class="secondPart">
             <div class="explanation">
-                עלייך לשים לב במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br>
+                עלייך לשים <img src="../assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br>
                 לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.
             </div>
             <div class="buttonCont">
@@ -60,7 +60,7 @@
                 כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.
             </div>
             <div class="buttonCont">
-                <button class="buttons" @click="$emit('backToHomePage', '')">
+                <button class="buttons" @click="$emit('backToHomePage', 'חלוקת קשב')">
                     ממשיכים
                 </button>
                 <button v-show="showBackButton" class="buttons" @click="prevSubject">
@@ -141,7 +141,7 @@
             }
         },
         countDownTimer () {
-            if (this.countDown === 0) {
+            if (this.countDown == 0o0) {
                 this.nextSubject();
             } else if (this.countDown > 0) {
                 this.timer = setTimeout(() => {
@@ -161,10 +161,7 @@
 
             this.isCircleVisible();
         }, 3000)
-    },
-    // destroyed() {
-    //     clearInterval(this.interval)
-    //     }
+    }
  }
  </script>
  
@@ -213,26 +210,37 @@
  }
 
  .explanation-2 {
-    width: 50vw;
+    width: 30vw;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
-    padding: 4vw;
-    animation: floatAnimation 3s ease-in-out infinite;
+    padding: 8vh 6vw;
     border-radius: 2rem;
     line-height: 1.5;
  }
 
+ .explanation, .explanation-2 {
+    animation: biggerAnimation 1.5s ease-in-out forwards;
+ }
+
+ .instructions {
+    animation: floatAnimation 3s ease-in-out infinite;
+ }
+
  .instructions, .explanation {
-    width: 50vw;
+    width: 32vw;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
-    height: 40vh;
     font-size: 2rem;
-    padding: 1.75vw;
-    animation: floatAnimation 3s ease-in-out infinite;
+    padding: 8vh 5vw;
     border-radius: 2rem;
     line-height: 1.5;
+ }
+
+ .heartIcon {
+    width: 2vw;
+    position: relative;
+    top: 0.5vh;
  }
 
  .buttons {
@@ -302,7 +310,7 @@
     left: 10vw;
     bottom: 10px;
     right: 10px;
-    width: 100%;
+    width: 95%;
     color: rgb(134, 134, 134);
     line-height: 25px;
     font-family: 'Indie Flower';
@@ -402,6 +410,24 @@
 
     100% {
         transform: translateY(0);
+    }
+}
+
+@-moz-keyframes biggerAnimation {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+   @keyframes biggerAnimation {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.15);
     }
 }
  </style>
