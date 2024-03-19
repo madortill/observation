@@ -17,10 +17,11 @@
         <div class="basicTitle">
             {{ chapter }}
         </div>
-    
+        <div class="firstPart">
+            
+        </div>
         
     </div>
-
 </template>
 
 
