@@ -1,15 +1,14 @@
 <script>
-
-  
   export default {
     props: ["chapter"],
     data() {
       return {
         subjectCounter: 0,
+        showBackButton: false,
         subjectsInfo: [
             {
                 subSubjectTitle: "הוראות בטיחות",
-                subjectText: ` לשים <img src="../assets/heart.png" class="heartIcon" /> כי הינך צריך להיות נוכח במקום שמאפשר לך לטפל באירועי בטיחות. <br> <br> 
+                subjectText: ` לשים <img src="src/assets/heart.png" class='heartIcon' /> כי הינך צריך להיות נוכח במקום שמאפשר לך לטפל באירועי בטיחות. <br> <br> 
                 כגון: תצפית על חניך שטווח בנשק.`
             },
             {
@@ -20,7 +19,6 @@
                 subSubjectTitle: "רואה ולא נראה",
                 subjectText: `המתצפת צריך למקם את עצמו במקום בו רואה את כל הכיתה אך לא מתבלט בה.`
             }
-
         ]
       }
     },
@@ -30,6 +28,9 @@
             if (this.subjectCounter === 1) {
                 this.showBackButton = true;
             }
+            // if (this.subjectCounter === 3) {
+            //     this.$emit('backToHomePage', 'בחירת מיקום');
+            // }
         },
         prevSubject() {
             this.subjectCounter--;
@@ -44,20 +45,21 @@
 <template>
     <div class="placement">
         <div class="basicTitle">
-            {{ chapter }} - {{ subjectsInfo[subjectCounter]["subSubjectTitle"] }}
+            {{ chapter }} <p v-if="subjectCounter < 3"> - {{ subjectsInfo[subjectCounter]["subSubjectTitle"] }}</p>
         </div>
-        <div v-if="subjectCounter === 0" class="firstPart">
-            <div class="explanation">
-                {{ subjectsInfo[subjectCounter]["subjectText"] }}
-            </div>
+        <div v-if="subjectCounter < 3" class="firstPart">
+            <div class="explanation" v-html="subjectsInfo[subjectCounter]['subjectText']"></div>
             <div class="buttonCont">
                 <button class="buttons" @click="nextSubject">
                     ממשיכים
                 </button>
-                <button v-show="showBackButton" class="buttons" :click="prevSubject">
+                <button v-show="showBackButton" class="buttons" @click="prevSubject">
                     חוזרים
                 </button>
             </div>
+        </div>
+        <div class="secondPart" v-else>
+            <div class="instructions">בזמן שיעור תצפית - <br> באיזה מיקום כדאי למתצפת לשבת לצורך קבלת תצפית מיטבית?</div>
         </div>
     </div>
 
@@ -75,9 +77,10 @@
 }
 
 .basicTitle {
-  margin-top: 3vh;
   font-size: 3rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
 .buttons {
@@ -104,10 +107,60 @@
     background-color: #426991;
 }
 
-.heartIcon {
+.explanation, .instructions {
+    width: 32vw;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.671);
+    font-size: 2rem;
+    padding: 8vh 5vw;
+    border-radius: 2rem;
+    line-height: 1.5;
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+.explanation ::v-deep .heartIcon {
     width: 2vw;
     position: relative;
     top: 0.5vh;
+    /* display: none; */
+}
+
+.firstPart, .secondPart {
+    margin-top: 17.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 75vh;
+    direction: rtl;
+}
+
+@-moz-keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+   @keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 </style>

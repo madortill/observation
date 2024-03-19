@@ -1,6 +1,7 @@
 <script>
   import DivideHearing from './divideHearing.vue'
   import SittingPlacement from './sittingPlacement.vue';
+  import NoteDown from './noteDown.vue';
 
   export default {
     props: ["chapter"],
@@ -35,7 +36,8 @@
     },
     components: {
       DivideHearing,
-      SittingPlacement
+      SittingPlacement,
+      NoteDown
     },
     methods: {
       changeSubject(event) {
@@ -72,7 +74,8 @@
           </div>
       </div>
         <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
-        <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" />
+        <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
+        <NoteDown v-else-if="currentSubSubject === 'רישום ותיעוד'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
     </div>
 
 </template>
@@ -163,8 +166,8 @@
 }
 
 .subjectCicle {
-  width: 5rem;
-  height: 6rem;
+  width: 6rem;
+  height: 6.5rem;
   border-radius: 50%;
   text-align: center;
   color: #413f3f;
