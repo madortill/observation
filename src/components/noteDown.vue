@@ -3,11 +3,100 @@
     props: ["chapter"],
     data() {
       return {
-       
+        showBackButton: false,
+        showFirstPart: true,
+        checked: false,
+        notePageInfo: [{
+            question: 'מה נרשום?',
+            answers: [{
+                option: 'תיאורים',
+                correct: true
+            },
+            {
+                option: 'ציטוטים',
+                correct: true
+            },
+            {
+                option: 'שמות',
+                correct: true
+            },
+            {
+                option: 'זמנים',
+                correct: true
+            },
+            {
+                option: 'מקומות',
+                correct: true
+            },
+            {
+                option: 'מידע כמותי',
+                correct: true
+            },
+            {
+                option: 'שטות',
+                correct: false
+            },
+            {
+                option: 'שטות',
+                correct: false
+            }]
+        },
+        {
+            question: 'מתי נרשום?',
+            answers: [{
+                option: 'בזמנים ״מתים״',
+                correct: true
+            },
+            {
+                option: 'רישום סמוך להתנסות',
+                correct: true
+            },
+            {
+                option: 'שטות',
+                correct: false
+            },
+            {
+                option: 'שטות',
+                correct: false
+            },
+            {
+                option: 'שטות',
+                correct: false
+            }]
+        },
+        {
+            question: 'איך נרשום?',
+            answers: [{
+                option: 'בצורה אובייקטיבית',
+                correct: true
+            },
+            {
+                option: 'בצורה מפורטת',
+                correct: true
+            },
+            {
+                option: 'שטות',
+                correct: false
+            },
+            {
+                option: 'שטות',
+                correct: false
+            },
+            {
+                option: 'שטות',
+                correct: false
+            },
+            {
+                option: 'שטות',
+                correct: false
+            }]
+        }]
       }
     },
     methods: {
-
+        checkAnswers() {
+            
+        }
     }
   }
 </script>
@@ -17,8 +106,35 @@
         <div class="basicTitle">
             {{ chapter }}
         </div>
-        <div class="firstPart">
-            
+        <div class="firstPart" v-if="showFirstPart">
+            <div class="instructions">
+                דף תצפית ״טוב״<br>
+                התייחסות הכנת שיעור והגשתו
+                תקף, מהימן ופרקטי - בר הכללה
+            </div>
+            <button class="buttons" type="button" @click="showFirstPart = false">לדף תצפית</button>
+        </div>
+        <div class="secondPart" v-else>
+            <div class="everythinCont">
+                <div v-for="(part, index) in notePageInfo" :key="index" class="questionCont">
+                    <div class="question">
+                        {{ part.question }}
+                    </div>
+                    <div class="answers" v-for="(answer, key) in part.answers" :key="key">
+                        <input type="checkbox" :id="answer.key" />
+                        <label :for="key">{{ answer.option }}</label>
+                    </div>
+                </div>
+            </div>
+            <button type="button" @click="checkAnswers" class="buttons">בדיקה</button>
+        </div>
+        <div class="buttonCont">
+            <button v-show="showBackButton" class="buttons">
+                ממשיכים
+            </button>
+            <button v-show="showBackButton" class="buttons">
+                חוזרים
+            </button>
         </div>
         
     </div>
@@ -35,12 +151,55 @@
   direction: rtl;
 }
 
+.secondPart {
+    height: 80vh;
+    width: 40vw;
+    background-color: rgba(255, 255, 255, 0.795);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.everythinCont {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    width: 40vw;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
+  margin-left: 0.5vw;
+  width: 1.5vw;
+  height: 1.5vh
+}
+
+.question {
+    font-size: 1.4rem;
+    margin-bottom: 0.75vh;
+}
+
+.answers {
+    font-size: 1.15rem;
+    margin-top: 0.65vh;
+    margin-right: 1vw;
+}
+
+.answers:hover {
+    font-size: 1.2rem;
+}
+
+.questionCont {
+    margin: 2.5vh 1.25vw;
+    width: 15vw;
+}
+
 .basicTitle {
   font-size: 3rem;
   margin-top: 3vh;
   font-weight: 600;
-  display: flex;
-  align-items: center;
 }
 
 .buttons {
@@ -48,7 +207,7 @@
     padding: 2vh 3.5vw;
     background-color: #6f9cb8;
     text-align: center;
-    margin-bottom: 5vh;
+    /* margin-bottom: 5vh; */
     cursor: pointer;
     color: white;
     border: none;
@@ -67,60 +226,23 @@
     background-color: #426991;
 }
 
-.explanation, .instructions {
+.instructions {
     width: 32vw;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
-    padding: 8vh 5vw;
-    border-radius: 2rem;
     line-height: 1.5;
-    animation: floatAnimation 3s ease-in-out infinite;
 }
 
-.explanation ::v-deep .heartIcon {
-    width: 2vw;
-    position: relative;
-    top: 0.5vh;
-    /* display: none; */
-}
-
-.firstPart, .secondPart {
-    margin-top: 17.5vh;
+.firstPart  {
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center;
     justify-content: space-between;
-    height: 75vh;
+    height: 40vh;
+    padding: 8vh 5vw;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.671);
     direction: rtl;
-}
-
-@-moz-keyframes floatAnimation {
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
-   @keyframes floatAnimation {
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
 }
 
 </style>
