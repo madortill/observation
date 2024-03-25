@@ -8,6 +8,7 @@
         checked: false,
         notePageInfo: [{
             question: 'מה נרשום?',
+            sideNote: 'תבחרו 6 אפשרויות',
             answers: [{
                 option: 'תיאורים',
                 correct: true
@@ -43,6 +44,7 @@
         },
         {
             question: 'מתי נרשום?',
+            sideNote: 'תבחרו 2 אפשרויות',
             answers: [{
                 option: 'בזמנים ״מתים״',
                 correct: true
@@ -66,6 +68,7 @@
         },
         {
             question: 'איך נרשום?',
+            sideNote: 'תבחרו 2 אפשרויות',
             answers: [{
                 option: 'בצורה אובייקטיבית',
                 correct: true
@@ -100,17 +103,18 @@
     },
     computed: {
         shuffledArr() {
-            for (let i = 0; i < notePageInfo.length; i++) {
+            for (let i = 0; i < this.notePageInfo.length; i++) {
                 let returnArray = this.notePageInfo[i]["answers"].slice(); // שכפול מערך התשובות הנכונות
                 let tmp = this.notePageInfo[i]["answers"].slice();
+
+                for (let i = 0; i < returnArray.length; i++) {
+                    let index = Math.floor(Math.random() * tmp.length);
+                    returnArray[i]= tmp[index];
+                    tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
+                }
+                return returnArray;
             }
 
-            for (let i = 0; i < returnArray.length; i++) {
-                let index = Math.floor(Math.random() * tmp.length);
-                returnArray[i]= tmp[index];
-                tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
-            }
-            return returnArray;
         }
     }
   }
@@ -133,9 +137,9 @@
             <div class="everythinCont">
                 <div v-for="(part, index) in notePageInfo" :key="index" class="questionCont">
                     <div class="question">
-                        {{ part.question }}
+                        {{ part.question }} <p class="side-note">{{ part.sideNote }}</p>
                     </div>
-                    <div class="answers" v-for="(answer, key) in part.answers" :key="key">
+                    <div class="answers" v-for="(answer, key) in shuffledArr" :key="key">
                         <input type="checkbox" :id="answer.key" />
                         <label :for="key">{{ answer.option }}</label>
                     </div>
@@ -173,6 +177,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.side-note {
+    color: rgba(128, 128, 128);
+    font-size: 1.02rem;
+    margin: 0.2vh;
 }
 
 .everythinCont {
