@@ -97,6 +97,21 @@
         checkAnswers() {
             
         }
+    },
+    computed: {
+        shuffledArr() {
+            for (let i = 0; i < notePageInfo.length; i++) {
+                let returnArray = this.notePageInfo[i]["answers"].slice(); // שכפול מערך התשובות הנכונות
+                let tmp = this.notePageInfo[i]["answers"].slice();
+            }
+
+            for (let i = 0; i < returnArray.length; i++) {
+                let index = Math.floor(Math.random() * tmp.length);
+                returnArray[i]= tmp[index];
+                tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
+            }
+            return returnArray;
+        }
     }
   }
 </script>

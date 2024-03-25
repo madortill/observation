@@ -37,7 +37,7 @@
                     <div class="holes hole-middle"></div>
                     <div class="holes hole-bottom"></div>
                 </div>
-                <div id="circle" v-show="circleVisible" @click="isCircleVisible" :style="[`--hue: ${(changeColor) * 15 + 130}deg`,{ top: `${top}vh`, left: `${left}vw`} ]">לחצו עליי</div>
+                <div id="circle" v-show="circleVisible" @click="disappear" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${top}vh`, left: `${left}vw`}]">לחצו עליי</div>
             </div>
         </div>
         <div v-else-if="subjectCounter === 1" class="secondPart">
@@ -89,7 +89,8 @@
             top: 0,
             left: 0,
             interval: null,
-            timer: null
+            timer: null,
+            disappearTimer: null
         };        
      },
      methods: {
@@ -97,35 +98,32 @@
             this.continued = true;
             this.countDownTimer()
         },
-        isCircleVisible(event) {
+        appeared() {
             this.top = Math.floor(Math.random() * (70 - 2) + 2);
             this.left = Math.floor(Math.random() * (70 - 2) + 2);
-            
-            if (this.circleVisible && event !== undefined) {
-                this.changeColor+= 3;
-                this.circleVisible = false;
+
+            this.changeColor+= 3;
+            this.circleVisible = true;
+
+            this.disappearTimer = setTimeout(this.disappear, 3000);
+        },
+        disappear(event) {
+            let randomTime = Math.random() * (7 - 1) + 1;
+            this.totalTime = randomTime * 1000;
+
+            if (event !== undefined) {
                 this.circleClicked++;
 
                 if (this.circleClicked === 3) {
-                    this.nextSubject();
+                    setTimeout(this.nextSubject, 1000);
                 }
-                
-                setTimeout(() => {
-                    this.circleVisible = true;
-                }, this.totalTime);
-
-            } else if (this.circleVisible) {
-
-                setTimeout(() => {
-                    this.circleVisible = false;
-                }, 2000);
-            } else {
-                this.changeColor+= 3;
-                
-                setTimeout(() => {
-                    this.circleVisible = true;
-                }, this.totalTime);
             }
+
+            clearTimeout(this.disappearTimer);
+            this.disappearTimer = null;
+            this.circleVisible = false;
+
+            setTimeout(this.appeared, this.totalTime);
         },
         nextSubject() {
             clearInterval(this.timer);
@@ -155,12 +153,7 @@
         }
     },
     mounted() {
-        window.setInterval(() => {
-            let randomTime = Math.random() * (7 - 1) + 1;
-            this.totalTime = randomTime * 1000;
-
-            this.isCircleVisible();
-        }, 3000)
+        setTimeout(this.appeared, 2000);
     }
  }
  </script>
