@@ -5,117 +5,240 @@
       return {
         showBackButton: false,
         showFirstPart: true,
-        checked: false,
-        notePageInfo: [{
+        whatInfo: {
             question: 'מה נרשום?',
             sideNote: 'תבחרו 6 אפשרויות',
             answers: [{
                 option: 'תיאורים',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'ציטוטים',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'שמות',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'זמנים',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'מקומות',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'מידע כמותי',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             }]
         },
-        {
+        whenInfo: {
             question: 'מתי נרשום?',
             sideNote: 'תבחרו 2 אפשרויות',
             answers: [{
                 option: 'בזמנים ״מתים״',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'רישום סמוך להתנסות',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             }]
         },
-        {
+        howInfo: {
             question: 'איך נרשום?',
             sideNote: 'תבחרו 2 אפשרויות',
             answers: [{
                 option: 'בצורה אובייקטיבית',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'בצורה מפורטת',
-                correct: true
+                correct: true,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             },
             {
                 option: 'שטות',
-                correct: false
+                correct: false,
+                chosen: false
             }]
-        }]
+        },
+        // notePageInfo: [{
+        //     question: 'מה נרשום?',
+        //     sideNote: 'תבחרו 6 אפשרויות',
+        //     answers: [{
+        //         option: 'תיאורים',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'ציטוטים',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שמות',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'זמנים',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'מקומות',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'מידע כמותי',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     }]
+        // },
+        // {
+        //     question: 'מתי נרשום?',
+        //     sideNote: 'תבחרו 2 אפשרויות',
+        //     answers: [{
+        //         option: 'בזמנים ״מתים״',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'רישום סמוך להתנסות',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     }]
+        // },
+        // {
+        //     question: 'איך נרשום?',
+        //     sideNote: 'תבחרו 2 אפשרויות',
+        //     answers: [{
+        //         option: 'בצורה אובייקטיבית',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'בצורה מפורטת',
+        //         correct: true,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     },
+        //     {
+        //         option: 'שטות',
+        //         correct: false,
+        //         chosen: false
+        //     }]
+        // }]
       }
     },
     methods: {
         checkAnswers() {
             
+        },
+        shuffledArr(currentArr) {
+            let returnArray = currentArr.answers; // שכפול מערך התשובות הנכונות
+            let tmp = currentArr.answers;
+
+            for (let i = 0; i < returnArray.length; i++) {
+                let index = Math.floor(Math.random() * tmp.length);
+                returnArray[i]= tmp[index];
+                tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
+            }
+            return returnArray;
         }
     },
     computed: {
-        shuffledArr() {
-            for (let i = 0; i < this.notePageInfo.length; i++) {
-                let returnArray = this.notePageInfo[i]["answers"].slice(); // שכפול מערך התשובות הנכונות
-                let tmp = this.notePageInfo[i]["answers"].slice();
-
-                for (let i = 0; i < returnArray.length; i++) {
-                    let index = Math.floor(Math.random() * tmp.length);
-                    returnArray[i]= tmp[index];
-                    tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
-                }
-                return returnArray;
-            }
-
-        }
+        
     }
   }
 </script>
@@ -135,13 +258,31 @@
         </div>
         <div class="secondPart" v-else>
             <div class="everythinCont">
-                <div v-for="(part, index) in notePageInfo" :key="index" class="questionCont">
+                <div class="questionCont">
                     <div class="question">
-                        {{ part.question }} <p class="side-note">{{ part.sideNote }}</p>
+                        {{ whatInfo.question }}
                     </div>
-                    <div class="answers" v-for="(answer, key) in shuffledArr" :key="key">
+                    <div class="answers" v-for="(answer, key) in shuffledArr(whatInfo)" :key="key">
                         <input type="checkbox" :id="answer.key" />
-                        <label :for="key">{{ answer.option }}</label>
+                        <label :for="answer.key">{{ answer.option }}</label>
+                    </div>
+                </div>
+                <div class="questionCont">
+                    <div class="question">
+                        {{ whenInfo.question }}
+                    </div>
+                    <div class="answers" v-for="(answer, key) in shuffledArr(whenInfo)" :key="key">
+                        <input type="checkbox" :id="answer.key" />
+                        <label :for="answer.key">{{ answer.option }}</label>
+                    </div>
+                </div>
+                <div class="questionCont">
+                    <div class="question">
+                        {{ howInfo.question }}
+                    </div>
+                    <div class="answers" v-for="(answer, key) in shuffledArr(howInfo)" :key="key">
+                        <input type="checkbox" :id="answer.key" />
+                        <label :for="answer.key">{{ answer.option }}</label>
                     </div>
                 </div>
             </div>
