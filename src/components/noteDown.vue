@@ -4,241 +4,184 @@
     data() {
       return {
         showBackButton: false,
+        pressedCheck: false,
         showFirstPart: true,
-        whatInfo: {
+        correctAnswersInTotal: 10,
+        correctCounter: 0,
+        messageForScreen: '',
+        showMessage: false,
+        notePageInfo: [{
             question: 'מה נרשום?',
             sideNote: 'תבחרו 6 אפשרויות',
             answers: [{
                 option: 'תיאורים',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'ציטוטים',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שמות',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'זמנים',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'מקומות',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'מידע כמותי',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             }]
         },
-        whenInfo: {
+        {
             question: 'מתי נרשום?',
             sideNote: 'תבחרו 2 אפשרויות',
             answers: [{
                 option: 'בזמנים ״מתים״',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'רישום סמוך להתנסות',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             }]
         },
-        howInfo: {
+        {
             question: 'איך נרשום?',
             sideNote: 'תבחרו 2 אפשרויות',
             answers: [{
                 option: 'בצורה אובייקטיבית',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'בצורה מפורטת',
                 correct: true,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             },
             {
                 option: 'שטות',
                 correct: false,
-                chosen: false
+                chosen: false,
+                userCorrect: ''
             }]
-        },
-        // notePageInfo: [{
-        //     question: 'מה נרשום?',
-        //     sideNote: 'תבחרו 6 אפשרויות',
-        //     answers: [{
-        //         option: 'תיאורים',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'ציטוטים',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שמות',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'זמנים',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'מקומות',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'מידע כמותי',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     }]
-        // },
-        // {
-        //     question: 'מתי נרשום?',
-        //     sideNote: 'תבחרו 2 אפשרויות',
-        //     answers: [{
-        //         option: 'בזמנים ״מתים״',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'רישום סמוך להתנסות',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     }]
-        // },
-        // {
-        //     question: 'איך נרשום?',
-        //     sideNote: 'תבחרו 2 אפשרויות',
-        //     answers: [{
-        //         option: 'בצורה אובייקטיבית',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'בצורה מפורטת',
-        //         correct: true,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     },
-        //     {
-        //         option: 'שטות',
-        //         correct: false,
-        //         chosen: false
-        //     }]
-        // }]
+        }]
       }
     },
     methods: {
         checkAnswers() {
-            
-        },
-        shuffledArr(currentArr) {
-            let returnArray = currentArr.answers; // שכפול מערך התשובות הנכונות
-            let tmp = currentArr.answers;
+            this.pressedCheck = true;
+            this.correctCounter = 0;
 
-            for (let i = 0; i < returnArray.length; i++) {
-                let index = Math.floor(Math.random() * tmp.length);
-                returnArray[i]= tmp[index];
-                tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
+            for (let i = 0; i < this.notePageInfo.length; i++) {
+                for (let j = 0; j < this.notePageInfo[i].answers.length; j ++) {
+
+                    if (this.notePageInfo[i].answers[j].chosen) {
+                        this.showMessage = true;
+
+                        if (this.notePageInfo[i].answers[j].chosen === this.notePageInfo[i].answers[j].correct) {
+
+                            this.notePageInfo[i].answers[j].userCorrect = 'true';
+                            this.correctCounter++;
+
+                            if (this.correctCounter === this.correctAnswersInTotal) {
+                                this.messageForScreen = 'עניתם על הכל בהצלחה';
+
+                                setTimeout(() => {
+                                    this.showMessage = false;
+                                    this.$emit('backToHomePage', 'רישום ותיעוד');
+                                }, 1500);
+                            } 
+                        } else {
+                            this.notePageInfo[i].answers[j].userCorrect = 'false';
+                            this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
+
+                                setTimeout(() => {
+                                    this.messageForScreen = '';
+                                    this.showMessage = false;
+                                }, 2000);
+
+                            setTimeout(() => {
+                                this.notePageInfo[i].answers[j].userCorrect = '';
+                                this.notePageInfo[i].answers[j].chosen = false;
+                            }, 2000);
+                        }
+                    } else {
+                        this.notePageInfo[i].answers[j].userCorrect = '';
+                    }
+                }
             }
-            return returnArray;
         }
-    },
-    computed: {
-        
     }
   }
 </script>
@@ -258,35 +201,18 @@
         </div>
         <div class="secondPart" v-else>
             <div class="everythinCont">
-                <div class="questionCont">
+                <div v-for="(part, index) in notePageInfo" :key="index" class="questionCont">
                     <div class="question">
-                        {{ whatInfo.question }}
+                        {{ part.question }} <p class="side-note">{{ part.sideNote }}</p>
                     </div>
-                    <div class="answers" v-for="(answer, key) in shuffledArr(whatInfo)" :key="key">
-                        <input type="checkbox" :id="answer.key" />
-                        <label :for="answer.key">{{ answer.option }}</label>
+                    <div class="answers" v-for="(answer, key) in part.answers" :key="key">
+                        <input type="checkbox" :id="key" :ref="key" v-model="answer.chosen" @change="!answer.chosen" :class="answer.userCorrect === 'true' && pressedCheck === true ? 'correct' : answer.userCorrect === 'false' ? 'incorrect' : ''"/>
+                        <label :for="key">{{ answer.option }}</label>
                     </div>
                 </div>
-                <div class="questionCont">
-                    <div class="question">
-                        {{ whenInfo.question }}
-                    </div>
-                    <div class="answers" v-for="(answer, key) in shuffledArr(whenInfo)" :key="key">
-                        <input type="checkbox" :id="answer.key" />
-                        <label :for="answer.key">{{ answer.option }}</label>
-                    </div>
-                </div>
-                <div class="questionCont">
-                    <div class="question">
-                        {{ howInfo.question }}
-                    </div>
-                    <div class="answers" v-for="(answer, key) in shuffledArr(howInfo)" :key="key">
-                        <input type="checkbox" :id="answer.key" />
-                        <label :for="answer.key">{{ answer.option }}</label>
-                    </div>
-                </div>
+                <div class="message" v-show="showMessage">{{ messageForScreen }}</div>
             </div>
-            <button type="button" @click="checkAnswers" class="buttons">בדיקה</button>
+            <button type="button" @click="checkAnswers()" class="buttons">בדיקה</button>
         </div>
         <div class="buttonCont">
             <button v-show="showBackButton" class="buttons">
@@ -335,11 +261,37 @@
     align-items: flex-start;
 }
 
+.message {
+    width: 23vw;
+    height: 10vh;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5); 
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    padding: 3vw;
+    font-size: 1.7rem;
+    text-align: center;
+    left: 50%;
+}
+
 input[type=checkbox] {
-  cursor: pointer;
-  margin-left: 0.5vw;
-  width: 1.5vw;
-  height: 1.5vh
+    cursor: pointer;
+    margin-left: 0.5vw;
+    width: 1.25vw;
+    height: 1.25vw;
+}
+
+.correct {
+    -webkit-box-shadow: 0px 0px 5px 3px rgb(27, 150, 29);
+    -moz-box-shadow: 0px 0px 5px 3px rgb(27, 150, 29);
+    box-shadow: 0px 0px 5px 3px rgb(27, 150, 29);
+}
+
+.incorrect {
+    -webkit-box-shadow: 0px 0px 5px 3px rgb(175, 15, 15);
+    -moz-box-shadow: 0px 0px 5px 3px rgb(175, 15, 15);
+    box-shadow: 0px 0px 5px 3px rgb(175, 15, 15);
 }
 
 .question {
@@ -373,7 +325,6 @@ input[type=checkbox] {
     padding: 2vh 3.5vw;
     background-color: #6f9cb8;
     text-align: center;
-    /* margin-bottom: 5vh; */
     cursor: pointer;
     color: white;
     border: none;
