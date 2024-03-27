@@ -9,8 +9,7 @@
                 <div class="explanationText">מופע אשר מבצע הנחנך באופן עצמאי, בשלב זה החונך ׳זז הצידה׳ ונותן לחנך את הבמה.</div>
             </div>
             <div v-else class="flip-card-container" >
-            <p class = "over-me">עברו מעליי!</p>
-            <div v-for="( item, index) in arrayFront" :key="index" class="flip-card">
+            <div v-for="( item, index) in arrayFront" :key="index" :class="['flip-card', this.onStart]">
                 <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 15 + 130}deg`">
                     <div class="flip-card-front">
                         <img :src="src(item)" class="imgFront">
@@ -42,6 +41,7 @@ export default {
             textCounter: 0, 
             arrayFrontText: ['בקרה', 'שיפור ושימור יכולות', 'איסוף מידע'],
             arrayFront: ['lightbulb.png', 'chat.png', 'work.png'],
+            onStart: 'start',
             arrayBack: ["יצירת תמונת מצב לגבי רמת הדרכה במסגרת.", "שיקוף יכולות הדרכתיות של סגל ופעילות לשיפורן ושימורן.", "איסוף מקסימום מידע כבסיס לעיבוד משוב."],
         }
     },
@@ -57,6 +57,9 @@ export default {
             this.$emit('changeCurrentScreen');
         } else if (this.textCounter === 1) {
             this.$emit('changeShrinkBackground', 'backgroundAniShrink');
+            setTimeout(() => {
+                this.onStart = 'off';
+            }, 150);
         } else {
             this.$emit('changeShrinkBackground', 'backgroundAniScale');
         }
@@ -134,14 +137,16 @@ export default {
 .flip-card {
     background-color: transparent;
     width: 300px;
-    height: 300px;
+    height: 350px;
     perspective: 1000px;
+    /* flex: 0 0 calc(50% - 20px); */
     margin: 10px;
+    box-sizing: border-box;
 }
 
 .font-card-text {
-    font-size: 1.25rem;
-    font-weight: 550;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .flip-card-inner {
@@ -151,11 +156,11 @@ export default {
     text-align: center;
 }
 
-.flip-card:hover .flip-card-front {
+.flip-card:hover .flip-card-front, .flip-card.start .flip-card-front{
     transform: rotateY(180deg);
 }
 
-.flip-card:hover .flip-card-back {
+.flip-card:hover .flip-card-back, .flip-card.start .flip-card-back {
     transform: rotateY(360deg)
 }
 

@@ -23,8 +23,14 @@ import wholeScreen from './wholeScreen.vue';
 
 
 <style scoped>
+@font-face {
+  font-family: "heebo";
+  src: url('src/assets/fonts/Heebo/heebo.regular.ttf');
+}
+
 .wrapper {
   background-color: #e2e1e1;
+  font-family: 'heebo';
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;

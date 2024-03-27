@@ -122,6 +122,7 @@
   background-color: #ffffff7f;
   border-radius: 2vh;
   padding: 2.5vh 4vw;
+  box-shadow: 0 5px 7px #0003;
   width: 15vw;
   margin-right: 9vw;
 }

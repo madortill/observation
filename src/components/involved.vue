@@ -13,11 +13,14 @@
                 explain: 'בהתערבות זו המתצפת חודל את השיעור ומתקן את הנחנך במידת הצורך. בהתערבות זו נשתמש רק למקרים של בטיחות או עברה על הפקודות.'
             }
         ],
-        showBackButton: false
+        showBackButton: false,
+        showOtherSubject: false
       }
     },
     methods: {
-        
+      showInfo() {
+
+      }
     }
   }
 </script>
@@ -28,7 +31,10 @@
           {{ chapter }}
         </div>
         <div class="circleCont" >
-            <div class="subjectCicle" v-for="(sub,index) in subArr" :key="index" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="changeSubject">{{ sub.title }}</div>
+            <div class="subjectCicle"  v-for="(sub,index) in subArr" :key="index" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="showInfo">
+              {{ sub.title }}
+              <p v-html="sub.explain" v-show="showOtherSubject"></p>
+            </div>
         </div>
         <div class="buttonCont">
                 <button v-show="showBackButton" class="buttons" @click="nextSubject">
@@ -79,10 +85,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 1px 50px 50px rgb(255, 255, 255);
   transition: all .3s ease;
   background-color: hsl(var(--hue),50%,75%);
   padding: 3.5%;
+  animation: pickSubject 1.5s ease-in-out infinite;
   cursor: pointer;
 }
 
@@ -113,4 +119,28 @@
 .buttons:hover {
     background-color: #426991;
 }
+
+@keyframes pickSubject {
+  0% {
+    box-shadow: 0px 0px 25px 20px #fff
+  }
+  50% {
+    box-shadow: 0px 0px 25px 0px #fff;
+  }
+   100% {
+    box-shadow: 0px 0px 25px 20px #fff;
+   }
+}
+
+@-webkit-keyframes pickSubject {
+  0% {
+    box-shadow: 0px 0px 25px 20px #fff;
+  }
+  50% {
+    box-shadow: 0px 0px 25px 0px #fff;
+  }
+   100% {
+    box-shadow: 0px 0px 25px 20px #fff;
+   }
+} 
 </style>
