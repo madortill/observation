@@ -4,7 +4,7 @@
             {{ chapter }}
         </div>
         <div>
-            <div v-if="textCounter === 0">
+            <div class="container" v-if="textCounter === 0">
                 <div class="explanationTitle">מהו שלב התצפית?</div>
                 <div class="explanationText">מופע אשר מבצע הנחנך באופן עצמאי, בשלב זה החונך ׳זז הצידה׳ ונותן לחנך את הבמה.</div>
             </div>
@@ -41,7 +41,7 @@ export default {
             textCounter: 0, 
             arrayFrontText: ['בקרה', 'שיפור ושימור יכולות', 'איסוף מידע'],
             arrayFront: ['lightbulb.png', 'chat.png', 'work.png'],
-            onStart: 'start',
+            onStart: '',
             arrayBack: ["יצירת תמונת מצב לגבי רמת הדרכה במסגרת.", "שיקוף יכולות הדרכתיות של סגל ופעילות לשיפורן ושימורן.", "איסוף מקסימום מידע כבסיס לעיבוד משוב."],
         }
     },
@@ -53,16 +53,14 @@ export default {
             this.textCounter--;
         }
 
-        if (this.textCounter === 2) {
-            this.$emit('changeCurrentScreen');
-        } else if (this.textCounter === 1) {
-            this.$emit('changeShrinkBackground', 'backgroundAniShrink');
+        if (this.textCounter === 1) {
+            setTimeout(() => {
+                this.onStart = 'start';
+            }, 100)
             setTimeout(() => {
                 this.onStart = 'off';
-            }, 150);
-        } else {
-            this.$emit('changeShrinkBackground', 'backgroundAniScale');
-        }
+            }, 500);
+        }        
     },
     src(name) {
         return new URL(`../assets/${name}`, import.meta.url).href
@@ -85,6 +83,12 @@ export default {
     margin-top: 3vh;
     font-size: 3rem;
     font-weight: 600;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.677);
+    padding: 10vh;
+    border-radius: 5rem;
 }
 
 .explanationText {
@@ -201,15 +205,4 @@ export default {
 .imgFront {
     width: 60%;
 }
-
-.over-me {
-    position: absolute;
-    top :25%;
-    margin-left: 50%;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #5f5a5a;
-    animation: floatAnimation 3s ease-in-out infinite;
-}
-
 </style>

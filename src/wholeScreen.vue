@@ -7,7 +7,7 @@
   export default {
     data() {
       return {
-        chapters: ["לצורך תצפית מיטבית", "פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
+        chapters: [ "פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
         pageCounter: 0,
         animationType: ""
       }
@@ -42,67 +42,22 @@
 
 <style scoped>
 .wrapperNew {
-  /* background-image: url("src/assets/glasses.svg"); */
+  background-image: url("src/assets/goggles.png");
+  background-size: 55% 70%;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
   background-position: center;
   height: 100vh;
 }
 
-.backgroundAni {
-  animation: biggerBackground 2s forwards;
-  -webkit-animation: biggerBackground 2s forwards;
-}
-
 .backgroundAniShrink {
-  animation: smallerBackground 1.5s forwards;
-  -webkit-animation: smallerBackground 1.5s forwards;
+  animation: smallerBackground 1s forwards;
+  -webkit-animation: smallerBackground 1s forwards;
 }
 
-.backgroundAniScale {
-  animation: scaleBackground 1.5s forwards;
-  -webkit-animation: scaleBackground 1.5s forwards;
-}
-
-@keyframes biggerBackground {
-    0% {
-      background-size: 100% 100%;
-    }
-    100% {
-      background-size: 140% 140%;
-    }
-}
-
-@-webkit-keyframes biggerBackground {
-    0% {
-      background-size: 100% 100%;
-    }
-    100% {
-      background-size: 140% 140%;
-    }
-}
-
-@keyframes scaleBackground {
-    0% {
-      background-size: 0% 0%;
-    }
-    100% {
-      background-size: 140% 140%;
-    }
-}
-
-@-webkit-keyframes scaleBackground {
-    0% {
-      background-size: 0% 0%;
-    }
-    100% {
-      background-size: 140% 140%;
-    }
-}
 
 @keyframes smallerBackground {
     0% {
-      background-size: 140% 140%;
+      background-size: 55% 70%;
     }
     100% {
       background-size: 0% 0%;
@@ -111,7 +66,7 @@
 
 @-webkit-keyframes smallerBackground {
     0% {
-      background-size: 140% 140%;
+      background-size: 55% 70%;
     }
     100% {
       background-size: 0% 0%;

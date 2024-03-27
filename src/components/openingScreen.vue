@@ -1,8 +1,8 @@
 <template>
 
     <div class="openingScreen">
-        <div class="openingTitle">תצפית</div>
-        <button class="startingButton" @click="$emit('changeCurrentScreen'); $emit('changeShrinkBackground', 'backgroundAni')">מתחילים</button>
+        <div class="openingTitle"><p>לומדת</p><p>תצפית</p></div>
+        <button class="startingButton" @click="$emit('changeCurrentScreen'); $emit('changeShrinkBackground', 'backgroundAniShrink')">מתחילים</button>
     </div>
 
 </template>
@@ -18,14 +18,7 @@ export default {
 </script>
 
 <style scoped>
-
-@font-face {
-    font-family: "Heebo";
-    src: url('src/assets/fonts/Heebo/Heebo-VariableFont_wght.ttf');
-}
 .openingScreen {
-    font-family: "Heebo";
-    background-image: url();
     display: flex;
     height: 100vh;
     flex-direction: column;
@@ -35,9 +28,13 @@ export default {
 
 .openingTitle {
     font-weight: 700;
-    font-size: 9rem;
-    padding-top: 29vh;
-    animation: floatAnimation 3s ease-in-out infinite;
+    display: flex;
+    font-size: 10rem;
+    padding-top: 32vh;
+    width: 55vw;
+    color: rgb(68, 68, 68);
+    animation: floatAnimation-7537332f 3s ease-in-out infinite;
+    justify-content: space-around;
 }
 
 .startingButton {

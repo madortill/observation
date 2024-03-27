@@ -14,7 +14,8 @@
             }
         ],
         showBackButton: false,
-        showOtherSubject: false
+        showOtherSubject: false,
+        onStart: 'start'
       }
     },
     methods: {
@@ -30,10 +31,17 @@
         <div class="basicTitle">
           {{ chapter }}
         </div>
-        <div class="circleCont" >
-            <div class="subjectCicle"  v-for="(sub,index) in subArr" :key="index" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="showInfo">
-              {{ sub.title }}
-              <p v-html="sub.explain" v-show="showOtherSubject"></p>
+        <div class="flip-card-container" >
+          <div v-for="( item, index) in subArr" :key="index" :class="['flip-card', this.onStart]">
+                <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 15 + 130}deg`">
+                    <div class="flip-card-front">
+                        <img :src="src(item)" class="imgFront">
+                        <div class="font-card-text">{{  }}</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h1 class="textBack">{{  }}</h1>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="buttonCont">
@@ -64,36 +72,82 @@
   font-weight: 600;
 }
 
-.circleCont {
-  display: flex;
-  width: 100vw;
-  height: 40vh;
-  margin-right: 2vw;
-  margin-left: 2vw;
-  align-items: center;
-  justify-content: space-around;
+.flip-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.677);
+    padding: 10vh;
+    border-radius: 5rem;
 }
 
-.subjectCicle {
-  width: 16rem;
-  height: 16.5rem;
-  border-radius: 50%;
-  text-align: center;
-  color: #413f3f;
-  font-size: 3.5rem;
-  font-weight: 550;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all .3s ease;
-  background-color: hsl(var(--hue),50%,75%);
-  padding: 3.5%;
-  animation: pickSubject 1.5s ease-in-out infinite;
-  cursor: pointer;
+.flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 350px;
+    perspective: 1000px;
+    /* flex: 0 0 calc(50% - 20px); */
+    margin: 10px;
+    box-sizing: border-box;
 }
 
-.subjectCicle:hover {
-  transform: scale(1.1);
+.font-card-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.flip-card:hover .flip-card-front, .flip-card.start .flip-card-front{
+    transform: rotateY(180deg);
+}
+
+.flip-card:hover .flip-card-back, .flip-card.start .flip-card-back {
+    transform: rotateY(360deg)
+}
+
+.flip-card-front,
+.flip-card-back {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: #f0a06a;
+    background-color: hsl(var(--hue), 50%, 58%);
+    border-radius: 30px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.flip-card-back {
+    background-color: #f5c381;
+    background-color: hsl(var(--hue), 50%, 78%);
+    border-radius: 30px;
+    color: rgb(84, 82, 82);
+    transform: rotateY(180deg);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgFront {
+    width: 60%;
 }
 
 .buttons {
