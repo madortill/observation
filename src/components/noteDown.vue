@@ -148,20 +148,26 @@
 
                     if (this.notePageInfo[i].answers[j].chosen) {
                         this.showMessage = true;
-
                         if (this.notePageInfo[i].answers[j].chosen === this.notePageInfo[i].answers[j].correct) {
-
+                            
                             this.notePageInfo[i].answers[j].userCorrect = 'true';
                             this.correctCounter++;
 
                             if (this.correctCounter === this.correctAnswersInTotal) {
                                 this.messageForScreen = 'עניתם על הכל בהצלחה';
-
+                                
                                 setTimeout(() => {
                                     this.showMessage = false;
                                     this.$emit('backToHomePage', 'רישום ותיעוד');
                                 }, 1500);
-                            } 
+                            } else {
+                                this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
+
+                                setTimeout(() => {
+                                    this.messageForScreen = '';
+                                    this.showMessage = false;
+                                }, 2000);
+                            }
                         } else {
                             this.notePageInfo[i].answers[j].userCorrect = 'false';
                             this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
@@ -206,7 +212,7 @@
                         {{ part.question }} <p class="side-note">{{ part.sideNote }}</p>
                     </div>
                     <div class="answers" v-for="(answer, key) in part.answers" :key="key">
-                        <input type="checkbox" :id="key" :ref="key" v-model="answer.chosen" @change="!answer.chosen" :class="answer.userCorrect === 'true' && pressedCheck === true ? 'correct' : answer.userCorrect === 'false' ? 'incorrect' : ''"/>
+                        <input type="checkbox" :id="key" :ref="key" v-model="answer.chosen" @change="!answer.chosen" :class="[answer.userCorrect === 'true' && pressedCheck === true ? 'correct' : answer.userCorrect === 'false' ? 'incorrect' : '', answer.userCorrect === 'true' ? 'disabled': '']"/>
                         <label :for="key">{{ answer.option }}</label>
                     </div>
                 </div>
@@ -259,6 +265,10 @@
     width: 40vw;
     flex-wrap: wrap;
     align-items: flex-start;
+}
+
+.disabled {
+    pointer-events: none;
 }
 
 .message {

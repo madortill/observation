@@ -1,7 +1,8 @@
 <script>
-  import DivideHearing from './divideHearing.vue'
+  import DivideHearing from './divideHearing.vue';
   import SittingPlacement from './sittingPlacement.vue';
   import NoteDown from './noteDown.vue';
+  import Involved from './involved.vue';
 
   export default {
     props: ["chapter"],
@@ -37,7 +38,8 @@
     components: {
       DivideHearing,
       SittingPlacement,
-      NoteDown
+      NoteDown,
+      Involved
     },
     methods: {
       changeSubject(event) {
@@ -61,8 +63,8 @@
     <div>
       <div class="goodWatch" v-if="currentSubSubject === ''">
         <div class="basicTitle">
-              {{ chapter }}
-          </div>
+          {{ chapter }}
+        </div>
           <div class="mainText">
             <div v-for="(sub, index) in subjectsArr" :key="index" class="subjectCont">
               <div :class="sub.beenThere ? 'beenThere' : 'subjectCicle'" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="changeSubject">{{ sub.title }}</div>
@@ -76,6 +78,7 @@
         <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
         <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
         <NoteDown v-else-if="currentSubSubject === 'רישום ותיעוד'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
+        <Involved v-else-if="currentSubSubject === 'התערבות'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
     </div>
 
 </template>
