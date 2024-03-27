@@ -193,9 +193,9 @@
         </div>
         <div class="firstPart" v-if="showFirstPart">
             <div class="instructions">
-                דף תצפית ״טוב״<br>
-                התייחסות הכנת שיעור והגשתו
-                תקף, מהימן ופרקטי - בר הכללה
+                רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
+                כלל הדברים שתכתוב ישמשו עבורך בשלב העיבוד. <br><br> 
+                שים לב, ההפך מלרשום הוא לשכוח.
             </div>
             <button class="buttons" type="button" @click="showFirstPart = false">לדף תצפית</button>
         </div>
@@ -359,7 +359,7 @@ input[type=checkbox] {
     text-align: center;
     align-items: center;
     justify-content: space-between;
-    height: 40vh;
+    height: 32vh;
     padding: 8vh 5vw;
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.671);
