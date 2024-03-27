@@ -328,13 +328,14 @@ export default {
 }
 
 #draggable-container {
-    width: 40vw;
-    border-style: solid;
-    border-color: white;
-    border-width: 1vh;
+    width: 38vw;
     margin-right: 15vw;
     height: 40vh;
-    background-color: rgba(255, 255, 255, 0.759);
+    border-style: solid;
+    border-width: 2vh;
+    border-color: #da9146;
+    color: rgba(234, 234, 234, 0.901);
+    background-color: #31432d;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -353,7 +354,8 @@ export default {
 }
 
 .dragItem {
-    margin-bottom: 4vh;
+    margin-top: 1vh;
+    margin-bottom: 2.4vh;
     font-size: 1.2rem;
     padding-right: 1vw;
 }

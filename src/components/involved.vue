@@ -4,25 +4,60 @@
     data() {
       return {
         subArr: [
-            {
-                title: "התערבות עקיפה",
-                pics: 'advice.png',
-                explain: 'התערבות זו מגיעה ישירות לאחר ביצוע התצפית, עוד <b>לפני </b> שלב המשוב.<br><br> שימושה בעיקר בעת הסבר של פערים מקצועיים קריטיים שהיו בהדרכה.'
-            },
-            {
-                title: "התערבות ישירה",
-                pics: 'stop.png',
-                explain: 'בהתערבות זו המתצפת חודל את השיעור ומתקן את הנחנך במידת הצורך. <br><br>בהתערבות זו נשתמש רק למקרים של בטיחות או עברה על הפקודות.'
-            }
+          {
+            title: "התערבות עקיפה",
+            pics: 'advice.png',
+            explain: 'התערבות זו מגיעה ישירות לאחר ביצוע התצפית, עוד <b>לפני </b> שלב המשוב.<br><br> שימושה בעיקר בעת הסבר של פערים מקצועיים קריטיים שהיו בהדרכה.'
+          },
+          {
+            title: "התערבות ישירה",
+            pics: 'stop.png',
+            explain: 'בהתערבות זו המתצפת חודל את השיעור ומתקן את הנחנך במידת הצורך. <br><br>בהתערבות זו נשתמש רק למקרים של בטיחות או עברה על הפקודות.'
+          }
         ],
-        showBackButton: false,
+        practice: [{
+          question: 'שאלה שאלתית עם סיטואציה עגכעגכ ע סופר מסובכת',
+          correctAnswer: '1'
+        },
+        {
+          question: 'שאלה שאלתית עם סיטואצכע גכעיה סופר מסובכת',
+          correctAnswer: '1'
+        },{
+          question: 'שאלה שאלתית עם סיטואציה עגכ גכ עסופר מסובכת',
+          correctAnswer: '1'
+        },
+      ],
+        showNextButton: true,
+        chosen: '',
         showOtherSubject: false,
-        onStart: 'start'
+        textCounter: 0,
+        showBackButton: false,
+        onStart: 'start',
+        questionCounter: 0
       }
     },
     methods: {
-      showInfo() {
+      nextSubject() {
+        this.textCounter++;
+        if(this.textCounter === 1) {
+          this.showNextButton = false;
+        }
+      },
+      checkAnswer(key) {
+        if (key === Number(this.practice[this.questionCounter]['correctAnswer'])) {
+          this.chosen = `true${key}`;
+        } else {
+          this.chosen = `false${key}`;
+        }
 
+        setTimeout(() => {
+          this.questionCounter++;
+          this.chosen = '';
+
+          if (this.questionCounter === 3) {
+            this.$emit('backToHomePage', 'התערבות');
+          }
+        }, 1000);
       },
       src(name) {
         return new URL(`../assets/${name}`, import.meta.url).href
@@ -41,22 +76,33 @@
         <div class="basicTitle">
           {{ chapter }}
         </div>
-        <div class="basicTitle-2">קיימים 2 סוגים: </div>
-        <div class="flip-card-container">
-          <div v-for="( item, index) in subArr" :key="index" :class="['flip-card', this.onStart]">
-                <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 15 + 130}deg`">
-                    <div class="flip-card-front">
-                        <img :src="src(item.pics)" class="imgFront">
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="font-card-text">{{ item.title }}</div>
-                        <h1 class="textBack" v-html="item.explain"></h1>
-                    </div>
-                </div>
-            </div>
+        <div v-if="textCounter === 0" class="explainCont">
+          <div class="basicTitle-2">קיימים 2 סוגים:</div>
+          <div class="flip-card-container">
+            <div v-for="( item, index) in subArr" :key="index" :class="['flip-card', this.onStart]">
+                  <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 15 + 130}deg`">
+                      <div class="flip-card-front">
+                          <img :src="src(item.pics)" class="imgFront">
+                      </div>
+                      <div class="flip-card-back">
+                        <div class="font-card-text">{{ item.title }}</div>
+                          <h1 class="textBack" v-html="item.explain"></h1>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div v-else class="practiceContainer">
+          <div class="question">
+            {{ practice[questionCounter].question }}
+          </div>
+          <div class="answerCont">
+            <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect']" @click="checkAnswer(1)">התערבות עקיפה</div>
+            <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect']" @click="checkAnswer(2)">התערבות ישירה</div>
+          </div>
         </div>
         <div class="buttonCont">
-                <button v-show="showBackButton" class="buttons" @click="nextSubject">
+                <button v-show="showNextButton" class="buttons" @click="nextSubject">
                     ממשיכים
                 </button>
                 <button v-show="showBackButton" class="buttons" @click="prevSubject">
@@ -78,16 +124,88 @@
   overflow: hidden;
 }
 
+.explainCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.correct {
+  background-color: #75d33ed2;
+  border-radius: 2vh;
+  cursor: pointer;
+  box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);
+  text-align: center;
+  padding: 2vh 2vw;
+  font-size: 1.25rem;
+}
+
+.incorrect {
+  background-color: #d33e3ed2;
+  border-radius: 2vh;
+  cursor: pointer;
+  box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);
+  text-align: center;
+  padding: 2vh 2vw;
+  font-size: 1.25rem;
+}
+
 .basicTitle {
   margin-top: 3vh;
   font-size: 4rem;
   font-weight: 600;
 }
 
+.practiceContainer {
+  border-color: #da9146;
+  color: rgba(234, 234, 234, 0.901);
+  background-color: #31432d;
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 2vh;
+  align-items: center;
+  height: 60vh;
+  justify-content: space-around;
+}
+
 .basicTitle-2 {
-  margin-top: 10vh;
   font-size: 1.6rem;
   font-weight: 600;
+  margin-bottom: 4vh;
+}
+
+.question {
+  width: 38vw;
+  font-size: 2rem;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.answerCont {
+  display: flex;
+  width: 45vw;
+  color: black;
+  height: 6vh;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.answers {
+  background-color: #ffffffd2;
+  border-radius: 2vh;
+  cursor: pointer;
+  box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);
+  text-align: center;
+  padding: 2vh 2vw;
+  font-size: 1.25rem;
+}
+
+.answers:hover {
+  background-color: #ffffffa3;
 }
 
 .flip-card-container {
@@ -98,11 +216,11 @@
 
 .flip-card {
   background-color: transparent;
-  width: 400px;
+  width: 350px;
   height: 700px;
   perspective: 1000px;
   flex: 0 0 calc(50% - 20px);
-  margin: 150px;
+  margin: 0px 150px 0px;
   box-sizing: border-box;
 }
 
@@ -121,7 +239,7 @@
 }
 
 .textBack {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
 }
 
 .flip-card:hover .flip-card-front, .flip-card.start .flip-card-front{

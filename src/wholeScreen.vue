@@ -7,7 +7,7 @@
   export default {
     data() {
       return {
-        chapters: ["לצורך תצפית מיטבית", "פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
+        chapters: ["פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
         pageCounter: 0,
         animationType: ""
       }
@@ -31,6 +31,7 @@
 
 <template>
     <div class="wrapperNew" :class="`${animationType}`" >
+      <img src="./assets/madortill.png" alt="mador" class="logo" />
       <OpeningScreen v-if="chapters[pageCounter]==='פתיחה'"  @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <BasicPrinciples v-else-if="chapters[pageCounter]==='עקרונות יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <Preperation v-else-if="chapters[pageCounter]==='הכנה עצמית לביצוע תצפית'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
@@ -42,11 +43,18 @@
 
 <style scoped>
 .wrapperNew {
-  /* background-image: url("src/assets/goggles.png"); */
+  background-image: url("src/assets/goggles.png");
   background-size: 55% 70%;
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
+}
+
+.logo {
+  width: 4vw;
+  position: fixed;
+  bottom: 1vh;
+  right: 1vw;
 }
 
 .backgroundAniShrink {

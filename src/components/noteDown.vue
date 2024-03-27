@@ -50,13 +50,13 @@
                 userCorrect: ''
             },
             {
-                option: 'שטות',
+                option: 'מחשבות',
                 correct: false,
                 chosen: false,
                 userCorrect: ''
             },
             {
-                option: 'שטות',
+                option: 'תחושות',
                 correct: false,
                 chosen: false,
                 userCorrect: ''
@@ -78,19 +78,19 @@
                 userCorrect: ''
             },
             {
-                option: 'שטות',
+                option: 'כל הזמן',
                 correct: false,
                 chosen: false,
                 userCorrect: ''
             },
             {
-                option: 'שטות',
+                option: 'ביצירת קשר עין אישי',
                 correct: false,
                 chosen: false,
                 userCorrect: ''
             },
             {
-                option: 'שטות',
+                option: 'מאחורי החניך',
                 correct: false,
                 chosen: false,
                 userCorrect: ''
@@ -112,25 +112,19 @@
                 userCorrect: ''
             },
             {
-                option: 'שטות',
+                option: 'בצורה שיפוטית',
                 correct: false,
                 chosen: false,
                 userCorrect: ''
             },
             {
-                option: 'שטות',
+                option: 'בצורה אישית',
                 correct: false,
                 chosen: false,
                 userCorrect: ''
             },
             {
-                option: 'שטות',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'שטות',
+                option: 'באופן מרגש',
                 correct: false,
                 chosen: false,
                 userCorrect: ''
