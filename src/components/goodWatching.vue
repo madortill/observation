@@ -47,10 +47,10 @@
       }, 
       backToHomePage(newSub) {
         this.currentSubSubject = "";
+
         for (let i = 0; i < this.subjectsArr.length; i++) {
           if (this.subjectsArr[i]["title"] === newSub) {
             this.subjectsArr[i]["beenThere"] = true;
-            console.log(this.subjectsArr[i]);
             break;
           }
         }
