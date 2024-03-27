@@ -6,7 +6,7 @@
         subArr: [
             {
                 title: "התערבות עקיפה",
-                explain: 'התערבות זו מגיעה ישירות לאחר ביצוע התצפית, עוד לפני שלב המשוב. שימושה בעיקר בעת הסבר של פערים מקצועיים קריטיים שהיו בהדרכה.'
+                explain: 'התערבות זו מגיעה ישירות לאחר ביצוע התצפית, עוד <b>לפני </b> שלב המשוב. שימושה בעיקר בעת הסבר של פערים מקצועיים קריטיים שהיו בהדרכה.'
             },
             {
                 title: "התערבות ישירה",
@@ -79,7 +79,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 5px 7px #0003;
+  box-shadow: 0 1px 50px 50px rgb(255, 255, 255);
   transition: all .3s ease;
   background-color: hsl(var(--hue),50%,75%);
   padding: 3.5%;

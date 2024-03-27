@@ -24,7 +24,7 @@ import wholeScreen from './wholeScreen.vue';
 
 <style scoped>
 .wrapper {
-  background-image: url("src/assets/blueBackground.svg");
+  background-color: #e2e1e1;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;

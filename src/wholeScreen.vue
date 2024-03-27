@@ -42,7 +42,7 @@
 
 <style scoped>
 .wrapperNew {
-  background-image: url("src/assets/glasses.svg");
+  /* background-image: url("src/assets/glasses.svg"); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
