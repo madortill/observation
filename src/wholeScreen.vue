@@ -7,7 +7,7 @@
   export default {
     data() {
       return {
-        chapters: [ "פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
+        chapters: ["לצורך תצפית מיטבית", "פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
         pageCounter: 0,
         animationType: ""
       }
@@ -42,7 +42,7 @@
 
 <style scoped>
 .wrapperNew {
-  background-image: url("src/assets/goggles.png");
+  /* background-image: url("src/assets/goggles.png"); */
   background-size: 55% 70%;
   background-repeat: no-repeat;
   background-position: center;

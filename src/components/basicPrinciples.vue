@@ -60,7 +60,9 @@ export default {
             setTimeout(() => {
                 this.onStart = 'off';
             }, 500);
-        }        
+        } else if (this.textCounter === 2) {
+            this.$emit('changeCurrentScreen')
+        }       
     },
     src(name) {
         return new URL(`../assets/${name}`, import.meta.url).href
@@ -81,7 +83,7 @@ export default {
 
 .basicTitle {
     margin-top: 3vh;
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 600;
 }
 

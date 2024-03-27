@@ -96,7 +96,7 @@
 
 .basicTitle {
   margin-top: 3vh;
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 600;
 }
 

@@ -325,7 +325,7 @@ input[type=checkbox] {
 }
 
 .basicTitle {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-top: 3vh;
   font-weight: 600;
 }

@@ -6,11 +6,13 @@
         subArr: [
             {
                 title: "התערבות עקיפה",
-                explain: 'התערבות זו מגיעה ישירות לאחר ביצוע התצפית, עוד <b>לפני </b> שלב המשוב. שימושה בעיקר בעת הסבר של פערים מקצועיים קריטיים שהיו בהדרכה.'
+                pics: 'advice.png',
+                explain: 'התערבות זו מגיעה ישירות לאחר ביצוע התצפית, עוד <b>לפני </b> שלב המשוב.<br><br> שימושה בעיקר בעת הסבר של פערים מקצועיים קריטיים שהיו בהדרכה.'
             },
             {
                 title: "התערבות ישירה",
-                explain: 'בהתערבות זו המתצפת חודל את השיעור ומתקן את הנחנך במידת הצורך. בהתערבות זו נשתמש רק למקרים של בטיחות או עברה על הפקודות.'
+                pics: 'stop.png',
+                explain: 'בהתערבות זו המתצפת חודל את השיעור ומתקן את הנחנך במידת הצורך. <br><br>בהתערבות זו נשתמש רק למקרים של בטיחות או עברה על הפקודות.'
             }
         ],
         showBackButton: false,
@@ -21,8 +23,16 @@
     methods: {
       showInfo() {
 
+      },
+      src(name) {
+        return new URL(`../assets/${name}`, import.meta.url).href
       }
-    }
+    },
+    mounted() {
+      setTimeout(() => {
+          this.onStart = 'off';
+      }, 100);
+    },
   }
 </script>
 
@@ -31,15 +41,16 @@
         <div class="basicTitle">
           {{ chapter }}
         </div>
-        <div class="flip-card-container" >
+        <div class="basicTitle-2">קיימים 2 סוגים: </div>
+        <div class="flip-card-container">
           <div v-for="( item, index) in subArr" :key="index" :class="['flip-card', this.onStart]">
                 <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 15 + 130}deg`">
                     <div class="flip-card-front">
-                        <img :src="src(item)" class="imgFront">
-                        <div class="font-card-text">{{  }}</div>
+                        <img :src="src(item.pics)" class="imgFront">
                     </div>
                     <div class="flip-card-back">
-                        <h1 class="textBack">{{  }}</h1>
+                      <div class="font-card-text">{{ item.title }}</div>
+                        <h1 class="textBack" v-html="item.explain"></h1>
                     </div>
                 </div>
             </div>
@@ -64,44 +75,53 @@
   justify-content: space-between;
   height: 100vh;
   direction: rtl;
+  overflow: hidden;
 }
 
 .basicTitle {
   margin-top: 3vh;
-  font-size: 3rem;
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.basicTitle-2 {
+  margin-top: 10vh;
+  font-size: 1.6rem;
   font-weight: 600;
 }
 
 .flip-card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: rgba(255, 255, 255, 0.677);
-    padding: 10vh;
-    border-radius: 5rem;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
 }
 
 .flip-card {
-    background-color: transparent;
-    width: 300px;
-    height: 350px;
-    perspective: 1000px;
-    /* flex: 0 0 calc(50% - 20px); */
-    margin: 10px;
-    box-sizing: border-box;
+  background-color: transparent;
+  width: 400px;
+  height: 700px;
+  perspective: 1000px;
+  flex: 0 0 calc(50% - 20px);
+  margin: 150px;
+  box-sizing: border-box;
 }
 
 .font-card-text {
-    font-size: 1.3rem;
-    font-weight: 600;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 3vh;
+  color: black;
 }
 
 .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.textBack {
+  font-size: 2.5rem;
 }
 
 .flip-card:hover .flip-card-front, .flip-card.start .flip-card-front{
@@ -142,6 +162,7 @@
     transform: rotateY(180deg);
     text-align: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

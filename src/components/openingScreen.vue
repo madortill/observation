@@ -29,11 +29,12 @@ export default {
 .openingTitle {
     font-weight: 700;
     display: flex;
+    direction: rtl;
     font-size: 10rem;
     padding-top: 32vh;
     width: 55vw;
     color: rgb(68, 68, 68);
-    animation: floatAnimation-7537332f 3s ease-in-out infinite;
+    animation: floatAnimation 3s ease-in-out infinite;
     justify-content: space-around;
 }
 
