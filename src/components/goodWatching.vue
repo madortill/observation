@@ -53,6 +53,10 @@ import Involved from './involved.vue';
           if (this.subjectsArr[i]["title"] === newSub) {
             this.subjectsArr[i]["beenThere"] = true;
             this.subjectCounter++;
+          
+            if (this.subjectCounter === 1) {
+              this.$emit('change-current-screen');
+            }
             break;
           }
         }

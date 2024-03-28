@@ -14,8 +14,9 @@
 <template>
     <div class="ending">
         <div class="text">
-            <p>כל</p><p>הכבוד!</p>
+            <p class="first">כל</p><p class="second">הכבוד!</p>
         </div>
+        <div class="third">סיימת את הלומדה בהצלחה</div>
     </div>
 
 </template>
@@ -37,10 +38,38 @@
     display: flex;
     direction: rtl;
     font-size: 10rem;
-    padding-top: 32vh;
-    width: 55vw;
+    padding-top: 36vh;
     color: rgb(68, 68, 68);
     animation: floatAnimation 3s ease-in-out infinite;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.second {
+    position: absolute;
+    right: 5.5vw;
+}
+
+.first {
+    position: absolute;
+    left: 11vw;
+}
+
+.third {
+    font-size: 3rem;
+    padding-bottom: 4vh;
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 </style>
