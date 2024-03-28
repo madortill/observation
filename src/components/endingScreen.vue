@@ -31,6 +31,11 @@
     height: 100vh;
     direction: rtl;
     overflow: hidden;
+    background-image: url("src/assets/goggles.png");
+    background-size: 55% 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
 }
 
 .text {

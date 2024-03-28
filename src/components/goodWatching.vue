@@ -54,7 +54,7 @@ import Involved from './involved.vue';
             this.subjectsArr[i]["beenThere"] = true;
             this.subjectCounter++;
           
-            if (this.subjectCounter === 1) {
+            if (this.subjectCounter === 4) {
               this.$emit('change-current-screen');
             }
             break;

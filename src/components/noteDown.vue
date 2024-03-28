@@ -20,14 +20,14 @@
                 userCorrect: ''
             },
             {
-                option: 'ציטוטים',
+                option: 'שמות',
                 correct: true,
                 chosen: false,
                 userCorrect: ''
             },
             {
-                option: 'שמות',
-                correct: true,
+                option: 'מחשבות',
+                correct: false,
                 chosen: false,
                 userCorrect: ''
             },
@@ -50,8 +50,8 @@
                 userCorrect: ''
             },
             {
-                option: 'מחשבות',
-                correct: false,
+                option: 'ציטוטים',
+                correct: true,
                 chosen: false,
                 userCorrect: ''
             },
@@ -65,21 +65,16 @@
         {
             question: 'מתי נרשום?',
             sideNote: 'תבחרו 2 אפשרויות',
-            answers: [{
-                option: 'בזמנים ״מתים״',
-                correct: true,
+            answers: [
+            {
+                option: 'כל הזמן',
+                correct: false,
                 chosen: false,
                 userCorrect: ''
             },
             {
                 option: 'רישום סמוך להתנסות',
                 correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'כל הזמן',
-                correct: false,
                 chosen: false,
                 userCorrect: ''
             },
@@ -94,26 +89,26 @@
                 correct: false,
                 chosen: false,
                 userCorrect: ''
-            }]
+            },{
+                option: 'בזמנים ״מתים״',
+                correct: true,
+                chosen: false,
+                userCorrect: ''
+            },]
         },
         {
             question: 'איך נרשום?',
             sideNote: 'תבחרו 2 אפשרויות',
-            answers: [{
-                option: 'בצורה אובייקטיבית',
-                correct: true,
+            answers: [
+            {
+                option: 'בצורה שיפוטית',
+                correct: false,
                 chosen: false,
                 userCorrect: ''
             },
             {
                 option: 'בצורה מפורטת',
                 correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'בצורה שיפוטית',
-                correct: false,
                 chosen: false,
                 userCorrect: ''
             },
@@ -126,6 +121,11 @@
             {
                 option: 'באופן מרגש',
                 correct: false,
+                chosen: false,
+                userCorrect: ''
+            },{
+                option: 'בצורה אובייקטיבית',
+                correct: true,
                 chosen: false,
                 userCorrect: ''
             }]

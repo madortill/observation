@@ -8,7 +8,7 @@
   export default {
     data() {
       return {
-        chapters: [ "לצורך תצפית מיטבית",  "סיום", "פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
+        chapters: [ "לצורך תצפית מיטבית", "פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
         pageCounter: 0,
         animationType: "",
         showInfo: false
@@ -55,7 +55,7 @@
       <BasicPrinciples v-else-if="chapters[pageCounter]==='עקרונות יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <Preperation v-else-if="chapters[pageCounter]==='הכנה עצמית לביצוע תצפית'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <GoodWatching v-else-if="chapters[pageCounter]==='לצורך תצפית מיטבית'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen"/>
-      <EndingScreen v-else-if="chapters[pageCounter]==='סיום'" />
+      <EndingScreen v-else-if="chapters[pageCounter]==='סיום'"/>
     </div>
 
 </template>
