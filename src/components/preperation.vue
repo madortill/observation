@@ -303,7 +303,7 @@ export default {
     font-size: 2rem;
     text-align: center;
     direction: rtl; */
-    width: 50vw;
+    width: 40vw;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     height: 40vh;

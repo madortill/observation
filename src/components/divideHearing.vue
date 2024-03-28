@@ -24,7 +24,7 @@
                     <div class="timer">00:{{ countDown }}</div>
                     <div class="game-points">Score: {{ circleClicked }}</div>
                 </div>
-                <div class="paper">
+                <!-- <div class="paper">
                     <div class="lines">
                         <div class="text" spellcheck="false">
                             משימתכם עכשיו לתאר את החופשה הכי חלומית שלכם על הדף.<br /><br />
@@ -36,7 +36,7 @@
                     <div class="holes hole-top"></div>
                     <div class="holes hole-middle"></div>
                     <div class="holes hole-bottom"></div>
-                </div>
+                </div> -->
                 <div id="circle" v-show="circleVisible" @click="disappear" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${top}vh`, left: `${left}vw`}]">לחצו עליי</div>
             </div>
         </div>
@@ -209,10 +209,11 @@
     font-size: 2rem;
     padding: 8vh 6vw;
     border-radius: 2rem;
+    transform: scale(1.15);
     line-height: 1.5;
  }
 
- .explanation, .explanation-2 {
+ .explanation {
     animation: biggerAnimation 1.5s ease-in-out forwards;
  }
 

@@ -1,8 +1,8 @@
 <script>
-  import DivideHearing from './divideHearing.vue';
-  import SittingPlacement from './sittingPlacement.vue';
-  import NoteDown from './noteDown.vue';
-  import Involved from './involved.vue';
+import DivideHearing from './divideHearing.vue';
+import SittingPlacement from './sittingPlacement.vue';
+import NoteDown from './noteDown.vue';
+import Involved from './involved.vue';
 
   export default {
     props: ["chapter"],
@@ -32,7 +32,8 @@
             text: ["עקיפה", "ישירה"], 
             beenThere: false
           }],
-          currentSubSubject: ""
+          currentSubSubject: "",
+          subjectCounter: 0
     }
     },
     components: {
@@ -51,6 +52,7 @@
         for (let i = 0; i < this.subjectsArr.length; i++) {
           if (this.subjectsArr[i]["title"] === newSub) {
             this.subjectsArr[i]["beenThere"] = true;
+            this.subjectCounter++;
             break;
           }
         }
