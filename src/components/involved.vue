@@ -33,17 +33,22 @@
         textCounter: 0,
         showBackButton: false,
         onStart: 'start',
+        isDisabled: '',
         questionCounter: 0
       }
     },
     methods: {
       nextSubject() {
         this.textCounter++;
+
         if(this.textCounter === 1) {
           this.showNextButton = false;
         }
       },
       checkAnswer(key) {
+
+        this.isDisabled = 'disabled';
+
         if (key === Number(this.practice[this.questionCounter]['correctAnswer'])) {
           this.chosen = `true${key}`;
         } else {
@@ -52,12 +57,13 @@
 
         setTimeout(() => {
           this.questionCounter++;
+          this.isDisabled = 'abled';
           this.chosen = '';
 
           if (this.questionCounter === 3) {
             this.$emit('backToHomePage', 'התערבות');
           }
-        }, 1000);
+        }, 1300);
       },
       src(name) {
         return new URL(`../assets/${name}`, import.meta.url).href
@@ -97,7 +103,7 @@
             {{ practice[questionCounter].question }}
           </div>
           <div class="answerCont">
-            <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect']" @click="checkAnswer(1)">התערבות עקיפה</div>
+            <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect', isDisabled]" @click="checkAnswer(1)">התערבות עקיפה</div>
             <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect']" @click="checkAnswer(2)">התערבות ישירה</div>
           </div>
         </div>
@@ -122,6 +128,14 @@
   height: 100vh;
   direction: rtl;
   overflow: hidden;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.abled {
+  pointer-events: all;
 }
 
 .explainCont {

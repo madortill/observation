@@ -8,6 +8,7 @@
         showFirstPart: true,
         correctAnswersInTotal: 10,
         correctCounter: 0,
+        incorrectCounter: 0,
         messageForScreen: '',
         showMessage: false,
         notePageInfo: [{
@@ -136,6 +137,7 @@
         checkAnswers() {
             this.pressedCheck = true;
             this.correctCounter = 0;
+            this.incorrectCounter = 0;
 
             for (let i = 0; i < this.notePageInfo.length; i++) {
                 for (let j = 0; j < this.notePageInfo[i].answers.length; j ++) {
@@ -147,15 +149,15 @@
                             this.notePageInfo[i].answers[j].userCorrect = 'true';
                             this.correctCounter++;
 
-                            if (this.correctCounter === this.correctAnswersInTotal) {
-                                this.messageForScreen = 'עניתם על הכל בהצלחה';
+                            if (this.correctCounter === this.correctAnswersInTotal && this.incorrectCounter === 0) {
+                                this.messageForScreen = '!עניתם על הכל בהצלחה';
                                 
                                 setTimeout(() => {
                                     this.showMessage = false;
                                     this.$emit('backToHomePage', 'רישום ותיעוד');
                                 }, 1500);
-                            } else {
-                                this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
+                            } else if (this.correctCounter === this.correctAnswersInTotal && this.incorrectCounter !== 0) {
+                                this.messageForScreen = 'תשימו לב למספר התשובות שבחרת...';
 
                                 setTimeout(() => {
                                     this.messageForScreen = '';
@@ -163,6 +165,7 @@
                                 }, 2000);
                             }
                         } else {
+                            this.incorrectCounter++;
                             this.notePageInfo[i].answers[j].userCorrect = 'false';
                             this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
 

@@ -230,18 +230,6 @@ export default {
     }
 }
 
-.storyTextCont {
-    font-size: 3.5rem;
-    position: fixed; 
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    color: white;
-    width: 100vw;
-    height: 120vh;
-    transform: scale(1.45);
-    top: 0vh;
-    right: 0vw;
-}
 
 .buttons-continue {
     font-size: 1.65rem;
@@ -251,7 +239,6 @@ export default {
     position: relative;
     bottom : 20vh;
     right: 80.7vw;
-    /* margin-bottom: 50vh; */
     cursor: pointer;
     color: white;
     border: none;
@@ -278,14 +265,31 @@ export default {
     flex-direction: row-reverse;
 }
 
-.buttons:hover {
+.buttons:hover, .buttons-continue:hover {
     background-color: #426991;
 }
 
-.storyText{
-    position: relative;
-    right: 32vw;
-    top: 40vh;
+.storyTextCont {
+    position: fixed; 
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    border-style: none;
+    color: white;
+    width: 100vw;
+    height: 110vh;
+    transform: scale(1.45);
+    top: 0vh;
+    right: 0vw;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.storyText {
+    margin-bottom: 14vh;
+    font-weight: 600;
+    font-size: 5rem;
 }
 
 .prepareTitle {
@@ -357,7 +361,15 @@ export default {
     margin-top: 1vh;
     margin-bottom: 2.4vh;
     font-size: 1.2rem;
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
     padding-right: 1vw;
+}
+
+.dragItem:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
 
 .instructions {
