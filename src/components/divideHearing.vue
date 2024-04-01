@@ -6,9 +6,8 @@
         <div v-if="subjectCounter === 0" class="firstPart">
             <div v-if="!continued" class="instructions-cont">
                 <div class="instructions">
-                    לפניכם משחקון שיתרגל התרחשויות של דברים שקורים בנפרד אך באותו הזמן. <br><br>
-                    בחלק הבא יהיה מולכם מטלת כתיבה שעליכם להשלים ב30 שניות. 
-                    תוך כדי יופיע כדור שיופיע על המסך באופן רנדומלי. יהיה עליכם ללחוץ על הכדור 3 פעמים כדי לעבור לשלב הבא.
+                    לפניכם משחקון שיתרגל ליקויי למידה שמוגבל בזמן. <br><br>
+                    עליכם לבחור בליקויי העברה הנכונים בלבד.
                 </div>
                 <div class="buttonCont">
                     <button class="buttons" @click="changeText">

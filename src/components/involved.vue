@@ -16,14 +16,14 @@
           }
         ],
         practice: [{
-          question: 'שאלה שאלתית עם סיטואציה עגכעגכ ע סופר מסובכת',
-          correctAnswer: '1'
+          question: 'מפקדת בטירונות מעבירה שיעור נשק לצוות שלה. במהלך השיעור היא מסבירה על מבנה הנשק וחלקיו השונים. לצורך הדגמה מוחשית, המפקדת מחליטה לטעון את הנשק ולכוון אותו לכיוון הלוח כדי לא לסכן את החניכים.',
+          correctAnswer: '2'
         },
         {
-          question: 'שאלה שאלתית עם סיטואצכע גכעיה סופר מסובכת',
-          correctAnswer: '1'
+          question: 'במהלך שיעור בקורס טבחים, החיילים קיבלו משימה לבשל מנה בשרית. אחד החיילים מגיע עם רקע עשיר בעולם הבישול. כתוצאה מכך, החליט שהוא מוסיף קצת עניין למנה. החייל הוסיף גבינת פרמז׳ן כתיבול סופי למנה.',
+          correctAnswer: '2'
         },{
-          question: 'שאלה שאלתית עם סיטואציה עגכ גכ עסופר מסובכת',
+          question: 'במהלך שיעור נשק בטירונות, מפקדת הצוות מפרטת על חלקי הנשק השונים. בהסברתה על החלק ״פין פציל״, המפקדת מדגישה כי חלק זה לא קריטי במבנה הנשק לצורך הפעלתו ובמקרה שאינו נמצא הנשק יתופעל כרגיל.',
           correctAnswer: '1'
         },
       ],
@@ -41,8 +41,18 @@
       nextSubject() {
         this.textCounter++;
 
-        if(this.textCounter === 1) {
+        if (this.textCounter === 2) {
           this.showNextButton = false;
+          this.showBackButton = false;
+        } else if (this.textCounter === 1) {
+          this.showBackButton = true;
+        }
+      },
+      prevSubject() {
+        this.textCounter--;
+
+        if (this.textCounter === 0) {
+          this.showBackButton = false;
         }
       },
       checkAnswer(key) {
@@ -57,13 +67,15 @@
 
         setTimeout(() => {
           this.questionCounter++;
-          this.isDisabled = 'abled';
+          setTimeout(() => {
+            this.isDisabled = 'abled';
+          }, 1000);
           this.chosen = '';
 
           if (this.questionCounter === 3) {
             this.$emit('backToHomePage', 'התערבות');
           }
-        }, 1300);
+        }, 2000);
       },
       src(name) {
         return new URL(`../assets/${name}`, import.meta.url).href
@@ -97,6 +109,10 @@
                   </div>
               </div>
           </div>
+        </div>
+        <div v-else-if="textCounter === 1" class="practiceContainer-instructions">
+          לפניכם משחק שימחיש סיטואציות בהן תצטרכו להבחין בין התערבות עקיפה להתערבות ישירה. <br> <br>
+          ענו על התשובה המתאימה ביותר לאחר קריאת הסיטואציה.
         </div>
         <div v-else class="practiceContainer">
           <div class="question">
@@ -170,6 +186,23 @@
   font-weight: 600;
 }
 
+.practiceContainer-instructions {
+  padding: 4vh;
+  border-color: #da9146;
+  color: rgba(234, 234, 234, 0.901);
+  background-color: #31432d;
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 2vh;
+  align-items: center;
+  height: 40vh;
+  width: 38vw;
+  font-size: 2.5rem;
+  text-align: center;
+  justify-content: space-around;
+}
+
 .practiceContainer {
   border-color: #da9146;
   color: rgba(234, 234, 234, 0.901);
@@ -183,15 +216,17 @@
   justify-content: space-around;
 }
 
+
 .basicTitle-2 {
-  font-size: 1.6rem;
+  font-size: 1.9rem;
   font-weight: 600;
   margin-bottom: 4vh;
 }
 
 .question {
   width: 38vw;
-  font-size: 2rem;
+  font-size: 2.75rem;
+  text-align: center;
   height: 40vh;
   display: flex;
   flex-direction: column;
@@ -231,7 +266,7 @@
 .flip-card {
   background-color: transparent;
   width: 350px;
-  height: 700px;
+  height: 650px;
   perspective: 1000px;
   flex: 0 0 calc(50% - 20px);
   margin: 0px 150px 0px;

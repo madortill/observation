@@ -299,14 +299,6 @@ export default {
 }
 
 .prevText {
-    /* background-color: rgba(255, 255, 255, 0.677);
-    padding: 3vh;
-    width: 70vw;
-    height: 30vh;
-    border-radius: 5rem;
-    font-size: 2rem;
-    text-align: center;
-    direction: rtl; */
     width: 40vw;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
@@ -315,10 +307,6 @@ export default {
     padding: 1vw;
     border-radius: 2rem;
     line-height: 1.5;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly; */
     animation: floatAnimation 3s ease-in-out infinite;
 }
 
@@ -333,6 +321,7 @@ export default {
 
 #draggable-container {
     width: 38vw;
+    padding: 1.75vw 1vw 0 0;
     margin-right: 15vw;
     height: 40vh;
     border-style: solid;
@@ -358,12 +347,10 @@ export default {
 }
 
 .dragItem {
-    margin-top: 1vh;
-    margin-bottom: 2.4vh;
-    font-size: 1.2rem;
-    cursor: move; /* fallback if grab cursor is unsupported */
+    margin-bottom: 4vh;
+    font-size: 1.4rem;
     cursor: grab;
-    padding-right: 1vw;
+    padding-right: 1.5vw;
 }
 
 .dragItem:active {
@@ -373,7 +360,7 @@ export default {
 }
 
 .instructions {
-    font-size: 1.5rem;
+    font-size: 2rem;
     width: 17vw;
     padding: 0vh 10vw;
 }

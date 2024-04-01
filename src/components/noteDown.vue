@@ -10,6 +10,7 @@
         correctCounter: 0,
         incorrectCounter: 0,
         messageForScreen: '',
+        messageForButton: 'בדיקה',
         showMessage: false,
         notePageInfo: [{
             question: 'מה נרשום?',
@@ -150,7 +151,7 @@
                             this.correctCounter++;
 
                             if (this.correctCounter === this.correctAnswersInTotal && this.incorrectCounter === 0) {
-                                this.messageForScreen = '!עניתם על הכל בהצלחה';
+                                this.messageForScreen = 'עניתם על הכל בהצלחה!';
                                 
                                 setTimeout(() => {
                                     this.showMessage = false;
@@ -162,6 +163,7 @@
                                 setTimeout(() => {
                                     this.messageForScreen = '';
                                     this.showMessage = false;
+                                    this.messageForButton = 'המשך';
                                 }, 2000);
                             }
                         } else {
@@ -215,7 +217,7 @@
                 </div>
                 <div class="message" v-show="showMessage">{{ messageForScreen }}</div>
             </div>
-            <button type="button" @click="checkAnswers()" class="buttons">בדיקה</button>
+            <button type="button" @click="checkAnswers()" class="buttons">{{ messageForButton }}</button>
         </div>
         <div class="buttonCont">
             <button v-show="showBackButton" class="buttons">
@@ -276,6 +278,7 @@
     transform: translate(-50%,-50%);
     position: absolute;
     top: 50%;
+    direction: rtl;
     padding: 3vw;
     font-size: 1.7rem;
     text-align: center;

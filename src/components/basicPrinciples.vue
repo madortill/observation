@@ -6,7 +6,7 @@
         <div>
             <div class="container" v-if="textCounter === 0">
                 <div class="explanationTitle">מהו שלב התצפית?</div>
-                <div class="explanationText">מופע אשר מבצע הנחנך באופן עצמאי, בשלב זה החונך ׳זז הצידה׳ ונותן לחנך את הבמה.</div>
+                <div class="explanationText">מופע אשר מבצע הנחנך באופן עצמאי, בשלב זה החונך ׳זז הצידה׳ ונותן לנחנך את הבמה.</div>
             </div>
             <div v-else class="flip-card-container" >
             <div v-for="( item, index) in arrayFront" :key="index" :class="['flip-card', this.onStart]">
