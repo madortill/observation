@@ -301,13 +301,18 @@ export default {
 .prevText {
     width: 40vw;
     text-align: center;
+    display: flex;
     background-color: rgba(255, 255, 255, 0.671);
     height: 40vh;
     font-size: 2rem;
     padding: 1vw;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     border-radius: 2rem;
     line-height: 1.5;
     animation: floatAnimation 3s ease-in-out infinite;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .flexCont {

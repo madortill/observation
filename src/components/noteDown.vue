@@ -202,7 +202,7 @@
                 כלל הדברים שתכתוב ישמשו עבורך בשלב העיבוד. <br><br> 
                 שים לב, ההפך מלרשום הוא לשכוח.
             </div>
-            <button class="buttons" type="button" @click="showFirstPart = false">לדף תצפית</button>
+            <button class="buttons" type="button" @click="showFirstPart = false">לתרגול</button>
         </div>
         <div class="secondPart" v-else>
             <div class="everythinCont">

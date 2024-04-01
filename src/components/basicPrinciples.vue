@@ -91,6 +91,8 @@ export default {
     background-color: rgba(255, 255, 255, 0.677);
     padding: 10vh;
     border-radius: 5rem;
+    animation: floatAnimation 3s ease-in-out infinite;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
 }
 
 .explanationText {
@@ -118,6 +120,7 @@ export default {
     border: none;
     box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
 }
+
 .buttonCont {
     width: 85vw;
     display: flex;
@@ -132,6 +135,7 @@ export default {
 
 .flip-card-container {
     display: flex;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -145,7 +149,6 @@ export default {
     width: 300px;
     height: 350px;
     perspective: 1000px;
-    /* flex: 0 0 calc(50% - 20px); */
     margin: 10px;
     box-sizing: border-box;
 }
@@ -206,5 +209,33 @@ export default {
 
 .imgFront {
     width: 60%;
+}
+
+@-moz-keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+   @keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 </style>
