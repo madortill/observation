@@ -326,14 +326,17 @@ export default {
 
 #draggable-container {
     width: 38vw;
-    padding: 1.75vw 1vw 0 0;
+    padding: 3vw 2vw 4vh 0;
     margin-right: 15vw;
     height: 40vh;
-    border-style: solid;
+    /* border-style: solid;
     border-width: 2vh;
     border-color: #da9146;
-    color: rgba(234, 234, 234, 0.901);
-    background-color: #31432d;
+    color: rgba(234, 234, 234, 0.901); */
+    /* background-color: #31432d; */
+    background-image: url('../assets/board.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -355,6 +358,7 @@ export default {
     margin-bottom: 4vh;
     font-size: 1.4rem;
     cursor: grab;
+    color: rgba(255, 255, 255, 0.821);
     padding-right: 1.5vw;
 }
 

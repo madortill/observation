@@ -60,6 +60,12 @@
         </div>
         <div class="secondPart" v-else>
             <div class="instructions">בזמן שיעור תצפית - <br> באיזה מיקום כדאי למתצפת לשבת לצורך קבלת תצפית מיטבית?</div>
+            <div class="questionContainer">
+                <div>
+                    
+                </div>
+            </div>
+            <img src="../assets/classTop.png" alt="class" class="sitting" />
         </div>
     </div>
 
@@ -107,7 +113,7 @@
     background-color: #426991;
 }
 
-.explanation, .instructions {
+.explanation {
     width: 32vw;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
@@ -115,7 +121,13 @@
     padding: 8vh 5vw;
     border-radius: 2rem;
     line-height: 1.5;
-    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+.instructions {
+    width: 32vw;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.5;
 }
 
 .explanation ::v-deep .heartIcon {
@@ -125,7 +137,7 @@
     /* display: none; */
 }
 
-.firstPart, .secondPart {
+.firstPart {
     margin-top: 17.5vh;
     display: flex;
     flex-direction: column;
@@ -133,6 +145,18 @@
     justify-content: space-between;
     height: 75vh;
     direction: rtl;
+}
+
+.secondPart {
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: space-between;
+    direction: rtl;
+}
+
+.sitting {
+    transform: scale(0.65);
 }
 
 @-moz-keyframes floatAnimation {
