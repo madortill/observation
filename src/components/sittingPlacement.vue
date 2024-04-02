@@ -19,12 +19,15 @@
                 subSubjectTitle: "רואה ולא נראה",
                 subjectText: `המתצפת צריך למקם את עצמו במקום בו רואה את כל הכיתה אך לא מתבלט בה.`
             }
-        ]
+        ],
+        sittingArr: [false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, true],
+        showAnswer: false
       }
     },
     methods: {
         nextSubject() {
             this.subjectCounter++; 
+
             if (this.subjectCounter === 1) {
                 this.showBackButton = true;
             }
@@ -34,9 +37,19 @@
         },
         prevSubject() {
             this.subjectCounter--;
+
             if (this.subjectCounter === 0) {
                 this.showBackButton = false;
             }
+        },
+        checkSeating(event) {
+            console.log(event.currentTarget.id);
+
+            // if (event.currentTarget.id === true) {
+            //     event.currentTarget.id.classList.add("correct");
+            // } else {
+            //     event.currentTarget.id.classList.add("incorrect");
+            // }
         }
     }
   }
@@ -62,10 +75,15 @@
             <div class="instructions">בזמן שיעור תצפית - <br> באיזה מיקום כדאי למתצפת לשבת לצורך קבלת תצפית מיטבית?</div>
             <div class="questionContainer">
                 <div>
-                    
+
                 </div>
             </div>
-            <img src="../assets/classTop.png" alt="class" class="sitting" />
+            <div class="sitting">
+                <img src="../assets/table2.png" alt="class" class="table2" />
+                <div>
+                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat" src="../assets/table.png" alt="seats" :class="['seats', seat ? 'correct' : 'incorrect']" @click="checkSeating" />
+                </div>
+            </div>
         </div>
     </div>
 
@@ -73,6 +91,10 @@
 
 
 <style scoped>
+p {
+    margin: 0;
+}
+
 .placement {
   display: flex;
   flex-direction: column;
@@ -83,10 +105,11 @@
 }
 
 .basicTitle {
-  font-size: 4rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
+    margin-top: 3vh;
+    font-size: 4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
 }
 
 .buttons {
@@ -134,7 +157,6 @@
     width: 2vw;
     position: relative;
     top: 0.5vh;
-    /* display: none; */
 }
 
 .firstPart {
@@ -149,15 +171,54 @@
 
 .secondPart {
     display: flex;
-    height: 90vh;
+    height: 85vh;
     align-items: center;
     justify-content: space-between;
     direction: rtl;
 }
 
 .sitting {
-    transform: scale(0.65);
+    transform: scale(0.6);
+    display: flex;
+    width: 61vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.table2 {
+    width: 40vw;
+}
+
+.seats {
+    height: 18vh;
+    cursor: pointer;
+    width: 9vw;
+    margin: 4vh 3vw 2vh 3vw;
+}
+
+.correct {
+    border-style: solid;
+    border-color: green;
+    height: 18vh;
+    cursor: pointer;
+    width: 9vw;
+    margin: 4vh 3vw 2vh 3vw;
+}
+
+.incorrect {
+    border-style: solid;
+    border-color: red;
+    height: 18vh;
+    cursor: pointer;
+    width: 9vw;
+    margin: 4vh 3vw 2vh 3vw;
+}
+
+.seats:hover {
+    transform: scale(1.05);
+}
+
 
 @-moz-keyframes floatAnimation {
     0% {

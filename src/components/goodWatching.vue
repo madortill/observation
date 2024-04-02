@@ -10,7 +10,7 @@ import Involved from './involved.vue';
       return {
         subjectsArr: [{
             title: "חלוקת קשב",
-            subtitle: "",
+            subtitle: "חלוקת קשב",
             text: ["דברים קורים בנפרד", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"], 
             beenThere: false
           },
@@ -128,6 +128,7 @@ import Involved from './involved.vue';
   background-color: #ffffff7f;
   border-radius: 2vh;
   padding: 2.5vh 4vw;
+  height: 12vh;
   box-shadow: 0 5px 7px #0003;
   width: 15vw;
   margin-right: 9vw;
@@ -149,13 +150,13 @@ import Involved from './involved.vue';
 }
 
 .beenThere {
-  pointer-events: none;
-  width: 5rem;
-  height: 6rem;
+  width: 6rem;
+  height: 6.5rem;
   border-radius: 50%;
   text-align: center;
   color: #413f3f;
   font-size: 2.5rem;
+  cursor: pointer;
   font-weight: 550;
   display: flex;
   justify-content: center;
@@ -170,6 +171,7 @@ import Involved from './involved.vue';
 .beenThere1 {
   background-color: #cacaca7f;
   border-radius: 2vh;
+  height: 12vh;
   padding: 2.5vh 4vw;
   width: 15vw;
   margin-right: 9vw;
