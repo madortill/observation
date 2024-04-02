@@ -197,12 +197,29 @@
             {{ chapter }}
         </div>
         <div class="firstPart" v-if="showFirstPart">
-            <div class="instructions">
+            <div class="explanation">
                 רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
                 כלל הדברים שתכתוב ישמשו עבורך בשלב העיבוד. <br><br> 
                 שים לב, ההפך מלרשום הוא לשכוח.
+                <br> <br>
+                במהלך התצפית, נתייחס להכנת השיעור והעברתו - תקף, מהימן, ופרקטי, כולל את כל החומר הנדרש.
             </div>
-            <button class="buttons" type="button" @click="showFirstPart = false">לתרגול</button>
+            <div class="instructions">
+                <div class="title">שימוש בדף תצפית</div>
+                <div class="subTitle">מה נרשום?</div>
+                    <div>
+                        ציטוטים, שמות, זמנים, מקומות, מידע כמותי
+                    </div>
+                <div class="subTitle">מתי נרשום?</div>
+                    <div>
+                        זמנים מתים, בסמוך להתנסות
+                    </div>
+                <div class="subTitle">איך נרשום?</div>
+                    <div>
+                        באופן אובייקטיבי, בצורה מפורטת
+                    </div>
+            </div>
+            <button class="buttons toPractice" type="button" @click="showFirstPart = false">לתרגול</button>
         </div>
         <div class="secondPart" v-else>
             <div class="everythinCont">
@@ -249,6 +266,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.toPractice {
+    margin-top: 4vh;
 }
 
 .side-note {
@@ -365,7 +386,7 @@ input[type=checkbox] {
     text-align: center;
     align-items: center;
     justify-content: space-between;
-    height: 32vh;
+    height: 35vh;
     padding: 8vh 5vw;
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.671);

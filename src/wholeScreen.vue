@@ -89,8 +89,8 @@
 .logo-2 {
   width: 1.75vw;
   position: absolute;
-  top: 1vh;
-  right: 1vw;
+  bottom: 1vh;
+  left: 1vw;
 }
 
 .infoContainer {

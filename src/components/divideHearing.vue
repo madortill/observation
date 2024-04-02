@@ -5,7 +5,10 @@
         </div>
         <div v-if="subjectCounter === 0" class="firstPart">
             <div v-if="!continued" class="instructions-cont">
-                <div class="instructions">
+                <div class="instructions" v-if="textCounter === 0">
+                    בכתיבה בדף התצפית, נקפיד להפריד בין עיקר ותפל, בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים. 
+                </div>
+                <div class="instructions" v-else>
                     לפניכם משחקון שיתרגל ליקויי למידה שמוגבל בזמן. <br><br>
                     עליכם לבחור בליקויי העברה הנכונים בלבד.
                 </div>
@@ -23,19 +26,6 @@
                     <div class="timer">00:{{ countDown }}</div>
                     <div class="game-points">Score: {{ circleClicked }}</div>
                 </div>
-                <!-- <div class="paper">
-                    <div class="lines">
-                        <div class="text" spellcheck="false">
-                            משימתכם עכשיו לתאר את החופשה הכי חלומית שלכם על הדף.<br /><br />
-                            <div class="text-2" contenteditable spellcheck="false">
-                                תערכו את הטקסט כאן...
-                            </div>
-                        </div>
-                    </div>
-                    <div class="holes hole-top"></div>
-                    <div class="holes hole-middle"></div>
-                    <div class="holes hole-bottom"></div>
-                </div> -->
                 <div id="circle" v-show="circleVisible" @click="disappear" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${top}vh`, left: `${left}vw`}]">לחצו עליי</div>
             </div>
         </div>
@@ -81,6 +71,7 @@
             showBackButton: false,
             changeColor: 0, 
             subjectCounter: 0,
+            textCounter: 0,
             totalTime: 0,
             countDown: 30,
             circleClicked: 0,
@@ -94,8 +85,12 @@
      },
      methods: {
         changeText() {
-            this.continued = true;
-            this.countDownTimer()
+            this.textCounter++;
+
+            if (this.textCounter === 2) {
+                this.continued = true;
+                this.countDownTimer();
+            }
         },
         appeared() {
             this.top = Math.floor(Math.random() * (70 - 2) + 2);

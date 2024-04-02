@@ -13,15 +13,81 @@
             },
             {
                 subSubjectTitle: "מאפיינים אישיים של המדריך",
-                subjectText: `ישנם מדריכים בתצפית ההדרכה שמעדיפים שהמתצפת ישב קרוב ללוח מכיוון שזה מעניק להם תחושת בטחון וחופשיות.`
+                subjectText: `נשתדל להתחשב בבקשות המדריך בנוגע למיקומנו בשיעור ונפעיל שיקול דעת כדי למנוע משיכת תשומת לב.`
             },
             {
                 subSubjectTitle: "רואה ולא נראה",
                 subjectText: `המתצפת צריך למקם את עצמו במקום בו רואה את כל הכיתה אך לא מתבלט בה.`
             }
         ],
-        sittingArr: [false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, true],
-        showAnswer: false
+        sittingArr: [
+            {
+                answer: false,
+                showAnswer: false, 
+                id: 0
+            },
+            {
+                answer: false,
+                showAnswer: false, 
+                id: 0
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: true,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: false,
+                showAnswer: false
+            },
+            {
+                answer: true,
+                showAnswer: false
+            }
+        ],
       }
     },
     methods: {
@@ -45,11 +111,14 @@
         checkSeating(event) {
             console.log(event.currentTarget.id);
 
-            // if (event.currentTarget.id === true) {
-            //     event.currentTarget.id.classList.add("correct");
-            // } else {
-            //     event.currentTarget.id.classList.add("incorrect");
-            // }
+            for (let i = 0; i < this.sittingArr.length; i++) {
+                if (event.currentTarget.id === true) {
+                    event.currentTarget.id.classList.add("correct");
+                } else {
+                    event.currentTarget.id.classList.add("incorrect");
+                }
+            }
+
         }
     }
   }
@@ -81,7 +150,7 @@
             <div class="sitting">
                 <img src="../assets/table2.png" alt="class" class="table2" />
                 <div>
-                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat" src="../assets/table.png" alt="seats" :class="['seats', seat ? 'correct' : 'incorrect']" @click="checkSeating" />
+                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat.answer" src="../assets/table.png" alt="seats" :class="['seats', !seat.showAnswer ? '' : seat.answer ? 'correct' : 'incorrect']" @click="checkSeating" />
                 </div>
             </div>
         </div>

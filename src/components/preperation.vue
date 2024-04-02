@@ -1,55 +1,53 @@
 <template>
-    <div class="prepare" id="prepare">
+    <div class="prepare">
         <div class="prepareTitle">
             {{ chapter }}
         </div>
-        <div>
-            <div class="textt" v-show="this.textContent === 0">
-                <div class="prevText">
-                    <div>
-                        <br>
-                        טרם תחילת התצפית, עלייך להערך מראש על מנת שתוכל לאסוף את הנתונים בצורה מדויקת וברורה.
-                    </div>
-                    <br><br>
-                    <div>
-                        זכור - הכנה עצמית תקבע את אופן ההכנה שלך לביצוע תצפית.
-                    </div>
-                </div>
-                <div class="buttonCont">
-                    <button class="buttons" @click="changeText">
-                        ממשיכים
-                    </button>
-                    <button v-if="showBackButton" class="buttons">
-                        חוזרים
-                    </button>
-                </div>
+        <div v-if="textCounter === 0">
+            <div class="prevText">
+                <br>
+                טרם תחילת התצפית, עלייך להערך מראש על מנת שתוכל לאסוף את הנתונים בצורה מדויקת וברורה.
+                 <br><br>
+                זכור - הכנה עצמית תקבע את אופן המוכנות שלך לביצוע תצפית.
             </div>
-            <div v-show="this.textContent === 1" class="flexCont">
-                <div :class="startAnimation ? 'storyTextCont introAni': 'storyTextCont'"><div class="storyText">הנך ניגש לתצפית. מה תביא?</div></div>
-                <div class="instructions">
-                    תגררו את הכלים המתאימים להכנה עצמית לביצוע תצפית.
-                </div>
-        
-                <div id="draggable-container" @dragstart="onDragging" @dragover="allowDrop" @drop="(e) => {
-                    e.preventDefault();
-                    drop(e);
-                }"> 
-                    <div v-for="(item, index) in this.shuffledArr" :key="index" class="dragItem" :draggable="item.setDraggable" @dragstart="drag" :id="'listItem' + index">
-                        {{item.optionName}} 
-                        <img v-show="item.chosenOption" :src="`src/assets/${item.correct}.png`" class="checkIcon" />
-                    </div>
-                </div>
-                
-                <div class="box-droppable"  @drop="(e) => {
-                    e.preventDefault();
-                    drop(e);
-                    checkDrop(e)
-                }" @dragover="allowDrop" id='dragArea' @dragstart="onDragging" >
+        </div>
+        <div v-else-if="textCounter === 1">
+            <div class="prevText-1">
+                <p class="subTitle">תיאום הזמן והמקום -</p> שבו קורת התצפית.<br><br>
+                <p class="subTitle">הכנת אמצעים -</p> דף תצפית, עט, כל פריט נוסף שנדרש. <br><br>
+                <p class="subTitle">איסוף רקע ומידע חסר -</p> כדי להגיע מוכנים להגיע ברמה הגבוהה ביותר. <br> <br>
+                <p class="subTitle">חזרה על קריטריונים -</p> לחזור על קריטריונים של דף התצפית.
+            </div>
+        </div>
+        <div v-else class="flexCont">
+            <div :class="startAnimation ? 'storyTextCont introAni': 'storyTextCont'"><div class="storyText">הנך ניגש לתצפית. מה תביא?</div></div>
+            <div class="instructions">
+                תגררו את הכלים המתאימים להכנה עצמית לביצוע תצפית.
+            </div>
+    
+            <div id="draggable-container" @dragstart="onDragging" @dragover="allowDrop" @drop="(e) => {
+                e.preventDefault();
+                drop(e);
+            }"> 
+                <div v-for="(item, index) in this.shuffledArr" :key="index" class="dragItem" :draggable="item.setDraggable" @dragstart="drag" :id="'listItem' + index">
+                    {{item.optionName}} 
+                    <img v-show="item.chosenOption" :src="`src/assets/${item.correct}.png`" class="checkIcon" />
                 </div>
             </div>
             
-            <button v-show="this.correctCounter === 4" class="buttons-continue" @click="$emit('changeCurrentScreen')">
+            <div class="box-droppable"  @drop="(e) => {
+                e.preventDefault();
+                drop(e);
+                checkDrop(e)
+            }" @dragover="allowDrop" id='dragArea' @dragstart="onDragging" >
+            </div>
+        </div>
+        <div class="buttonCont">
+            <button v-show="showNextButton || this.correctCounter === 4" class="buttons" @click="nextText">
                 ממשיכים
+            </button>
+            <button v-show="showBackButton" class="buttons" @click="prevText">
+                חוזרים
             </button>
         </div>
     </div>
@@ -58,10 +56,11 @@
 <script>
 
 export default {
-    el: '#prepare',
     props: ["chapter"],
     data() {
         return {
+            textCounter: 0,
+            showNextButton: true,
             dropOptionArray: [{
                 optionName: "תיאום זמן ומקום",
                 correct: "check",
@@ -124,10 +123,9 @@ export default {
             },
         ], 
         correctCounter: 0,
-        textContent: 0,
         showBackButton: false,
         startAnimation: false
-        };        
+    };        
     },
     mounted() {
         this.initialize();
@@ -177,8 +175,26 @@ export default {
                 }
             }
         },
-        changeText() {
-            this.textContent++;
+        nextText() {
+            this.textCounter++;
+
+            if (this.textCounter === 1) {
+                this.showBackButton = true;
+            } else if (this.textCounter === 2) {
+                this.showNextButton = false;
+                this.showBackButton = false;
+            }
+
+            if (this.correctCounter === 4) {
+                this.$emit('changeCurrentScreen');
+            }
+        },
+        prevText() {
+            this.textCounter--;
+
+            if (this.textCounter === 0) {
+                this.showBackButton = false;
+            }
         }
     },
     computed: {
@@ -205,6 +221,31 @@ export default {
     height: 100vh;
     direction: rtl;
     overflow: hidden;
+}
+
+p {
+    margin: 0;
+}
+
+.subTitle {
+    font-weight: 800;
+}
+
+.prevText-1 {
+    width: 40vw;
+    text-align: center;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.671);
+    height: 48vh;
+    font-size: 2rem;
+    padding: 1vw;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
+    border-radius: 2rem;
+    line-height: 1.5;
+    animation: floatAnimation 3s ease-in-out infinite;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .textt {
