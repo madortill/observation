@@ -4,11 +4,12 @@
   import Preperation from './components/preperation.vue';
   import GoodWatching from './components/goodWatching.vue';
   import EndingScreen from './components/endingScreen.vue';
+  import Targets from './components/targets.vue'
   
   export default {
     data() {
       return {
-        chapters: ["פתיחה", "עקרונות יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
+        chapters: ["פתיחה", "הגדרת יסוד", "מאייפני יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
         pageCounter: 0,
         animationType: "",
         showInfo: false
@@ -19,7 +20,8 @@
       BasicPrinciples,
       Preperation,
       GoodWatching,
-      EndingScreen
+      EndingScreen,
+      Targets
     },
     methods: {
       changeCurrentScreen() {
@@ -27,6 +29,9 @@
       },
       changeShrinkBackground(type) {
         this.animationType = type;
+      },
+      prevCurrentScreen() {
+        this.pageCounter--;
       }
     }
   }
@@ -52,7 +57,8 @@
         <img src="./assets/mifkada-logo.png" alt="mifkada" class="logo-2" />
       </div>
       <OpeningScreen v-if="chapters[pageCounter]==='פתיחה'"  @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
-      <BasicPrinciples v-else-if="chapters[pageCounter]==='עקרונות יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
+      <BasicPrinciples v-else-if="chapters[pageCounter]==='הגדרת יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
+      <Targets  v-else-if="chapters[pageCounter]==='מאייפני יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @prev-current-screen="prevCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <Preperation v-else-if="chapters[pageCounter]==='הכנה עצמית לביצוע תצפית'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <GoodWatching v-else-if="chapters[pageCounter]==='לצורך תצפית מיטבית'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen"/>
       <EndingScreen v-else-if="chapters[pageCounter]==='סיום'"/>
