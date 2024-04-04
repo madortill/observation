@@ -7,16 +7,13 @@
             <div class="prevText">
                 <br>
                 טרם תחילת התצפית, עלייך להערך מראש על מנת שתוכל לאסוף את הנתונים בצורה מדויקת וברורה.
-                 <br><br>
-                זכור - הכנה עצמית תקבע את אופן המוכנות שלך לביצוע תצפית.
-            </div>
-        </div>
-        <div v-else-if="textCounter === 1">
-            <div class="prevText-1">
-                <p class="subTitle">תיאום הזמן והמקום -</p> שבו קורת התצפית.<br><br>
-                <p class="subTitle">הכנת אמצעים -</p> דף תצפית, עט, כל פריט נוסף שנדרש. <br><br>
-                <p class="subTitle">איסוף רקע ומידע חסר -</p> כדי להגיע מוכנים להגיע ברמה הגבוהה ביותר. <br> <br>
-                <p class="subTitle">חזרה על קריטריונים -</p> לחזור על קריטריונים של דף התצפית.
+                <br><br>
+                <div class="checkList"><img src="../assets/check-mark.png" class="check"/><b>תיאום הזמן והמקום -</b> שבו קורת התצפית.</div><br>
+                <div class="checkList"><img src="../assets/check-mark.png" class="check"/><b>הכנת אמצעים -</b> דף תצפית, עט, כל פריט נוסף שנדרש.</div> <br>
+                <div class="checkList"><img src="../assets/check-mark.png" class="check"/><b>איסוף רקע ומידע חסר -</b> כדי להגיע מוכנים להגיע ברמה הגבוהה ביותר.</div> <br>
+                <div class="checkList"><img src="../assets/check-mark.png" class="check"/><b>חזרה על קריטריונים -</b> לחזור על קריטריונים של דף התצפית.</div>
+                <br>
+                <div><img src="../assets/pin.png" alt="pin" class="pin" />זכור - הכנה עצמית תקבע את אופן המוכנות שלך לביצוע תצפית.</div>
             </div>
         </div>
         <div v-else class="flexCont">
@@ -43,7 +40,7 @@
             </div>
         </div>
         <div class="buttonCont">
-            <button v-show="showNextButton || this.correctCounter === 4" class="buttons" @click="nextText">
+            <button v-show="showNextButton || correctCounter === 4" class="buttons" @click="nextText">
                 ממשיכים
             </button>
             <button v-show="showBackButton" class="buttons" @click="prevText">
@@ -223,29 +220,21 @@ export default {
     overflow: hidden;
 }
 
+.pin {
+    width: 1.7vw;
+    margin-left: 0.5vw;
+}
+
+.check {
+    width: 2vw;
+}
+
 p {
     margin: 0;
 }
 
 .subTitle {
     font-weight: 800;
-}
-
-.prevText-1 {
-    width: 40vw;
-    text-align: center;
-    display: flex;
-    background-color: rgba(255, 255, 255, 0.671);
-    height: 48vh;
-    font-size: 2rem;
-    padding: 1vw;
-    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-    border-radius: 2rem;
-    line-height: 1.5;
-    animation: floatAnimation 3s ease-in-out infinite;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .textt {
@@ -344,7 +333,7 @@ p {
     text-align: center;
     display: flex;
     background-color: rgba(255, 255, 255, 0.671);
-    height: 40vh;
+    /* height: 40vh; */
     font-size: 2rem;
     padding: 1vw;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
