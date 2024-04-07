@@ -31,10 +31,10 @@ import Involved from './involved.vue';
             subtitle: "2 סוגי התערבות",
             text: ["עקיפה", "ישירה"], 
             beenThere: false
-          }],
-          currentSubSubject: "",
-          subjectCounter: 0
-    }
+          }
+        ],
+        currentSubSubject: "",
+      } 
     },
     components: {
       DivideHearing,
@@ -52,11 +52,10 @@ import Involved from './involved.vue';
         for (let i = 0; i < this.subjectsArr.length; i++) {
           if (this.subjectsArr[i]["title"] === newSub) {
             this.subjectsArr[i]["beenThere"] = true;
-            this.subjectCounter++;
           
-            if (this.subjectCounter === 4) {
-              this.$emit('change-current-screen');
-            }
+              if (!this.subjectsArr.some(e => e.beenThere === false)) {
+                this.$emit('change-current-screen');
+              }
             break;
           }
         }

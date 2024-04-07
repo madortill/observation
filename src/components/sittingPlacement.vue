@@ -94,12 +94,12 @@
         nextSubject() {
             this.subjectCounter++; 
 
-            if (this.subjectCounter === 1) {
-                this.showBackButton = true;
-            }
-            // if (this.subjectCounter === 3) {
-            //     this.$emit('backToHomePage', 'בחירת מיקום');
+            // if (this.subjectCounter === 1) {
+            //     this.showBackButton = true;
             // }
+            if (this.subjectCounter === 1) {
+                this.$emit('backToHomePage', 'בחירת מיקום');
+            }
         },
         prevSubject() {
             this.subjectCounter--;
