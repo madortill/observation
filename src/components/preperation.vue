@@ -3,20 +3,17 @@
         <div class="prepareTitle">
             {{ chapter }}
         </div>
-        <div v-if="textCounter === 0">
+        <div>
             <div class="prevText">
                 <br>
                 טרם תחילת התצפית, עלייך להערך מראש על מנת שתוכל לאסוף את הנתונים בצורה מדויקת וברורה.
                 <br><br>
-                <div class="checkList"><img src="../assets/check-mark.png" class="check"/><b>תיאום הזמן והמקום -</b> שבו קורת התצפית.</div><br>
-                <div class="checkList"><img src="../assets/check-mark.png" class="check"/><b>הכנת אמצעים -</b> דף תצפית, עט, כל פריט נוסף שנדרש.</div> <br>
-                <div class="checkList"><img src="../assets/check-mark.png" class="check"/><b>איסוף רקע ומידע חסר -</b> כדי להגיע מוכנים להגיע ברמה הגבוהה ביותר.</div> <br>
-                <div class="checkList"><img src="../assets/check-mark.png" class="check"/><b>חזרה על קריטריונים -</b> לחזור על קריטריונים של דף התצפית.</div>
+                <div v-for="(item, index) in preperationTitleList" :key="index" v-show="index <= lineText" :class="index === lineText ? 'typed' : 'stopTyped' " class="checkList typewriter"><img src="../assets/check-mark.png" class="check"/><b>{{item}} -</b> {{ preperationItemList[index] }}</div><br>
                 <br>
                 <div><img src="../assets/pin.png" alt="pin" class="pin" />זכור - הכנה עצמית תקבע את אופן המוכנות שלך לביצוע תצפית.</div>
             </div>
         </div>
-        <div v-else class="flexCont">
+        <!-- <div v-else class="flexCont">
             <div :class="startAnimation ? 'storyTextCont introAni': 'storyTextCont'"><div class="storyText">הנך ניגש לתצפית. מה תביא?</div></div>
             <div class="instructions">
                 תגררו את הכלים המתאימים להכנה עצמית לביצוע תצפית.
@@ -38,7 +35,7 @@
                 checkDrop(e)
             }" @dragover="allowDrop" id='dragArea' @dragstart="onDragging" >
             </div>
-        </div>
+        </div> -->
         <div class="buttonCont">
             <button v-show="showNextButton || correctCounter === 4" class="buttons" @click="nextText">
                 ממשיכים
@@ -56,156 +53,172 @@ export default {
     props: ["chapter"],
     data() {
         return {
-            textCounter: 0,
+            // textCounter: 0,
             showNextButton: true,
-            dropOptionArray: [{
-                optionName: "תיאום זמן ומקום",
-                correct: "check",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "הכנת אמצעים",
-                correct: "check",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "איסוף רקע ומידע חסר",
-                correct: "check",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "חזרה על קרטריונים",
-                correct: "check",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "כללים לתדריך במהלך התצפית",
-                correct: "cancel",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "אוכל",
-                correct: "cancel",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "קפה",
-                correct: "cancel",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "תופעות למשוב",
-                correct: "cancel",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "כללים להתמודדויות עם התנגדויות",
-                correct: "cancel",
-                chosenOption: false,
-                setDraggable: true
-            },
-            {
-                optionName: "הכנת ציון מראש",
-                correct: "cancel",
-                chosenOption: false,
-                setDraggable: true
-            },
-        ], 
+        //     dropOptionArray: [{
+        //         optionName: "תיאום זמן ומקום",
+        //         correct: "check",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "הכנת אמצעים",
+        //         correct: "check",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "איסוף רקע ומידע חסר",
+        //         correct: "check",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "חזרה על קרטריונים",
+        //         correct: "check",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "כללים לתדריך במהלך התצפית",
+        //         correct: "cancel",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "אוכל",
+        //         correct: "cancel",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "קפה",
+        //         correct: "cancel",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "תופעות למשוב",
+        //         correct: "cancel",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "כללים להתמודדויות עם התנגדויות",
+        //         correct: "cancel",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        //     {
+        //         optionName: "הכנת ציון מראש",
+        //         correct: "cancel",
+        //         chosenOption: false,
+        //         setDraggable: true
+        //     },
+        // ], 
+        lineText : 0,
+        preperationItemList: ["שבו קורת התצפית", "דף תצפית, עט, כל פריט נוסף שנדרש.", "כדי להגיע מוכנים להגיע ברמה הגבוהה ביותר.", "לחזור על קריטריונים של דף התצפית."],
+        preperationTitleList: ["תיאום הזמן והמקום", "הכנת אמצעים", "איסוף רקע ומידע חסר", "חזרה על קריטריונים"],
         correctCounter: 0,
         showBackButton: false,
-        startAnimation: false
+        // startAnimation: false
     };        
     },
     mounted() {
-        this.initialize();
+        // this.initialize();
+        this.textAni();
     },
     methods: {
-        initialize() {
-            setTimeout(() => {
-                this.startAnimation = true;
-            }, 1000);
-        },
-        onDragging(ev){
-            ev.dataTransfer.setData("text",ev.target.textContent.slice(0, -1));
-            ev.dataTransfer.setData("id",ev.target.id);
-        
-        },
-        allowDrop(ev) {
-            ev.preventDefault();
-        },
-        drag(ev) {
-            ev.dataTransfer.setData("text",ev.target.textContent.slice(0, -1));
-            ev.dataTransfer.setData("id",ev.target.id);
-        },
-        drop(ev) {
-            ev.preventDefault();
-            const data = ev.dataTransfer.getData("id");
-            ev.currentTarget.appendChild(document.getElementById(data));
-        },
-        checkDrop(ev) {
-            const dragtext = ev.dataTransfer.getData("text");
-            const ID = ev.dataTransfer.getData("id");
-
-            for (let i = 0; i < this.dropOptionArray.length; i++) {
-                if (dragtext === this.dropOptionArray[i]["optionName"]) {
-
-                    if (this.dropOptionArray[i]["correct"] === "check") {
-                        this.dropOptionArray[i]["chosenOption"] = true;
-                        this.dropOptionArray[i]["setDraggable"] = false;
-                        this.correctCounter++;
-                        break;
-                    } else {
-                        this.dropOptionArray[i]["chosenOption"] = true;
-                        setTimeout(() => {
-                            this.dropOptionArray[i]["chosenOption"] = false; 
-                            this.$el.querySelector("#draggable-container").appendChild(this.$el.querySelector(`#${ID}`))
-                        }, 1200)
-                    }
+        // initialize() {
+        //     setTimeout(() => {
+        //         this.startAnimation = true;
+        //     }, 1000);
+        // },
+        textAni() {
+            setInterval(() => {
+                if (this.lineText < 4) {
+                    this.lineText++;
+                    
                 }
-            }
+            }, 3700);
         },
+        // onDragging(ev){
+        //     ev.dataTransfer.setData("text",ev.target.textContent.slice(0, -1));
+        //     ev.dataTransfer.setData("id",ev.target.id);
+        
+        // },
+        // allowDrop(ev) {
+        //     ev.preventDefault();
+        // },
+        // drag(ev) {
+        //     ev.dataTransfer.setData("text",ev.target.textContent.slice(0, -1));
+        //     ev.dataTransfer.setData("id",ev.target.id);
+        // },
+        // drop(ev) {
+        //     ev.preventDefault();
+        //     const data = ev.dataTransfer.getData("id");
+        //     ev.currentTarget.appendChild(document.getElementById(data));
+        // },
+        // checkDrop(ev) {
+        //     const dragtext = ev.dataTransfer.getData("text");
+        //     const ID = ev.dataTransfer.getData("id");
+
+        //     for (let i = 0; i < this.dropOptionArray.length; i++) {
+        //         if (dragtext === this.dropOptionArray[i]["optionName"]) {
+
+        //             if (this.dropOptionArray[i]["correct"] === "check") {
+        //                 this.dropOptionArray[i]["chosenOption"] = true;
+        //                 this.dropOptionArray[i]["setDraggable"] = false;
+        //                 this.correctCounter++;
+        //                 break;
+        //             } else {
+        //                 this.dropOptionArray[i]["chosenOption"] = true;
+        //                 setTimeout(() => {
+        //                     this.dropOptionArray[i]["chosenOption"] = false; 
+        //                     this.$el.querySelector("#draggable-container").appendChild(this.$el.querySelector(`#${ID}`))
+        //                 }, 1200)
+        //             }
+        //         }
+        //     }
+        // },
         nextText() {
-            this.textCounter++;
+            // this.textCounter++;
 
-            if (this.textCounter === 1) {
-                this.showBackButton = true;
-            } else if (this.textCounter === 2) {
-                this.showNextButton = false;
-                this.showBackButton = false;
-            }
+            // if (this.textCounter === 1) {
+            //     this.showBackButton = true;
+            // } else if (this.textCounter === 2) {
+            //     this.showNextButton = false;
+            //     this.showBackButton = false;
+            // }
 
-            if (this.correctCounter === 4) {
+            // if (this.textCounter === 1) {
                 this.$emit('changeCurrentScreen');
-            }
-        },
-        prevText() {
-            this.textCounter--;
+            // }
 
-            if (this.textCounter === 0) {
-                this.showBackButton = false;
-            }
-        }
+            // if (this.correctCounter === 1) {
+            //     this.$emit('changeCurrentScreen');
+            // }
+        },
+        // prevText() {
+        //     this.textCounter--;
+
+        //     if (this.textCounter === 0) {
+        //         this.showBackButton = false;
+        //     }
+        // }
     },
-    computed: {
-        shuffledArr() {
-            let returnArray = this.dropOptionArray.slice(); // שכפול מערך התשובות הנכונות
-            let tmp = this.dropOptionArray.slice();
-            for (let i = 0; i < returnArray.length; i++) {
-                let index = Math.floor(Math.random() * tmp.length);
-                returnArray[i]= tmp[index];
-                tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
-            }
-            return returnArray;
-        }
-    }
+    // computed: {
+    //     shuffledArr() {
+    //         let returnArray = this.dropOptionArray.slice(); // שכפול מערך התשובות הנכונות
+    //         let tmp = this.dropOptionArray.slice();
+    //         for (let i = 0; i < returnArray.length; i++) {
+    //             let index = Math.floor(Math.random() * tmp.length);
+    //             returnArray[i]= tmp[index];
+    //             tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
+    //         }
+    //         return returnArray;
+    //     }
+    // }
 }
 </script>
 
@@ -218,6 +231,44 @@ export default {
     height: 100vh;
     direction: rtl;
     overflow: hidden;
+}
+
+.typewriter {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  white-space: nowrap; /*  Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  direction: rtl;
+  margin: 0 auto;
+  letter-spacing: .05em; 
+  /* animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite; */
+} 
+
+.typed {
+    border-left: .1em solid black;
+    animation: 
+    typing 4.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+.stopTyped {
+    border-left: .1em solid transparent;
+    /* animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite; */
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: black; }
 }
 
 .pin {
@@ -260,7 +311,6 @@ p {
     }
 }
 
-
 .buttons-continue {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
@@ -299,7 +349,7 @@ p {
     background-color: #426991;
 }
 
-.storyTextCont {
+/* .storyTextCont {
     position: fixed; 
     display: flex;
     background-color: rgba(0, 0, 0, 0.6);
@@ -320,7 +370,7 @@ p {
     margin-bottom: 14vh;
     font-weight: 600;
     font-size: 5rem;
-}
+} */
 
 .prepareTitle {
     margin-top: 3vh;
@@ -329,7 +379,7 @@ p {
 }
 
 .prevText {
-    width: 40vw;
+    width: 43vw;
     text-align: center;
     display: flex;
     background-color: rgba(255, 255, 255, 0.671);
@@ -354,7 +404,7 @@ p {
     margin-top: 10vh;
 }
 
-#draggable-container {
+/* #draggable-container {
     width: 38vw;
     padding: 3vw 2vw 4vh 0;
     margin-right: 15vw;
@@ -363,7 +413,7 @@ p {
     border-width: 2vh;
     border-color: #da9146;
     color: rgba(234, 234, 234, 0.901); */
-    /* background-color: #31432d; */
+    /* background-color: #31432d; 
     background-image: url('../assets/board.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -406,7 +456,7 @@ p {
 
 .checkIcon {
     width: 1vw;
-}
+} */
 
 .introAni {
     animation: introText 2.25s 0.75s ease-in forwards;
