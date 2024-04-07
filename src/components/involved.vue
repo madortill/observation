@@ -37,6 +37,8 @@
         showBackButton: false,
         onStart: 'start',
         isDisabled: '',
+        sideNote: '',
+        answered: false,
         questionCounter: 0
       }
     },
@@ -61,24 +63,29 @@
       checkAnswer(key) {
 
         this.isDisabled = 'disabled';
-
+        this.answered = true;
+        
         if (key === Number(this.practice[this.questionCounter]['correctAnswer'])) {
           this.chosen = `true${key}`;
+          this.sideNote = 'תשובה נכונה. כל הכבוד!';
         } else {
           this.chosen = `false${key}`;
+          this.sideNote = this.practice[this.questionCounter]['explain'];
         }
 
         setTimeout(() => {
           this.questionCounter++;
+          this.chosen = '';
+          this.answered = false;
+
           setTimeout(() => {
             this.isDisabled = 'abled';
           }, 1000);
-          this.chosen = '';
 
           if (this.questionCounter === 3) {
             this.$emit('backToHomePage', 'התערבות');
           }
-        }, 2000);
+        }, 4000);
       },
       src(name) {
         return new URL(`../assets/${name}`, import.meta.url).href
@@ -121,6 +128,7 @@
           <div class="question">
             {{ practice[questionCounter].question }}
           </div>
+          <div class="explain" v-show="answered" v-html="sideNote"></div>
           <div class="answerCont">
             <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect', isDisabled]" @click="checkAnswer(1)">התערבות עקיפה</div>
             <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect']" @click="checkAnswer(2)">התערבות ישירה</div>
@@ -190,14 +198,13 @@
 }
 
 .practiceContainer-instructions {
-  padding: 4vh;
-  border-color: #da9146;
-  color: rgba(234, 234, 234, 0.901);
-  background-color: #31432d;
+  padding: 6vh;
+  color: rgba(234, 234, 234, 0.901); 
+  background-image: url('../assets/board.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
-  border-style: solid;
-  border-width: 2vh;
   align-items: center;
   height: 40vh;
   width: 38vw;
@@ -206,14 +213,19 @@
   justify-content: space-around;
 }
 
+.explain {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
 .practiceContainer {
-  border-color: #da9146;
-  color: rgba(234, 234, 234, 0.901);
-  background-color: #31432d;
+  padding: 6vh;
+  color: rgba(234, 234, 234, 0.901); 
+  background-image: url('../assets/board.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
-  border-style: solid;
-  border-width: 2vh;
   align-items: center;
   height: 60vh;
   justify-content: space-around;
