@@ -40,7 +40,7 @@
             <button v-show="showNextButton || correctCounter === 4" class="buttons" @click="nextText">
                 ממשיכים
             </button>
-            <button v-show="showBackButton" class="buttons" @click="prevText">
+            <button v-show="showBackButton" class="buttons" @click="prevSubject">
                 חוזרים
             </button>
         </div>
@@ -55,6 +55,7 @@ export default {
         return {
             // textCounter: 0,
             showNextButton: true,
+            showBackButton: true,
         //     dropOptionArray: [{
         //         optionName: "תיאום זמן ומקום",
         //         correct: "check",
@@ -119,8 +120,7 @@ export default {
         lineText : 0,
         preperationItemList: ["שבו קורת התצפית", "דף תצפית, עט, כל פריט נוסף שנדרש.", "כדי להגיע מוכנים להגיע ברמה הגבוהה ביותר.", "לחזור על קריטריונים של דף התצפית."],
         preperationTitleList: ["תיאום הזמן והמקום", "הכנת אמצעים", "איסוף רקע ומידע חסר", "חזרה על קריטריונים"],
-        correctCounter: 0,
-        showBackButton: false,
+        correctCounter: 0
         // startAnimation: false
     };        
     },
@@ -141,6 +141,9 @@ export default {
                     
                 }
             }, 3700);
+        },
+        prevSubject() {
+            this.$emit('prevCurrentScreen');
         },
         // onDragging(ev){
         //     ev.dataTransfer.setData("text",ev.target.textContent.slice(0, -1));
@@ -199,13 +202,7 @@ export default {
             //     this.$emit('changeCurrentScreen');
             // }
         },
-        // prevText() {
-        //     this.textCounter--;
 
-        //     if (this.textCounter === 0) {
-        //         this.showBackButton = false;
-        //     }
-        // }
     },
     // computed: {
     //     shuffledArr() {

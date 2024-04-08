@@ -129,7 +129,9 @@
                         this.correctCounter++;
 
                         if (this.correctCounter === 2) {
-                            this.$emit('backToHomePage', 'בחירת מיקום');
+                            setTimeout(() => {
+                                this.$emit('backToHomePage', 'בחירת מיקום');
+                            }, 2000);
                         }
                     }
                 }
@@ -158,11 +160,7 @@
         </div>
         <div class="secondPart" v-else>
             <div class="instructions">בזמן שיעור תצפית - <br> באיזה מיקום כדאי למתצפת לשבת לצורך קבלת תצפית מיטבית?</div>
-            <div class="questionContainer">
-                <div>
-
-                </div>
-            </div>
+            <div class="message" v-show="correctCounter === 2">כל הכבוד!<img src="../assets/muscle.png" class="muscle" /></div>
             <div class="sitting">
                 <img src="../assets/table2.png" alt="class" class="table2" />
                 <div>
@@ -197,6 +195,27 @@ p {
     align-items: center;
 }
 
+.message {
+    width: 23vw;
+    height: 10vh;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5); 
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    direction: rtl;
+    padding: 3vw;
+    font-size: 2.7rem;
+    text-align: center;
+    left: 50%;
+    z-index: 2;
+}
+
+.muscle {
+    width: 2.5vw;
+    margin-right: 0.5vw;
+}
+
 .buttons {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
@@ -228,6 +247,7 @@ p {
     font-size: 2rem;
     padding: 8vh 5vw;
     border-radius: 2rem;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     line-height: 1.5;
 }
 
