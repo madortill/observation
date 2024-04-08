@@ -34,6 +34,7 @@ import Involved from './involved.vue';
           }
         ],
         currentSubSubject: "",
+        colorCode: 0
       } 
     },
     components: {
@@ -43,8 +44,11 @@ import Involved from './involved.vue';
       Involved
     },
     methods: {
-      changeSubject(event) {
+      changeSubject(event, color) {
+        console.log(color);
+        console.log(event);
         this.currentSubSubject = event.currentTarget.innerText;
+        this.colorCode = color;
       }, 
       backToHomePage(newSub) {
         this.currentSubSubject = "";
@@ -72,7 +76,7 @@ import Involved from './involved.vue';
         </div>
           <div class="mainText">
             <div v-for="(sub, index) in subjectsArr" :key="index" class="subjectCont">
-              <div :class="sub.beenThere ? 'beenThere' : 'subjectCicle'" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="changeSubject">{{ sub.title }}</div>
+              <div :class="sub.beenThere ? 'beenThere' : 'subjectCicle'" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="changeSubject($event, index + 3)">{{ sub.title }}</div>
               <div :class="sub.beenThere ? 'beenThere1' : 'subjectExplain'">
                 <div v-if="sub.subtitle" class="subtitle">{{ sub.subtitle }}</div>
                 <ul><li v-for="(item, index) in sub.text" :key="index" :class="sub.beenThere ? 'item-text-disabled' : 'item-text'">{{ item }}</li></ul>
@@ -80,10 +84,10 @@ import Involved from './involved.vue';
             </div>
           </div>
       </div>
-        <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
-        <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
-        <NoteDown v-else-if="currentSubSubject === 'רישום ותיעוד'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
-        <Involved v-else-if="currentSubSubject === 'התערבות'" :chapter="currentSubSubject" @backToHomePage="backToHomePage"/>
+        <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+        <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+        <NoteDown v-else-if="currentSubSubject === 'רישום ותיעוד'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+        <Involved v-else-if="currentSubSubject === 'התערבות'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
     </div>
 
 </template>

@@ -1,12 +1,13 @@
 <template>
     <div class="hearingContainer">
-        <div class="basicTitle">
-            {{ chapter }} - {{ subSubjectTitle[subjectCounter] }}
-        </div>
+        <div class="titleCircle" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter === 0" class="firstPart">
             <div v-if="!continued" class="instructions-cont">
                 <div class="instructions" v-if="textCounter === 0">
-                    בכתיבה בדף התצפית, נקפיד להפריד בין עיקר ותפל, בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים. 
+                    <div class="basicTitle">
+                         {{ subSubjectTitle[subjectCounter] }}
+                    </div>
+                    בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים. 
                 </div>
                 <div class="instructions" v-else>
                     לפניכם משחקון שיתרגל ליקויי למידה שמוגבל בזמן. <br><br>
@@ -63,7 +64,7 @@
  
  <script>
  export default {
-     props: ["chapter"],
+     props: ["chapter", "colorCode"],
      data() {
         return {
             subSubjectTitle: ["דברים קורים בנפרד", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
@@ -157,14 +158,38 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100vh;
     direction: rtl;
     overflow: hidden;
  }
 
+ .titleCircle {
+    width: 5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    text-align: center;
+    color: #413f3f;
+    font-size: 2.5rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 7px #0003;
+    transition: all .3s ease;
+    background-color: hsl(var(--hue),50%,75%);
+    position: fixed;
+    padding: 3.5%;
+    position: absolute;
+    animation: floatAnimation 3s ease-in-out infinite;
+    top: 14vh;
+    right: 25vw;
+    z-index: 2;
+    cursor: pointer;
+ }
+
  .basicTitle {
-   margin-top: 3vh;
+   /* margin-top: 3vh; */
    font-size: 4rem;
    font-weight: 600;
  }
@@ -176,7 +201,6 @@
  }
 
  .instructions-cont {
-    margin-top: 17.5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -220,6 +244,7 @@
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     padding: 8vh 5vw;
     border-radius: 2rem;
     line-height: 1.5;
