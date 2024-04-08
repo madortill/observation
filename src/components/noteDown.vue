@@ -5,7 +5,8 @@
       return {
         showBackButton: false,
         pressedCheck: false,
-        showFirstPart: true,
+        showNextButton: true,
+        showPart: 0,
         correctAnswersInTotal: 10,
         correctCounter: 0,
         incorrectCounter: 0,
@@ -141,7 +142,7 @@
             this.incorrectCounter = 0;
 
             for (let i = 0; i < this.notePageInfo.length; i++) {
-                for (let j = 0; j < this.notePageInfo[i].answers.length; j ++) {
+                for (let j = 0; j < this.notePageInfo[i].answers.length; j++) {
 
                     if (this.notePageInfo[i].answers[j].chosen) {
                         this.showMessage = true;
@@ -161,9 +162,14 @@
                                 this.messageForScreen = 'תשימו לב למספר התשובות שבחרת...';
 
                                 setTimeout(() => {
-                                    this.messageForScreen = '';
                                     this.showMessage = false;
                                     this.messageForButton = 'המשך';
+                                }, 2000);
+                            } else if (this.correctCounter !== this.correctAnswersInTotal) {
+                                this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
+
+                                setTimeout(() => {
+                                    this.showMessage = false;
                                 }, 2000);
                             }
                         } else {
@@ -171,10 +177,9 @@
                             this.notePageInfo[i].answers[j].userCorrect = 'false';
                             this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
 
-                                setTimeout(() => {
-                                    this.messageForScreen = '';
-                                    this.showMessage = false;
-                                }, 2000);
+                            setTimeout(() => {
+                                this.showMessage = false;
+                            }, 2000);
 
                             setTimeout(() => {
                                 this.notePageInfo[i].answers[j].userCorrect = '';
@@ -186,6 +191,22 @@
                     }
                 }
             }
+        },
+        nextPart() {
+            this.showPart++;
+
+            if (this.showPart === 1) {
+                this.showNextButton = false;
+                this.showBackButton = true;
+            }
+        },
+        prevPart() {
+            this.showPart--;
+
+            if (this.showPart === 0) {
+                this.showNextButton = true;
+                this.showBackButton = false;
+            }
         }
     }
   }
@@ -196,32 +217,38 @@
         <div class="basicTitle">
             {{ chapter }}
         </div>
-        <div class="firstPart" v-if="showFirstPart">
-            <div class="explanation">
-                רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
-                כלל הדברים שתכתוב ישמשו עבורך בשלב העיבוד. <br><br> 
-                שים לב, ההפך מלרשום הוא לשכוח.
-                <br> <br>
-                במהלך התצפית, נתייחס להכנת השיעור והעברתו - תקף, מהימן, ופרקטי, כולל את כל החומר הנדרש.
-            </div>
+        <div class="explanation firstPart" v-if="showPart === 0">
+            רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
+            כלל הדברים שתכתוב ישמשו עבורך בשלב העיבוד. <br><br> 
+            שים לב, ההפך מלרשום הוא לשכוח.
+            <br> <br>
+            במהלך התצפית, נתייחס להכנת השיעור והעברתו - תקף, מהימן, ופרקטי, כולל את כל החומר הנדרש.
+        </div>
+        <div class="secondPart" v-else-if="showPart === 1">
             <div class="instructions">
                 <div class="title">שימוש בדף תצפית</div>
-                <div class="subTitle">מה נרשום?</div>
+                <div class="sections">
+                    <div class="subTitle">מה נרשום?</div>
                     <div>
                         ציטוטים, שמות, זמנים, מקומות, מידע כמותי
                     </div>
-                <div class="subTitle">מתי נרשום?</div>
+                </div>
+                <div class="sections">
+                    <div class="subTitle">מתי נרשום?</div>
                     <div>
                         זמנים מתים, בסמוך להתנסות
                     </div>
-                <div class="subTitle">איך נרשום?</div>
-                    <div>
-                        באופן אובייקטיבי, בצורה מפורטת
-                    </div>
+                </div>
+                <div class="sections">
+                    <div class="subTitle">איך נרשום?</div>
+                        <div>
+                            באופן אובייקטיבי, בצורה מפורטת
+                        </div>
+                </div>
             </div>
-            <button class="buttons toPractice" type="button" @click="showFirstPart = false">לתרגול</button>
+            <button class="buttons toPractice" type="button" @click="showPart = 3; showBackButton = false">לתרגול</button>
         </div>
-        <div class="secondPart" v-else>
+        <div class="thirdPart" v-else>
             <div class="everythinCont">
                 <div v-for="(part, index) in notePageInfo" :key="index" class="questionCont">
                     <div class="question">
@@ -237,10 +264,10 @@
             <button type="button" @click="checkAnswers()" class="buttons">{{ messageForButton }}</button>
         </div>
         <div class="buttonCont">
-            <button v-show="showBackButton" class="buttons">
+            <button  :class="showNextButton ? '' : 'invisible'"  class="buttons" @click="nextPart">
                 ממשיכים
             </button>
-            <button v-show="showBackButton" class="buttons">
+            <button :class="showBackButton ? '' : 'invisible'" class="buttons" @click="prevPart">
                 חוזרים
             </button>
         </div>
@@ -254,18 +281,68 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
   justify-content: space-between;
   height: 100vh;
   direction: rtl;
 }
 
-.secondPart {
+.thirdPart {
     height: 80vh;
     width: 40vw;
     background-color: rgba(255, 255, 255, 0.795);
     display: flex;
+    margin-top: 4vh;
     flex-direction: column;
     align-items: center;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.title {
+    font-size: 2.35rem;
+    font-weight: 700;
+    margin-bottom: 3vh;
+    color: #0e6003;
+}
+
+.subTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.25vh;
+    animation: floatAnimation 3s ease-in-out infinite;
+    color: #5e9057;
+    text-decoration: none;
+    position: relative;
+
+    &:hover {
+        color: #5e9057;
+
+        &:before {
+            visibility: visible;
+            transform: scaleX(0.25);
+        }
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        background-color: #5e9057;
+        visibility: hidden;
+        transform: scaleX(0);
+        transition: all 0.3s ease-in-out 0s;
+    }
+
+}
+
+.sections {
+    margin: 1.75vh;
 }
 
 .toPractice {
@@ -356,6 +433,7 @@ input[type=checkbox] {
     padding: 2vh 3.5vw;
     background-color: #6f9cb8;
     text-align: center;
+    margin-bottom: 5vh;
     cursor: pointer;
     color: white;
     border: none;
@@ -374,7 +452,7 @@ input[type=checkbox] {
     background-color: #426991;
 }
 
-.instructions {
+.instructions, .explanation {
     width: 32vw;
     font-size: 2rem;
     line-height: 1.5;
@@ -387,6 +465,19 @@ input[type=checkbox] {
     align-items: center;
     justify-content: space-between;
     height: 35vh;
+    padding: 8vh 5vw;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.671);
+    direction: rtl;
+}
+
+.secondPart  {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    height: 45vh;
     padding: 8vh 5vw;
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.671);
