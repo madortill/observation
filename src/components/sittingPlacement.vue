@@ -5,6 +5,7 @@
       return {
         subjectCounter: 0,
         showBackButton: false,
+        correctCounter: 0,
         subjectsInfo: [
             {
                 subSubjectTitle: "הוראות בטיחות",
@@ -23,69 +24,83 @@
         sittingArr: [
             {
                 answer: false,
-                showAnswer: false, 
+                showAnswer: '', 
                 id: 0
             },
             {
                 answer: false,
-                showAnswer: false, 
-                id: 0
+                showAnswer: '', 
+                id: 1
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 2
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 3
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 4
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 5
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 6
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 7
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 8
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 9
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 10
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '',  
+                id: 11
             },
             {
                 answer: true,
-                showAnswer: false
+                showAnswer: '', 
+                id: 12
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 13
             },
             {
                 answer: false,
-                showAnswer: false
+                showAnswer: '', 
+                id: 14
             },
             {
                 answer: true,
-                showAnswer: false
+                showAnswer: '', 
+                id: 15
             }
         ],
       }
@@ -94,11 +109,8 @@
         nextSubject() {
             this.subjectCounter++; 
 
-            // if (this.subjectCounter === 1) {
-            //     this.showBackButton = true;
-            // }
             if (this.subjectCounter === 1) {
-                this.$emit('backToHomePage', 'בחירת מיקום');
+                this.showBackButton = true;
             }
         },
         prevSubject() {
@@ -109,13 +121,17 @@
             }
         },
         checkSeating(event) {
-            console.log(event.currentTarget.id);
-
             for (let i = 0; i < this.sittingArr.length; i++) {
-                if (event.currentTarget.id === true) {
-                    event.currentTarget.id.classList.add("correct");
-                } else {
-                    event.currentTarget.id.classList.add("incorrect");
+                if (Number(event.currentTarget.id) === this.sittingArr[i]["id"]) {
+                    this.sittingArr[i].showAnswer = true;
+
+                    if (this.sittingArr[i]["answer"] === true) {
+                        this.correctCounter++;
+
+                        if (this.correctCounter === 2) {
+                            this.$emit('backToHomePage', 'בחירת מיקום');
+                        }
+                    }
                 }
             }
 
@@ -150,7 +166,7 @@
             <div class="sitting">
                 <img src="../assets/table2.png" alt="class" class="table2" />
                 <div>
-                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat.answer" src="../assets/table.png" alt="seats" :class="['seats', !seat.showAnswer ? '' : seat.answer ? 'correct' : 'incorrect']" @click="checkSeating" />
+                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat.id" src="../assets/table.png" alt="seats" :class="['seats', !seat.showAnswer ? '' : seat.answer ? 'correct' : 'incorrect']" @click="checkSeating" />
                 </div>
             </div>
         </div>
@@ -267,8 +283,9 @@ p {
 }
 
 .correct {
-    border-style: solid;
-    border-color: green;
+    -webkit-box-shadow:0px 0px 48px 5px rgba(46,255,70,0.9);
+    -moz-box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
+    box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
     height: 18vh;
     cursor: pointer;
     width: 9vw;
@@ -276,8 +293,9 @@ p {
 }
 
 .incorrect {
-    border-style: solid;
-    border-color: red;
+    -webkit-box-shadow:0px 0px 48px 5px rgba(255,46,46,0.6);
+    -moz-box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
+    box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
     height: 18vh;
     cursor: pointer;
     width: 9vw;
