@@ -1,15 +1,18 @@
-<template>
+<!-- <template>
     <div class="hearingContainer">
-        <div class="titleCircle" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div class="titleCircle" v-show="!continued" :class="changeAni ? 'float': 'scale'" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter === 0" class="firstPart">
             <div v-if="!continued" class="instructions-cont">
-                <div class="instructions" v-if="textCounter === 0">
+                <div class="instructions" v-if="textCounter === 0" :class="changeAni ? 'float': 'scale'">
                     <div class="basicTitle">
                          {{ subSubjectTitle[subjectCounter] }}
                     </div>
                     בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים. 
                 </div>
                 <div class="instructions" v-else>
+                    <div class="basicTitle">
+                         הוראות
+                    </div>
                     לפניכם משחקון שיתרגל ליקויי למידה שמוגבל בזמן. <br><br>
                     עליכם לבחור בליקויי העברה הנכונים בלבד.
                 </div>
@@ -61,19 +64,52 @@
     </div>
         
  </template>
- 
+  -->
+
+<template>
+    <div class="hearingContainer">
+        <div class="titleCircle" v-show="subjectCounter !== 2" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div v-if="subjectCounter !== 2" class="textPart">
+            <div :class="[changeAni ? 'float': 'scale', subjectCounter < 2 ? 'instructions' : 'explanation']">
+                <div class="basicTitle">
+                        {{ subSubjectTitle[subjectCounter] }}
+                </div>
+                <div v-html="subSubjectText[subjectCounter]"></div> 
+            </div>
+        </div>
+        <div v-else>
+            <div class="gameInfo">
+                <div class="timer">00:{{ countDown }}</div>
+                <div class="game-points">Score: {{ circleClicked }}</div>
+            </div>
+            <div id="circle" v-show="circleVisible" @click="disappear" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${top}vh`, left: `${left}vw`}]">לחצו עליי</div>
+        </div>
+    </div>
+    <div class="buttonCont">
+        <button v-show="showNextButton" class="buttons" @click="nextSubject">
+            ממשיכים
+        </button>
+        <button v-show="showBackButton" class="buttons" @click="prevSubject">
+            חוזרים
+        </button>
+    </div>
+</template>
+
+
  <script>
  export default {
      props: ["chapter", "colorCode"],
      data() {
         return {
-            subSubjectTitle: ["דברים קורים בנפרד", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
+            subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
+            subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחקון שיתרגל ליקויי למידה שמוגבל בזמן. <br><br> עליכם לבחור בליקויי העברה הנכונים בלבד.", "", 'עלייך לשים <img src="../assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="../assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
             circleVisible: false,
             showBackButton: false,
+            showNextButton: true,
             changeColor: 0, 
             subjectCounter: 0,
-            textCounter: 0,
             totalTime: 0,
+            changeAni: false,
             countDown: 30,
             circleClicked: 0,
             continued: false,
@@ -83,16 +119,28 @@
             timer: null,
             disappearTimer: null
         };        
-     },
-     methods: {
-        changeText() {
-            this.textCounter++;
+    },
+    methods: {
+         nextSubject() {
+             this.subjectCounter++;
 
-            if (this.textCounter === 2) {
-                this.continued = true;
+            if (this.subjectCounter === 2) {
+                this.showBackButton = false;
+                this.showNextButton = false;
+
                 this.countDownTimer();
+
+            } else if (this.subjectCounter === 5) {
+                this.$emit('backToHomePage', 'חלוקת קשב');
             }
-        },
+         },
+         prevSubject() {
+             this.subjectCounter--;
+
+             if (this.subjectCounter === 0) {
+                 this.showBackButton = false;
+             }
+         },
         appeared() {
             this.top = Math.floor(Math.random() * (70 - 2) + 2);
             this.left = Math.floor(Math.random() * (70 - 2) + 2);
@@ -120,19 +168,6 @@
 
             setTimeout(this.appeared, this.totalTime);
         },
-        nextSubject() {
-            clearInterval(this.timer);
-            this.subjectCounter++;
-            if (this.subjectCounter === 2) {
-                this.showBackButton = true;
-            }
-        },
-        prevSubject() {
-            this.subjectCounter--;
-            if (this.subjectCounter === 1) {
-                this.showBackButton = false;
-            }
-        },
         countDownTimer () {
             if (this.countDown == 0o0) {
                 this.nextSubject();
@@ -149,6 +184,9 @@
     },
     mounted() {
         setTimeout(this.appeared, 2000);
+        setTimeout(() => {
+            this.changeAni = true;
+        }, 1250);
     }
  }
  </script>
@@ -170,7 +208,7 @@
     border-radius: 50%;
     text-align: center;
     color: #413f3f;
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     font-weight: 600;
     display: flex;
     justify-content: center;
@@ -181,7 +219,6 @@
     position: fixed;
     padding: 3.5%;
     position: absolute;
-    animation: floatAnimation 3s ease-in-out infinite;
     top: 14vh;
     right: 25vw;
     z-index: 2;
@@ -189,8 +226,8 @@
  }
 
  .basicTitle {
-   /* margin-top: 3vh; */
-   font-size: 4rem;
+   margin-bottom: 3vh;
+   font-size: 3.5rem;
    font-weight: 600;
  }
  
@@ -200,14 +237,14 @@
    padding: 0;
  }
 
- .instructions-cont {
+ /* .instructions-cont {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 75vh;
+    height: 100vh;
     direction: rtl;
- }
+ } */
 
  .gameInfo {
     display: flex;
@@ -220,7 +257,7 @@
     justify-content: space-around;
  }
 
- .explanation-2 {
+ /* .explanation-2 {
     width: 30vw;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
@@ -229,18 +266,28 @@
     border-radius: 2rem;
     transform: scale(1.15);
     line-height: 1.5;
- }
+ } */
 
  .explanation {
     animation: biggerAnimation 1.5s ease-in-out forwards;
  }
 
- .instructions {
-    animation: floatAnimation 3s ease-in-out infinite;
+ .float {
+     animation: floatAnimation 3s ease-in-out infinite;
  }
 
- .instructions, .explanation {
+ .scale {
+     animation: scaleScreen 1.25s linear forwards;
+ }
+ 
+ .instructions {
+    height: 24vh;
+    transform-origin: top right;
+}
+
+.instructions, .explanation {
     width: 32vw;
+    margin-top: 24vh;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
@@ -248,20 +295,20 @@
     padding: 8vh 5vw;
     border-radius: 2rem;
     line-height: 1.5;
- }
+}
 
- .heartIcon {
+.heartIcon {
     width: 2vw;
     position: relative;
     top: 0.5vh;
- }
+}
 
- .buttons {
+.buttons {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
     background-color: #6f9cb8;
     text-align: center;
-    margin-bottom: 5vh;
+    /* margin-bottom: 10vh; */
     cursor: pointer;
     color: white;
     border: none;
@@ -273,51 +320,51 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
 .buttons:hover {
     background-color: #426991;
 }
 
- .paper {
-   position: absolute;
-   height: 55vh;
-   width: 27vw;
-   background: rgba(255,255,255,0.9);
-   margin: -275px -225px;
-   box-shadow: 0px 0px 5px 0px #888;
- }
+/* .paper {
+    position: absolute;
+    height: 55vh;
+    width: 27vw;
+    background: rgba(255,255,255,0.9);
+    margin: -275px -225px;
+    box-shadow: 0px 0px 5px 0px #888;
+}
 
- .paper::before {
-   content: '';
-   position: absolute;
-   left: 45px;
-   height: 100%;
-   width: 2px;
-   background: rgba(255,0,0,0.4);
- }
+.paper::before {
+    content: '';
+    position: absolute;
+    left: 45px;
+    height: 100%;
+    width: 2px;
+    background: rgba(255,0,0,0.4);
+}
 
- .lines {
-   margin-top: 40px;
-   height: calc(100% - 40px);
-   width: 100%;
-   background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
- }
+.lines {
+    margin-top: 40px;
+    height: calc(100% - 40px);
+    width: 100%;
+    background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
+} */
+/* 
+.text {
+    position: absolute;
+    top: 65px;
+    left: 55px;
+    bottom: 10px;
+    right: 10px;
+    line-height: 25px;
+    font-family: 'Indie Flower';
+    overflow: hidden;
+    outline: none;
+}
 
- .text {
-   position: absolute;
-   top: 65px;
-   left: 55px;
-   bottom: 10px;
-   right: 10px;
-   line-height: 25px;
-   font-family: 'Indie Flower';
-   overflow: hidden;
-   outline: none;
- }
- 
- .text-2 {
+.text-2 {
     position: absolute;
     top: 4.75vh;
     left: 10vw;
@@ -329,62 +376,80 @@
     font-family: 'Indie Flower';
     overflow: hidden;
     outline: none;
- }
+} */
+/* 
+.holes {
+    position: absolute;
+    left: 10px;
+    height: 25px;
+    width: 25px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 2px 0px #888;
+}
+.hole-top {
+    top: 10%;
+}
+.hole-middle {
+    top: 50%;
+}
+.hole-bottom {
+    bottom: 10%;
+} */
 
- .holes {
-   position: absolute;
-   left: 10px;
-   height: 25px;
-   width: 25px;
-   background: transparent;
-   border-radius: 50%;
-   box-shadow: inset 0px 0px 2px 0px #888;
- }
- .hole-top {
-   top: 10%;
- }
- .hole-middle {
-   top: 50%;
- }
- .hole-bottom {
-   bottom: 10%;
- }
- 
- #circle {
-   width: 5.75rem;
-   height: 6rem;
-   border-radius: 50%;
-   text-align: center;
-   color: #413f3f;
-   font-size: 2.5rem;
-   font-weight: 550;
-   padding: 3.5%;
-   color: white;
-   z-index: 2;
-   display: block;
-   position: absolute;
-   cursor: pointer;
-   box-shadow: 0 5px 7px #0003;
-   animation: animationColors 2s ease-in-out;
-   animation-iteration-count: infinite;
- }
+#circle {
+    width: 5.75rem;
+    height: 6rem;
+    border-radius: 50%;
+    text-align: center;
+    color: #413f3f;
+    font-size: 2.5rem;
+    font-weight: 550;
+    padding: 3.5%;
+    color: white;
+    z-index: 2;
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    box-shadow: 0 5px 7px #0003;
+    animation: animationColors 2s ease-in-out;
+    animation-iteration-count: infinite;
+}
 
- .notes-area {
+/* .notes-area {
     height: 90vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-evenly;
- }
+} */
 
- .secondPart ,.thirdPart {
+.textPart {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 75vh;
+    height: 100vh;
     direction: rtl;
- }
+}
+
+@-webkit-keyframes scaleScreen {
+   0% {
+       transform: scale(0);
+   }
+   100% {
+       transform: scale(1);
+   }
+}
+
+@keyframes scaleScreen {
+   0% {
+       transform: scale(0);
+   }
+   100% {
+       transform: scale(1);
+   }
+}
  
 @keyframes animationColors {
     0% {
