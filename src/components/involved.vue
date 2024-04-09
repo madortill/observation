@@ -302,9 +302,12 @@
 }
 
 .flip-card-container {
-  display: flex;  
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  direction: rtl;
 }
 
 .flip-card {
