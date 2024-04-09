@@ -1,71 +1,3 @@
-<!-- <template>
-    <div class="hearingContainer">
-        <div class="titleCircle" v-show="!continued" :class="changeAni ? 'float': 'scale'" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
-        <div v-if="subjectCounter === 0" class="firstPart">
-            <div v-if="!continued" class="instructions-cont">
-                <div class="instructions" v-if="textCounter === 0" :class="changeAni ? 'float': 'scale'">
-                    <div class="basicTitle">
-                         {{ subSubjectTitle[subjectCounter] }}
-                    </div>
-                    בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים. 
-                </div>
-                <div class="instructions" v-else>
-                    <div class="basicTitle">
-                         הוראות
-                    </div>
-                    לפניכם משחקון שיתרגל ליקויי למידה שמוגבל בזמן. <br><br>
-                    עליכם לבחור בליקויי העברה הנכונים בלבד.
-                </div>
-                <div class="buttonCont">
-                    <button class="buttons" @click="changeText">
-                        ממשיכים
-                    </button>
-                    <button v-show="showBackButton" class="buttons">
-                        חוזרים
-                    </button>
-                </div>
-            </div>
-            <div v-else class="notes-area">
-                <div class="gameInfo">
-                    <div class="timer">00:{{ countDown }}</div>
-                    <div class="game-points">Score: {{ circleClicked }}</div>
-                </div>
-                <div id="circle" v-show="circleVisible" @click="disappear" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${top}vh`, left: `${left}vw`}]">לחצו עליי</div>
-            </div>
-        </div>
-        <div v-else-if="subjectCounter === 1" class="secondPart">
-            <div class="explanation">
-                עלייך לשים <img src="../assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br>
-                לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.
-            </div>
-            <div class="buttonCont">
-                <button class="buttons" @click="nextSubject">
-                    ממשיכים
-                </button>
-                <button v-show="showBackButton" class="buttons">
-                    חוזרים
-                </button>
-            </div>
-        </div>
-        <div v-else class="thirdPart">
-            <div class="explanation-2">
-                שים לב כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br>
-                כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.
-            </div>
-            <div class="buttonCont">
-                <button class="buttons" @click="$emit('backToHomePage', 'חלוקת קשב')">
-                    ממשיכים
-                </button>
-                <button v-show="showBackButton" class="buttons" @click="prevSubject">
-                    חוזרים
-                </button>
-            </div>
-        </div>
-    </div>
-        
- </template>
-  -->
-
 <template>
     <div class="hearingContainer">
         <div class="titleCircle" v-show="subjectCounter !== 2" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
@@ -77,21 +9,24 @@
                 <div v-html="subSubjectText[subjectCounter]"></div> 
             </div>
         </div>
-        <div v-else>
+        <div class="gameCont" v-else>
+            <div class="basicTitle-2">
+                {{ subSubjectTitle[subjectCounter] }}
+            </div>
             <div class="gameInfo">
                 <div class="timer">00:{{ countDown }}</div>
                 <div class="game-points">Score: {{ circleClicked }}</div>
             </div>
             <div id="circle" v-show="circleVisible" @click="disappear" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${top}vh`, left: `${left}vw`}]">לחצו עליי</div>
         </div>
-    </div>
-    <div class="buttonCont">
-        <button v-show="showNextButton" class="buttons" @click="nextSubject">
-            ממשיכים
-        </button>
-        <button v-show="showBackButton" class="buttons" @click="prevSubject">
-            חוזרים
-        </button>
+        <div class="buttonCont">
+            <button v-show="showNextButton" class="buttons" @click="nextSubject">
+                ממשיכים
+            </button>
+            <button v-show="showBackButton" class="buttons" @click="prevSubject">
+                חוזרים
+            </button>
+        </div>
     </div>
 </template>
 
@@ -102,20 +37,18 @@
      data() {
         return {
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
-            subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחקון שיתרגל ליקויי למידה שמוגבל בזמן. <br><br> עליכם לבחור בליקויי העברה הנכונים בלבד.", "", 'עלייך לשים <img src="../assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="../assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
+            subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור בליקויים בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהתוצאה הסופית.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
             circleVisible: false,
             showBackButton: false,
-            showNextButton: true,
+            showNextButton: false,
             changeColor: 0, 
             subjectCounter: 0,
             totalTime: 0,
             changeAni: false,
             countDown: 30,
             circleClicked: 0,
-            continued: false,
             top: 0,
             left: 0,
-            interval: null,
             timer: null,
             disappearTimer: null
         };        
@@ -130,6 +63,13 @@
 
                 this.countDownTimer();
 
+            } else if (this.subjectCounter === 1) {
+                this.showBackButton = true;
+            } else if (this.subjectCounter === 3) {
+                this.showNextButton = true;
+                this.showBackButton = false;
+            } else if (this.subjectCounter === 4) {
+                this.showBackButton = true;
             } else if (this.subjectCounter === 5) {
                 this.$emit('backToHomePage', 'חלוקת קשב');
             }
@@ -139,7 +79,9 @@
 
              if (this.subjectCounter === 0) {
                  this.showBackButton = false;
-             }
+             } else if (this.subjectCounter === 3) {
+                this.showBackButton = false;
+            }
          },
         appeared() {
             this.top = Math.floor(Math.random() * (70 - 2) + 2);
@@ -186,6 +128,7 @@
         setTimeout(this.appeared, 2000);
         setTimeout(() => {
             this.changeAni = true;
+            this.showNextButton = true;
         }, 1250);
     }
  }
@@ -200,6 +143,13 @@
     height: 100vh;
     direction: rtl;
     overflow: hidden;
+ }
+
+ .gameCont {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
  }
 
  .titleCircle {
@@ -226,8 +176,14 @@
  }
 
  .basicTitle {
-   margin-bottom: 3vh;
-   font-size: 3.5rem;
+   padding-bottom: 3vh;
+   font-size: 3.3rem;
+   font-weight: 600;
+ }
+
+ .basicTitle-2 {
+   margin-top: 3vh;
+   font-size: 3.3rem;
    font-weight: 600;
  }
  
@@ -246,7 +202,7 @@
     direction: rtl;
  } */
 
- .gameInfo {
+.gameInfo {
     display: flex;
     flex-direction: row;
     position: absolute;
@@ -255,7 +211,7 @@
     width: 100vw;
     align-items: center;
     justify-content: space-around;
- }
+}
 
  /* .explanation-2 {
     width: 30vw;
@@ -268,20 +224,19 @@
     line-height: 1.5;
  } */
 
- .explanation {
-    animation: biggerAnimation 1.5s ease-in-out forwards;
- }
+.explanation {
+animation: biggerAnimation 1.5s ease-in-out forwards;
+}
 
- .float {
-     animation: floatAnimation 3s ease-in-out infinite;
- }
+.float {
+animation: floatAnimation 3s ease-in-out infinite;
+}
 
- .scale {
-     animation: scaleScreen 1.25s linear forwards;
- }
+.scale {
+animation: scaleScreen 1.25s linear forwards;
+}
  
- .instructions {
-    height: 24vh;
+.instructions {
     transform-origin: top right;
 }
 
@@ -292,12 +247,12 @@
     background-color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-    padding: 8vh 5vw;
+    padding: 8.5vh 5vw;
     border-radius: 2rem;
     line-height: 1.5;
 }
 
-.heartIcon {
+.explanation ::v-deep .heartIcon {
     width: 2vw;
     position: relative;
     top: 0.5vh;
@@ -308,7 +263,7 @@
     padding: 2vh 3.5vw;
     background-color: #6f9cb8;
     text-align: center;
-    /* margin-bottom: 10vh; */
+    margin-bottom: 5vh;
     cursor: pointer;
     color: white;
     border: none;
@@ -320,7 +275,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 
 .buttons:hover {

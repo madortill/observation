@@ -45,8 +45,6 @@ import Involved from './involved.vue';
     },
     methods: {
       changeSubject(event, color) {
-        console.log(color);
-        console.log(event);
         this.currentSubSubject = event.currentTarget.innerText;
         this.colorCode = color;
       }, 
