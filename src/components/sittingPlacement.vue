@@ -1,6 +1,6 @@
 <script>
   export default {
-    props: ["chapter"],
+    props: ["chapter", "colorCode"],
     data() {
       return {
         subjectCounter: 0,
@@ -144,11 +144,14 @@
 
 <template>
     <div class="placement">
-        <div class="basicTitle">
-            {{ chapter }} <p v-if="subjectCounter < 3"> - {{ subjectsInfo[subjectCounter]["subSubjectTitle"] }}</p>
-        </div>
+        <div class="titleCircle" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter < 3" class="firstPart">
-            <div class="explanation" v-html="subjectsInfo[subjectCounter]['subjectText']"></div>
+            <div class="explanation scale">
+                <div class="basicTitle" v-if="subjectCounter < 3">
+                    {{ subjectsInfo[subjectCounter]["subSubjectTitle"] }}
+                </div>
+                <div v-html="subjectsInfo[subjectCounter]['subjectText']"></div>
+            </div>
             <div class="buttonCont">
                 <button class="buttons" @click="nextSubject">
                     ממשיכים
@@ -174,26 +177,44 @@
 
 
 <style scoped>
-p {
-    margin: 0;
-}
-
 .placement {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 100vh;
-  direction: rtl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+    direction: rtl;
+    overflow: hidden;
 }
 
 .basicTitle {
-    margin-top: 3vh;
-    font-size: 4rem;
+   padding-bottom: 3vh;
+   font-size: 3.3rem;
+   font-weight: 600;
+ }
+
+ .titleCircle {
+    width: 5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    text-align: center;
+    color: #413f3f;
+    font-size: 2.75rem;
     font-weight: 600;
     display: flex;
+    justify-content: center;
     align-items: center;
-}
+    box-shadow: 0 5px 7px #0003;
+    transition: all .3s ease;
+    background-color: hsl(var(--hue),50%,75%);
+    position: fixed;
+    padding: 3.5%;
+    position: absolute;
+    top: 14vh;
+    right: 25vw;
+    z-index: 2;
+    cursor: pointer;
+ }
 
 .message {
     width: 23vw;
@@ -242,12 +263,14 @@ p {
 
 .explanation {
     width: 32vw;
+    margin-top: 24vh;
+    transform-origin: top right;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
-    padding: 8vh 5vw;
-    border-radius: 2rem;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
+    padding: 8.5vh 5vw;
+    border-radius: 2rem;
     line-height: 1.5;
 }
 
@@ -264,13 +287,16 @@ p {
     top: 0.5vh;
 }
 
+.scale {
+    animation: scaleScreen 1.25s linear forwards;
+}
+
 .firstPart {
-    margin-top: 17.5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 75vh;
+    height: 100vh;
     direction: rtl;
 }
 
@@ -341,7 +367,7 @@ p {
     }
 }
 
-   @keyframes floatAnimation {
+@keyframes floatAnimation {
     0% {
         transform: translateY(0);
     }
@@ -353,6 +379,24 @@ p {
     100% {
         transform: translateY(0);
     }
+}
+
+@-webkit-keyframes scaleScreen {
+   0% {
+       transform: scale(0);
+   }
+   100% {
+       transform: scale(1);
+   }
+}
+
+@keyframes scaleScreen {
+   0% {
+       transform: scale(0);
+   }
+   100% {
+       transform: scale(1);
+   }
 }
 
 </style>

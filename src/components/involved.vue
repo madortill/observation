@@ -1,6 +1,6 @@
 <script>
   export default {
-    props: ["chapter"],
+    props: ["chapter", "colorCode"],
     data() {
       return {
         subArr: [
@@ -101,10 +101,10 @@
 
 <template>
     <div class="involved">
-        <div class="basicTitle">
+        <div v-show="textCounter === 0" class="titleCircle" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">
           {{ chapter }}
         </div>
-        <div v-if="textCounter === 0" class="explainCont">
+        <div v-if="textCounter === 0" class="explainCont scale">
           <div class="basicTitle-2">קיימים 2 סוגים:</div>
           <div class="flip-card-container">
             <div v-for="( item, index) in subArr" :key="index" :class="['flip-card', this.onStart]">
@@ -151,7 +151,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 100vh;
   direction: rtl;
   overflow: hidden;
@@ -161,6 +161,29 @@
   pointer-events: none;
 }
 
+.titleCircle {
+  width: 5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  text-align: center;
+  color: #413f3f;
+  font-size: 2.75rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 7px #0003;
+  transition: all .3s ease;
+  background-color: hsl(var(--hue),50%,75%);
+  position: fixed;
+  padding: 3.5%;
+  position: absolute;
+  top: 9vh;
+  right: 19vw;
+  z-index: 2;
+  cursor: pointer;
+ }
+
 .abled {
   pointer-events: all;
 }
@@ -169,6 +192,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20vh;
+  transform-origin: top right;
+  background-color: rgba(255, 255, 255, 0.671);
+  box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
+  padding: 8vh 7vw;
+  border-radius: 2rem;
 }
 
 .correct {
@@ -280,8 +309,8 @@
 
 .flip-card {
   background-color: transparent;
-  width: 350px;
-  height: 650px;
+  width: 200px;
+  height: 525px;
   perspective: 1000px;
   flex: 0 0 calc(50% - 20px);
   margin: 0px 150px 0px;
@@ -303,101 +332,100 @@
 }
 
 .textBack {
-  font-size: 2.25rem;
+  font-size: 2rem;
+  padding: 0.5vh;
 }
 
 .flip-card:hover .flip-card-front, .flip-card.start .flip-card-front{
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .flip-card:hover .flip-card-back, .flip-card.start .flip-card-back {
-    transform: rotateY(360deg)
+  transform: rotateY(360deg)
 }
 
 .flip-card-front,
 .flip-card-back {
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .flip-card-front {
-    background-color: #f0a06a;
-    background-color: hsl(var(--hue), 50%, 58%);
-    border-radius: 30px;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+  background-color: #f0a06a;
+  background-color: hsl(var(--hue), 50%, 58%);
+  border-radius: 30px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .flip-card-back {
-    background-color: #f5c381;
-    background-color: hsl(var(--hue), 50%, 78%);
-    border-radius: 30px;
-    color: rgb(84, 82, 82);
-    transform: rotateY(180deg);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background-color: #f5c381;
+  background-color: hsl(var(--hue), 50%, 78%);
+  border-radius: 30px;
+  color: rgb(84, 82, 82);
+  transform: rotateY(180deg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .imgFront {
-    width: 60%;
+  width: 60%;
+}
+
+.scale {
+  animation: scaleScreen 1.25s linear forwards;
 }
 
 .buttons {
-    font-size: 1.65rem;
-    padding: 2vh 3.5vw;
-    background-color: #6f9cb8;
-    text-align: center;
-    margin-bottom: 5vh;
-    cursor: pointer;
-    color: white;
-    border: none;
-    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+  font-size: 1.65rem;
+  padding: 2vh 3.5vw;
+  background-color: #6f9cb8;
+  text-align: center;
+  margin-bottom: 5vh;
+  cursor: pointer;
+  color: white;
+  border: none;
+  box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
 }
 
 .buttonCont {
-    width: 85vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row-reverse;
+  width: 85vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
 }
 
 .buttons:hover {
-    background-color: #426991;
+  background-color: #426991;
 }
 
-@keyframes pickSubject {
+@-webkit-keyframes scaleScreen {
   0% {
-    box-shadow: 0px 0px 25px 20px #fff
+      transform: scale(0);
   }
-  50% {
-    box-shadow: 0px 0px 25px 0px #fff;
+  100% {
+      transform: scale(1);
   }
-   100% {
-    box-shadow: 0px 0px 25px 20px #fff;
-   }
 }
 
-@-webkit-keyframes pickSubject {
+@keyframes scaleScreen {
   0% {
-    box-shadow: 0px 0px 25px 20px #fff;
+      transform: scale(0);
   }
-  50% {
-    box-shadow: 0px 0px 25px 0px #fff;
+  100% {
+      transform: scale(1);
   }
-   100% {
-    box-shadow: 0px 0px 25px 20px #fff;
-   }
-} 
+}
 </style>

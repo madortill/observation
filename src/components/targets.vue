@@ -3,20 +3,20 @@
         <div class="basicTitle">
             {{ chapter }}
         </div>
-        <div>
+        <div >
             <div class="flip-card-container">
-            <div v-for="( item, index) in arrayFront" :key="index" :class="['flip-card', this.onStart]">
-                <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 15 + 130}deg`">
-                    <div class="flip-card-front">
-                        <img :src="src(item)" class="imgFront">
-                        <div class="font-card-text">{{ arrayFrontText[index] }}</div>
-                    </div>
-                    <div class="flip-card-back">
-                        <h1 class="textBack">{{ arrayBack[index] }}</h1>
+                <div v-for="( item, index) in arrayFront" :key="index" :class="['flip-card', this.onStart]">
+                    <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 15 + 130}deg`">
+                        <div class="flip-card-front">
+                            <img :src="src(item)" class="imgFront">
+                            <div class="font-card-text">{{ arrayFrontText[index] }}</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h1 class="textBack">{{ arrayBack[index] }}</h1>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         <div class="buttonCont">
             <button class="buttons" @click="changeText">
@@ -113,6 +113,7 @@ export default {
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     justify-content: center;
     align-items: center;
+    animation: floatAnimation 3s ease-in-out infinite;
     flex-wrap: wrap;
     background-color: rgba(255, 255, 255, 0.677);
     padding: 10vh;

@@ -1,6 +1,6 @@
 <script>
   export default {
-    props: ["chapter"],
+    props: ["chapter", "colorCode"],
     data() {
       return {
         showBackButton: false,
@@ -214,15 +214,16 @@
 
 <template>
     <div class="noting">
-        <div class="basicTitle">
-            {{ chapter }}
-        </div>
-        <div class="explanation firstPart" v-if="showPart === 0">
-            רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
-            כלל הדברים שתכתוב ישמשו עבורך בשלב העיבוד. <br><br> 
-            שים לב, ההפך מלרשום הוא לשכוח.
-            <br> <br>
-            במהלך התצפית, נתייחס להכנת השיעור והעברתו - תקף, מהימן, ופרקטי, כולל את כל החומר הנדרש.
+        <div class="titleCircle" v-show="showPart !== 3" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div class="firstPart" v-if="showPart === 0">     
+            <div class="explanation scale">
+                <div class="basicTitle">הגדרה</div>
+                רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
+                כלל הדברים שתכתוב ישמשו עבורך בשלב העיבוד. <br><br> 
+                שים לב, ההפך מלרשום הוא לשכוח.
+                <br> <br>
+                במהלך התצפית, נתייחס להכנת השיעור והעברתו - תקף, מהימן, ופרקטי, כולל את כל החומר הנדרש.
+            </div>
         </div>
         <div class="secondPart" v-else-if="showPart === 1">
             <div class="instructions">
@@ -245,23 +246,26 @@
                             באופן אובייקטיבי, בצורה מפורטת
                         </div>
                 </div>
+                <button class="toPractice" type="button" @click="showPart = 3; showBackButton = false">לתרגול</button>
             </div>
-            <button class="buttons toPractice" type="button" @click="showPart = 3; showBackButton = false">לתרגול</button>
         </div>
         <div class="thirdPart" v-else>
-            <div class="everythinCont">
-                <div v-for="(part, index) in notePageInfo" :key="index" class="questionCont">
-                    <div class="question">
-                        {{ part.question }} <p class="side-note">{{ part.sideNote }}</p>
+            <div class="basicTitle">תרגול</div>
+            <div class="test-page">
+                <div class="everythinCont">
+                    <div v-for="(part, index) in notePageInfo" :key="index" class="questionCont">
+                        <div class="question">
+                            {{ part.question }} <p class="side-note">{{ part.sideNote }}</p>
+                        </div>
+                        <div class="answers" v-for="(answer, key) in part.answers" :key="key">
+                            <input type="checkbox" :id="key" :ref="key" v-model="answer.chosen" @change="!answer.chosen" :class="[answer.userCorrect === 'true' && pressedCheck === true ? 'correct' : answer.userCorrect === 'false' ? 'incorrect' : '', answer.userCorrect === 'true' ? 'disabled': '']"/>
+                            <label :for="key">{{ answer.option }}</label>
+                        </div>
                     </div>
-                    <div class="answers" v-for="(answer, key) in part.answers" :key="key">
-                        <input type="checkbox" :id="key" :ref="key" v-model="answer.chosen" @change="!answer.chosen" :class="[answer.userCorrect === 'true' && pressedCheck === true ? 'correct' : answer.userCorrect === 'false' ? 'incorrect' : '', answer.userCorrect === 'true' ? 'disabled': '']"/>
-                        <label :for="key">{{ answer.option }}</label>
-                    </div>
+                    <div class="message" v-show="showMessage">{{ messageForScreen }}</div>
                 </div>
-                <div class="message" v-show="showMessage">{{ messageForScreen }}</div>
+                <button type="button" @click="checkAnswers()" class="buttons">{{ messageForButton }}</button>
             </div>
-            <button type="button" @click="checkAnswers()" class="buttons">{{ messageForButton }}</button>
         </div>
         <div class="buttonCont">
             <button  :class="showNextButton ? '' : 'invisible'"  class="buttons" @click="nextPart">
@@ -278,23 +282,13 @@
 
 <style scoped>
 .noting {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  justify-content: space-between;
-  height: 100vh;
-  direction: rtl;
-}
-
-.thirdPart {
-    height: 80vh;
-    width: 40vw;
-    background-color: rgba(255, 255, 255, 0.795);
     display: flex;
-    margin-top: 4vh;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+    direction: rtl;
+    overflow: hidden;
 }
 
 .invisible {
@@ -302,7 +296,7 @@
 }
 
 .title {
-    font-size: 2.35rem;
+    font-size: 3.3rem;
     font-weight: 700;
     margin-bottom: 3vh;
     color: #0e6003;
@@ -347,12 +341,40 @@
 
 .toPractice {
     margin-top: 4vh;
+    font-size: 1.65rem;
+    padding: 2vh 3.5vw;
+    background-color: #6f9cb8;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    border: none;
+    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
 }
 
 .side-note {
     color: rgba(128, 128, 128);
     font-size: 1.02rem;
     margin: 0.2vh;
+}
+
+.thirdPart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    direction: rtl;
+}
+
+.test-page {
+    height: 72vh;
+    padding: 1vh 0vw;
+    width: 40vw;
+    background-color: rgba(255, 255, 255, 0.795);
+    display: flex;
+    margin-top: 4vh;
+    flex-direction: column;
+    align-items: center;
 }
 
 .everythinCont {
@@ -423,10 +445,33 @@ input[type=checkbox] {
 }
 
 .basicTitle {
-  font-size: 4rem;
-  margin-top: 3vh;
-  font-weight: 600;
-}
+   margin-top: 3vh;
+   font-size: 3.3rem;
+   font-weight: 600;
+ }
+
+ .titleCircle {
+    width: 5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    text-align: center;
+    color: #413f3f;
+    font-size: 2.75rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 7px #0003;
+    transition: all .3s ease;
+    background-color: hsl(var(--hue),50%,75%);
+    position: fixed;
+    padding: 3.5%;
+    position: absolute;
+    top: 14vh;
+    right: 25vw;
+    z-index: 2;
+    cursor: pointer;
+ }
 
 .buttons {
     font-size: 1.65rem;
@@ -454,24 +499,31 @@ input[type=checkbox] {
 
 .instructions, .explanation {
     width: 32vw;
+    margin-top: 24vh;
+    transform-origin: top right;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
+    padding: 6vh 5vw;
+    border-radius: 2rem;
     line-height: 1.5;
 }
 
-.firstPart  {
+.firstPart, .secondPart  {
     display: flex;
     flex-direction: column;
-    text-align: center;
     align-items: center;
     justify-content: space-between;
-    height: 35vh;
-    padding: 8vh 5vw;
-    border-radius: 2rem;
-    background-color: rgba(255, 255, 255, 0.671);
+    height: 100vh;
     direction: rtl;
 }
 
-.secondPart  {
+.scale {
+    animation: scaleScreen 1.25s linear forwards;
+}
+
+/* .secondPart  {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -482,6 +534,52 @@ input[type=checkbox] {
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.671);
     direction: rtl;
+} */
+
+@-moz-keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes scaleScreen {
+   0% {
+       transform: scale(0);
+   }
+   100% {
+       transform: scale(1);
+   }
+}
+
+@keyframes scaleScreen {
+   0% {
+       transform: scale(0);
+   }
+   100% {
+       transform: scale(1);
+   }
 }
 
 </style>

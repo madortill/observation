@@ -37,7 +37,7 @@
      data() {
         return {
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
-            subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור בליקויים בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהתוצאה הסופית.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
+            subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור בליקויים בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהניקוד הכולל.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
             circleVisible: false,
             showBackButton: false,
             showNextButton: false,
@@ -193,15 +193,6 @@
    padding: 0;
  }
 
- /* .instructions-cont {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100vh;
-    direction: rtl;
- } */
-
 .gameInfo {
     display: flex;
     flex-direction: row;
@@ -213,27 +204,16 @@
     justify-content: space-around;
 }
 
- /* .explanation-2 {
-    width: 30vw;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.671);
-    font-size: 2rem;
-    padding: 8vh 6vw;
-    border-radius: 2rem;
-    transform: scale(1.15);
-    line-height: 1.5;
- } */
-
 .explanation {
-animation: biggerAnimation 1.5s ease-in-out forwards;
+    animation: biggerAnimation 1.5s ease-in-out forwards;
 }
 
 .float {
-animation: floatAnimation 3s ease-in-out infinite;
+    animation: floatAnimation 3s ease-in-out infinite;
 }
 
 .scale {
-animation: scaleScreen 1.25s linear forwards;
+    animation: scaleScreen 1.25s linear forwards;
 }
  
 .instructions {
