@@ -15,20 +15,21 @@
             explain: 'בהתערבות זו המתצפת חודל את השיעור ומתקן את הנחנך במידת הצורך. <br><br>בהתערבות זו נשתמש רק למקרים של בטיחות או עברה על הפקודות.'
           }
         ],
-        practice: [{
-          question: 'מפקדת בטירונות מעבירה שיעור נשק לצוות שלה. במהלך השיעור היא מסבירה על מבנה הנשק וחלקיו השונים. לצורך הדגמה מוחשית, המפקדת מחליטה לטעון את הנשק ולכוון אותו לכיוון הלוח כדי לא לסכן את החניכים.',
-          correctAnswer: '2',
-          explain: ' התערבות ישירה. <br> טעינת הנשק והסטת קנה הן פעולות אסורות בהחלט ומסכנות את חייהם של כל הנוכחים. נתערב מייד כדי לחדול את הסכנה.'
-        },
-        {
-          question: 'במהלך שיעור בקורס טבחים, החיילים קיבלו משימה לבשל מנה בשרית. אחד החיילים מגיע עם רקע עשיר בעולם הבישול. כתוצאה מכך, החליט שהוא מוסיף קצת עניין למנה. החייל הוסיף גבינת פרמז׳ן כתיבול סופי למנה.',
-          correctAnswer: '2',
-          explain: 'התערבות ישירה. <br> מדובר בהפרת פקודות וחוקי המטבח וכתוצאה מכך, מחללת את כשרותו של המטבח כולו. לכן, נתערב מייד כדי למנוע את המתרחש.'
-        },{
-          question: 'במהלך שיעור נשק בטירונות, מפקדת הצוות מפרטת על חלקי הנשק השונים. בהסברתה על החלק ״פין פציל״, המפקדת מדגישה כי חלק זה לא קריטי במבנה הנשק לצורך הפעלתו ובמקרה שאינו נמצא הנשק יתופעל כרגיל.',
-          correctAnswer: '1',
-          explain: 'התערבות עקיפה. <br> המפקדת טעתה בחומר הלימוד, לכן במקום להביך אותה בתיקון מול הכיתה, ניגש אליה מייד לאחר השיעור ונסביר לה את הטעות. היא תתקן את עצמה מול החניכים.'
-        },
+        practice: [
+          {
+            question: 'מפקדת בטירונות מעבירה שיעור נשק לצוות שלה. במהלך השיעור היא מסבירה על מבנה הנשק וחלקיו השונים. לצורך הדגמה מוחשית, המפקדת מחליטה לטעון את הנשק ולכוון אותו לכיוון הלוח כדי לא לסכן את החניכים.',
+            correctAnswer: '2',
+            explain: ' התערבות ישירה. <br> טעינת הנשק והסטת קנה הן פעולות אסורות בהחלט ומסכנות את חייהם של כל הנוכחים. נתערב מייד כדי לחדול את הסכנה.'
+          },
+          {
+            question: 'במהלך שיעור בקורס טבחים, החיילים קיבלו משימה לבשל מנה בשרית. אחד החיילים מגיע עם רקע עשיר בעולם הבישול. כתוצאה מכך, החליט שהוא מוסיף קצת עניין למנה. החייל הוסיף גבינת פרמז׳ן כתיבול סופי למנה.',
+            correctAnswer: '2',
+            explain: 'התערבות ישירה. <br> מדובר בהפרת פקודות וחוקי המטבח וכתוצאה מכך, מחללת את כשרותו של המטבח כולו. לכן, נתערב מייד כדי למנוע את המתרחש.'
+          },{
+            question: 'במהלך שיעור נשק בטירונות, מפקדת הצוות מפרטת על חלקי הנשק השונים. בהסברתה על החלק ״פין פציל״, המפקדת מדגישה כי חלק זה לא קריטי במבנה הנשק לצורך הפעלתו ובמקרה שאינו נמצא הנשק יתופעל כרגיל.',
+            correctAnswer: '1',
+            explain: 'התערבות עקיפה. <br> המפקדת טעתה בחומר הלימוד, לכן במקום להביך אותה בתיקון מול הכיתה, ניגש אליה מייד לאחר השיעור ונסביר לה את הטעות. היא תתקן את עצמה מול החניכים.'
+          },
       ],
         showNextButton: true,
         chosen: '',
@@ -39,7 +40,8 @@
         isDisabled: '',
         sideNote: '',
         answered: false,
-        questionCounter: 0
+        questionCounter: 0,
+        changeAni: true
       }
     },
     methods: {
@@ -68,12 +70,8 @@
         if (key === Number(this.practice[this.questionCounter]['correctAnswer'])) {
           this.chosen = `true${key}`;
           this.sideNote = 'תשובה נכונה. כל הכבוד!';
-        } else {
-          this.chosen = `false${key}`;
-          this.sideNote = this.practice[this.questionCounter]['explain'];
-        }
 
-        setTimeout(() => {
+          setTimeout(() => {
           this.questionCounter++;
           this.chosen = '';
           this.answered = false;
@@ -85,7 +83,26 @@
           if (this.questionCounter === 3) {
             this.$emit('backToHomePage', 'התערבות');
           }
-        }, 4000);
+        }, 2000);
+
+        } else {
+          this.chosen = `false${key}`;
+          this.sideNote = this.practice[this.questionCounter]['explain'];
+
+          setTimeout(() => {
+            this.questionCounter++;
+            this.chosen = '';
+            this.answered = false;
+
+            setTimeout(() => {
+              this.isDisabled = 'abled';
+            }, 1000);
+
+            if (this.questionCounter === 3) {
+              this.$emit('backToHomePage', 'התערבות');
+            }
+          }, 4000);
+        }
       },
       src(name) {
         return new URL(`../assets/${name}`, import.meta.url).href
@@ -120,9 +137,11 @@
               </div>
           </div>
         </div>
-        <div v-else-if="textCounter === 1" class="practiceContainer-instructions">
-          לפניכם משחק שימחיש סיטואציות בהן תצטרכו להבחין בין התערבות עקיפה להתערבות ישירה. <br> <br>
-          ענו על התשובה המתאימה ביותר לאחר קריאת הסיטואציה.
+        <div v-else-if="textCounter === 1" class="parts">
+          <div class="practiceContainer-instructions">
+            לפניכם משחק שימחיש סיטואציות בהן תצטרכו להבחין בין התערבות עקיפה להתערבות ישירה. <br> <br>
+            ענו על התשובה המתאימה ביותר לאחר קריאת הסיטואציה.
+          </div>
         </div>
         <div v-else class="practiceContainer">
           <div class="question">
@@ -161,6 +180,15 @@
   pointer-events: none;
 }
 
+.parts {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    direction: rtl;
+}
+
 .titleCircle {
   width: 5rem;
   height: 5.5rem;
@@ -179,10 +207,10 @@
   padding: 3.5%;
   position: absolute;
   top: 9vh;
-  right: 19vw;
+  right: 17vw;
   z-index: 2;
   cursor: pointer;
- }
+}
 
 .abled {
   pointer-events: all;
@@ -196,7 +224,7 @@
   transform-origin: top right;
   background-color: rgba(255, 255, 255, 0.671);
   box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-  padding: 8vh 7vw;
+  padding: 9.3vh 7vw;
   border-radius: 2rem;
 }
 
@@ -232,6 +260,7 @@
   background-image: url('../assets/board.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  margin-top: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -249,6 +278,7 @@
 
 .practiceContainer {
   padding: 6vh;
+  margin-top: 15vh;
   color: rgba(234, 234, 234, 0.901); 
   background-image: url('../assets/board.jpg');
   background-repeat: no-repeat;
@@ -256,7 +286,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60vh;
+  height: 56vh;
   justify-content: space-around;
 }
 
@@ -303,16 +333,15 @@
 
 .flip-card-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  height: 100vh;
   direction: rtl;
+  justify-content: center;
 }
 
 .flip-card {
   background-color: transparent;
-  width: 200px;
+  width: 250px;
   height: 525px;
   perspective: 1000px;
   flex: 0 0 calc(50% - 20px);
@@ -321,7 +350,7 @@
 }
 
 .font-card-text {
-  font-size: 3rem;
+  font-size: 2.75rem;
   font-weight: 700;
   margin-bottom: 3vh;
   color: black;
@@ -336,7 +365,7 @@
 
 .textBack {
   font-size: 2rem;
-  padding: 0.5vh;
+  padding: 0.75vh;
 }
 
 .flip-card:hover .flip-card-front, .flip-card.start .flip-card-front{
