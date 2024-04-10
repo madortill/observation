@@ -1,196 +1,251 @@
 <script>
+import ConnectTwo from './connectTwo.vue'
   export default {
     props: ["chapter", "colorCode"],
     data() {
       return {
         showBackButton: false,
         pressedCheck: false,
-        showNextButton: true,
+        showNextButton: false,
         showPart: 0,
+        changeAni: false,
         correctAnswersInTotal: 10,
         correctCounter: 0,
         incorrectCounter: 0,
         messageForScreen: '',
         messageForButton: 'בדיקה',
         showMessage: false,
-        notePageInfo: [{
-            question: 'מה נרשום?',
-            sideNote: 'תבחרו 6 אפשרויות',
-            answers: [{
-                option: 'תיאורים',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
+        option1: 
+            {
+                option: ["חניכים", "מידע", "תיאורים"],
+                correctAnswer: "מידע"
+            },
+        option2:
+            {
+                option: ["זמנים חשובים", "זמנים טובים", "זמנים מתים"],
+                correctAnswer: "זמנים מתים"
+            }, 
+        option3:
+            {
+                option: ["שכחה", "זיכרון", "פגיעה"],
+                correctAnswer: "שכחה"
+            }, 
+        option4:
+            {
+                option: ["אחרי ההתנסות", "בסמוך להתנסות", "לפני ההתנסות"],
+                correctAnswer: "בסמוך להתנסות"
+            }
+        ,
+        howQuestion: [
+            {
+                title: "בצורה אובייקטבית",
+                options: ['"לדעתי הדרך בה המגיב הייתה שגויה."', '"המדריך הגיב באופן פוגעני והחיילת יצאה בוכה מהשיעור."'],
+                correct: '"המדריך הגיב באופן פוגעני והחיילת יצאה בוכה מהשיעור."'
             },
             {
-                option: 'שמות',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'מחשבות',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'זמנים',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'מקומות',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'מידע כמותי',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'ציטוטים',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'תחושות',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            }]
-        },
-        {
-            question: 'מתי נרשום?',
-            sideNote: 'תבחרו 2 אפשרויות',
-            answers: [
-            {
-                option: 'כל הזמן',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'רישום סמוך להתנסות',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'ביצירת קשר עין אישי',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'מאחורי החניך',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            },{
-                option: 'בזמנים ״מתים״',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            },]
-        },
-        {
-            question: 'איך נרשום?',
-            sideNote: 'תבחרו 2 אפשרויות',
-            answers: [
-            {
-                option: 'בצורה שיפוטית',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'בצורה מפורטת',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'בצורה אישית',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            },
-            {
-                option: 'באופן מרגש',
-                correct: false,
-                chosen: false,
-                userCorrect: ''
-            },{
-                option: 'בצורה אובייקטיבית',
-                correct: true,
-                chosen: false,
-                userCorrect: ''
-            }]
-        }]
+                title: "בצורה מפורטת",
+                options: ['"המדריך עשה סיכום שיעור לא טוב."', '"סיכום השיעור היה קצר (3 דקות במקום 10), המדריך לא עבר על התכנים שלימד ולא וידא הבנה."'],
+                correct: '"סיכום השיעור היה קצר (3 דקות במקום 10), המדריך לא עבר על התכנים שלימד ולא וידא הבנה."'
+            }
+        ],
+        connectArr: {
+            "type": "connect-two",
+            "question": "התאימו בין המושג להגדרה- לחצו על מושג והגדרה",
+            "term": ["תיאורים", "ציטוטים", "שמות", "זמנים", "מקומות", "מידע כמותי"],
+            "definition": ["הכיתה מלוכלכת ואינה מוכנה לקיום שיעור.", "״נכון! בדיוק כמו שאמרת, המנוע צריך להתחמם לפני שמתחילים בנסיעה״", "דנה נרדמה בשיעור", 
+            "מתוך 45 דקות שיעור, המדריך העביר פתיחה במשך 25 דקות.", "השיעור הועבר בחוץ ביום של 35 מעלות חום, זה הקשה מאוד על ריכוז התלמידים.", "3 תלמידים ספציפיים תמיד עונים על כל השאלות."],
+            "correct": {"תיאורים": "הכיתה מלוכלכת ואינה מוכנה לקיום שיעור.", "ציטוטים": "״נכון! בדיוק כמו שאמרת, המנוע צריך להתחמם לפני שמתחילים בנסיעה״", "שמות": "דנה נרדמה בשיעור", "זמנים" : "מתוך 45 דקות שיעור, המדריך העביר פתיחה במשך 25 דקות.", "מקומות" : "השיעור הועבר בחוץ ביום של 35 מעלות חום, זה הקשה מאוד על ריכוז התלמידים.", "מידע כמותי" :  "3 תלמידים ספציפיים תמיד עונים על כל השאלות."}
+        }
+        // notePageInfo: [{
+        //     question: 'מה נרשום?',
+        //     sideNote: 'תבחרו 6 אפשרויות',
+        //     answers: [{
+        //         option: 'תיאורים',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'שמות',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'מחשבות',
+        //         correct: false,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'זמנים',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'מקומות',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'מידע כמותי',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'ציטוטים',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'תחושות',
+        //         correct: false,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     }]
+        // },
+        // {
+        //     question: 'מתי נרשום?',
+        //     sideNote: 'תבחרו 2 אפשרויות',
+        //     answers: [
+        //     {
+        //         option: 'כל הזמן',
+        //         correct: false,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'רישום סמוך להתנסות',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'ביצירת קשר עין אישי',
+        //         correct: false,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'מאחורי החניך',
+        //         correct: false,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },{
+        //         option: 'בזמנים ״מתים״',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },]
+        // },
+        // {
+        //     question: 'איך נרשום?',
+        //     sideNote: 'תבחרו 2 אפשרויות',
+        //     answers: [
+        //     {
+        //         option: 'בצורה שיפוטית',
+        //         correct: false,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'בצורה מפורטת',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'בצורה אישית',
+        //         correct: false,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },
+        //     {
+        //         option: 'באופן מרגש',
+        //         correct: false,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     },{
+        //         option: 'בצורה אובייקטיבית',
+        //         correct: true,
+        //         chosen: false,
+        //         userCorrect: ''
+        //     }]
+        // }]
       }
     },
+    components: {
+     ConnectTwo
+    },
     methods: {
-        checkAnswers() {
-            this.pressedCheck = true;
-            this.correctCounter = 0;
-            this.incorrectCounter = 0;
+        // checkAnswers() {
+        //     this.pressedCheck = true;
+        //     this.correctCounter = 0;
+        //     this.incorrectCounter = 0;
 
-            for (let i = 0; i < this.notePageInfo.length; i++) {
-                for (let j = 0; j < this.notePageInfo[i].answers.length; j++) {
+        //     for (let i = 0; i < this.notePageInfo.length; i++) {
+        //         for (let j = 0; j < this.notePageInfo[i].answers.length; j++) {
 
-                    if (this.notePageInfo[i].answers[j].chosen) {
-                        this.showMessage = true;
-                        if (this.notePageInfo[i].answers[j].chosen === this.notePageInfo[i].answers[j].correct) {
+        //             if (this.notePageInfo[i].answers[j].chosen) {
+        //                 this.showMessage = true;
+        //                 if (this.notePageInfo[i].answers[j].chosen === this.notePageInfo[i].answers[j].correct) {
                             
-                            this.notePageInfo[i].answers[j].userCorrect = 'true';
-                            this.correctCounter++;
+        //                     this.notePageInfo[i].answers[j].userCorrect = 'true';
+        //                     this.correctCounter++;
 
-                            if (this.correctCounter === this.correctAnswersInTotal && this.incorrectCounter === 0) {
-                                this.messageForScreen = 'עניתם על הכל בהצלחה!';
+        //                     if (this.correctCounter === this.correctAnswersInTotal && this.incorrectCounter === 0) {
+        //                         this.messageForScreen = 'עניתם על הכל בהצלחה!';
                                 
-                                setTimeout(() => {
-                                    this.showMessage = false;
-                                    this.$emit('backToHomePage', 'רישום ותיעוד');
-                                }, 1500);
-                            } else if (this.correctCounter === this.correctAnswersInTotal && this.incorrectCounter !== 0) {
-                                this.messageForScreen = 'תשימו לב למספר התשובות שבחרת...';
+        //                         setTimeout(() => {
+        //                             this.showMessage = false;
+        //                             this.$emit('backToHomePage', 'רישום ותיעוד');
+        //                         }, 1500);
+        //                     } else if (this.correctCounter === this.correctAnswersInTotal && this.incorrectCounter !== 0) {
+        //                         this.messageForScreen = 'תשימו לב למספר התשובות שבחרת...';
 
-                                setTimeout(() => {
-                                    this.showMessage = false;
-                                    this.messageForButton = 'המשך';
-                                }, 2000);
-                            } else if (this.correctCounter !== this.correctAnswersInTotal) {
-                                this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
+        //                         setTimeout(() => {
+        //                             this.showMessage = false;
+        //                             this.messageForButton = 'המשך';
+        //                         }, 2000);
+        //                     } else if (this.correctCounter !== this.correctAnswersInTotal) {
+        //                         this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
 
-                                setTimeout(() => {
-                                    this.showMessage = false;
-                                }, 2000);
-                            }
-                        } else {
-                            this.incorrectCounter++;
-                            this.notePageInfo[i].answers[j].userCorrect = 'false';
-                            this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
+        //                         setTimeout(() => {
+        //                             this.showMessage = false;
+        //                         }, 2000);
+        //                     }
+        //                 } else {
+        //                     this.incorrectCounter++;
+        //                     this.notePageInfo[i].answers[j].userCorrect = 'false';
+        //                     this.messageForScreen = 'נראה שלא עניתם על הכל... תנסו שוב';
 
-                            setTimeout(() => {
-                                this.showMessage = false;
-                            }, 2000);
+        //                     setTimeout(() => {
+        //                         this.showMessage = false;
+        //                     }, 2000);
 
-                            setTimeout(() => {
-                                this.notePageInfo[i].answers[j].userCorrect = '';
-                                this.notePageInfo[i].answers[j].chosen = false;
-                            }, 2000);
-                        }
-                    } else {
-                        this.notePageInfo[i].answers[j].userCorrect = '';
-                    }
-                }
-            }
+        //                     setTimeout(() => {
+        //                         this.notePageInfo[i].answers[j].userCorrect = '';
+        //                         this.notePageInfo[i].answers[j].chosen = false;
+        //                     }, 2000);
+        //                 }
+        //             } else {
+        //                 this.notePageInfo[i].answers[j].userCorrect = '';
+        //             }
+        //         }
+        //     }
+        // },
+        checkHowPractice() {
+
+        },
+        checkWhatPractice() {
+
+        },
+        checkWhenPractice() {
+
         },
         nextPart() {
             this.showPart++;
@@ -200,6 +255,10 @@
                 this.showBackButton = true;
             }
         },
+        toPractice() {
+            this.showPart = 2 ; 
+            this.showBackButton = false;
+        },
         prevPart() {
             this.showPart--;
 
@@ -208,13 +267,19 @@
                 this.showBackButton = false;
             }
         }
+    },
+    mounted() {
+        setTimeout(() => {
+            this.changeAni = true;
+            this.showNextButton = true;
+        }, 1250);
     }
   }
 </script>
 
 <template>
     <div class="noting">
-        <div class="titleCircle" v-show="showPart !== 3" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div class="titleCircle" v-show="showPart !== 2" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
         <div class="firstPart" v-if="showPart === 0">     
             <div class="explanation scale">
                 <div class="basicTitle">הגדרה</div>
@@ -246,11 +311,49 @@
                             באופן אובייקטיבי, בצורה מפורטת
                         </div>
                 </div>
-                <button class="toPractice" type="button" @click="showPart = 3; showBackButton = false">לתרגול</button>
+                <button class="toPractice" type="button" @click="toPractice">לתרגול</button>
             </div>
         </div>
         <div class="thirdPart" v-else>
             <div class="basicTitle">תרגול</div>
+            <div class="test-page">
+                <div class="everythinCont">
+                    <div class="whatWriting">
+                        <ConnectTwo :ques="connectArr"/>
+                    </div>
+                    <div class="whenWriting">
+                        <div class="title-practice">
+                            מתי נרשום? 
+                        </div>
+                        <div class="questionContainer">
+                            <div class="questionFilling">
+                                בזמנים ״מתים״ - <br> כדי לקלוט כמה שיותר <select class="options"><option v-for="(option, index) in option1.option" :key="index" :value="option">{{ option }}</option></select> ולהספיק לכתוב כל מה שאנחנו צריכים, נכתוב בזמנים מסויימים הנקראים <select class="options"><option v-for="(option, index) in option2.option" :value="option" :key="index">{{ option }}</option></select>.
+                            </div>
+                            <div class="questionFilling">
+                                רישום בסמוך להתנסות - <br> על מנת למנוע <select class="options"><option v-for="(option, index) in option3.option" :value="option" :key="index">{{ option }}</option></select> של פרטים חשובים וקריטיים, ניישם סוג רישום נוסף שלפיו יש לרשום <select class="options"><option v-for="(option, index) in option4.option" :value="option" :key="index">{{ option }}</option></select>.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="howWriting">
+                        <div class="title-practice">
+                            איך נרשום? 
+                        </div>
+                        <div class="subtitle-practice">
+                            נכון / לא נכון
+                        </div>
+                        <div v-for="(question, index) in howQuestion" :key="index">
+                            <div class="question-howPractice">
+                                {{ question.title }}
+                            </div>
+                            <div v-for="(options, id) in question.options" :key="id" class="option-howPractice" @click="checkHowPractice">
+                                {{ options }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" @click="checkWhenPractice(); checkHowPractice()" class="buttons">{{ messageForButton }}</button>
+            </div>
+                        <!-- <div class="basicTitle">תרגול</div>
             <div class="test-page">
                 <div class="everythinCont">
                     <div v-for="(part, index) in notePageInfo" :key="index" class="questionCont">
@@ -265,10 +368,10 @@
                     <div class="message" v-show="showMessage">{{ messageForScreen }}</div>
                 </div>
                 <button type="button" @click="checkAnswers()" class="buttons">{{ messageForButton }}</button>
-            </div>
+            </div> -->
         </div>
         <div class="buttonCont">
-            <button  :class="showNextButton ? '' : 'invisible'"  class="buttons" @click="nextPart">
+            <button :class="showNextButton ? '' : 'invisible'"  class="buttons" @click="nextPart">
                 ממשיכים
             </button>
             <button :class="showBackButton ? '' : 'invisible'" class="buttons" @click="prevPart">
@@ -293,6 +396,48 @@
 
 .invisible {
     visibility: hidden;
+}
+
+.float {
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+.scale {
+    animation: scaleScreen 1.25s linear forwards;
+}
+
+.title-practice {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.8vh;
+}
+
+.questionContainer {
+    display: flex;
+    flex-direction: row;
+    width: 40vw;
+    justify-content: space-around;
+}
+
+.options {
+    font-size: 1.2rem;
+}
+
+.subtitle-practice {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5vh;
+}
+
+.questionFilling {
+    font-size: 1.2rem;
+    width: 15vw;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.2vh;
+    border-radius: 2vh;
+    padding: 3vh 1.5vw;
+    text-align: center;
 }
 
 .title {
@@ -429,6 +574,17 @@ input[type=checkbox] {
     margin-bottom: 0.75vh;
 }
 
+.question-howPractice {
+    font-size: 1.4rem;
+    margin-bottom: 0.25vh;
+}
+
+.option-howPractice {
+    font-size: 1.2rem;
+    cursor: pointer;
+
+}
+
 .answers {
     font-size: 1.15rem;
     margin-top: 0.65vh;
@@ -448,6 +604,7 @@ input[type=checkbox] {
    margin-top: 3vh;
    font-size: 3.3rem;
    font-weight: 600;
+   color: #00241B;
  }
 
  .titleCircle {

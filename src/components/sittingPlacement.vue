@@ -144,7 +144,7 @@
 
 <template>
     <div class="placement">
-        <div class="titleCircle" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div class="titleCircle" v-show="subjectCounter < 3" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter < 3" class="firstPart">
             <div class="explanation scale">
                 <div class="basicTitle" v-if="subjectCounter < 3">
@@ -162,7 +162,7 @@
             </div>
         </div>
         <div class="secondPart" v-else>
-            <div class="instructions">בזמן שיעור תצפית - <br> באיזה מיקום כדאי למתצפת לשבת לצורך קבלת תצפית מיטבית?</div>
+            <div class="instructions">בזמן שיעור תצפית - <br> באיזה 2 מיקומים בכיתה כדאי למתצפת לשבת לצורך קבלת תצפית מיטבית?</div>
             <div class="message" v-show="correctCounter === 2">כל הכבוד!<img src="../assets/muscle.png" class="muscle" /></div>
             <div class="sitting">
                 <img src="../assets/table2.png" alt="class" class="table2" />

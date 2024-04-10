@@ -31,7 +31,7 @@
             explain: 'התערבות עקיפה. <br> המפקדת טעתה בחומר הלימוד, לכן במקום להביך אותה בתיקון מול הכיתה, ניגש אליה מייד לאחר השיעור ונסביר לה את הטעות. היא תתקן את עצמה מול החניכים.'
           },
       ],
-        showNextButton: true,
+        showNextButton: false,
         chosen: '',
         showOtherSubject: false,
         textCounter: 0,
@@ -112,6 +112,10 @@
       setTimeout(() => {
           this.onStart = 'off';
       }, 100);
+
+      setTimeout(() => {
+        this.showNextButton = true;
+      }, 1250);
     },
   }
 </script>
