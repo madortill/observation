@@ -15,6 +15,7 @@ import ConnectTwo from './connectTwo.vue'
         messageForScreen: '',
         messageForButton: 'בדיקה',
         showMessage: false,
+        practiceCount: 0,
         option1: 
             {
                 option: ["חניכים", "מידע", "תיאורים"],
@@ -247,6 +248,9 @@ import ConnectTwo from './connectTwo.vue'
         checkWhenPractice() {
 
         },
+        changePractice() {
+            this.practiceCount++;
+        },
         nextPart() {
             this.showPart++;
 
@@ -318,10 +322,15 @@ import ConnectTwo from './connectTwo.vue'
             <div class="basicTitle">תרגול</div>
             <div class="test-page">
                 <div class="everythinCont">
-                    <div class="whatWriting">
-                        <ConnectTwo :ques="connectArr"/>
+                    <div class="whatWriting" v-show="practiceCount === 0">
+                        <div class="title-practice">
+                            מה נרשום? 
+                        </div>
+                        <div class="connectTwo">
+                            <ConnectTwo @changePractice="changePractice" :ques="connectArr"/>
+                        </div>
                     </div>
-                    <div class="whenWriting">
+                    <div class="whenWriting" v-show="practiceCount === 1">
                         <div class="title-practice">
                             מתי נרשום? 
                         </div>
@@ -334,7 +343,7 @@ import ConnectTwo from './connectTwo.vue'
                             </div>
                         </div>
                     </div>
-                    <div class="howWriting">
+                    <div class="howWriting" v-show="practiceCount === 2">
                         <div class="title-practice">
                             איך נרשום? 
                         </div>
@@ -351,7 +360,7 @@ import ConnectTwo from './connectTwo.vue'
                         </div>
                     </div>
                 </div>
-                <button type="button" @click="checkWhenPractice(); checkHowPractice()" class="buttons">{{ messageForButton }}</button>
+                <button type="button" v-show="practiceCount === 2" @click="checkWhenPractice(); checkHowPractice()" class="buttons">{{ messageForButton }}</button>
             </div>
                         <!-- <div class="basicTitle">תרגול</div>
             <div class="test-page">
@@ -410,6 +419,11 @@ import ConnectTwo from './connectTwo.vue'
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.8vh;
+}
+
+.connectTwo {
+    width: 40vw;
+    /* height: 20vh; */
 }
 
 .questionContainer {

@@ -93,6 +93,7 @@
         }
         if (this.connectionNum === this.ques.term.length) {
           this.allConnected = true;
+          this.$emit('changePractice');
         }
       },
       chosenItem(currItem, keyNameIndex, currIndex) {
@@ -131,15 +132,19 @@
     width: 30rem;
     height: fit-content;
     position: relative;
-    padding: 10%;
+    padding: 3vh;
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
   }
+
+  .instruction {
+    font-size: 1.4rem;
+  }
   
   .content-container {
-    width: 30rem;
-    height: 17rem;
+    width: 50rem;
+    height: 40rem;
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(v-bind("termsNum"), 1fr);
     justify-items: center;
@@ -159,14 +164,13 @@
     margin: 0 5%;
     text-align: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
   }
   
   .term:hover,
   .definition:hover {
     cursor: pointer;
   }
-  
   
   .term {
     grid-row: 1 / 2;
