@@ -128,7 +128,7 @@
         }
       },
       finished() {
-        this.$emit('changePractice');
+        this.$emit('change-practice');
       },
       proceed() {
         this.terms = {};

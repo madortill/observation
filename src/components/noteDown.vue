@@ -16,6 +16,10 @@ import ConnectTwo from './connectTwo.vue'
         messageForButton: 'בדיקה',
         showMessage: false,
         practiceCount: 0,
+        select1: undefined,
+        select2: undefined,
+        select3: undefined,
+        select4: undefined,
         option1: 
             {
                 option: ["חניכים", "מידע", "תיאורים"],
@@ -242,11 +246,18 @@ import ConnectTwo from './connectTwo.vue'
         checkHowPractice() {
 
         },
-        checkWhatPractice() {
+        checkWhenPractice(event) {
+            console.log(this.select1);
+            // if (event.currentTarget.select) {
 
+            // }
         },
-        checkWhenPractice() {
-
+        checkPractice() {
+            if (this.practiceCount === 1) {
+                this.checkWhenPractice();
+            } else {
+                this.checkHowPractice();
+            }
         },
         changePractice() {
             this.practiceCount++;
@@ -260,7 +271,7 @@ import ConnectTwo from './connectTwo.vue'
             }
         },
         toPractice() {
-            this.showPart = 2 ; 
+            this.showPart = 2; 
             this.showBackButton = false;
         },
         prevPart() {
@@ -311,9 +322,9 @@ import ConnectTwo from './connectTwo.vue'
                 </div>
                 <div class="sections">
                     <div class="subTitle">איך נרשום?</div>
-                        <div>
-                            באופן אובייקטיבי, בצורה מפורטת
-                        </div>
+                    <div>
+                        באופן אובייקטיבי, בצורה מפורטת
+                    </div>
                 </div>
                 <button class="toPractice" type="button" @click="toPractice">לתרגול</button>
             </div>
@@ -322,24 +333,24 @@ import ConnectTwo from './connectTwo.vue'
             <div class="basicTitle">תרגול</div>
             <div class="test-page">
                 <div class="everythinCont">
-                    <div class="whatWriting" v-show="practiceCount === 0">
+                    <div class="whatWriting" v-show="practiceCount === 1">
                         <div class="title-practice">
                             מה נרשום? 
                         </div>
                         <div class="connectTwo">
-                            <ConnectTwo @changePractice="changePractice" :ques="connectArr"/>
+                            <ConnectTwo @change-practice="changePractice" :ques="connectArr"/>
                         </div>
                     </div>
-                    <div class="whenWriting" v-show="practiceCount === 1">
+                    <div class="whenWriting" v-show="practiceCount === 0">
                         <div class="title-practice">
                             מתי נרשום? 
                         </div>
                         <div class="questionContainer">
                             <div class="questionFilling">
-                                בזמנים ״מתים״ - <br> כדי לקלוט כמה שיותר <select class="options"><option v-for="(option, index) in option1.option" :key="index" :value="option">{{ option }}</option></select> ולהספיק לכתוב כל מה שאנחנו צריכים, נכתוב בזמנים מסויימים הנקראים <select class="options"><option v-for="(option, index) in option2.option" :value="option" :key="index">{{ option }}</option></select>.
+                                בזמנים ״מתים״ - <br> כדי לקלוט כמה שיותר <select class="options" @change="checkWhenPractice" v-model="select1"><option v-for="(option, index) in option1.option" :key="index">{{ option }}</option></select> ולהספיק לכתוב כל מה שאנחנו צריכים, נכתוב בזמנים מסויימים הנקראים <select @change="checkWhenPractice" v-model="select2" class="options"><option v-for="(option, index) in option2.option" :key="index">{{ option }}</option></select>.
                             </div>
                             <div class="questionFilling">
-                                רישום בסמוך להתנסות - <br> על מנת למנוע <select class="options"><option v-for="(option, index) in option3.option" :value="option" :key="index">{{ option }}</option></select> של פרטים חשובים וקריטיים, ניישם סוג רישום נוסף שלפיו יש לרשום <select class="options"><option v-for="(option, index) in option4.option" :value="option" :key="index">{{ option }}</option></select>.
+                                רישום בסמוך להתנסות - <br> על מנת למנוע <select  @change="checkWhenPractice" v-model="select3" class="options"><option v-for="(option, index) in option3.option" :key="index">{{ option }}</option></select> של פרטים חשובים וקריטיים, ניישם סוג רישום נוסף שלפיו יש לרשום <select class="options"  @change="checkWhenPractice" v-model="select4"><option v-for="(option, index) in option4.option" :key="index">{{ option }}</option></select>.
                             </div>
                         </div>
                     </div>
@@ -360,7 +371,7 @@ import ConnectTwo from './connectTwo.vue'
                         </div>
                     </div>
                 </div>
-                <button type="button" v-show="practiceCount === 2" @click="checkWhenPractice(); checkHowPractice()" class="buttons">{{ messageForButton }}</button>
+                <button type="button" v-show="practiceCount === 2 || practiceCount === 1" @click="checkPractice" class="buttons">{{ messageForButton }}</button>
             </div>
                         <!-- <div class="basicTitle">תרגול</div>
             <div class="test-page">
@@ -423,14 +434,13 @@ import ConnectTwo from './connectTwo.vue'
 
 .connectTwo {
     width: 60rem;
-    /* height: 20vh; */
 }
 
 .questionContainer {
     display: flex;
-    flex-direction: row;
-    width: 40vw;
-    justify-content: space-around;
+    flex-direction: column;
+    height: 55vh;
+    justify-content: space-evenly;
 }
 
 .options {
