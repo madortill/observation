@@ -2,7 +2,7 @@
     <div class="container">
       <span class="instruction"> התאימו בין התשובות הנכונות</span>
       <div id="connect-two" class="content-container">
-        <svg class="svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" ref="svg">
+        <svg class="svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" ref="svg">
           <path :id="`path${index - 1}`" v-for="index in termsNum" :key="colorsArr[index - 1]"
             :stroke="colorsArr[index - 1]" stroke-width="0.5%" fill="none" :d="paths[index - 1]"></path>
         </svg>
@@ -18,7 +18,7 @@
             }} </div>
         </div>
       </div>
-      <button v-if="!allConnected" @click="checkConnection" class="general-btn">חבר</button>
+        <button @click="checkText" class="buttons">{{ innerButtonText }}</button>
     </div>
   </template>
   
@@ -33,6 +33,7 @@
         definitions: {},
         chosenTermIndex: -1,
         chosenTermKey: -1,
+        innerButtonText: "חבר",
         chosenDefinitionIndex: -1,
         chosenDefinitionKey: -1,
         termsNum: this.ques.term.length,
@@ -47,6 +48,8 @@
     mounted() {
       // fit SVG to screen proportions - take the CSS size of the svg element and set it to the viewBox values
       this.$refs.svg.setAttribute('viewBox', `0 0 ${this.$refs.svg.clientWidth} ${this.$refs.svg.clientHeight}`);
+
+      console.log(this.$refs.svg.clientWidth);
   
       for (let i = 0; i < this.ques.term.length; i++) {
         let random = Math.round(Math.random() * this.ques.term.length);
@@ -64,6 +67,13 @@
       }
     },
     methods: {
+      checkText() { 
+        if (this.innerButtonText === "חבר") {
+          this.checkConnection();
+        } else {
+          this.finished();
+        }
+      },
       checkConnection() {
         if (this.chosenTermIndex === -1 || this.chosenDefinitionIndex === -1) {
           this.showEmpty = true;
@@ -74,6 +84,8 @@
             let y1 = 0;
             let y2 = this.$refs.svg.clientHeight;
             this.paths[this.chosenTermIndex] = `M ${x1} ${y1} C ${x1} ${y2 * 1.2} ${x2} ${y2 * 0.01} ${x2} ${y2}`;
+            console.log(Number(this.chosenTermIndex) * (this.$refs.svg.clientWidth / this.termsNum) + (this.$refs.svg.clientWidth / this.termsNum / 2));
+
             this.chosenTermIndex = -1;
             this.chosenTermKey = -1;
             this.chosenDefinitionIndex = -1;
@@ -93,7 +105,7 @@
         }
         if (this.connectionNum === this.ques.term.length) {
           this.allConnected = true;
-          this.$emit('changePractice');
+          this.innerButtonText = "ממשיכים";
         }
       },
       chosenItem(currItem, keyNameIndex, currIndex) {
@@ -115,6 +127,9 @@
           }
         }
       },
+      finished() {
+        this.$emit('changePractice');
+      },
       proceed() {
         this.terms = {};
         this.definitions = {};
@@ -129,22 +144,31 @@
   
   <style scoped>
   .container {
-    width: 30rem;
+    /* width: 30rem; */
     height: fit-content;
-    position: relative;
-    padding: 3vh;
+    /* padding: 3vh; */
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
+    align-items: center;
   }
 
   .instruction {
     font-size: 1.4rem;
   }
+
+  /* .buttonCont {
+    margin-top: 8vh;
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  } */
   
   .content-container {
-    width: 50rem;
-    height: 40rem;
+    width: 60rem;
+    height: 35rem;
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(v-bind("termsNum"), 1fr);
     justify-items: center;
@@ -153,18 +177,23 @@
   
   .term,
   .definition {
-    border: 5px solid white;
-    border-radius: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.301);
-    padding: 5%;
+    padding: 1rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 5rem;
+    direction: rtl;
     margin: 0 5%;
     text-align: center;
     justify-content: center;
     font-size: 1.2rem;
+  }
+
+  .term {
+    height: 3rem;
+    width: 6rem;
   }
   
   .term:hover,
@@ -194,7 +223,7 @@
   }
   
   .chosen {
-    background-color: rgba(255, 255, 255, 0.791);
+    background-color: rgba(236, 236, 236, 0.84);
   }
   
   .error-message {
@@ -206,6 +235,22 @@
     align-self: center;
   }
   
+  .buttons {
+    font-size: 1.65rem;
+    padding: 2vh 3.5vw;
+    background-color: #6f9cb8;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 8vh;
+    color: white;
+    border: none;
+    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+}
+
+.buttons:hover {
+    background-color: #426991;
+}
+
   @keyframes failedConnection {
     0% {
       background-color: rgba(255, 255, 255, 0.589);

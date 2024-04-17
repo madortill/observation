@@ -422,7 +422,7 @@ import ConnectTwo from './connectTwo.vue'
 }
 
 .connectTwo {
-    width: 40vw;
+    width: 60rem;
     /* height: 20vh; */
 }
 
@@ -435,6 +435,12 @@ import ConnectTwo from './connectTwo.vue'
 
 .options {
     font-size: 1.2rem;
+}
+
+.whatWriting, .howWriting, .whenWriting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .subtitle-practice {
@@ -519,6 +525,7 @@ import ConnectTwo from './connectTwo.vue'
 .thirdPart {
     display: flex;
     flex-direction: column;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     height: 100vh;
@@ -528,7 +535,7 @@ import ConnectTwo from './connectTwo.vue'
 .test-page {
     height: 72vh;
     padding: 1vh 0vw;
-    width: 40vw;
+    width: 60rem;
     background-color: rgba(255, 255, 255, 0.795);
     display: flex;
     margin-top: 4vh;
@@ -540,7 +547,7 @@ import ConnectTwo from './connectTwo.vue'
     display: flex;
     flex-direction: column;
     height: 70vh;
-    width: 40vw;
+    width: fit-content;
     flex-wrap: wrap;
     align-items: flex-start;
 }
