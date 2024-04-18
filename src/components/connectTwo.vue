@@ -26,7 +26,7 @@
   
   export default {
     props: ["ques"],
-    emits: ['finished'],
+    emits: ['change-practice'],
     data() {
       return {
         terms: {},
@@ -48,8 +48,6 @@
     mounted() {
       // fit SVG to screen proportions - take the CSS size of the svg element and set it to the viewBox values
       this.$refs.svg.setAttribute('viewBox', `0 0 ${this.$refs.svg.clientWidth} ${this.$refs.svg.clientHeight}`);
-
-      console.log(this.$refs.svg.clientWidth);
   
       for (let i = 0; i < this.ques.term.length; i++) {
         let random = Math.round(Math.random() * this.ques.term.length);
@@ -84,7 +82,6 @@
             let y1 = 0;
             let y2 = this.$refs.svg.clientHeight;
             this.paths[this.chosenTermIndex] = `M ${x1} ${y1} C ${x1} ${y2 * 1.2} ${x2} ${y2 * 0.01} ${x2} ${y2}`;
-            console.log(Number(this.chosenTermIndex) * (this.$refs.svg.clientWidth / this.termsNum) + (this.$refs.svg.clientWidth / this.termsNum / 2));
 
             this.chosenTermIndex = -1;
             this.chosenTermKey = -1;
@@ -129,15 +126,7 @@
       },
       finished() {
         this.$emit('change-practice');
-      },
-      proceed() {
-        this.terms = {};
-        this.definitions = {};
-        this.paths = [];
-        this.showEmpty = false;
-        this.allConnected = false;
-        this.$emit('finished');
-      },
+      }
     },
   }
   </script>
