@@ -6,6 +6,7 @@
         subjectCounter: 0,
         showBackButton: false,
         correctCounter: 0,
+        changeAni: false,
         subjectsInfo: [
             {
                 subSubjectTitle: "הוראות בטיחות",
@@ -25,81 +26,97 @@
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 0
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 1
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 2
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 3
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 4
             },
             {
                 answer: false,
-                showAnswer: '', 
+                showAnswer: '',
+                checked: false, 
                 id: 5
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 6
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 7
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 8
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 9
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 10
             },
             {
                 answer: false,
                 showAnswer: '',  
+                checked: false,
                 id: 11
             },
             {
                 answer: true,
                 showAnswer: '', 
+                checked: false,
                 id: 12
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 13
             },
             {
                 answer: false,
                 showAnswer: '', 
+                checked: false,
                 id: 14
             },
             {
                 answer: true,
                 showAnswer: '', 
+                checked: false,
                 id: 15
             }
         ],
@@ -125,15 +142,16 @@
                 if (Number(event.currentTarget.id) === this.sittingArr[i]["id"]) {
                     this.sittingArr[i].showAnswer = true;
 
-                    if (this.sittingArr[i]["answer"] === true) {
-                        this.correctCounter++;
+                        if (this.sittingArr[i]["answer"] === true) {
 
-                        if (this.correctCounter === 2) {
-                            setTimeout(() => {
-                                this.$emit('backToHomePage', 'בחירת מיקום');
-                            }, 2000);
+                            this.correctCounter++;
+
+                            if (this.correctCounter === 2) {
+                                setTimeout(() => {
+                                    this.$emit('backToHomePage', 'בחירת מיקום');
+                                }, 2000);
+                            }
                         }
-                    }
                 }
             }
 
@@ -333,7 +351,7 @@
     -moz-box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
     box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
     height: 18vh;
-    cursor: pointer;
+    pointer-events: none;
     width: 9vw;
     margin: 4vh 3vw 2vh 3vw;
 }
@@ -343,7 +361,7 @@
     -moz-box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
     box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
     height: 18vh;
-    cursor: pointer;
+    pointer-events: none;
     width: 9vw;
     margin: 4vh 3vw 2vh 3vw;
 }

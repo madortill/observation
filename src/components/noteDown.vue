@@ -88,8 +88,11 @@ import ConnectTwo from './connectTwo.vue'
     },
     methods: {
         checkHowPractice() {
-            for (let i = 0; i < 4; i++) {
-                console.log(document.getElementById(i));
+            for (let i = 0; i < this.howQuestion.length; i++) {
+                console.log(i)
+                for (let j = 0; j < this.howQuestion[i]["options"]; j++) {
+                    console.log(j)
+                }
             }
         },
         checkWhenPractice(event) {
@@ -220,7 +223,7 @@ import ConnectTwo from './connectTwo.vue'
                                     {{ question.title }}
                                 </div>
                                 <div v-for="(options, id) in question.options" :key="id" class="option-howPractice">
-                                    <input type="radio" class="radioButton" :value="options" :name="options.opt" :id="options.id" v-model="question.checked">
+                                    <input type="radio" class="radioButton" :name="question" :id="options.id" :value="options.opt">
                                     <label>{{ options.opt }}</label>
                                 </div>
                             </div>
