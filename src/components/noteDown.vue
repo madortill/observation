@@ -1,17 +1,17 @@
 <script>
 import ConnectTwo from './connectTwo.vue'
+
   export default {
     props: ["chapter", "colorCode"],
     data() {
       return {
         showBackButton: false,
-        checkIcons: '',
         showNextButton: false,
         showPart: 0,
         changeAni: false,
         correctCounter: 0,
         messageForButton: 'בדיקה',
-        practiceCount: 1,
+        practiceCount: 2,
         select1: undefined,
         select2: undefined,
         select3: undefined,
@@ -50,27 +50,31 @@ import ConnectTwo from './connectTwo.vue'
                 title: "בצורה אובייקטבית",
                 options: [{
                     opt: '"לדעתי הדרך בה המגיב הייתה שגויה."',
-                    id: 0
+                    id: 0,
+                    clickedCorrect: ''
                 }, 
                 {
                     opt: '"המדריך הגיב באופן פוגעני והחיילת יצאה בוכה מהשיעור."',
-                    id: 1
+                    id: 1,
+                    clickedCorrect: ''
                 } ],
                 correct: '"המדריך הגיב באופן פוגעני והחיילת יצאה בוכה מהשיעור."',
-                checked: ''
+                checked: '',
             },
             {
                 title: "בצורה מפורטת",
                 options: [{
                     opt: '"המדריך עשה סיכום שיעור לא טוב."',
-                    id: 2
+                    id: 2,
+                    clickedCorrect: ''
                 },
                 {
                     opt: '"סיכום השיעור היה קצר (3 דקות במקום 10), המדריך לא עבר על התכנים שלימד ולא וידא הבנה."',
-                    id: 3
+                    id: 3,
+                    clickedCorrect: ''
                 } ],
                 correct: '"סיכום השיעור היה קצר (3 דקות במקום 10), המדריך לא עבר על התכנים שלימד ולא וידא הבנה."',
-                checked: ''
+                checked: '',
             }
         ],
         connectArr: {
@@ -87,11 +91,31 @@ import ConnectTwo from './connectTwo.vue'
      ConnectTwo
     },
     methods: {
+        clickedOnOption(event) {
+            for (let i = 0; i < this.howQuestion.length; i++) {
+                if (event.currentTarget.id === this.howQuestion[i].title) {
+                    this.howQuestion[i].checked = event.currentTarget.innerText;
+
+                    for (let j = 0; j < this.howQuestion[i]["options"].length; j++) {
+                        this.howQuestion[i]["options"][j]["clickedCorrect"] = '';
+                        if (this.howQuestion[i]["options"][j]["opt"] === event.currentTarget.innerText) {
+                            this.howQuestion[i]["options"][j]["clickedCorrect"] = 'checked';
+                        }
+                    }
+                }
+            }
+        },
         checkHowPractice() {
             for (let i = 0; i < this.howQuestion.length; i++) {
-                console.log(i)
-                for (let j = 0; j < this.howQuestion[i]["options"]; j++) {
-                    console.log(j)
+                for (let j = 0; j < this.howQuestion[i]["options"].length; j++) {
+                    if (this.howQuestion[i]["options"][j]["opt"] === this.howQuestion[i].checked) {
+                        if (this.howQuestion[i].checked === this.howQuestion[i].correct) {
+                            this.howQuestion[i]["options"][j]["clickedCorrect"] = 'correctBox';
+                        } else {
+                            this.howQuestion[i]["options"][j]["clickedCorrect"] = 'incorrectBox';
+                        }
+                    }
+
                 }
             }
         },
@@ -186,14 +210,14 @@ import ConnectTwo from './connectTwo.vue'
             <div class="basicTitle">תרגול</div>
             <div class="test-page">
                 <div class="everythinCont">
-                    <!-- <div class="whatWriting" v-show="practiceCount === 0">
+                    <div class="whatWriting" v-show="practiceCount === 0">
                         <div class="title-practice">
                             מה נרשום? 
                         </div>
                         <div class="connectTwo">
                             <ConnectTwo @change-practice="changePractice" :ques="connectArr"/>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="whenWriting" v-show="practiceCount === 1">
                         <div class="title-practice">
                             מתי נרשום? 
@@ -222,9 +246,10 @@ import ConnectTwo from './connectTwo.vue'
                                 <div class="question-howPractice">
                                     {{ question.title }}
                                 </div>
-                                <div v-for="(options, id) in question.options" :key="id" class="option-howPractice">
-                                    <input type="radio" class="radioButton" :name="question" :id="options.id" :value="options.opt">
-                                    <label>{{ options.opt }}</label>
+                                <div class="optionsContainer">
+                                    <div v-for="(options, id) in question.options" :key="id" :id="question.title" class="option-howPractice" @click="clickedOnOption" :class="options.clickedCorrect">
+                                        {{ options.opt }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -318,7 +343,7 @@ select:disabled {
 }
 
 .questionFilling {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     width: 15vw;
     border-style: solid;
     border-color: black;
@@ -424,6 +449,24 @@ select:disabled {
     pointer-events: none;
 }
 
+.checked {
+    background-color: #8e8e8e;
+}
+
+.correctBox {
+    background-color: rgb(27, 150, 29);
+    -webkit-box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
+    -moz-box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
+    box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
+}
+
+.incorrectBox {
+    background-color: rgb(175, 15, 15);
+    -webkit-box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
+    -moz-box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
+    box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
+}
+
 .message {
     width: 23vw;
     height: 10vh;
@@ -470,8 +513,27 @@ input[type=checkbox] {
 }
 
 .option-howPractice {
-    font-size: 1.2rem;
     cursor: pointer;
+    font-size: 1.3rem;
+    width: 10vw;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.2vh;
+    margin: 1vh;
+    border-radius: 2vh;
+    padding: 2.5vh 1.5vw;
+    text-align: center;
+}
+
+.option-howPractice:hover {
+    background-color: #d0d0d090;
+}
+
+.optionsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 35vw;
 }
 
 .answers {
