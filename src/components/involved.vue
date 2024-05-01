@@ -72,18 +72,18 @@
           this.sideNote = 'תשובה נכונה. כל הכבוד!';
 
           setTimeout(() => {
-          this.questionCounter++;
-          this.chosen = '';
-          this.answered = false;
+            this.questionCounter++;
+            this.chosen = '';
+            this.answered = false;
 
-          setTimeout(() => {
-            this.isDisabled = 'abled';
-          }, 1000);
+            setTimeout(() => {
+              this.isDisabled = 'abled';
+            },1000)
 
-          if (this.questionCounter === 3) {
-            this.$emit('backToHomePage', 'התערבות');
-          }
-        }, 2000);
+            if (this.questionCounter === 3) {
+              this.$emit('backToHomePage', 'התערבות');
+            }
+          }, 2000);
 
         } else {
           this.chosen = `false${key}`;
@@ -96,7 +96,7 @@
 
             setTimeout(() => {
               this.isDisabled = 'abled';
-            }, 1000);
+            },1000)
 
             if (this.questionCounter === 3) {
               this.$emit('backToHomePage', 'התערבות');
@@ -154,7 +154,7 @@
           <div class="explain" v-show="answered" v-html="sideNote"></div>
           <div class="answerCont">
             <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect', isDisabled]" @click="checkAnswer(1)">התערבות עקיפה</div>
-            <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect']" @click="checkAnswer(2)">התערבות ישירה</div>
+            <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect' , isDisabled]" @click="checkAnswer(2)">התערבות ישירה</div>
           </div>
         </div>
         <div class="buttonCont">

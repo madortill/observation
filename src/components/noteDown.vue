@@ -8,6 +8,7 @@ import ConnectTwo from './connectTwo.vue'
         showBackButton: false,
         showNextButton: false,
         showPart: 0,
+        finishedLevel: false,
         changeAni: false,
         correctCounter: 0,
         messageForButton: 'בדיקה',
@@ -65,12 +66,12 @@ import ConnectTwo from './connectTwo.vue'
                 title: "בצורה מפורטת",
                 options: [{
                     opt: '"המדריך עשה סיכום שיעור לא טוב."',
-                    id: 2,
+                    id: 0,
                     clickedCorrect: ''
                 },
                 {
                     opt: '"סיכום השיעור היה קצר (3 דקות במקום 10), המדריך לא עבר על התכנים שלימד ולא וידא הבנה."',
-                    id: 3,
+                    id: 1,
                     clickedCorrect: ''
                 } ],
                 correct: '"סיכום השיעור היה קצר (3 דקות במקום 10), המדריך לא עבר על התכנים שלימד ולא וידא הבנה."',
@@ -106,6 +107,7 @@ import ConnectTwo from './connectTwo.vue'
             }
         },
         checkHowPractice() {
+            this.messageForButton = 'ממשיכים';
             for (let i = 0; i < this.howQuestion.length; i++) {
                 for (let j = 0; j < this.howQuestion[i]["options"].length; j++) {
                     if (this.howQuestion[i]["options"][j]["opt"] === this.howQuestion[i].checked) {
@@ -114,8 +116,9 @@ import ConnectTwo from './connectTwo.vue'
                         } else {
                             this.howQuestion[i]["options"][j]["clickedCorrect"] = 'incorrectBox';
                         }
+                    } else {
+                        this.howQuestion[i]["options"][j]["clickedCorrect"] = 'disabled';
                     }
-
                 }
             }
         },
@@ -136,6 +139,13 @@ import ConnectTwo from './connectTwo.vue'
                 }, 1200)
             }
         },
+        checkingFunction() {
+            if (this.messageForButton === 'בדיקה') {
+                this.checkHowPractice();
+            } else {
+                this.finished();
+            }
+        },
         changePractice() {
             this.practiceCount++;
         },
@@ -145,11 +155,9 @@ import ConnectTwo from './connectTwo.vue'
             if (this.showPart === 1) {
                 this.showNextButton = false;
                 this.showBackButton = true;
+            } else if (this.showPart === 2) {
+                this.showBackButton = false;
             }
-        },
-        toPractice() {
-            this.showPart = 2; 
-            this.showBackButton = false;
         },
         prevPart() {
             this.showPart--;
@@ -158,6 +166,13 @@ import ConnectTwo from './connectTwo.vue'
                 this.showNextButton = true;
                 this.showBackButton = false;
             }
+        },
+        finished() {
+            this.finishedLevel = true;
+
+            setTimeout(() => {
+                this.$emit('backToHomePage', 'רישום ותיעוד');
+            }, 1200);
         }
     },
     mounted() {
@@ -203,7 +218,7 @@ import ConnectTwo from './connectTwo.vue'
                         באופן אובייקטיבי, בצורה מפורטת
                     </div>
                 </div>
-                <button class="toPractice" type="button" @click="toPractice">לתרגול</button>
+                <button class="toPractice" type="button" @click="nextPart">לתרגול</button>
             </div>
         </div>
         <div class="thirdPart" v-else>
@@ -234,7 +249,7 @@ import ConnectTwo from './connectTwo.vue'
                             </div>
                         </div>
                     </div>
-                    <div class="howWriting" v-show="practiceCount === 2">
+                    <div class="howWriting" v-show="practiceCount === 2 ">
                         <div class="title-practice">
                             איך נרשום? 
                         </div>
@@ -255,7 +270,8 @@ import ConnectTwo from './connectTwo.vue'
                         </div>
                     </div>
                 </div>
-                <button type="button" v-show="practiceCount === 2" @click="checkHowPractice" class="buttons">{{ messageForButton }}</button>
+                <div class="message" v-show="finishedLevel">כל הכבוד!<img src="../assets/muscle.png" class="muscle" /></div>
+                <button type="button" v-show="practiceCount === 2" @click="checkingFunction" class="buttons">{{ messageForButton }}</button>
             </div>
         </div>
         <div class="buttonCont">
@@ -458,6 +474,7 @@ select:disabled {
     -webkit-box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
     -moz-box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
     box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
+    pointer-events: none;
 }
 
 .incorrectBox {
@@ -465,6 +482,7 @@ select:disabled {
     -webkit-box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
     -moz-box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
     box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
+    pointer-events: none;
 }
 
 .message {
@@ -477,9 +495,15 @@ select:disabled {
     top: 50%;
     direction: rtl;
     padding: 3vw;
-    font-size: 1.7rem;
+    font-size: 2.7rem;
     text-align: center;
     left: 50%;
+    z-index: 2;
+}
+
+.muscle {
+    width: 2.5vw;
+    margin-right: 0.5vw;
 }
 
 input[type=checkbox] {

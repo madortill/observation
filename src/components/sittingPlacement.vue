@@ -156,6 +156,11 @@
             }
 
         }
+    },
+    mounted() {
+        setTimeout(() => {
+            this.changeAni = true;
+        }, 1250);
     }
   }
 </script>
@@ -164,7 +169,7 @@
     <div class="placement">
         <div class="titleCircle" v-show="subjectCounter < 3" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter < 3" class="firstPart">
-            <div class="explanation scale">
+            <div :class="changeAni ? 'explanation float' : 'explanation scale'">
                 <div class="basicTitle" v-if="subjectCounter < 3">
                     {{ subjectsInfo[subjectCounter]["subSubjectTitle"] }}
                 </div>
@@ -233,6 +238,10 @@
     z-index: 2;
     cursor: pointer;
  }
+
+.float {
+    animation: floatAnimation 3s ease-in-out infinite;
+}
 
 .message {
     width: 23vw;
