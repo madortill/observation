@@ -17,7 +17,7 @@
                 <div class="timer">00:{{ countDown }}</div>
                 <div class="game-points">Score: {{ circleClicked }}</div>
             </div>
-            <div id="circle" v-show="circleVisible" v-for="(option, index) in optionsPractice" @click="disappear" :key="index" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${top}vh`, left: `${left}vw`}]">{{ option.option }}</div>
+            <div id="circle" v-show="circleVisible" v-for="(option, index) in section0" @click="disappear" :key="index" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${Math.floor(Math.random() * (70 - 2) + 2)}vh`, left: `${Math.floor(Math.random() * (70 - 2) + 2)}vw`}]">{{ option.option }}</div>
         </div>
         <div class="buttonCont">
             <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -39,29 +39,9 @@
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
             subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור בליקויים בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהניקוד הכולל.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
             circleVisible: false,
-            optionsPractice: [
+            section0: [
                 {
                     option: "מיקוד בדבר המפקד",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בביצוע מורכב",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בתגובות החניכים",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בכלל הדברים שקורים",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בביצועים חוזרים",
                     isCorrect: true,
                     clicked: false
                 },
@@ -71,55 +51,17 @@
                     clicked: false
                 },
                 {
-                    option: "מיקוד בדיגום של המפקד",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בעזרי הדרכה",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בסביבת ההדרכה",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בבקיאות המדריך",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
                     option: "עיסוק ברעשי רקע",
                     isCorrect: false,
                     clicked: false
                 },
                 {
-                    option: "מיקוד בביצוע פשוט",
+                    option: "עיסוק בבקיאות החניכים",
                     isCorrect: false,
                     clicked: false
                 },
-                {
-                    option: "עיסוק בהפרעות",
-                    isCorrect: false,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בביצוע ספציפי",
-                    isCorrect: false,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בדיבורי החניכים",
-                    isCorrect: false,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בביצועים חד פעמיים",
-                    isCorrect: false,
-                    clicked: false
-                },
+            ],
+            section1: [
                 {
                     option: "עיסוק בדיגום החניכים",
                     isCorrect: false,
@@ -136,7 +78,74 @@
                     clicked: false
                 },
                 {
-                    option: "עיסוק בבקיאות החניכים",
+                    option: "מיקוד בבקיאות המדריך",
+                    isCorrect: true,
+                    clicked: false
+                },
+            ], 
+            section2: [
+                {
+                    option: "מיקוד בביצוע מורכב",
+                    isCorrect: true,
+                    clicked: false
+                },
+                {
+                    option: "עיסוק בתגובות החניכים",
+                    isCorrect: true,
+                    clicked: false
+                },
+                {
+                    option: "מיקוד בביצועים חד פעמיים",
+                    isCorrect: false,
+                    clicked: false
+                },
+                {
+                    option: "עיסוק בדיבורי החניכים",
+                    isCorrect: false,
+                    clicked: false
+                },
+            ],
+            section3: [
+                {
+                    option: "עיסוק בכלל הדברים שקורים",
+                    isCorrect: true,
+                    clicked: false
+                },
+                {
+                    option: "מיקוד בביצועים חוזרים",
+                    isCorrect: true,
+                    clicked: false
+                },
+
+                {
+                    option: "מיקוד בדיגום של המפקד",
+                    isCorrect: true,
+                    clicked: false
+                },
+                {
+                    option: "מיקוד בביצוע פשוט",
+                    isCorrect: false,
+                    clicked: false
+                },
+            ],
+            section4: [
+                {
+                    option: "מיקוד בעזרי הדרכה",
+                    isCorrect: true,
+                    clicked: false
+                },
+                {
+                    option: "עיסוק בסביבת ההדרכה",
+                    isCorrect: true,
+                    clicked: false
+                },
+                {
+                    option: "עיסוק בהפרעות",
+                    isCorrect: false,
+                    clicked: false
+                },
+                {
+                    option: "מיקוד בביצוע ספציפי",
                     isCorrect: false,
                     clicked: false
                 },
@@ -147,7 +156,7 @@
             subjectCounter: 0,
             totalTime: 0,
             changeAni: false,
-            countDown: 30,
+            countDown: 59,
             circleClicked: 0,
             top: 0,
             left: 0,
@@ -179,21 +188,22 @@
          prevSubject() {
              this.subjectCounter--;
 
-             if (this.subjectCounter === 0) {
+            if (this.subjectCounter === 0) {
                  this.showBackButton = false;
-             } else if (this.subjectCounter === 3) {
+            } else if (this.subjectCounter === 3) {
                 this.showBackButton = false;
             }
          },
         appeared() {
-            this.top = Math.floor(Math.random() * (70 - 2) + 2);
-            this.left = Math.floor(Math.random() * (70 - 2) + 2);
-
             this.changeColor+= 3;
             this.circleVisible = true;
 
-            this.disappearTimer = setTimeout(this.disappear, 3000);
+            this.disappearTimer = setTimeout(this.disappear, 6000);
         },
+        // choosePlacement() {
+        //     this.top = Math.floor(Math.random() * (70 - 2) + 2);
+        //     this.left = Math.floor(Math.random() * (70 - 2) + 2);
+        // },
         disappear(event) {
             let randomTime = Math.random() * (7 - 1) + 1;
             this.totalTime = randomTime * 1000;
@@ -214,7 +224,7 @@
         },
         countDownTimer () {
             if (this.countDown == 0o0) {
-                this.nextSubject();
+                // this.nextSubject();
             } else if (this.countDown > 0) {
                 this.timer = setTimeout(() => {
                     this.countDown -= 1
@@ -365,14 +375,14 @@
 }
 
 #circle {
-    width: 5.75rem;
-    height: 6rem;
+    width: 6.25rem;
+    height: 6.5rem;
     border-radius: 50%;
     text-align: center;
     color: #413f3f;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 550;
-    padding: 3.5%;
+    padding: 5.75rem;
     color: white;
     z-index: 2;
     display: block;

@@ -12,7 +12,7 @@ import ConnectTwo from './connectTwo.vue'
         changeAni: false,
         correctCounter: 0,
         messageForButton: 'בדיקה',
-        practiceCount: 2,
+        practiceCount: 0,
         select1: undefined,
         select2: undefined,
         select3: undefined,
