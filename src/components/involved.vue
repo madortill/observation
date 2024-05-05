@@ -211,7 +211,7 @@
   padding: 3.5%;
   position: absolute;
   top: 9vh;
-  right: 17vw;
+  right: 21vw;
   z-index: 2;
   cursor: pointer;
 }
@@ -224,11 +224,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20vh;
+  margin-top: 18vh;
   transform-origin: top right;
   background-color: rgba(255, 255, 255, 0.671);
   box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-  padding: 9.3vh 7vw;
+  padding: 7.5vh 7vw;
   border-radius: 2rem;
 }
 
@@ -345,11 +345,11 @@
 
 .flip-card {
   background-color: transparent;
-  width: 250px;
-  height: 525px;
+  width: 200px;
+  height: 520px;
   perspective: 1000px;
   flex: 0 0 calc(50% - 20px);
-  margin: 0px 150px 0px;
+  margin: 0px 115px 0px;
   box-sizing: border-box;
 }
 
@@ -368,8 +368,8 @@
 }
 
 .textBack {
-  font-size: 2rem;
-  padding: 0.75vh;
+  font-size: 1.9rem;
+  padding: 1vh;
 }
 
 .flip-card:hover .flip-card-front, .flip-card.start .flip-card-front{
@@ -438,6 +438,7 @@
 .buttonCont {
   width: 85vw;
   display: flex;
+  margin-top: 6vh;
   align-items: center;
   justify-content: space-between;
   flex-direction: row-reverse;

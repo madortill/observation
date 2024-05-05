@@ -141,13 +141,9 @@ import ConnectTwo from './connectTwo.vue'
         },
         checkingFunction() {
             if (this.showButton === true) {
-                this.finishedLevel = true;
-                setTimeout(() => {
                     this.messageForButton = 'בדיקה';
                     this.showButton = false;
-                    this.finishedLevel = false;
                     this.changePractice();
-                }, 1000)
             } else {
                 if (this.messageForButton === 'בדיקה') {
                     this.checkHowPractice();
