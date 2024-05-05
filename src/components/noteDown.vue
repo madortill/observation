@@ -472,7 +472,7 @@ select:disabled {
 }
 
 .checked {
-    background-color: #8e8e8e;
+    background-color: #c5c5c5;
 }
 
 .correctBox {

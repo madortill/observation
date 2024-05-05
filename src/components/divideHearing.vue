@@ -17,7 +17,7 @@
                 <div class="timer">00:{{ countDown }}</div>
                 <div class="game-points">Score: {{ circleClicked }}</div>
             </div>
-            <div id="circle" v-show="circleVisible" v-for="(option, index) in section0" @click="disappear" :key="index" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${Math.floor(Math.random() * (70 - 2) + 2)}vh`, left: `${Math.floor(Math.random() * (70 - 2) + 2)}vw`}]">{{ option.option }}</div>
+            <CircleGame :sections="sections" :cicleSectionCounter="cicleSectionCounter"/>
         </div>
         <div class="buttonCont">
             <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -32,137 +32,141 @@
 
 
  <script>
+ import CircleGame from './circleGame.vue';
+
  export default {
      props: ["chapter", "colorCode"],
      data() {
         return {
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
             subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור בליקויים בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהניקוד הכולל.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
-            circleVisible: false,
-            section0: [
-                {
-                    option: "מיקוד בדבר המפקד",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בשפת גוף של המפקד",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק ברעשי רקע",
-                    isCorrect: false,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בבקיאות החניכים",
-                    isCorrect: false,
-                    clicked: false
-                },
-            ],
-            section1: [
-                {
-                    option: "עיסוק בדיגום החניכים",
-                    isCorrect: false,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בכלי כתיבה של החניכים",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בכתב המדריך",
-                    isCorrect: false,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בבקיאות המדריך",
-                    isCorrect: true,
-                    clicked: false
-                },
-            ], 
-            section2: [
-                {
-                    option: "מיקוד בביצוע מורכב",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בתגובות החניכים",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בביצועים חד פעמיים",
-                    isCorrect: false,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בדיבורי החניכים",
-                    isCorrect: false,
-                    clicked: false
-                },
-            ],
-            section3: [
-                {
-                    option: "עיסוק בכלל הדברים שקורים",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בביצועים חוזרים",
-                    isCorrect: true,
-                    clicked: false
-                },
+            cicleSectionCounter: 0,
+            sections : [
+                [
+                    {
+                        option: "מיקוד בדבר המפקד",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "עיסוק בשפת גוף של המפקד",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "עיסוק ברעשי רקע",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                    {
+                        option: "עיסוק בבקיאות החניכים",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                ],
+                [
+                    {
+                        option: "עיסוק בדיגום החניכים",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                    {
+                        option: "מיקוד בכלי כתיבה של החניכים",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "מיקוד בכתב המדריך",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                    {
+                        option: "מיקוד בבקיאות המדריך",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                ], 
+                [
+                    {
+                        option: "מיקוד בביצוע מורכב",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "עיסוק בתגובות החניכים",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "מיקוד בביצועים חד פעמיים",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                    {
+                        option: "עיסוק בדיבורי החניכים",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                ],
+                [
+                    {
+                        option: "עיסוק בכלל הדברים שקורים",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "מיקוד בביצועים חוזרים",
+                        isCorrect: true,
+                        clicked: false
+                    },
 
-                {
-                    option: "מיקוד בדיגום של המפקד",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בביצוע פשוט",
-                    isCorrect: false,
-                    clicked: false
-                },
-            ],
-            section4: [
-                {
-                    option: "מיקוד בעזרי הדרכה",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בסביבת ההדרכה",
-                    isCorrect: true,
-                    clicked: false
-                },
-                {
-                    option: "עיסוק בהפרעות",
-                    isCorrect: false,
-                    clicked: false
-                },
-                {
-                    option: "מיקוד בביצוע ספציפי",
-                    isCorrect: false,
-                    clicked: false
-                },
+                    {
+                        option: "מיקוד בדיגום של המפקד",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "מיקוד בביצוע פשוט",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                ],
+                [
+                    {
+                        option: "מיקוד בעזרי הדרכה",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "עיסוק בסביבת ההדרכה",
+                        isCorrect: true,
+                        clicked: false
+                    },
+                    {
+                        option: "עיסוק בהפרעות",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                    {
+                        option: "מיקוד בביצוע ספציפי",
+                        isCorrect: false,
+                        clicked: false
+                    },
+                ],    
             ],
             showBackButton: false,
             showNextButton: false,
-            changeColor: 0, 
             subjectCounter: 0,
             totalTime: 0,
             changeAni: false,
             countDown: 59,
             circleClicked: 0,
-            top: 0,
-            left: 0,
             timer: null,
             disappearTimer: null
         };        
+    },
+    components: {
+        CircleGame
     },
     methods: {
          nextSubject() {
@@ -171,9 +175,7 @@
             if (this.subjectCounter === 2) {
                 this.showBackButton = false;
                 this.showNextButton = false;
-
                 this.countDownTimer();
-
             } else if (this.subjectCounter === 1) {
                 this.showBackButton = true;
             } else if (this.subjectCounter === 3) {
@@ -194,34 +196,6 @@
                 this.showBackButton = false;
             }
          },
-        appeared() {
-            this.changeColor+= 3;
-            this.circleVisible = true;
-
-            this.disappearTimer = setTimeout(this.disappear, 6000);
-        },
-        // choosePlacement() {
-        //     this.top = Math.floor(Math.random() * (70 - 2) + 2);
-        //     this.left = Math.floor(Math.random() * (70 - 2) + 2);
-        // },
-        disappear(event) {
-            let randomTime = Math.random() * (7 - 1) + 1;
-            this.totalTime = randomTime * 1000;
-
-            if (event !== undefined) {
-                this.circleClicked++;
-
-                if (this.circleClicked === 3) {
-                    setTimeout(this.nextSubject, 1000);
-                }
-            }
-
-            clearTimeout(this.disappearTimer);
-            this.disappearTimer = null;
-            this.circleVisible = false;
-
-            setTimeout(this.appeared, this.totalTime);
-        },
         countDownTimer () {
             if (this.countDown == 0o0) {
                 // this.nextSubject();
@@ -237,7 +211,7 @@
         }
     },
     mounted() {
-        setTimeout(this.appeared, 2000);
+        // setTimeout(this.appeared, 2000);
         setTimeout(() => {
             this.changeAni = true;
             this.showNextButton = true;
@@ -307,6 +281,7 @@
 
 .gameInfo {
     display: flex;
+    height: 10vh;
     flex-direction: row;
     position: absolute;
     font-size: 3rem;
@@ -374,25 +349,6 @@
     background-color: #426991;
 }
 
-#circle {
-    width: 6.25rem;
-    height: 6.5rem;
-    border-radius: 50%;
-    text-align: center;
-    color: #413f3f;
-    font-size: 2rem;
-    font-weight: 550;
-    padding: 5.75rem;
-    color: white;
-    z-index: 2;
-    display: block;
-    position: absolute;
-    cursor: pointer;
-    box-shadow: 0 5px 7px #0003;
-    animation: animationColors 2s ease-in-out;
-    animation-iteration-count: infinite;
-}
-
 .textPart {
     display: flex;
     flex-direction: column;
@@ -418,18 +374,6 @@
    100% {
        transform: scale(1);
    }
-}
- 
-@keyframes animationColors {
-    0% {
-        background-color: hsl(var(--hue),50%,75%);
-    } 
-    50% {
-        background-color: hsl(var(--hue),40%,40%);
-    }
-    100% {
-        background-color: hsl(var(--hue),50%,75%);
-    }
 }
 
 @-moz-keyframes floatAnimation {

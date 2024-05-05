@@ -142,16 +142,16 @@
                 if (Number(event.currentTarget.id) === this.sittingArr[i]["id"]) {
                     this.sittingArr[i].showAnswer = true;
 
-                        if (this.sittingArr[i]["answer"] === true) {
+                    if (this.sittingArr[i]["answer"] === true) {
 
-                            this.correctCounter++;
+                        this.correctCounter++;
 
-                            if (this.correctCounter === 2) {
-                                setTimeout(() => {
-                                    this.$emit('backToHomePage', 'בחירת מיקום');
-                                }, 2000);
-                            }
+                        if (this.correctCounter === 2) {
+                            setTimeout(() => {
+                                this.$emit('backToHomePage', 'בחירת מיקום');
+                            }, 2000);
                         }
+                    }
                 }
             }
 
