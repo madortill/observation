@@ -12,7 +12,8 @@ import ConnectTwo from './connectTwo.vue'
         changeAni: false,
         correctCounter: 0,
         messageForButton: 'בדיקה',
-        practiceCount: 0,
+        showButton: false,
+        practiceCount: 1,
         select1: undefined,
         select2: undefined,
         select3: undefined,
@@ -134,16 +135,25 @@ import ConnectTwo from './connectTwo.vue'
             }
 
             if (this.correctCounter === 4) {
-                setTimeout(() => {
-                    this.changePractice();
-                }, 1200)
+                this.showButton = true;
+                this.messageForButton = 'ממשיכים';
             }
         },
         checkingFunction() {
-            if (this.messageForButton === 'בדיקה') {
-                this.checkHowPractice();
+            if (this.showButton === true) {
+                this.finishedLevel = true;
+                setTimeout(() => {
+                    this.messageForButton = 'בדיקה';
+                    this.showButton = false;
+                    this.finishedLevel = false;
+                    this.changePractice();
+                }, 1000)
             } else {
-                this.finished();
+                if (this.messageForButton === 'בדיקה') {
+                    this.checkHowPractice();
+                } else {
+                    this.finished();
+                }
             }
         },
         changePractice() {
@@ -271,7 +281,7 @@ import ConnectTwo from './connectTwo.vue'
                     </div>
                 </div>
                 <div class="message" v-show="finishedLevel">כל הכבוד!<img src="../assets/muscle.png" class="muscle" /></div>
-                <button type="button" v-show="practiceCount === 2" @click="checkingFunction" class="buttons">{{ messageForButton }}</button>
+                <button type="button" v-show="practiceCount === 2 || showButton === true" @click="checkingFunction" class="buttons">{{ messageForButton }}</button>
             </div>
         </div>
         <div class="buttonCont">
