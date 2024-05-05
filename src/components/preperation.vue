@@ -53,75 +53,12 @@ export default {
     props: ["chapter"],
     data() {
         return {
-            // textCounter: 0,
             showNextButton: true,
             showBackButton: true,
-        //     dropOptionArray: [{
-        //         optionName: "תיאום זמן ומקום",
-        //         correct: "check",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "הכנת אמצעים",
-        //         correct: "check",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "איסוף רקע ומידע חסר",
-        //         correct: "check",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "חזרה על קרטריונים",
-        //         correct: "check",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "כללים לתדריך במהלך התצפית",
-        //         correct: "cancel",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "אוכל",
-        //         correct: "cancel",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "קפה",
-        //         correct: "cancel",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "תופעות למשוב",
-        //         correct: "cancel",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "כללים להתמודדויות עם התנגדויות",
-        //         correct: "cancel",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        //     {
-        //         optionName: "הכנת ציון מראש",
-        //         correct: "cancel",
-        //         chosenOption: false,
-        //         setDraggable: true
-        //     },
-        // ], 
-        lineText : 0,
-        preperationItemList: ["שבו קורת התצפית", "דף תצפית, עט, כל פריט נוסף שנדרש.", "כדי להגיע מוכנים להגיע ברמה הגבוהה ביותר.", "לחזור על קריטריונים של דף התצפית."],
-        preperationTitleList: ["תיאום הזמן והמקום", "הכנת אמצעים", "איסוף רקע ומידע חסר", "חזרה על קריטריונים"],
-        correctCounter: 0
-        // startAnimation: false
+            lineText : 0,
+            preperationItemList: ["שבו קורת התצפית", "דף תצפית, עט, כל פריט נוסף שנדרש.", "כדי להגיע מוכנים להגיע ברמה הגבוהה ביותר.", "לחזור על קריטריונים של דף התצפית."],
+            preperationTitleList: ["תיאום הזמן והמקום", "הכנת אמצעים", "איסוף רקע ומידע חסר", "חזרה על קריטריונים"],
+            correctCounter: 0
     };        
     },
     mounted() {
@@ -129,11 +66,6 @@ export default {
         this.textAni();
     },
     methods: {
-        // initialize() {
-        //     setTimeout(() => {
-        //         this.startAnimation = true;
-        //     }, 1000);
-        // },
         textAni() {
             setInterval(() => {
                 if (this.lineText < 4) {
@@ -145,77 +77,11 @@ export default {
         prevSubject() {
             this.$emit('prevCurrentScreen');
         },
-        // onDragging(ev){
-        //     ev.dataTransfer.setData("text",ev.target.textContent.slice(0, -1));
-        //     ev.dataTransfer.setData("id",ev.target.id);
-        
-        // },
-        // allowDrop(ev) {
-        //     ev.preventDefault();
-        // },
-        // drag(ev) {
-        //     ev.dataTransfer.setData("text",ev.target.textContent.slice(0, -1));
-        //     ev.dataTransfer.setData("id",ev.target.id);
-        // },
-        // drop(ev) {
-        //     ev.preventDefault();
-        //     const data = ev.dataTransfer.getData("id");
-        //     ev.currentTarget.appendChild(document.getElementById(data));
-        // },
-        // checkDrop(ev) {
-        //     const dragtext = ev.dataTransfer.getData("text");
-        //     const ID = ev.dataTransfer.getData("id");
-
-        //     for (let i = 0; i < this.dropOptionArray.length; i++) {
-        //         if (dragtext === this.dropOptionArray[i]["optionName"]) {
-
-        //             if (this.dropOptionArray[i]["correct"] === "check") {
-        //                 this.dropOptionArray[i]["chosenOption"] = true;
-        //                 this.dropOptionArray[i]["setDraggable"] = false;
-        //                 this.correctCounter++;
-        //                 break;
-        //             } else {
-        //                 this.dropOptionArray[i]["chosenOption"] = true;
-        //                 setTimeout(() => {
-        //                     this.dropOptionArray[i]["chosenOption"] = false; 
-        //                     this.$el.querySelector("#draggable-container").appendChild(this.$el.querySelector(`#${ID}`))
-        //                 }, 1200)
-        //             }
-        //         }
-        //     }
-        // },
         nextText() {
-            // this.textCounter++;
-
-            // if (this.textCounter === 1) {
-            //     this.showBackButton = true;
-            // } else if (this.textCounter === 2) {
-            //     this.showNextButton = false;
-            //     this.showBackButton = false;
-            // }
-
-            // if (this.textCounter === 1) {
-                this.$emit('changeCurrentScreen');
-            // }
-
-            // if (this.correctCounter === 1) {
-            //     this.$emit('changeCurrentScreen');
-            // }
+            this.$emit('changeCurrentScreen');
         },
 
     },
-    // computed: {
-    //     shuffledArr() {
-    //         let returnArray = this.dropOptionArray.slice(); // שכפול מערך התשובות הנכונות
-    //         let tmp = this.dropOptionArray.slice();
-    //         for (let i = 0; i < returnArray.length; i++) {
-    //             let index = Math.floor(Math.random() * tmp.length);
-    //             returnArray[i]= tmp[index];
-    //             tmp = tmp.slice(0, index).concat(tmp.slice(index + 1)); // removes tmp[index]
-    //         }
-    //         return returnArray;
-    //     }
-    // }
 }
 </script>
 

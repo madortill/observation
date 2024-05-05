@@ -14,7 +14,7 @@
                 {{ subSubjectTitle[subjectCounter] }}
             </div>
             <div class="gameInfo">
-                <div class="timer">00:{{ countDown }}</div>
+                <div class="timer" :style="warning ? 'color: red' : 'color: black'">00:{{ countDown }}</div>
                 <div class="game-points">Score: {{ circleClicked }}</div>
             </div>
             <CircleGame :sections="sections" :cicleSectionCounter="cicleSectionCounter"/>
@@ -41,6 +41,7 @@
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
             subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור בליקויים בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהניקוד הכולל.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
             cicleSectionCounter: 0,
+            warning: false,
             sections : [
                 [
                     {
@@ -204,6 +205,11 @@
                     this.countDown -= 1
                     if (this.countDown < 10) {
                         this.countDown = `0${this.countDown}`;
+                        if (this.countDown % 2 === 0) {
+                            this.warning = true;
+                        } else {
+                            this.warning = false;
+                        }
                     }
                     this.countDownTimer()
                 }, 1000)
@@ -211,7 +217,6 @@
         }
     },
     mounted() {
-        // setTimeout(this.appeared, 2000);
         setTimeout(() => {
             this.changeAni = true;
             this.showNextButton = true;

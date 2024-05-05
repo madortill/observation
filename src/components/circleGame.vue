@@ -1,6 +1,6 @@
 <template>
     <div v-for="(section, id) in sections" :key="id" v-show="cicleSectionCounter === id">
-        <div v-for="(option, index) in section" :key="index" id="circle" @click="disappear" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, `top: ${Math.floor(Math.random() * (70 - 2) + 2)}vh`, `left: ${Math.floor(Math.random() * (70 - 2) + 2)}vw`]">
+        <div v-for="(option, index) in section" :key="index" id="circle" @click="disappear" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, `top: ${Math.floor(Math.random() * (60 - 2) + 2) * 1.5}vh`, `left: ${Math.floor(Math.random() * (60 - 2) + 2) * 1.5}vw`]">
             {{ option.option }}
         </div>
         <!-- <div id="circle" v-show="circleVisible" v-for="(option, index) in section" @click="disappear" :key="index" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${Math.floor(Math.random() * (70 - 2) + 2)}vh`, left: `${Math.floor(Math.random() * (70 - 2) + 2)}vw`}]">{{ option.option }}</div> -->
@@ -13,9 +13,7 @@ export default {
     data() {
         return {
             circleVisible: false,
-            changeColor: 0, 
-            top: 0,
-            left: 0,
+            changeColor: 0,
         }
     },
     methods: {
