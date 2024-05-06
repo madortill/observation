@@ -17,7 +17,7 @@
                 <div class="timer" :style="warning ? 'color: red' : 'color: black'">00:{{ countDown }}</div>
                 <div class="game-points">Score: {{ circleClicked }}</div>
             </div>
-            <CircleGame :sections="sections" :cicleSectionCounter="cicleSectionCounter"/>
+            <CircleGame/>
         </div>
         <div class="buttonCont">
             <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -40,121 +40,7 @@
         return {
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
             subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור בליקויים בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהניקוד הכולל.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
-            cicleSectionCounter: 0,
             warning: false,
-            sections : [
-                [
-                    {
-                        option: "מיקוד בדבר המפקד",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "עיסוק בשפת גוף של המפקד",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "עיסוק ברעשי רקע",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                    {
-                        option: "עיסוק בבקיאות החניכים",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                ],
-                [
-                    {
-                        option: "עיסוק בדיגום החניכים",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                    {
-                        option: "מיקוד בכלי כתיבה של החניכים",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "מיקוד בכתב המדריך",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                    {
-                        option: "מיקוד בבקיאות המדריך",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                ], 
-                [
-                    {
-                        option: "מיקוד בביצוע מורכב",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "עיסוק בתגובות החניכים",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "מיקוד בביצועים חד פעמיים",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                    {
-                        option: "עיסוק בדיבורי החניכים",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                ],
-                [
-                    {
-                        option: "עיסוק בכלל הדברים שקורים",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "מיקוד בביצועים חוזרים",
-                        isCorrect: true,
-                        clicked: false
-                    },
-
-                    {
-                        option: "מיקוד בדיגום של המפקד",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "מיקוד בביצוע פשוט",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                ],
-                [
-                    {
-                        option: "מיקוד בעזרי הדרכה",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "עיסוק בסביבת ההדרכה",
-                        isCorrect: true,
-                        clicked: false
-                    },
-                    {
-                        option: "עיסוק בהפרעות",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                    {
-                        option: "מיקוד בביצוע ספציפי",
-                        isCorrect: false,
-                        clicked: false
-                    },
-                ],    
-            ],
             showBackButton: false,
             showNextButton: false,
             subjectCounter: 0,
