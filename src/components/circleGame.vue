@@ -1,11 +1,10 @@
 <template>
     <div v-for="(section, id) in sections" :key="id" class="circle-container" v-show="circleSectionCounter === id">
-        <div v-for="(option, index) in section" 
-        :key="index" class="circle colorAni" 
-        :id="option.id" 
-        :style="`--hue: ${(changeColor) * 15 + 130}deg`"
-        @click="disappear" >
-            {{ option.option }}
+        <div v-for="(option, index) in section" :key="index">
+            <img class="icon" v-show="option.clicked" :src="option.isCorrect ? 'src/assets/check.png' : 'src/assets/cancel.png'" />
+            <div class="circle colorAni" :id="option.id" :style="`--hue: ${(changeColor) * 15 + 130}deg`" @click="disappear" >
+                {{ option.option }}
+            </div>
         </div>
     </div>
 </template>
@@ -157,6 +156,7 @@ export default {
         appeared() {    
             for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
                 if (!this.sections[this.circleSectionCounter][i]["clicked"]) {
+                    document.getElementById(`${this.sections[this.circleSectionCounter][i]["id"]}`).classList.remove("disappearAni");
                     document.getElementById(`${this.sections[this.circleSectionCounter][i]["id"]}`).classList.add("appearAni");
                 }
             }
@@ -170,15 +170,19 @@ export default {
                 }
 
                 this.appeared();
-            }, 7000);
+            }, 7500);
         },
         disappear(event) {
             if (event !== undefined) {
                 for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
                     
                     if (this.sections[this.circleSectionCounter][i]["id"] === Number(event.currentTarget.id)) {
-                        event.currentTarget.classList.remove("appearAni");
-                        event.currentTarget.classList.add("disappearAni");
+                            this.sections[this.circleSectionCounter][i]["clicked"] = true;
+                            event.currentTarget.classList.remove("appearAni");
+                            event.currentTarget.classList.add("disappearAni");
+                            setTimeout(() => {
+                                this.sections[this.circleSectionCounter][i]["clicked"] = false;
+                            }, 500)
                         if (this.sections[this.circleSectionCounter][i]["isCorrect"]) {
                             this.$emit('setInScore', true);
                         } else {
@@ -190,36 +194,6 @@ export default {
 
             clearTimeout(this.disappearTimer);
         }
-        // appeared() {
-        //     for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
-        //         document.getElementById(this.sections[this.circleSectionCounter][i]["id"]).classList.add("appearAni");
-        //     }
-
-        //     this.disappearTimer = setTimeout(this.disappear, 6000);
-        // },
-        // disappear(event) {
-        //     if (event !== undefined) {
-
-        //         for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
-        //             event.currentTarget.classList.add("disappearAni");
-                    
-        //             if (this.sections[this.circleSectionCounter][i]["id"] === Number(event.currentTarget.id)) {
-        //                 if (this.sections[this.circleSectionCounter][i]["isCorrect"]) {
-        //                     console.log("yessssss");
-        //                     this.$emit('setInScore', true);
-        //                 } else {
-        //                     console.log("norrrrrrr");
-        //                     this.$emit('setInScore', false);
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        //     // this.circleVisible = false;
-        //     clearTimeout(this.disappearTimer);
-
-        //     // setTimeout(this.appeared, 2000);
-        // }
     },
     mounted() {
         this.appeared();
@@ -266,6 +240,14 @@ export default {
     background-color: hsl(var(--hue),50%,75%);
 }
 
+.icon {
+    width: 3vw;
+}
+
+/* .upAni {
+    animation: up 2s linear infinite, animationColors 2s ease-in-out;
+} */
+
 @keyframes animationColors {
     0% {
         background-color: hsl(var(--hue),50%,75%);
@@ -299,6 +281,18 @@ export default {
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes up {
+    0% {
+        margin-bottom: 0vh;
+    }
+    50% {
+        margin-bottom: 10vh;
+    }
+    100% {
+        margin-bottom: 0vh;
     }
 }
 </style>

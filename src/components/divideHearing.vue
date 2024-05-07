@@ -20,6 +20,7 @@
             <div class="circleCont">
                 <CircleGame @setInScore="setInScore" />
             </div>
+            <div class="message" v-show="showEndMessage">כל הכבוד!<img src="../assets/muscle.png" class="muscle" /></div>
         </div>
         <div class="buttonCont">
             <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -41,11 +42,12 @@
      data() {
         return {
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
-            subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור בליקויים בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהניקוד הכולל.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
+            subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור במאפיינים של חלוקת קשב בצורה הנכונה בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהניקוד הכולל. על מנת להצליח עליכם לזכות ב1200 נקודות.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
             warning: false,
             showBackButton: false,
             showNextButton: false,
             subjectCounter: 0,
+            showEndMessage: false,
             totalTime: 0,
             changeAni: false,
             countDown: 59,
@@ -86,7 +88,7 @@
          },
         countDownTimer () {
             if (this.countDown == 0o0) {
-                // this.nextSubject();
+                this.endingGame();
             } else if (this.countDown > 0) {
                 this.timer = setTimeout(() => {
                     this.countDown -= 1
@@ -108,6 +110,15 @@
             } else {
                 this.score -= 100;
             }
+        },
+        endingGame() {
+            this.showEndMessage = true;
+            if (this.score <= 1200) {
+                
+            }
+            setTimeout(() => {
+                this.nextSubject();
+            }, 1200)
         }
     },
     mounted() {
@@ -128,6 +139,22 @@
     height: 100vh;
     direction: rtl;
     overflow: hidden;
+ }
+
+ .message {
+    width: 23vw;
+    height: 10vh;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5); 
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    direction: rtl;
+    padding: 3vw;
+    font-size: 2.7rem;
+    text-align: center;
+    left: 50%;
+    z-index: 2;
  }
 
  .gameCont {
