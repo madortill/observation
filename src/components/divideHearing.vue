@@ -1,6 +1,6 @@
 <template>
     <div class="hearingContainer">
-        <div class="titleCircle" v-show="subjectCounter !== 2" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div class="titleCircle" v-show="subjectCounter !== 2 && subjectCounter !== 1" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter !== 2" class="textPart">
             <div :class="[changeAni ? 'float': 'scale', subjectCounter < 2 ? 'instructions' : 'explanation']">
                 <div class="basicTitle">
@@ -15,9 +15,11 @@
             </div>
             <div class="gameInfo">
                 <div class="timer" :style="warning ? 'color: red' : 'color: black'">00:{{ countDown }}</div>
-                <div class="game-points">Score: {{ circleClicked }}</div>
+                <div class="game-points">Score: {{ score }}</div>
             </div>
-            <CircleGame/>
+            <div class="circleCont">
+                <CircleGame @setInScore="setInScore" />
+            </div>
         </div>
         <div class="buttonCont">
             <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -47,9 +49,8 @@
             totalTime: 0,
             changeAni: false,
             countDown: 59,
-            circleClicked: 0,
+            score: 0,
             timer: null,
-            disappearTimer: null
         };        
     },
     components: {
@@ -100,6 +101,13 @@
                     this.countDownTimer()
                 }, 1000)
             }
+        },
+        setInScore(correctClick) {            
+            if (correctClick) {
+                this.score += 250;
+            } else {
+                this.score -= 100;
+            }
         }
     },
     mounted() {
@@ -127,6 +135,10 @@
     height: 100vh;
     flex-direction: column;
     align-items: center;
+ }
+
+ .circleCont {
+    margin-top: 30vh;
  }
 
  .titleCircle {

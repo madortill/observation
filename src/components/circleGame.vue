@@ -1,19 +1,23 @@
 <template>
-    <div v-for="(section, id) in sections" :key="id" v-show="cicleSectionCounter === id">
-        <div v-for="(option, index) in section" :key="index" class="circle" :id="option.id" @click="calculatePoints" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, `top: ${Math.floor(Math.random() * (60 - 2) + 2) * 1.2}vh`, `left: ${Math.floor(Math.random() * (60 - 2) + 2) * 1.2}vw`]">
+    <div v-for="(section, id) in sections" :key="id" class="circle-container" v-show="circleSectionCounter === id">
+        <div v-for="(option, index) in section" 
+        :key="index" class="circle colorAni" 
+        :id="option.id" 
+        :style="`--hue: ${(changeColor) * 15 + 130}deg`"
+        @click="disappear" >
             {{ option.option }}
         </div>
-        <!-- <div id="circle" v-show="circleVisible" v-for="(option, index) in section" @click="disappear" :key="index" :style="[`--hue: ${(changeColor) * 15 + 130}deg`, { top: `${Math.floor(Math.random() * (70 - 2) + 2)}vh`, left: `${Math.floor(Math.random() * (70 - 2) + 2)}vw`}]">{{ option.option }}</div> -->
     </div>
 </template>
 
 <script>
 export default {
+    emits: ["setInScore"],
     data() {
         return {
-            circleVisible: false,
             changeColor: 0,
-            cicleSectionCounter: 0,
+            circleSectionCounter: 0,
+            disappearTimer: null,
             sections : [
                 [
                     {
@@ -150,42 +154,75 @@ export default {
         }
     },
     methods: {
-        setCircleColor() {
-            this.changeColor+= 3;
-            this.cicleSectionCounter++;
-
-            if (this.cicleSectionCounter === 6) {
-                this.cicleSectionCounter = 0;
+        appeared() {    
+            for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
+                if (!this.sections[this.circleSectionCounter][i]["clicked"]) {
+                    document.getElementById(`${this.sections[this.circleSectionCounter][i]["id"]}`).classList.add("appearAni");
+                }
             }
 
             setTimeout(() => {
-                this.setCircleColor();
-            }, 3000);
-        },
-        appeared() {
-            this.circleVisible = true;
-            this.disappearTimer = setTimeout(this.disappear, 6000);
+                this.changeColor+= 3;
+                this.circleSectionCounter++;
+            
+                if (this.circleSectionCounter === 5) {
+                    this.circleSectionCounter = 0;
+                }
+
+                this.appeared();
+            }, 7000);
         },
         disappear(event) {
             if (event !== undefined) {
-                this.circleClicked++;
-
-                if (this.circleClicked === 3) {
-                    setTimeout(this.nextSubject, 1000);
+                for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
+                    
+                    if (this.sections[this.circleSectionCounter][i]["id"] === Number(event.currentTarget.id)) {
+                        event.currentTarget.classList.remove("appearAni");
+                        event.currentTarget.classList.add("disappearAni");
+                        if (this.sections[this.circleSectionCounter][i]["isCorrect"]) {
+                            this.$emit('setInScore', true);
+                        } else {
+                            this.$emit('setInScore', false);
+                        }
+                    }
                 }
             }
 
             clearTimeout(this.disappearTimer);
-            this.circleVisible = false;
-
-            setTimeout(this.appeared, 2000);
-        },
-        calculatePoints(event) {
-            console.log(event.currentTarget);
         }
+        // appeared() {
+        //     for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
+        //         document.getElementById(this.sections[this.circleSectionCounter][i]["id"]).classList.add("appearAni");
+        //     }
+
+        //     this.disappearTimer = setTimeout(this.disappear, 6000);
+        // },
+        // disappear(event) {
+        //     if (event !== undefined) {
+
+        //         for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
+        //             event.currentTarget.classList.add("disappearAni");
+                    
+        //             if (this.sections[this.circleSectionCounter][i]["id"] === Number(event.currentTarget.id)) {
+        //                 if (this.sections[this.circleSectionCounter][i]["isCorrect"]) {
+        //                     console.log("yessssss");
+        //                     this.$emit('setInScore', true);
+        //                 } else {
+        //                     console.log("norrrrrrr");
+        //                     this.$emit('setInScore', false);
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        //     // this.circleVisible = false;
+        //     clearTimeout(this.disappearTimer);
+
+        //     // setTimeout(this.appeared, 2000);
+        // }
     },
     mounted() {
-        this.setCircleColor();
+        this.appeared();
     }
 } 
 </script>
@@ -203,12 +240,31 @@ export default {
     color: white;
     z-index: 2;
     display: block;
-    position: absolute;
     cursor: pointer;
     box-shadow: 0 5px 7px #0003;
+}
+
+.circle-container {
+    display: flex;
+    width: 100vw;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.colorAni {
     animation: animationColors 2s ease-in-out;
     animation-iteration-count: infinite;
-} 
+}
+
+.disappearAni {
+    animation: disappearCircle 1.25s linear forwards;
+    background-color: hsl(var(--hue),50%,75%);
+}
+
+.appearAni {
+    animation: appearCircle 1.25s linear forwards;
+    background-color: hsl(var(--hue),50%,75%);
+}
 
 @keyframes animationColors {
     0% {
@@ -219,6 +275,30 @@ export default {
     }
     100% {
         background-color: hsl(var(--hue),50%,75%);
+    }
+}
+
+@keyframes disappearCircle {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes appearCircle {
+    0% {
+        transform: scale(0);
+    }
+    25% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 </style>
