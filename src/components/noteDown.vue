@@ -197,8 +197,8 @@ import ConnectTwo from './connectTwo.vue'
             <div :class="changeAni ? 'explanation float' : 'explanation scale'">
                 <div class="basicTitle">הגדרה</div>
                 רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
-                כלל הדברים שתכתוב ישמשו עבורך בשלב העיבוד. <br><br> 
-                שימו לב, ההפך מלרשום הוא לשכוח.
+                כלל הדברים שתכתבו ישמשו עבורך בשלב העיבוד. <br><br> 
+                שימו <img src="src/assets/heart.png" class="heartIcon" />, ההפך מלרשום הוא לשכוח.
                 <br> <br>
                 במהלך התצפית, התייחסו להכנת השיעור והעברתו - תקף, מהימן, ופרקטי, כולל את כל החומר הנדרש.
             </div>
@@ -306,6 +306,12 @@ import ConnectTwo from './connectTwo.vue'
 
 .invisible {
     visibility: hidden;
+}
+
+.heartIcon {
+    width: 2vw;
+    position: relative;
+    top: 0.5vh;
 }
 
 .float {
@@ -582,7 +588,6 @@ input[type=checkbox] {
 }
 
 .basicTitle {
-   margin-top: 3vh;
    font-size: 3.3rem;
    font-weight: 600;
    color: #00241B;
