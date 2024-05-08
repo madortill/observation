@@ -212,13 +212,13 @@
  }
 
  .basicTitle {
-   padding-bottom: 3vh;
+    padding-bottom: 3vh;
    font-size: 3.3rem;
    font-weight: 600;
  }
 
  .basicTitle-2 {
-   margin-top: 3vh;
+    margin-top: 3vh;
    font-size: 3.3rem;
    font-weight: 600;
  }

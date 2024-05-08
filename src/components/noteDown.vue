@@ -382,9 +382,10 @@ select:disabled {
 }
 
 .title {
-    font-size: 3.3rem;
-    font-weight: 700;
-    margin-bottom: 3vh;
+    margin-top: 3vh;
+    font-size: 3rem;
+    margin-left: 75vw;
+    font-weight: 600;
     color: #0e6003;
 }
 
@@ -588,9 +589,9 @@ input[type=checkbox] {
 }
 
 .basicTitle {
+    margin-top: 3vh;
    font-size: 3.3rem;
    font-weight: 600;
-   color: #00241B;
  }
 
  .titleCircle {

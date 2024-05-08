@@ -254,7 +254,7 @@
 
 .basicTitle {
   margin-top: 3vh;
-  font-size: 4rem;
+  font-size: 3.3rem;
   font-weight: 600;
 }
 
