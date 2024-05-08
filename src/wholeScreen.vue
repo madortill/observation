@@ -13,7 +13,8 @@
         chapters: ["פתיחה", "הגדרת יסוד", "מאפייני יסוד", "הכנה עצמית לביצוע תצפית", "לצורך תצפית מיטבית", "סיום"],
         pageCounter: 0,
         animationType: "",
-        showInfo: false
+        showInfo: false,
+        showNav: true
       }
     },
     components: {
@@ -34,6 +35,9 @@
       },
       prevCurrentScreen() {
         this.pageCounter--;
+      },
+      hideNav() {
+        this.showNav = false;
       }
     }
   }
@@ -58,7 +62,7 @@
         רס"מ שלומי אוגרן
         <img src="./assets/mifkada-logo.png" alt="mifkada" class="logo-2" />
       </div>
-      <Navbar v-if="chapters[pageCounter]!=='פתיחה'" :pageCounter="pageCounter" />
+      <Navbar v-if="chapters[pageCounter]!=='פתיחה' && !showNav" :pageCounter="pageCounter" />
       <OpeningScreen v-if="chapters[pageCounter]==='פתיחה'"  @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <BasicPrinciples v-else-if="chapters[pageCounter]==='הגדרת יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <Targets  v-else-if="chapters[pageCounter]==='מאפייני יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @prev-current-screen="prevCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
