@@ -72,6 +72,7 @@ import Involved from './involved.vue';
         <div class="basicTitle">
           {{ chapter }}
         </div>
+        <div>לחצו על העיגולים על מנת לעבור את השלבים</div>
           <div class="mainText">
             <div v-for="(sub, index) in subjectsArr" :key="index" class="subjectCont">
               <div :class="sub.beenThere ? 'beenThere' : 'subjectCicle'" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="changeSubject($event, index + 3)">{{ sub.title }}</div>

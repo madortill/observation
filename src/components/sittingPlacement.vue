@@ -10,12 +10,12 @@
         subjectsInfo: [
             {
                 subSubjectTitle: "הוראות בטיחות",
-                subjectText: ` לשים <img src="src/assets/heart.png" class='heartIcon' /> כי הינך צריך להיות נוכח במקום שמאפשר לך לטפל באירועי בטיחות. <br> <br> 
+                subjectText: ` שימו <img src="src/assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> <br> 
                 כגון: תצפית על חניך שטווח בנשק.`
             },
             {
                 subSubjectTitle: "מאפיינים אישיים של המדריך",
-                subjectText: `נשתדל להתחשב בבקשות המדריך בנוגע למיקומנו בשיעור ונפעיל שיקול דעת כדי למנוע משיכת תשומת לב.`
+                subjectText: `השתדלו להתחשב בבקשות המדריך בנוגע למיקומנו בשיעור ונפעיל שיקול דעת כדי למנוע משיכת תשומת לב.`
             },
             {
                 subSubjectTitle: "רואה ולא נראה",
