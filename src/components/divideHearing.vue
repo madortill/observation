@@ -15,6 +15,7 @@
             </div>
             <div class="gameInfo">
                 <div class="timer" :style="warning ? 'color: red' : 'color: black'">00:{{ countDown }}</div>
+                <div class="rounds">{{ rounds }}</div>
                 <div class="game-points">Score: {{ score }}</div>
             </div>
             <div class="circleCont">
@@ -50,6 +51,7 @@
             showEndMessage: false,
             endMessage: '',
             totalTime: 0,
+            rounds: 0,
             changeAni: false,
             countDown: 0,
             score: 0,
@@ -67,7 +69,6 @@
             if (this.subjectCounter === 2) {
                 this.showBackButton = false;
                 this.showNextButton = false;
-                // this.countDownTimer();
             } else if (this.subjectCounter === 1) {
                 this.showBackButton = true;
             } else if (this.subjectCounter === 3) {
@@ -90,6 +91,7 @@
         },
         callingTimer(timer, counter) {
             if (counter !== 5) {
+                this.rounds = counter + 1;
                 this.countDown = timer;
                 clearTimeout(this.timer);
                 this.countDownTimer();
