@@ -170,7 +170,7 @@ export default {
                 }
 
                 this.appeared();
-            }, 7500);
+            }, 10000);
         },
         disappear(event) {
             if (event !== undefined) {

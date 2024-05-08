@@ -20,7 +20,7 @@
             <div class="circleCont">
                 <CircleGame @setInScore="setInScore" />
             </div>
-            <div class="message" v-show="showEndMessage">כל הכבוד!<img src="../assets/muscle.png" class="muscle" /></div>
+            <div class="message" v-show="showEndMessage">התוצאה הסופית שלכם היא: {{ score }} <br><br> {{ endMessage }}<img src="../assets/muscle.png" class="muscle" v-show="this.score < 1200" /></div>
         </div>
         <div class="buttonCont">
             <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -42,12 +42,13 @@
      data() {
         return {
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים"],
-            subSubjectText: ["בכתיבה בדף התצפית, <br> נקפיד להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל ליקויי חלוקת קשב. <br> עליכם לבחור במאפיינים של חלוקת קשב בצורה הנכונה בלבד. <br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה לא נכון, ירדו לכם נקודות מהניקוד הכולל. על מנת להצליח עליכם לזכות ב1200 נקודות.", "", 'עלייך לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
+            subSubjectText: ["בכתיבה בדף התצפית, <br> הקפידו להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל חלוקת קשב נכונה. <br> יופיעו סיטואציות מגוונות שמתחלפות כל 10 שניות.<br> כדי להצליח בתרגול עליכם לבחור במיקודים הנכונים ביותר של חלוקת קשב.<br><br> שימו לב, המשחק מוגבל בזמן. <br>  על כל מענה שגוי, ירדו לכם נקודות מהציון הכולל. על מנת להצליח עליכם לזכות בלפחות 1200 נקודות.", "", 'עליכם לשים <img src="src/assets/heart.png" class="heartIcon" /> במה אתה בוחר להתמקד ובעת בחירתך מהו הדבר שאתה מפספס. <br> <br> לדוגמא - אם הינך מתמקד רק בתגובת החניכים, אתה יכול לפספס את טכניקות המסירה של המדריך.', 'שים <img src="src/assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעלייך להשקיע קשב מירבי. <br> <br> כגון, גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
             warning: false,
             showBackButton: false,
             showNextButton: false,
             subjectCounter: 0,
             showEndMessage: false,
+            endMessage: '',
             totalTime: 0,
             changeAni: false,
             countDown: 59,
@@ -113,12 +114,14 @@
         },
         endingGame() {
             this.showEndMessage = true;
-            if (this.score <= 1200) {
-                
+            if (this.score < 1200) {
+                this.endMessage = 'כל הכבוד על ניסיון';
+            } else {
+                this.endMessage = 'כל הכבוד! הצלחת בגדול!';
             }
             setTimeout(() => {
                 this.nextSubject();
-            }, 1200)
+            }, 2500)
         }
     },
     mounted() {
@@ -141,9 +144,14 @@
     overflow: hidden;
  }
 
+ .muscle {
+    width: 2.5vw;
+    margin-right: 0.5vw;
+ }
+
  .message {
     width: 23vw;
-    height: 10vh;
+    height: contain;
     background-color: rgb(255, 255, 255);
     box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5); 
     transform: translate(-50%,-50%);
