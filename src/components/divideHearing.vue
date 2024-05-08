@@ -18,9 +18,9 @@
                 <div class="game-points">Score: {{ score }}</div>
             </div>
             <div class="circleCont">
-                <CircleGame @setInScore="setInScore" />
+                <CircleGame @setInScore="setInScore" @callingTimer="callingTimer" />
             </div>
-            <div class="message" v-show="showEndMessage">התוצאה הסופית שלכם היא: {{ score }} <br><br> {{ endMessage }}<img src="../assets/muscle.png" class="muscle" v-show="this.score < 1200" /></div>
+            <div class="message" v-show="showEndMessage">התוצאה הסופית שלכם היא: {{ score }} <br><br> {{ endMessage }}<img src="../assets/muscle.png" class="muscle" v-show="this.score > 1200" /></div>
         </div>
         <div class="buttonCont">
             <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -51,9 +51,10 @@
             endMessage: '',
             totalTime: 0,
             changeAni: false,
-            countDown: 59,
+            countDown: 0,
             score: 0,
             timer: null,
+            disappearTimer: null
         };        
     },
     components: {
@@ -66,7 +67,7 @@
             if (this.subjectCounter === 2) {
                 this.showBackButton = false;
                 this.showNextButton = false;
-                this.countDownTimer();
+                // this.countDownTimer();
             } else if (this.subjectCounter === 1) {
                 this.showBackButton = true;
             } else if (this.subjectCounter === 3) {
@@ -78,30 +79,39 @@
                 this.$emit('backToHomePage', 'חלוקת קשב');
             }
          },
-         prevSubject() {
-             this.subjectCounter--;
+        prevSubject() {
+            this.subjectCounter--;
 
             if (this.subjectCounter === 0) {
-                 this.showBackButton = false;
+                    this.showBackButton = false;
             } else if (this.subjectCounter === 3) {
                 this.showBackButton = false;
             }
-         },
-        countDownTimer () {
-            if (this.countDown == 0o0) {
+        },
+        callingTimer(timer, counter) {
+            if (counter !== 5) {
+                this.countDown = timer;
+                clearTimeout(this.timer);
+                this.countDownTimer();
+            } else {
                 this.endingGame();
-            } else if (this.countDown > 0) {
+            }
+        },
+        countDownTimer() {
+            if (this.countDown > 0) {
                 this.timer = setTimeout(() => {
                     this.countDown -= 1
                     if (this.countDown < 10) {
                         this.countDown = `0${this.countDown}`;
-                        if (this.countDown % 2 === 0) {
-                            this.warning = true;
-                        } else {
-                            this.warning = false;
+                        if (this.countDown < 5) {
+                            if (this.countDown % 2 === 0) {
+                                this.warning = true;
+                            } else {
+                                this.warning = false;
+                            }
                         }
                     }
-                    this.countDownTimer()
+                    this.countDownTimer();
                 }, 1000)
             }
         },
