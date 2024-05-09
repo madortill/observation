@@ -167,7 +167,7 @@
 
 <template>
     <div class="placement">
-        <div class="titleCircle" v-show="subjectCounter < 3" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div class="titleCircle" v-show="subjectCounter < 3" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter < 3" class="firstPart">
             <div :class="changeAni ? 'explanation float' : 'explanation scale'">
                 <div class="basicTitle" v-if="subjectCounter < 3">

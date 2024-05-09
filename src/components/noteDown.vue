@@ -192,7 +192,7 @@ import ConnectTwo from './connectTwo.vue'
 
 <template>
     <div class="noting">
-        <div class="titleCircle" v-show="showPart !== 2" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div class="titleCircle" v-show="showPart !== 2" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
         <div class="firstPart" v-if="showPart === 0">     
             <div :class="changeAni ? 'explanation float' : 'explanation scale'">
                 <div class="basicTitle">הגדרה</div>

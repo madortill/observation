@@ -1,6 +1,6 @@
 <template>
     <div class="hearingContainer">
-        <div class="titleCircle" v-show="subjectCounter !== 2 && subjectCounter !== 1" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 15 + 130}deg`">{{ chapter }}</div>
+        <div class="titleCircle" v-show="subjectCounter !== 2 && subjectCounter !== 1" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter !== 2" class="textPart">
             <div :class="[changeAni ? 'float': 'scale', subjectCounter < 2 ? 'instructions' : 'explanation']">
                 <div class="basicTitle">

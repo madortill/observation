@@ -78,7 +78,7 @@ import Involved from './involved.vue';
         <div class="instruc">לחצו על העיגולים על מנת לעבור את השלבים</div>
           <div class="mainText">
             <div v-for="(sub, index) in subjectsArr" :key="index" class="subjectCont">
-              <div :class="sub.beenThere ? 'beenThere' : 'subjectCicle'" :style="`--hue: ${(index + 3) * 15 + 130}deg`" @click="changeSubject($event, index + 3)">{{ sub.title }}</div>
+              <div :class="sub.beenThere ? 'beenThere' : 'subjectCicle'" :style="`--hue: ${(index) * 20 + 130}deg`" @click="changeSubject($event, index)">{{ sub.title }}</div>
               <div :class="sub.beenThere ? 'beenThere1' : 'subjectExplain'">
                 <div v-if="sub.subtitle" class="subtitle">{{ sub.subtitle }}</div>
                 <ul><li v-for="(item, index) in sub.text" :key="index" :class="sub.beenThere ? 'item-text-disabled' : 'item-text'">{{ item }}</li></ul>
