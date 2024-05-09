@@ -43,8 +43,4 @@ export default {
     width: 100vw;
     direction: rtl;
 }
-
-.container {
-
-}
 </style>

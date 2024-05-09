@@ -620,7 +620,7 @@ input[type=checkbox] {
 .buttons {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    background-color: #6f9cb8;
+    background-color: #083b2e;
     text-align: center;
     margin-bottom: 5vh;
     cursor: pointer;
@@ -638,7 +638,7 @@ input[type=checkbox] {
 }
 
 .buttons:hover {
-    background-color: #426991;
+    background-color: #0d5744;
 }
 
 .instructions, .explanation {

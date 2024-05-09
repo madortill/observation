@@ -13,29 +13,6 @@
                 <div><img src="../assets/pin.png" alt="pin" class="pin" />זכרו - הכנה עצמית תקבע את אופן המוכנות שלכם לביצוע תצפית.</div>
             </div>
         </div>
-        <!-- <div v-else class="flexCont">
-            <div :class="startAnimation ? 'storyTextCont introAni': 'storyTextCont'"><div class="storyText">הנך ניגש לתצפית. מה תביא?</div></div>
-            <div class="instructions">
-                תגררו את הכלים המתאימים להכנה עצמית לביצוע תצפית.
-            </div>
-    
-            <div id="draggable-container" @dragstart="onDragging" @dragover="allowDrop" @drop="(e) => {
-                e.preventDefault();
-                drop(e);
-            }"> 
-                <div v-for="(item, index) in this.shuffledArr" :key="index" class="dragItem" :draggable="item.setDraggable" @dragstart="drag" :id="'listItem' + index">
-                    {{item.optionName}} 
-                    <img v-show="item.chosenOption" :src="`src/assets/${item.correct}.png`" class="checkIcon" />
-                </div>
-            </div>
-            
-            <div class="box-droppable"  @drop="(e) => {
-                e.preventDefault();
-                drop(e);
-                checkDrop(e)
-            }" @dragover="allowDrop" id='dragArea' @dragstart="onDragging" >
-            </div>
-        </div> -->
         <div class="buttonCont">
             <button v-show="showNextButton || correctCounter === 4" class="buttons" @click="nextText">
                 ממשיכים
@@ -62,7 +39,6 @@ export default {
     };        
     },
     mounted() {
-        // this.initialize();
         this.textAni();
     },
     methods: {
@@ -103,9 +79,6 @@ export default {
   direction: rtl;
   margin: 0 auto;
   letter-spacing: .05em; 
-  /* animation: 
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end infinite; */
 } 
 
 .typed {
@@ -117,9 +90,6 @@ export default {
 
 .stopTyped {
     border-left: .1em solid transparent;
-    /* animation: 
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end infinite; */
 }
 
 /* The typing effect */
@@ -191,7 +161,7 @@ p {
 .buttons {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    background-color: #6f9cb8;
+    background-color: #083b2e;
     text-align: center;
     margin-bottom: 5vh;
     cursor: pointer;
@@ -209,7 +179,7 @@ p {
 }
 
 .buttons:hover, .buttons-continue:hover {
-    background-color: #426991;
+    background-color: #0d5744;
 }
 
 .prepareTitle {
@@ -243,60 +213,6 @@ p {
     flex-wrap: wrap;
     margin-top: 10vh;
 }
-
-/* #draggable-container {
-    width: 38vw;
-    padding: 3vw 2vw 4vh 0;
-    margin-right: 15vw;
-    height: 40vh;
-    /* border-style: solid;
-    border-width: 2vh;
-    border-color: #da9146;
-    color: rgba(234, 234, 234, 0.901); */
-    /* background-color: #31432d; 
-    background-image: url('../assets/board.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: stretch;
-}
-
-.box-droppable {
-    border-style: solid;
-    width: 35vw;
-    height: 20vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background-color: rgba(56, 55, 55, 0.645);
-    margin: 0vh 10vw;
-}
-
-.dragItem {
-    margin-bottom: 4vh;
-    font-size: 1.4rem;
-    cursor: grab;
-    color: rgba(255, 255, 255, 0.821);
-    padding-right: 1.5vw;
-}
-
-.dragItem:active {
-    cursor: grabbing;
-    cursor: -moz-grabbing;
-    cursor: -webkit-grabbing;
-}
-
-.instructions {
-    font-size: 2rem;
-    width: 17vw;
-    padding: 0vh 10vw;
-}
-
-.checkIcon {
-    width: 1vw;
-} */
 
 .introAni {
     animation: introText 2.25s 0.75s ease-in forwards;

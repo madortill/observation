@@ -75,7 +75,7 @@ nav ul li {
 }
 
 nav ul li.active {
-    background: #0296d0;
+    background: #65B891;
     cursor: pointer;
     border-radius: 30px;
     color: white;
