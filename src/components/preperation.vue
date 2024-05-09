@@ -212,33 +212,9 @@ p {
     background-color: #426991;
 }
 
-/* .storyTextCont {
-    position: fixed; 
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    border-style: none;
-    color: white;
-    width: 100vw;
-    height: 110vh;
-    transform: scale(1.45);
-    top: 0vh;
-    right: 0vw;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.storyText {
-    margin-bottom: 14vh;
-    font-weight: 600;
-    font-size: 5rem;
-} */
-
 .prepareTitle {
-    margin-top: 3vh;
+    margin-top: 12vh;
     font-size: 3rem;
-    margin-left: 75vw;
     font-weight: 600;
 }
 

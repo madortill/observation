@@ -6,6 +6,7 @@ import Involved from './involved.vue';
 
   export default {
     props: ["chapter"],
+    emits: ["hideNav", "setNavShown"],
     data() {
       return {
         subjectsArr: [{
@@ -46,10 +47,12 @@ import Involved from './involved.vue';
     methods: {
       changeSubject(event, color) {
         this.currentSubSubject = event.currentTarget.innerText;
+        this.$emit('hideNav');
         this.colorCode = color;
       }, 
       backToHomePage(newSub) {
         this.currentSubSubject = "";
+        this.$emit('setNavShown');
 
         for (let i = 0; i < this.subjectsArr.length; i++) {
           if (this.subjectsArr[i]["title"] === newSub) {
@@ -83,10 +86,10 @@ import Involved from './involved.vue';
             </div>
           </div>
       </div>
-        <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
-        <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
-        <NoteDown v-else-if="currentSubSubject === 'רישום ותיעוד'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
-        <Involved v-else-if="currentSubSubject === 'התערבות'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+      <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+      <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+      <NoteDown v-else-if="currentSubSubject === 'רישום ותיעוד'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+      <Involved v-else-if="currentSubSubject === 'התערבות'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
     </div>
 
 </template>
@@ -104,14 +107,13 @@ import Involved from './involved.vue';
 
 .instruc {
   position: absolute;
-  top: 52vh;
+  top: 17.5vh;
   font-size: 1.5rem;
 }
 
 .basicTitle {
-  margin-top: 3vh;
+  margin-top: 12vh;
   font-size: 3rem;
-  margin-left: 75vw;
   font-weight: 600;
 }
 

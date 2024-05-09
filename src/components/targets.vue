@@ -75,9 +75,8 @@ export default {
 }
 
 .basicTitle {
-    margin-top: 3vh;
+    margin-top: 12vh;
     font-size: 3rem;
-    margin-left: 75vw;
     font-weight: 600;
 }
 
