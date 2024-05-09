@@ -122,14 +122,14 @@
 
 <template>
     <div class="involved">
-        <div v-show="textCounter === 0" class="titleCircle" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 120}deg`">
+        <div v-show="textCounter === 0" class="titleCircle" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">
           {{ chapter }}
         </div>
         <div v-if="textCounter === 0" class="explainCont scale">
           <div class="basicTitle-2">קיימים 2 סוגים:</div>
           <div class="flip-card-container">
             <div v-for="( item, index) in subArr" :key="index" :class="['flip-card', this.onStart]">
-                  <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 20 + 130}deg`">
+                  <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 17 + 120}deg`">
                       <div class="flip-card-front">
                           <img :src="src(item.pics)" class="imgFront">
                       </div>
