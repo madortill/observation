@@ -197,10 +197,10 @@ import ConnectTwo from './connectTwo.vue'
             <div :class="changeAni ? 'explanation float' : 'explanation scale'">
                 <div class="basicTitle">הגדרה</div>
                 רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
-                כלל הדברים שתכתבו ישמשו עבורך בשלב העיבוד. <br><br> 
+                כלל הדברים שתכתבו ישמשו עבורכם בשלב העיבוד. <br><br> 
                 שימו <img src="src/assets/heart.png" class="heartIcon" />, ההפך מלרשום הוא לשכוח.
                 <br> <br>
-                במהלך התצפית, התייחסו להכנת השיעור והעברתו - תקף, מהימן, ופרקטי, כולל את כל החומר הנדרש.
+                במהלך התצפית, התייחסו להכנת השיעור והעברתו - תקף, מהימן ופרקטי, כולל את כל החומר הנדרש.
             </div>
         </div>
         <div class="secondPart" v-else-if="showPart === 1">
