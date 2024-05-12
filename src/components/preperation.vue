@@ -10,7 +10,7 @@
                 <br><br>
                 <div v-for="(item, index) in preperationTitleList" :key="index" v-show="index <= lineText" :class="index === lineText ? 'typed' : 'stopTyped' " class="checkList typewriter"><img src="../assets/check-mark.png" class="check"/><b>{{item}} -</b> {{ preperationItemList[index] }}</div><br>
                 <br>
-                <div><img src="../assets/thumbtack.png" alt="pin" class="pin" />זכרו - הכנה עצמית תקבע את אופן המוכנות שלכם לביצוע תצפית.</div>
+                <div><img src="../assets/pinGreen.png" alt="pin" class="pin" />זכרו - הכנה עצמית תקבע את אופן המוכנות שלכם לביצוע תצפית.</div>
             </div>
         </div>
         <div class="buttonCont">
@@ -161,7 +161,7 @@ p {
 .buttons {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    background-color: #083b2e;
+    background-color: #0c5341;
     text-align: center;
     margin-bottom: 5vh;
     cursor: pointer;
@@ -179,12 +179,13 @@ p {
 }
 
 .buttons:hover, .buttons-continue:hover {
-    background-color: #0d5744;
+    background-color: #116d56;
 }
 
 .prepareTitle {
     margin-top: 13vh;
     font-size: 3rem;
+    color: #083b2e;
     font-weight: 600;
 }
 

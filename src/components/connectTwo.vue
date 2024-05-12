@@ -227,7 +227,7 @@
   .buttons {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    background-color: #6f9cb8;
+    background-color: #0c5341;
     text-align: center;
     cursor: pointer;
     margin-top: 8vh;
@@ -237,7 +237,7 @@
 }
 
 .buttons:hover {
-    background-color: #426991;
+    background-color: #116d56;
 }
 
   @keyframes failedConnection {

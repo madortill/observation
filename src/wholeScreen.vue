@@ -65,7 +65,7 @@
         רס"מ שלומי אוגרן
         <img src="./assets/mifkada-logo.png" alt="mifkada" class="logo-2" />
       </div>
-      <Navbar v-if="chapters[pageCounter]!=='פתיחה' && showNav" :pageCounter="pageCounter" />
+      <Navbar v-if="chapters[pageCounter]!=='פתיחה' && showNav && chapters[pageCounter]!=='סיום'" :pageCounter="pageCounter" />
       <OpeningScreen v-if="chapters[pageCounter]==='פתיחה'"  @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <BasicPrinciples v-else-if="chapters[pageCounter]==='הגדרת יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @change-shrink-background="changeShrinkBackground"/>
       <Targets  v-else-if="chapters[pageCounter]==='מאפייני יסוד'" :chapter="chapters[pageCounter]" @change-current-screen="changeCurrentScreen" @prev-current-screen="prevCurrentScreen" @change-shrink-background="changeShrinkBackground"/>

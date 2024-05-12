@@ -55,6 +55,7 @@ export default {
 .basicTitle {
     margin-top: 13vh;
     font-size: 3rem;
+    color: #083b2e;
     font-weight: 600;
 }
 
@@ -94,7 +95,7 @@ export default {
 .buttons {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    background-color: #083b2e;
+    background-color: #0c5341;
     text-align: center;
     margin-bottom: 5vh;
     cursor: pointer;
@@ -112,7 +113,7 @@ export default {
 }
 
 .buttons:hover {
-    background-color: #0d5744;
+    background-color: #116d56;
 }
 
 

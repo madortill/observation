@@ -385,7 +385,6 @@ select:disabled {
     margin-bottom: 2vh;
     font-size: 3rem;
     font-weight: 600;
-    color: #0e6003;
 }
 
 .subTitle {
@@ -619,7 +618,7 @@ input[type=checkbox] {
 .buttons {
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    background-color: #083b2e;
+    background-color: #0c5341;
     text-align: center;
     margin-bottom: 5vh;
     cursor: pointer;
@@ -637,7 +636,7 @@ input[type=checkbox] {
 }
 
 .buttons:hover {
-    background-color: #0d5744;
+    background-color: #116d56;
 }
 
 .instructions, .explanation {

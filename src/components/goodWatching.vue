@@ -115,6 +115,7 @@ import Involved from './involved.vue';
   margin-top: 13vh;
   font-size: 3rem;
   font-weight: 600;
+  color: #083b2e;
 }
 
 .mainText {
