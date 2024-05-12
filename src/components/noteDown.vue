@@ -228,7 +228,7 @@ import ConnectTwo from './connectTwo.vue'
             </div>
         </div>
         <div class="thirdPart" v-else>
-            <div class="basicTitle">תרגול</div>
+            <div class="basicTitle-3">תרגול</div>
             <div class="test-page">
                 <div class="everythinCont">
                     <div class="whatWriting" v-show="practiceCount === 0">
@@ -326,6 +326,12 @@ import ConnectTwo from './connectTwo.vue'
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.8vh;
+}
+
+.basicTitle-3 {
+    margin-top: 2vh;
+    font-size: 3rem;
+    font-weight: 600;
 }
 
 .checkIcon {
@@ -428,12 +434,16 @@ select:disabled {
     margin-top: 4vh;
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    background-color: #083b2e;
+    background-color: #0c5341;
     text-align: center;
     cursor: pointer;
     color: white;
     border: none;
     box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+}
+
+.toPractice:hover {
+    background-color: #116d56;
 }
 
 .side-note {
@@ -455,7 +465,7 @@ select:disabled {
 .test-page {
     height: 72vh;
     padding: 1vh 0vw;
-    width: 60rem;
+    width: 64rem;
     background-color: rgba(255, 255, 255, 0.795);
     display: flex;
     margin-top: 4vh;
