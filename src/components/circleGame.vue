@@ -1,7 +1,7 @@
 <template>
     <div v-for="(section, id) in sections" :key="id" class="circle-container" v-show="circleSectionCounter === id">
         <div v-for="(option, index) in section" :key="index">
-            <img class="icon" v-show="option.clicked" :src="option.isCorrect ? 'src/assets/check.png' : 'src/assets/cancel.png'" />
+            <div v-show="option.clicked" class="clickedContainer"><img class="icon" :src="option.isCorrect ? 'src/assets/check.png' : 'src/assets/cancel.png'" />{{ score }}</div>
             <div class="circle colorAni" :id="option.id" :style="`--hue: ${(changeColor) * 15 + 130}deg`" @click="disappear" >
                 {{ option.option }}
             </div>
@@ -17,6 +17,7 @@ export default {
             changeColor: 0,
             circleSectionCounter: 0,
             disappearTimer: null,
+            score: null,
             sections : [
                 [
                     {
@@ -181,8 +182,10 @@ export default {
                                 this.sections[this.circleSectionCounter][i]["clicked"] = false;
                             }, 500)
                         if (this.sections[this.circleSectionCounter][i]["isCorrect"]) {
+                            this.score = '+250';
                             this.$emit('setInScore', true);
                         } else {
+                            this.score = '-100';
                             this.$emit('setInScore', false);
                         }
                     }
@@ -199,6 +202,16 @@ export default {
 </script>
 
 <style>
+.clickedContainer {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    width: 10vw;
+    direction: ltr;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+}
+
 .circle {
     width: 10.25rem;
     height: 10.5rem;
