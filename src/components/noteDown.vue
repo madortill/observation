@@ -13,7 +13,7 @@ import ConnectTwo from './connectTwo.vue'
         correctCounter: 0,
         messageForButton: 'בדיקה',
         showButton: false,
-        practiceCount: 1,
+        practiceCount: 0,
         select1: undefined,
         select2: undefined,
         select3: undefined,
@@ -382,9 +382,8 @@ select:disabled {
 }
 
 .title {
-    margin-top: 3vh;
+    margin-bottom: 2vh;
     font-size: 3rem;
-    margin-left: 75vw;
     font-weight: 600;
     color: #0e6003;
 }
@@ -430,7 +429,7 @@ select:disabled {
     margin-top: 4vh;
     font-size: 1.65rem;
     padding: 2vh 3.5vw;
-    background-color: #6f9cb8;
+    background-color: #083b2e;
     text-align: center;
     cursor: pointer;
     color: white;
@@ -589,7 +588,7 @@ input[type=checkbox] {
 }
 
 .basicTitle {
-    margin-top: 3vh;
+    margin-bottom: 2vh;
    font-size: 3.3rem;
    font-weight: 600;
  }

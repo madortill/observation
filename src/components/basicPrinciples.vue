@@ -53,7 +53,7 @@ export default {
 }
 
 .basicTitle {
-    margin-top: 12vh;
+    margin-top: 13vh;
     font-size: 3rem;
     font-weight: 600;
 }
@@ -71,7 +71,7 @@ export default {
 .container {
     background-color: rgba(255, 255, 255, 0.677);
     padding: 5vw 5vw;
-    margin-bottom: 10vh;
+    margin-bottom: 18vh;
     border-radius: 5rem;
     animation: floatAnimation 3s ease-in-out infinite;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);

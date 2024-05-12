@@ -15,7 +15,7 @@
             </div>
             <div class="gameInfo">
                 <div class="timer" :style="warning ? 'color: red' : 'color: black'">00:{{ countDown }}</div>
-                <div class="rounds">{{ rounds }}</div>
+                <div class="rounds">Round: {{ rounds }}</div>
                 <div class="game-points">Score: {{ score }}</div>
             </div>
             <div class="circleCont">
@@ -205,7 +205,7 @@
     position: fixed;
     padding: 3.5%;
     position: absolute;
-    top: 14vh;
+    top: 10vh;
     right: 25vw;
     z-index: 2;
     cursor: pointer;
@@ -259,7 +259,7 @@
 
 .instructions, .explanation {
     width: 32vw;
-    margin-top: 24vh;
+    margin-top: 20vh;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;

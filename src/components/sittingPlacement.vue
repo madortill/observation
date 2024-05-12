@@ -211,7 +211,7 @@
 }
 
 .basicTitle {
-    margin-top: 3vh;
+    margin-bottom: 2vh;
    font-size: 3.3rem;
    font-weight: 600;
  }

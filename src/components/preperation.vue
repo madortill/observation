@@ -183,7 +183,7 @@ p {
 }
 
 .prepareTitle {
-    margin-top: 12vh;
+    margin-top: 13vh;
     font-size: 3rem;
     font-weight: 600;
 }

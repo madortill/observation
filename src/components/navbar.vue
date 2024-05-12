@@ -63,7 +63,7 @@ nav ul li {
     padding: 0;
     list-style: none;
     display: inline-block;
-    padding: 5px 50px;
+    padding: 8px 50px;
     margin: 10px;
     font-size: 1.2rem;
     font-weight: 500;
