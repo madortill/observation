@@ -67,6 +67,7 @@
          nextSubject() {
              this.subjectCounter++;
 
+             console.log(this.subjectCounter)
             if (this.subjectCounter === 2) {
                 this.showBackButton = false;
                 this.showNextButton = false;
@@ -82,10 +83,10 @@
                 this.showEndingGame = false;
                 this.endMessage = "כל הכבוד! סיימתם את השלב";
 
-                setTimeout(() => {
-                    this.showEndMessage = false;
-                    this.$emit('backToHomePage', 'חלוקת קשב');
-                }, 1500)
+                // setTimeout(() => {
+                //     this.showEndMessage = false;
+                //     this.$emit('backToHomePage', 'חלוקת קשב');
+                // }, 1500)
             }
          },
         prevSubject() {

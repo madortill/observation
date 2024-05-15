@@ -81,10 +81,6 @@
               }, 1500)
             }
 
-            this.questionCounter++;
-            this.chosen = '';
-            this.answered = false;
-
             setTimeout(() => {
               this.isDisabled = 'abled';
             },1000)
@@ -106,10 +102,6 @@
               }, 1500)
             }
 
-            this.questionCounter++;
-            this.chosen = '';
-            this.answered = false;
-
             setTimeout(() => {
               this.isDisabled = 'abled';
             },1000)
@@ -119,6 +111,11 @@
       },
       src(name) {
         return new URL(`../assets/${name}`, import.meta.url).href
+      },
+      nextSituation() {
+        this.questionCounter++;
+            this.chosen = '';
+            this.answered = false;
       }
     },
     mounted() {
@@ -170,6 +167,7 @@
             <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect' , isDisabled]" @click="checkAnswer(2)">התערבות ישירה<img src="../assets/stop.png" class="iconForButton" /></div>
           </div>
         </div>
+        <img src="../assets/arrow.png" @click="nextSituation" v-show="answered" class="nextArrow" alt="arrow">
         <div class="message" v-show="showEndMessage">כל הכבוד! עברתם שלב<img src="../assets/muscle.png" class="muscle" /></div>
         <div class="buttonCont">
                 <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -196,6 +194,14 @@
 
 .disabled {
   pointer-events: none;
+}
+
+.nextArrow {
+  width: 3vw;
+  position: absolute;
+  bottom: 4vh;
+  right: 93vw;
+  cursor: pointer;
 }
 
 .message {
@@ -277,6 +283,8 @@
   background-color: #75d33ed2;
   border-radius: 2vh;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);
   text-align: center;
   padding: 2vh 2vw;
@@ -290,6 +298,8 @@
   box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);
   text-align: center;
   padding: 2vh 2vw;
+  display: flex;
+  align-items: center;
   font-size: 1.25rem;
 }
 
@@ -346,7 +356,7 @@
   width: 38vw;
   font-size: 2.75rem;
   text-align: center;
-  height: 40vh;
+  height: 32vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -366,13 +376,13 @@
   background-color: #ffffffd2;
   border-radius: 2vh;
   cursor: pointer;
+  align-items: center;
   display: flex;
   direction: rtl;
   box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);
   text-align: center;
   padding: 2vh 2vw;
   font-size: 1.25rem;
-  align-items: center;
 }
 
 .answers:hover {
