@@ -10,7 +10,7 @@
         subjectsInfo: [
             {
                 subSubjectTitle: "הוראות בטיחות",
-                subjectText: ` שימו <img src="src/assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> <br> 
+                subjectText: `שימו <img src="src/assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> <br> 
                 כגון: תצפית על חניך שטווח בנשק.`
             },
             {
@@ -154,7 +154,6 @@
                     }
                 }
             }
-
         }
     },
     mounted() {
@@ -186,7 +185,7 @@
         </div>
         <div class="secondPart" v-else>
             <div class="instructions">בזמן שיעור תצפית - <br> באיזה 2 מיקומים בכיתה כדאי למתצפת לשבת לצורך קבלת תצפית מיטבית?</div>
-            <div class="message" v-show="correctCounter === 2">כל הכבוד!<img src="../assets/muscle.png" class="muscle" /></div>
+            <div class="message" v-show="correctCounter === 2">כל הכבוד! סיימתם את השלב<img src="../assets/muscle.png" class="muscle" /></div>
             <div class="sitting">
                 <img src="../assets/table2.png" alt="class" class="table2" />
                 <div>

@@ -20,28 +20,28 @@ import ConnectTwo from './connectTwo.vue'
         select4: undefined,
         option1: 
             {
-                option: ["חניכים", "מידע", "תיאורים"],
+                option: ["בחר", "חניכים", "מידע", "תיאורים"],
                 correctAnswer: "מידע",
                 isCorrect: '',
                 disabled: false
             },
         option2:
             {
-                option: ["זמנים חשובים", "זמנים טובים", "זמנים מתים"],
+                option: ["בחר", "זמנים חשובים", "זמנים טובים", "זמנים מתים"],
                 correctAnswer: "זמנים מתים",
                 isCorrect: '',
                 disabled: false
             }, 
         option3:
             {
-                option: ["שכחה", "זיכרון", "פגיעה"],
+                option: ["בחר", "שכחה", "זיכרון", "פגיעה"],
                 correctAnswer: "שכחה",
                 isCorrect: '',
                 disabled: false
             }, 
         option4:
             {
-                option: ["אחרי ההתנסות", "בסמוך להתנסות", "לפני ההתנסות"],
+                option: ["בחר", "אחרי ההתנסות", "בסמוך להתנסות", "לפני ההתנסות"],
                 correctAnswer: "בסמוך להתנסות",
                 isCorrect: '',
                 disabled: false
@@ -245,11 +245,11 @@ import ConnectTwo from './connectTwo.vue'
                         </div>
                         <div class="questionContainer">
                             <div class="questionFilling">
-                                בזמנים ״מתים״ - <br> כדי לקלוט כמה שיותר <select id="option1" class="options" @change="checkWhenPractice" v-model="select1" :disabled="option1.disabled"><option v-for="(option, index) in option1.option" :key="index">{{ option }}</option></select>
+                                כדי לקלוט כמה שיותר <select id="option1" class="options" @change="checkWhenPractice" v-model="select1" :disabled="option1.disabled"><option v-for="(option, index) in option1.option" :key="index">{{ option }}</option></select>
                                 <img v-if="option1.isCorrect !== '' && select1 !== undefined" :src="option1.isCorrect" alt="icon" class="checkIcon"/> ולהספיק לכתוב כל מה שאנחנו צריכים, נכתוב בזמנים מסויימים הנקראים <select @change="checkWhenPractice" v-model="select2" id="option2" class="options" :disabled="option2.disabled"><option v-for="(option, index) in option2.option" :key="index">{{ option }}</option></select><img v-if="option2.isCorrect !== '' && select2 !== undefined" :src="option2.isCorrect" alt="icon" class="checkIcon"/>.
                             </div>
                             <div class="questionFilling">
-                                רישום בסמוך להתנסות - <br> על מנת למנוע <select  @change="checkWhenPractice" :disabled="option3.disabled" v-model="select3" id="option3" class="options"><option v-for="(option, index) in option3.option" :key="index">{{ option }}</option></select>
+                                על מנת למנוע <select  @change="checkWhenPractice" :disabled="option3.disabled" v-model="select3" id="option3" class="options"><option v-for="(option, index) in option3.option" :key="index">{{ option }}</option></select>
                                 <img v-if="option3.isCorrect !== '' && select3 !== undefined" :src="option3.isCorrect" alt="icon" class="checkIcon"/>
                                 של פרטים חשובים וקריטיים, ניישם סוג רישום נוסף שלפיו יש לרשום <select :disabled="option4.disabled" class="options"  @change="checkWhenPractice" v-model="select4" id="option4"><option v-for="(option, index) in option4.option" :key="index">{{ option }}</option></select><img v-if="option4.isCorrect !== '' && select4 !== undefined" :src="option4.isCorrect" alt="icon" class="checkIcon"/>.
                             </div>
@@ -276,7 +276,7 @@ import ConnectTwo from './connectTwo.vue'
                         </div>
                     </div>
                 </div>
-                <div class="message" v-show="finishedLevel">כל הכבוד!<img src="../assets/muscle.png" class="muscle" /></div>
+                <div class="message" v-show="finishedLevel">כל הכבוד! סיימתם את השלב<img src="../assets/muscle.png" class="muscle" /></div>
                 <button type="button" v-show="practiceCount === 2 || showButton === true" @click="checkingFunction" class="buttons">{{ messageForButton }}</button>
             </div>
         </div>
@@ -507,7 +507,7 @@ select:disabled {
 }
 
 .message {
-    width: 23vw;
+    width: 25vw;
     height: 10vh;
     background-color: rgb(255, 255, 255);
     box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5); 

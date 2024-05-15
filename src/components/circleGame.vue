@@ -156,6 +156,7 @@ export default {
     methods: {
         appeared() {    
             this.$emit('callingTimer', 12, this.circleSectionCounter);
+
             for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
                 if (!this.sections[this.circleSectionCounter][i]["clicked"]) {
                     document.getElementById(`${this.sections[this.circleSectionCounter][i]["id"]}`).classList.remove("disappearAni");

@@ -35,6 +35,7 @@
         chosen: '',
         showOtherSubject: false,
         textCounter: 0,
+        showEndMessage: false,
         showBackButton: false,
         onStart: 'start',
         isDisabled: '',
@@ -63,7 +64,6 @@
         }
       },
       checkAnswer(key) {
-
         this.isDisabled = 'disabled';
         this.answered = true;
         
@@ -72,6 +72,15 @@
           this.sideNote = 'תשובה נכונה. כל הכבוד!';
 
           setTimeout(() => {
+            if (this.questionCounter === 2) {
+              this.showEndMessage = true;
+
+              setTimeout(() => {
+                this.showEndMessage = false;
+                this.$emit('backToHomePage', 'התערבות');
+              }, 1500)
+            }
+
             this.questionCounter++;
             this.chosen = '';
             this.answered = false;
@@ -80,16 +89,23 @@
               this.isDisabled = 'abled';
             },1000)
 
-            if (this.questionCounter === 3) {
-              this.$emit('backToHomePage', 'התערבות');
-            }
+
           }, 2000);
 
         } else {
           this.chosen = `false${key}`;
           this.sideNote = this.practice[this.questionCounter]['explain'];
-
+          
           setTimeout(() => {
+            if (this.questionCounter === 2) {
+              this.showEndMessage = true;
+  
+              setTimeout(() => {
+                this.showEndMessage = false;
+                this.$emit('backToHomePage', 'התערבות');
+              }, 1500)
+            }
+
             this.questionCounter++;
             this.chosen = '';
             this.answered = false;
@@ -98,9 +114,6 @@
               this.isDisabled = 'abled';
             },1000)
 
-            if (this.questionCounter === 3) {
-              this.$emit('backToHomePage', 'התערבות');
-            }
           }, 4000);
         }
       },
@@ -110,7 +123,7 @@
     },
     mounted() {
       setTimeout(() => {
-          this.onStart = 'off';
+        this.onStart = 'off';
       }, 100);
 
       setTimeout(() => {
@@ -148,15 +161,16 @@
           </div>
         </div>
         <div v-else class="practiceContainer">
-          <div class="question">
+          <div class="question" v-if="questionCounter < 3">
             {{ practice[questionCounter].question }}
           </div>
           <div class="explain" v-show="answered" v-html="sideNote"></div>
           <div class="answerCont">
-            <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect', isDisabled]" @click="checkAnswer(1)">התערבות עקיפה</div>
-            <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect' , isDisabled]" @click="checkAnswer(2)">התערבות ישירה</div>
+            <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect', isDisabled]" @click="checkAnswer(1)">התערבות עקיפה<img src="../assets/advice.png" class="iconForButton" /></div>
+            <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect' , isDisabled]" @click="checkAnswer(2)">התערבות ישירה<img src="../assets/stop.png" class="iconForButton" /></div>
           </div>
         </div>
+        <div class="message" v-show="showEndMessage">כל הכבוד! עברתם שלב<img src="../assets/muscle.png" class="muscle" /></div>
         <div class="buttonCont">
                 <button v-show="showNextButton" class="buttons" @click="nextSubject">
                     ממשיכים
@@ -184,13 +198,40 @@
   pointer-events: none;
 }
 
+.message {
+  width: 23vw;
+  height: contain;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5); 
+  transform: translate(-50%,-50%);
+  position: absolute;
+  top: 50%;
+  direction: rtl;
+  padding: 3vw;
+  font-size: 2.7rem;
+  text-align: center;
+  left: 50%;
+  z-index: 2;
+ }
+
+ .muscle {
+  width: 2.5vw;
+  margin-right: 0.5vw;
+ }
+
 .parts {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100vh;
-    direction: rtl;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  direction: rtl;
+}
+
+.iconForButton {
+  width: 2vw;
+  height: 4vh;
+  margin-right: 0.5vw;
 }
 
 .titleCircle {
@@ -325,10 +366,13 @@
   background-color: #ffffffd2;
   border-radius: 2vh;
   cursor: pointer;
+  display: flex;
+  direction: rtl;
   box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);
   text-align: center;
   padding: 2vh 2vw;
   font-size: 1.25rem;
+  align-items: center;
 }
 
 .answers:hover {

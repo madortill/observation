@@ -21,7 +21,7 @@
             <div class="circleCont">
                 <CircleGame @setInScore="setInScore" @callingTimer="callingTimer" />
             </div>
-            <div class="message" v-show="showEndMessage">התוצאה הסופית שלכם היא: {{ score }} <br><br> {{ endMessage }}<img src="../assets/muscle.png" class="muscle" v-show="this.score > 1200" /></div>
+            <div class="message" v-show="showEndMessage"><div v-if="showEndingGame">התוצאה הסופית שלכם היא: {{ score }} <br><br></div> {{ endMessage }}<img src="../assets/muscle.png" class="muscle" v-show="this.score > 1200" /></div>
         </div>
         <div class="buttonCont">
             <button v-show="showNextButton" class="buttons" @click="nextSubject">
@@ -55,6 +55,7 @@
             changeAni: false,
             countDown: 0,
             score: 0,
+            showEndingGame: true,
             timer: null,
             disappearTimer: null
         };        
@@ -77,7 +78,14 @@
             } else if (this.subjectCounter === 4) {
                 this.showBackButton = true;
             } else if (this.subjectCounter === 5) {
-                this.$emit('backToHomePage', 'חלוקת קשב');
+                this.showEndMessage = true;
+                this.showEndingGame = false;
+                this.endMessage = "כל הכבוד! סיימתם את השלב";
+
+                setTimeout(() => {
+                    this.showEndMessage = false;
+                    this.$emit('backToHomePage', 'חלוקת קשב');
+                }, 1500)
             }
          },
         prevSubject() {
@@ -129,7 +137,7 @@
             if (this.score < 1200) {
                 this.endMessage = 'כל הכבוד על ניסיון';
             } else {
-                this.endMessage = 'כל הכבוד! הצלחת בגדול!';
+                this.endMessage = 'כל הכבוד! הצלחתם בגדול!';
             }
             setTimeout(() => {
                 this.nextSubject();
