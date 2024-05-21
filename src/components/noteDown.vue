@@ -1,5 +1,6 @@
 <script>
-import ConnectTwo from './connectTwo.vue'
+// import ConnectTwo from './connectTwo.vue'
+import DragQuestion from './dragQuestion.vue'
 
   export default {
     props: ["chapter", "colorCode"],
@@ -90,7 +91,8 @@ import ConnectTwo from './connectTwo.vue'
       }
     },
     components: {
-     ConnectTwo
+    //  ConnectTwo,
+        DragQuestion
     },
     methods: {
         clickedOnOption(event) {
@@ -236,7 +238,8 @@ import ConnectTwo from './connectTwo.vue'
                             מה נרשום? 
                         </div>
                         <div class="connectTwo">
-                            <ConnectTwo @change-practice="changePractice" :ques="connectArr"/>
+                            <DragQuestion />
+                            <!-- <ConnectTwo @change-practice="changePractice" :ques="connectArr"/> -->
                         </div>
                     </div>
                     <div class="whenWriting" v-show="practiceCount === 1">

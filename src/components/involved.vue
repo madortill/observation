@@ -71,42 +71,11 @@
           this.chosen = `true${key}`;
           this.sideNote = 'תשובה נכונה. כל הכבוד!';
 
-          setTimeout(() => {
-            if (this.questionCounter === 2) {
-              this.showEndMessage = true;
-
-              setTimeout(() => {
-                this.showEndMessage = false;
-                this.$emit('backToHomePage', 'התערבות');
-              }, 1500)
-            }
-
-            setTimeout(() => {
-              this.isDisabled = 'abled';
-            },1000)
-
-
-          }, 2000);
-
         } else {
           this.chosen = `false${key}`;
           this.sideNote = this.practice[this.questionCounter]['explain'];
-          
-          setTimeout(() => {
-            if (this.questionCounter === 2) {
-              this.showEndMessage = true;
-  
-              setTimeout(() => {
-                this.showEndMessage = false;
-                this.$emit('backToHomePage', 'התערבות');
-              }, 1500)
-            }
 
-            setTimeout(() => {
-              this.isDisabled = 'abled';
-            },1000)
 
-          }, 4000);
         }
       },
       src(name) {
@@ -114,8 +83,22 @@
       },
       nextSituation() {
         this.questionCounter++;
-            this.chosen = '';
-            this.answered = false;
+        this.chosen = '';
+        this.answered = false;
+
+        if (this.questionCounter === 3) {
+          this.showEndMessage = true;
+
+          setTimeout(() => {
+            this.showEndMessage = false;
+            this.$emit('backToHomePage', 'התערבות');
+          }, 1500)
+        } else {
+          
+          setTimeout(() => {
+            this.isDisabled = 'abled';
+          },1000)
+        }
       }
     },
     mounted() {
@@ -162,12 +145,12 @@
             {{ practice[questionCounter].question }}
           </div>
           <div class="explain" v-show="answered" v-html="sideNote"></div>
-          <div class="answerCont">
+          <div class="answerCont" v-if="questionCounter < 3">
             <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect', isDisabled]" @click="checkAnswer(1)">התערבות עקיפה<img src="../assets/advice.png" class="iconForButton" /></div>
             <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect' , isDisabled]" @click="checkAnswer(2)">התערבות ישירה<img src="../assets/stop.png" class="iconForButton" /></div>
           </div>
         </div>
-        <img src="../assets/arrow.png" @click="nextSituation" v-show="answered" class="nextArrow" alt="arrow">
+        <img src="../assets/arrow.png" @click="nextSituation" v-show="answered" class="nextArrow" alt="arrow" />
         <div class="message" v-show="showEndMessage">כל הכבוד! עברתם שלב<img src="../assets/muscle.png" class="muscle" /></div>
         <div class="buttonCont">
                 <button v-show="showNextButton" class="buttons" @click="nextSubject">
