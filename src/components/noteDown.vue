@@ -14,7 +14,7 @@ import DragQuestion from './dragQuestion.vue'
         correctCounter: 0,
         messageForButton: 'בדיקה',
         showButton: false,
-        practiceCount: 0,
+        practiceCount: 1,
         select1: undefined,
         select2: undefined,
         select3: undefined,
@@ -67,7 +67,7 @@ import DragQuestion from './dragQuestion.vue'
             {
                 title: "בצורה מפורטת",
                 options: [{
-                    opt: '"המדריך עשה סיכום שיעור לא טוב."',
+                    opt: '"המדריך עשה סיכום שיעור לא טוב"',
                     id: 0,
                     clickedCorrect: ''
                 },
@@ -238,7 +238,7 @@ import DragQuestion from './dragQuestion.vue'
                             מה נרשום? 
                         </div>
                         <div class="connectTwo">
-                            <DragQuestion />
+                            <!-- <DragQuestion @change-practice="changePractice"/> -->
                             <!-- <ConnectTwo @change-practice="changePractice" :ques="connectArr"/> -->
                         </div>
                     </div>
@@ -263,7 +263,7 @@ import DragQuestion from './dragQuestion.vue'
                             איך נרשום? 
                         </div>
                         <div class="subtitle-practice">
-                            נכון / לא נכון
+                            בחרו בתשובה הנכונה
                         </div>
                         <div>
                             <div v-for="(question, index) in howQuestion" :key="index" class="container-howPractice">
@@ -329,6 +329,7 @@ import DragQuestion from './dragQuestion.vue'
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.8vh;
+    color: #0c5341;
 }
 
 .basicTitle-3 {

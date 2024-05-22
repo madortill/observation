@@ -14,8 +14,8 @@
                 כגון: תצפית על חניך שטווח בנשק.`
             },
             {
-                subSubjectTitle: "מאפיינים אישיים של המדריך",
-                subjectText: `השתדלו להתחשב בבקשות המדריך בנוגע למיקומנו בשיעור ונפעיל שיקול דעת כדי למנוע משיכת תשומת לב.`
+                subSubjectTitle: "שאלו את הנחנך",
+                subjectText: `השתדלו להתחשב בבקשות הנחנך בנוגע למיקומנו בשיעור ונפעיל שיקול דעת כדי למנוע משיכת תשומת לב.`
             },
             {
                 subSubjectTitle: "רואה ולא נראה",
@@ -189,7 +189,7 @@
             <div class="sitting">
                 <img src="../assets/table2.png" alt="class" class="table2" />
                 <div>
-                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat.id" src="../assets/table.png" alt="seats" :class="['seats', !seat.showAnswer ? '' : seat.answer ? 'correct' : 'incorrect']" @click="checkSeating" />
+                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat.id" src="../assets/table.png" alt="seats" :class="['seats', !seat.showAnswer ? '' : seat.answer ? 'correctSeating' : 'incorrectSeating']" @click="checkSeating" />
                 </div>
             </div>
         </div>
@@ -354,7 +354,7 @@
     margin: 4vh 3vw 2vh 3vw;
 }
 
-.correct {
+.correctSeating {
     -webkit-box-shadow:0px 0px 48px 5px rgba(46,255,70,0.9);
     -moz-box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
     box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
@@ -364,7 +364,7 @@
     margin: 4vh 3vw 2vh 3vw;
 }
 
-.incorrect {
+.incorrectSeating {
     -webkit-box-shadow:0px 0px 48px 5px rgba(255,46,46,0.6);
     -moz-box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
     box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);

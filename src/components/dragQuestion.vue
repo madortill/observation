@@ -136,7 +136,7 @@ export default {
                 // console.log(indexCorrectAns);
                 if (indexCorrectAns === rightAns.length) {
                     setTimeout(() => {
-                        this.$emit('next-question');
+                        this.$emit('change-practice');
                     }, 1500)
                 }
             }
@@ -200,10 +200,10 @@ export default {
     font-size: 1.2rem;
     font-weight: 500;
     position: relative;
-    background: #11a8e3;
+    background: white;
     cursor: grab;
     border-radius: 30px;
-    color: white;
+    color: rgb(0, 0, 0);
     transition: all 0.3s ease;
     top: 2%;
 }
@@ -245,15 +245,18 @@ export default {
 }
 
 .word-warehouse {
+    width: 85%;
+    height: 10%;
+    display: flex;
     position: absolute;
-    width: 88%;
-    /* height: 10%; */
-    left: 5%;
-    bottom: 8%;
-    background: #fff;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #538b8fad;
     border-radius: 50px;
     box-shadow: 0 15px 20px -20px rgba(0, 0, 0, 0.4);
     text-align: center;
+    justify-content: space-evenly;
 }
 
 .correct {
