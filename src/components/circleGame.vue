@@ -15,6 +15,8 @@ export default {
     data() {
         return {
             changeColor: 0,
+            correctCircle: 0,
+            circleClickedTimes: 0,
             circleSectionCounter: 0,
             disappearTimer: null,
             score: null,
@@ -24,24 +26,28 @@ export default {
                         option: "מיקוד בדבר המפקד",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 0
                     },
                     {
                         option: "עיסוק בשפת גוף של המפקד",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 1
                     },
                     {
                         option: "עיסוק ברעשי רקע",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 2
                     },
                     {
                         option: "עיסוק בבקיאות החניכים",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 3
                     },
                 ],
@@ -50,24 +56,28 @@ export default {
                         option: "עיסוק בדיגום החניכים",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 0
                     },
                     {
                         option: "מיקוד בכלי כתיבה של החניכים",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 1
                     },
                     {
                         option: "מיקוד בכתב המדריך",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 2
                     },
                     {
                         option: "מיקוד בבקיאות המדריך",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 3
                     },
                 ], 
@@ -76,24 +86,28 @@ export default {
                         option: "מיקוד בביצוע מורכב",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 0
                     },
                     {
                         option: "עיסוק בתגובות החניכים",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 1
                     },
                     {
                         option: "מיקוד בביצועים חד פעמיים",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 2
                     },
                     {
                         option: "עיסוק בדיבורי החניכים",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 3
                     },
                 ],
@@ -102,12 +116,14 @@ export default {
                         option: "עיסוק בכלל הדברים שקורים",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 0
                     },
                     {
                         option: "מיקוד בביצועים חוזרים",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 1
                     },
 
@@ -115,12 +131,14 @@ export default {
                         option: "מיקוד בדיגום של המפקד",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 2
                     },
                     {
                         option: "מיקוד בביצוע פשוט",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 3
                     },
                 ],
@@ -129,24 +147,28 @@ export default {
                         option: "מיקוד בעזרי הדרכה",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 0
                     },
                     {
                         option: "עיסוק בסביבת ההדרכה",
                         isCorrect: true,
                         clicked: false,
+                        seen: true,
                         id: 1
                     },
                     {
                         option: "עיסוק בהפרעות",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 2
                     },
                     {
                         option: "מיקוד בביצוע ספציפי",
                         isCorrect: false,
                         clicked: false,
+                        seen: true,
                         id: 3
                     },
                 ],    
@@ -174,14 +196,19 @@ export default {
         disappear(event) {
             if (event !== undefined) {
                 for (let i = 0; i < this.sections[this.circleSectionCounter].length; i++) {
+                    this.correctCircle++;
                     
                     if (this.sections[this.circleSectionCounter][i]["id"] === Number(event.currentTarget.id)) {
-                            this.sections[this.circleSectionCounter][i]["clicked"] = true;
-                            event.currentTarget.classList.remove("appearAni");
-                            event.currentTarget.classList.add("disappearAni");
-                            setTimeout(() => {
-                                this.sections[this.circleSectionCounter][i]["clicked"] = false;
-                            }, 500)
+                        this.circleSectionCounter++;
+                        this.sections[this.circleSectionCounter][i]["clicked"] = true;
+                        this.sections[this.circleSectionCounter][i]["seen"] = false;
+                        event.currentTarget.classList.remove("appearAni");
+                        event.currentTarget.classList.add("disappearAni");
+
+                        setTimeout(() => {
+                            this.sections[this.circleSectionCounter][i]["clicked"] = false;
+                        }, 500)
+
                         if (this.sections[this.circleSectionCounter][i]["isCorrect"]) {
                             this.score = '+250';
                             this.$emit('setInScore', true);
@@ -189,6 +216,10 @@ export default {
                             this.score = '-100';
                             this.$emit('setInScore', false);
                         }
+
+                    }
+                    if (this.correctCircle === this.circleSectionCounter) {
+                        this.circleSectionCounter++;
                     }
                 }
             }
