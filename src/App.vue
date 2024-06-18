@@ -25,7 +25,7 @@ import wholeScreen from './wholeScreen.vue';
 <style scoped>
 @font-face {
   font-family: "heebo";
-  src: url('src/assets/fonts/Heebo/heebo.regular.ttf');
+  src: url('./assets/fonts/Heebo/heebo.regular.ttf');
 }
 
 .wrapper {
