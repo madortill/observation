@@ -49,7 +49,7 @@
 <template>
     <div class="wrapperNew" :class="`${animationType}`" >
       <img src="./assets/madortill.png" alt="mador" class="logo" />
-      <img src="src/assets/information.png" alt="info" v-show="chapters[pageCounter] === 'פתיחה'" class="info" @click="showInfo = !showInfo"/>
+      <img src="./assets/information.png" alt="info" v-show="chapters[pageCounter] === 'פתיחה'" class="info" @click="showInfo = !showInfo"/>
       <div class="infoContainer" v-show="showInfo">
         מפתחת ראשית: <br>
         סמל שירה כהן <br> <br>
