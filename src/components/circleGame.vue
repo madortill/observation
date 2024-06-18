@@ -1,7 +1,7 @@
 <template>
     <div v-for="(section, id) in sections" :key="id" class="circle-container" v-show="circleSectionCounter === id">
         <div v-for="(option, index) in section" :key="index">
-            <div v-show="option.clicked" class="clickedContainer"><img class="icon" :src="option.isCorrect ? 'src/assets/check.png' : 'src/assets/cancel.png'" />{{ score }}</div>
+            <div v-show="option.clicked" class="clickedContainer"><img class="icon" :src="option.isCorrect ? '../assets/check.png' : '../assets/cancel.png'" />{{ score }}</div>
             <div class="circle colorAni" :id="option.id" :style="`--hue: ${(changeColor) * 15 + 130}deg`" @click="disappear" >
                 {{ option.option }}
             </div>
