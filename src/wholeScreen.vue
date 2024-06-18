@@ -79,7 +79,7 @@
 
 <style scoped>
 .wrapperNew {
-  background-image: url("src/assets/goggles.png");
+  background-image: url("./assets/goggles.png");
   background-size: 55% 70%;
   background-repeat: no-repeat;
   background-position: center;
