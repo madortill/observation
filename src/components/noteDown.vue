@@ -129,11 +129,11 @@ import DragQuestion from './dragQuestion.vue'
             let numberOfArray = event.currentTarget.id.slice(-1);
 
             if (this[`option${numberOfArray}`].correctAnswer === event.currentTarget.value) {
-                this[`option${numberOfArray}`].isCorrect = './assets/check.png';
+                this[`option${numberOfArray}`].isCorrect = '../assets/check.png';
                 this.correctCounter++;
                 this[`option${numberOfArray}`].disabled = true;
             } else {
-                this[`option${numberOfArray}`].isCorrect = './assets/cancel.png';
+                this[`option${numberOfArray}`].isCorrect = '../assets/cancel.png';
             }
 
             if (this.correctCounter === 4) {
