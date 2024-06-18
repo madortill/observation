@@ -200,7 +200,7 @@ import DragQuestion from './dragQuestion.vue'
                 <div class="basicTitle">הגדרה</div>
                 רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
                 כלל הדברים שתכתבו ישמשו עבורכם בשלב העיבוד. <br><br> 
-                שימו <img src="src/assets/heart.png" class="heartIcon" />, ההפך מלרשום הוא לשכוח.
+                שימו <img src="../assets/heart.png" class="heartIcon" />, ההפך מלרשום הוא לשכוח.
                 <br> <br>
                 במהלך התצפית, התייחסו להכנת השיעור והעברתו - תקף, מהימן ופרקטי, כולל את כל החומר הנדרש.
             </div>
