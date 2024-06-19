@@ -112,8 +112,8 @@
 .infoContainer {
   position: absolute;
   width: 12%;
-  height: 35%;
-  padding-top: 2vh;
+  height: contain;
+  padding: 2vh;
   direction: rtl;
   left: 5%;
   top: 5%;

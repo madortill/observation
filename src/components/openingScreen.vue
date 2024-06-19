@@ -30,10 +30,10 @@ export default {
     font-weight: 700;
     display: flex;
     direction: rtl;
-    font-size: 10rem;
+    font-size: 9.5rem;
     padding-top: 32vh;
-    width: 55vw;
-    color: rgb(68, 68, 68);
+    width: 55.5vw;
+    color: rgb(110, 110, 110);
     animation: floatAnimation 3s ease-in-out infinite;
     justify-content: space-around;
 }

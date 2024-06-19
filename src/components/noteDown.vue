@@ -129,7 +129,7 @@ import DragQuestion from './dragQuestion.vue'
             let numberOfArray = event.currentTarget.id.slice(-1);
 
             if (this[`option${numberOfArray}`].correctAnswer === event.currentTarget.value) {
-                this[`option${numberOfArray}`].isCorrect = 'cancel';
+                this[`option${numberOfArray}`].isCorrect = 'check';
                 this.correctCounter++;
                 this[`option${numberOfArray}`].disabled = true;
             } else {
@@ -249,12 +249,12 @@ import DragQuestion from './dragQuestion.vue'
                         <div class="questionContainer">
                             <div class="questionFilling">
                                 כדי לקלוט כמה שיותר <select id="option1" class="options" @change="checkWhenPractice" v-model="select1" :disabled="option1.disabled"><option v-for="(option, index) in option1.option" :key="index">{{ option }}</option></select>
-                                <img v-if="option1.isCorrect !== '' && select1 !== undefined" :src='option1.isCorrect === "check" ? "./assets/check.png" : "./assets/cancel.png"' alt="icon" class="checkIcon"/> ולהספיק לכתוב כל מה שאנחנו צריכים, נכתוב בזמנים מסויימים הנקראים <select @change="checkWhenPractice" v-model="select2" id="option2" class="options" :disabled="option2.disabled"><option v-for="(option, index) in option2.option" :key="index">{{ option }}</option></select><img v-if="option2.isCorrect !== '' && select2 !== undefined" :src="option2.isCorrect" alt="icon" class="checkIcon"/>.
+                                <img v-if="option1.isCorrect !== '' && select1 !== undefined" :src='option1.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/> ולהספיק לכתוב כל מה שאנחנו צריכים, נכתוב בזמנים מסויימים הנקראים <select @change="checkWhenPractice" v-model="select2" id="option2" class="options" :disabled="option2.disabled"><option v-for="(option, index) in option2.option" :key="index">{{ option }}</option></select><img v-if="option2.isCorrect !== '' && select2 !== undefined" :src='option2.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>.
                             </div>
                             <div class="questionFilling">
                                 על מנת למנוע <select  @change="checkWhenPractice" :disabled="option3.disabled" v-model="select3" id="option3" class="options"><option v-for="(option, index) in option3.option" :key="index">{{ option }}</option></select>
-                                <img v-if="option3.isCorrect !== '' && select3 !== undefined" :src="option3.isCorrect" alt="icon" class="checkIcon"/>
-                                של פרטים חשובים וקריטיים, ניישם סוג רישום נוסף שלפיו יש לרשום <select :disabled="option4.disabled" class="options"  @change="checkWhenPractice" v-model="select4" id="option4"><option v-for="(option, index) in option4.option" :key="index">{{ option }}</option></select><img v-if="option4.isCorrect !== '' && select4 !== undefined" :src="option4.isCorrect" alt="icon" class="checkIcon"/>.
+                                <img v-if="option3.isCorrect !== '' && select3 !== undefined" :src='option3.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>
+                                של פרטים חשובים וקריטיים, ניישם סוג רישום נוסף שלפיו יש לרשום <select :disabled="option4.disabled" class="options"  @change="checkWhenPractice" v-model="select4" id="option4"><option v-for="(option, index) in option4.option" :key="index">{{ option }}</option></select><img v-if="option4.isCorrect !== '' && select4 !== undefined" :src='option4.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>.
                             </div>
                         </div>
                     </div>
