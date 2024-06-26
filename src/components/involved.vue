@@ -254,11 +254,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 18vh;
+  margin-top: 16.8vh;
   transform-origin: top right;
   background-color: rgba(255, 255, 255, 0.671);
   box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-  padding: 7.5vh 7vw;
+  padding: 6vh 7vw;
   border-radius: 2rem;
 }
 
@@ -374,6 +374,7 @@
 
 .flip-card-container {
   display: flex;
+  width: 40vw;
   flex-direction: row;
   align-items: center;
   direction: rtl;
@@ -382,8 +383,8 @@
 
 .flip-card {
   background-color: transparent;
-  width: 200px;
-  height: 520px;
+  width: 175px;
+  height: 420px;
   perspective: 1000px;
   flex: 0 0 calc(50% - 20px);
   margin: 0px 115px 0px;
@@ -391,9 +392,9 @@
 }
 
 .font-card-text {
-  font-size: 2.75rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  margin-bottom: 3vh;
+  margin-bottom: 1.5vh;
   color: black;
 }
 
@@ -405,7 +406,7 @@
 }
 
 .textBack {
-  font-size: 1.9rem;
+  font-size: 1.6rem;
   padding: 1vh;
 }
 

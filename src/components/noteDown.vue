@@ -467,7 +467,7 @@ select:disabled {
 }
 
 .test-page {
-    height: 72vh;
+    height: 78vh;
     padding: 1vh 0vw;
     width: 64rem;
     background-color: rgba(255, 255, 255, 0.795);
