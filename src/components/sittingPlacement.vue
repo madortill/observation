@@ -303,7 +303,7 @@
 .instructions {
     width: 32vw;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.5;
 }
 

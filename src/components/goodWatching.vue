@@ -139,7 +139,7 @@ import Involved from './involved.vue';
 .subjectExplain {
   background-color: #ffffff7f;
   border-radius: 2vh;
-  padding: 2.5vh 4vw;
+  padding: 3.75vh 4vw;
   height: 12vh;
   box-shadow: 0 5px 7px #0003;
   width: 15vw;
@@ -149,7 +149,6 @@ import Involved from './involved.vue';
 .subtitle {
   font-size: 1.3rem;
   font-weight: 600;
-  padding-bottom: 0.6vh;
 }
 
 .item-text {
@@ -184,7 +183,7 @@ import Involved from './involved.vue';
   background-color: #cacaca7f;
   border-radius: 2vh;
   height: 12vh;
-  padding: 2.5vh 4vw;
+  padding: 3vh 4vw;
   width: 15vw;
   margin-right: 9vw;
 }

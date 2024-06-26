@@ -659,7 +659,7 @@ input[type=checkbox] {
     transform-origin: top right;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
-    font-size: 2rem;
+    font-size: 1.5rem;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     padding: 6vh 5vw;
     border-radius: 2rem;

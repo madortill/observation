@@ -1,6 +1,6 @@
 <template>
     <div class="hearingContainer">
-        <div class="titleCircle" v-show="subjectCounter !== 2 && subjectCounter !== 1 && subjectCounter !== 5" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
+        <div class="titleCircle" v-show="subjectCounter !== 2 && subjectCounter !== 5" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter !== 2" class="textPart">
             <div :class="[changeAni ? 'float': 'scale', subjectCounter < 2 ? 'instructions' : 'explanation']">
                 <div class="basicTitle">
@@ -66,6 +66,7 @@
     methods: {
          nextSubject() {
              this.subjectCounter++;
+             console.log(this.subjectCounter);
 
              console.log(this.subjectCounter)
             if (this.subjectCounter === 2) {
@@ -277,7 +278,7 @@
     margin-top: 20vh;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
-    font-size: 2rem;
+    font-size: 1.5rem;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     padding: 8.5vh 5vw;
     border-radius: 2rem;
