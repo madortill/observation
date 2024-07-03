@@ -371,6 +371,7 @@
     transform: scale(0.6);
     display: flex;
     width: 56vw;
+    margin-top: 8vh;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;

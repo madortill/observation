@@ -87,7 +87,6 @@
         this.questionCounter++;
         this.chosen = '';
         this.answered = false;
-         console.log(this.questionCounter)
 
         if (this.questionCounter === 3) {
           this.showEndMessage = true;
@@ -216,7 +215,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
+  height: 85vh;
   direction: rtl;
 }
 
@@ -513,7 +512,7 @@
 
 .buttonCont {
   width: 85vw;
-  margin-top: 8vh;
+  /* margin-top: 8vh; */
   display: flex;
   align-items: center;
   justify-content: space-between;
