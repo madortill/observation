@@ -243,7 +243,7 @@
   position: fixed;
   padding: 3.5%;
   position: absolute;
-  top: 13vh;
+  top: 11vh;
   right: 21vw;
   z-index: 2;
   cursor: pointer;
@@ -254,15 +254,15 @@
 }
 
 .explainCont {
-    margin-top: 21vh;
-    transform-origin: top right;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.671);
-    font-size: 2rem;
-    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-    padding: 5vh 7vw;
-    border-radius: 2rem;
-    line-height: 1.5;
+  margin-top: 22vh;
+  transform-origin: top right;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.671);
+  font-size: 2rem;
+  box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
+  padding: 5vh 7vw;
+  border-radius: 2rem;
+  line-height: 1.5;
 }
 
 .correct {
@@ -513,6 +513,7 @@
 
 .buttonCont {
   width: 85vw;
+  margin-top: 8vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
