@@ -154,7 +154,7 @@ export default {
     align-items: center;
     background: #fff;
     border-radius: 50px;
-    box-shadow: 0 15px 20px -20px rgba(0, 0, 0, 0.4);
+    box-shadow: 6px 7px 21px -3px rgba(0,0,0,0.57);
     text-align: center;
 }
 
@@ -166,7 +166,7 @@ export default {
     background: #fff;
     border-radius: 50px;
     position: absolute;
-    box-shadow: 0 15px 20px -20px rgba(0, 0, 0, 0.4);
+    box-shadow: 6px 7px 21px -3px rgba(0,0,0,0.57);
     text-align: center;
     width: 15vw;
     height: 55vh;
@@ -286,7 +286,7 @@ export default {
     height: 10%;
     display: flex;
     position: absolute;
-    bottom: -8%;
+    bottom: -10%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: #65b891d8;
