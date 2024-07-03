@@ -22,7 +22,7 @@
                 <div v-for="(term, index) in terms" :key="index" class="terms">{{ term }}</div>
             </div>
 
-            <button v-show="!showWordWarehouse" class="buttons" @click="$emit('changePractice')">
+            <button v-show="!showWordWarehouse" class="buttons-drag" @click="$emit('changePractice')">
                 ממשיכים
             </button>
         </div>
@@ -206,7 +206,7 @@ export default {
     cursor: pointer;
 }
 
-.buttons {
+.buttons-drag {
     border: none;
     cursor: pointer;   
     height: 6vh;
@@ -223,8 +223,8 @@ export default {
     width: 11vw;
 }
 
-.buttons:hover,
-.buttons:focus {
+.buttons-drag:hover,
+.buttons-drag:focus {
 	animation: borderPulse 4000ms infinite ease-out,  hoverShine 200ms;
 }
 
