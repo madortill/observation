@@ -9,7 +9,7 @@
             }" @dragover="allowDrop" id='dragArea' @dragstart="onDragging">
             </div>
 
-            <ul v-show = "showWordWarehouse" class="word-warehouse" @dragstart="onDragging" @dragover="allowDrop" @drop="(e) => {
+            <ul v-show="showWordWarehouse" class="word-warehouse" @dragstart="onDragging" @dragover="allowDrop" @drop="(e) => {
                 e.preventDefault();
                 drop(e);
                 checkDrop(e)
@@ -22,7 +22,9 @@
                 <div v-for="(term, index) in terms" :key="index" class="terms">{{ term }}</div>
             </div>
 
-            <p v-show = "showTextSuccess" class = "text-success">כל הכבוד!</p>
+            <button v-show="!showWordWarehouse" class="buttons" @click="$emit('changePractice')">
+                ממשיכים
+            </button>
         </div>
     </div>
 </template>
@@ -37,7 +39,6 @@ export default {
         return {
             answerArray: [],
             showWordWarehouse: true,
-            showTextSuccess: false,
             definitions: ["הכיתה מלוכלכת ואינה מוכנה לקיום שיעור.", "״נכון! בדיוק כמו שאמרת, המנוע צריך להתחמם לפני שמתחילים בנסיעה״", "דנה נרדמה בשיעור", 
             "מתוך 45 דקות שיעור, המדריך העביר פתיחה במשך 25 דקות.", "השיעור הועבר בחוץ ביום של 35 מעלות חום, זה הקשה מאוד על ריכוז התלמידים.", "3 תלמידים ספציפיים תמיד עונים על כל השאלות."],
             terms: ["תיאורים", "ציטוטים", "שמות", "זמנים", "מקומות", "מידע כמותי"],
@@ -77,8 +78,7 @@ export default {
 
             const rightAns = this.definitions;
             if (!rightAns) {
-                console.log("rightAns is not defined or empty");
-                return;
+                 return;
             }
             for (let i = 0; i < this.answerArray.length; i++) {
                 let newArrayElement = this.answerArray[i]; 
@@ -95,15 +95,7 @@ export default {
                 }
                 // console.log(indexCorrectAns);
                 if (indexCorrectAns === rightAns.length) {
-                    // console.log(rightAns.correctArray.length);
-                    // console.log(indexCorrectAns + 'right ans')
-                    // if(indexCorrectAns === rightAns.correctArray.length){
-                    //     this.showWordWarehouse = true;
-                    // }
-                    this.showTextSuccess = true;
-                    setTimeout(() => {
-                        this.$emit('next-question');
-                    }, 2000)
+                    this.showWordWarehouse = false;
                 } 
             }
         },
@@ -124,21 +116,14 @@ export default {
                 let newArrayElement = this.answerArray[i]; 
                 let rightAnsElement = rightAns[i];
                 if (newArrayElement === rightAnsElement) {
-                    console.log('Correct');
                     indexCorrectAns++;
                     document.querySelector(`.draggable-area .list-item:nth-of-type(${i + 1})`).classList.add("correct");
                     document.querySelector(`.draggable-area .list-item:nth-of-type(${i + 1})`).classList.remove("wrong");
                 } else {
-                    console.log('Wrong');
                     document.querySelector(`.draggable-area .list-item:nth-of-type(${i + 1})`).classList.add("wrong");
                     document.querySelector(`.draggable-area .list-item:nth-of-type(${i + 1})`).classList.remove("correct");
                 }
-                // console.log(indexCorrectAns);
-                if (indexCorrectAns === rightAns.length) {
-                    setTimeout(() => {
-                        this.$emit('change-practice');
-                    }, 1500)
-                }
+                
             }
         }
     },
@@ -162,7 +147,7 @@ export default {
 .draggable-area {
     position: absolute;
     width: 18vw;
-    height: 50vh;
+    height: 55vh;
     margin-right: 19vw;
     display: flex;
     flex-direction: column;
@@ -184,20 +169,20 @@ export default {
     box-shadow: 0 15px 20px -20px rgba(0, 0, 0, 0.4);
     text-align: center;
     width: 15vw;
-    height: 50vh;
+    height: 55vh;
 }
 
 .terms {
-    margin-top: 3.5vh;
+    margin: 2.2vh 0vw;
 }
 
 .list-item {
     list-style: none;
     width: 10vw;
     display: inline-block;
-    padding: 8px 30px;
+    padding: 0.5vh 1.2vw;
     margin: 10px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     position: relative;
     background: white;
@@ -219,6 +204,58 @@ export default {
 .text-drag:hover {
     color: #232020;
     cursor: pointer;
+}
+
+.buttons {
+    border: none;
+    cursor: pointer;   
+    height: 6vh;
+    /* left: 10%; */
+    /* bottom: 30%; */
+    font-size: 1.9rem;
+    color: #ffffff;
+    border-radius: 100px;
+    background-color: #0e5745d8;
+    /* min-width: 12%; */
+    position: absolute;
+    top: 97vh;
+    right: 45vw;
+    width: 11vw;
+}
+
+.buttons:hover,
+.buttons:focus {
+	animation: borderPulse 4000ms infinite ease-out,  hoverShine 200ms;
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+  35% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  50% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  } 
+  75% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  100% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+}
+
+@keyframes hoverShine {
+	0%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+	}
+	50%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0) 100%);
+	}
+	100%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,.4) 100%);
+	}
 }
 
 @keyframes floatAnimation {
@@ -249,10 +286,10 @@ export default {
     height: 10%;
     display: flex;
     position: absolute;
-    bottom: 2%;
+    bottom: -8%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #538b8fad;
+    background: #65b891d8;
     border-radius: 50px;
     box-shadow: 0 15px 20px -20px rgba(0, 0, 0, 0.4);
     text-align: center;

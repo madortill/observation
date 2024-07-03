@@ -14,7 +14,7 @@ import DragQuestion from './dragQuestion.vue'
         correctCounter: 0,
         messageForButton: 'בדיקה',
         showButton: false,
-        practiceCount: 1,
+        practiceCount: 0,
         select1: undefined,
         select2: undefined,
         select3: undefined,
@@ -238,7 +238,7 @@ import DragQuestion from './dragQuestion.vue'
                             מה נרשום? 
                         </div>
                         <div class="connectTwo">
-                            <!-- <DragQuestion @change-practice="changePractice"/> -->
+                            <DragQuestion @change-practice="changePractice"/> 
                             <!-- <ConnectTwo @change-practice="changePractice" :ques="connectArr"/> -->
                         </div>
                     </div>
@@ -291,7 +291,6 @@ import DragQuestion from './dragQuestion.vue'
                 חוזרים
             </button>
         </div>
-        
     </div>
 </template>
 
