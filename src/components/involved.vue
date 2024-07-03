@@ -29,7 +29,11 @@
             question: 'במהלך שיעור נשק בטירונות, מפקדת הצוות מפרטת על חלקי הנשק השונים. בהסברתה על החלק ״פין פציל״, המפקדת מדגישה כי חלק זה לא קריטי במבנה הנשק לצורך הפעלתו ובמקרה שאינו נמצא הנשק יתופעל כרגיל.',
             correctAnswer: '1',
             explain: 'התערבות עקיפה. <br> המפקדת טעתה בחומר הלימוד, לכן במקום להביך אותה בתיקון מול הכיתה, ניגש אליה מייד לאחר השיעור ונסביר לה את הטעות. היא תתקן את עצמה מול החניכים.'
-          },
+          },{
+            question: 'במהלך שיעור נשק בטירונות, מפקדת הצוות מפרטת על חלקי הנשק השונים. בהסברתה על החלק ״פין פציל״, המפקדת מדגישה כי חלק זה לא קריטי במבנה הנשק לצורך הפעלתו ובמקרה שאינו נמצא הנשק יתופעל כרגיל.',
+            correctAnswer: '1',
+            explain: 'התערבות עקיפה. <br> המפקדת טעתה בחומר הלימוד, לכן במקום להביך אותה בתיקון מול הכיתה, ניגש אליה מייד לאחר השיעור ונסביר לה את הטעות. היא תתקן את עצמה מול החניכים.'
+          }
       ],
         showNextButton: false,
         chosen: '',
@@ -37,7 +41,7 @@
         textCounter: 0,
         showEndMessage: false,
         showBackButton: false,
-        onStart: 'start',
+        onStart: 'off',
         isDisabled: '',
         sideNote: '',
         answered: false,
@@ -74,8 +78,6 @@
         } else {
           this.chosen = `false${key}`;
           this.sideNote = this.practice[this.questionCounter]['explain'];
-
-
         }
       },
       src(name) {
@@ -85,6 +87,7 @@
         this.questionCounter++;
         this.chosen = '';
         this.answered = false;
+         console.log(this.questionCounter)
 
         if (this.questionCounter === 3) {
           this.showEndMessage = true;
@@ -94,7 +97,6 @@
             this.$emit('backToHomePage', 'התערבות');
           }, 1500)
         } else {
-          
           setTimeout(() => {
             this.isDisabled = 'abled';
           },1000)
@@ -103,12 +105,13 @@
     },
     mounted() {
       setTimeout(() => {
-        this.onStart = 'off';
-      }, 100);
-
-      setTimeout(() => {
         this.showNextButton = true;
-      }, 1250);
+        this.onStart = 'start';
+
+        setTimeout(() => {
+          this.onStart = 'off';
+        }, 350);
+      }, 1300);
     },
   }
 </script>
@@ -140,18 +143,18 @@
             ענו על התשובה המתאימה ביותר לאחר קריאת הסיטואציה.
           </div>
         </div>
-        <div v-else class="practiceContainer">
-          <div class="question" v-if="questionCounter < 3">
+        <div v-else-if="textCounter === 2" class="practiceContainer">
+          <div class="question">
             {{ practice[questionCounter].question }}
           </div>
           <div class="explain" v-show="answered" v-html="sideNote"></div>
-          <div class="answerCont" v-if="questionCounter < 3">
+          <div class="answerCont">
             <div :class="[chosen == 'true1' ? 'correct' : chosen === 'true2' || chosen === '' || chosen === 'false2' ? 'answers' : 'incorrect', isDisabled]" @click="checkAnswer(1)">התערבות עקיפה<img src="../assets/advice.png" class="iconForButton" /></div>
             <div :class="[chosen == 'true2' ? 'correct' : chosen === 'true1' || chosen === '' || chosen === 'false1' ? 'answers' : 'incorrect' , isDisabled]" @click="checkAnswer(2)">התערבות ישירה<img src="../assets/stop.png" class="iconForButton" /></div>
           </div>
         </div>
-        <img src="../assets/arrow.png" @click="nextSituation" v-show="answered" class="nextArrow" alt="arrow" />
         <div class="message" v-show="showEndMessage">כל הכבוד! עברתם שלב<img src="../assets/muscle.png" class="muscle" /></div>
+        <img src="../assets/arrow.png" @click="nextSituation" v-show="answered" class="nextArrow" alt="arrow" />
         <div class="buttonCont">
                 <button v-show="showNextButton" class="buttons" @click="nextSubject">
                     ממשיכים
@@ -240,7 +243,7 @@
   position: fixed;
   padding: 3.5%;
   position: absolute;
-  top: 9vh;
+  top: 13vh;
   right: 21vw;
   z-index: 2;
   cursor: pointer;
@@ -251,15 +254,15 @@
 }
 
 .explainCont {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 16.8vh;
-  transform-origin: top right;
-  background-color: rgba(255, 255, 255, 0.671);
-  box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-  padding: 6vh 7vw;
-  border-radius: 2rem;
+    margin-top: 21vh;
+    transform-origin: top right;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.671);
+    font-size: 2rem;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
+    padding: 5vh 7vw;
+    border-radius: 2rem;
+    line-height: 1.5;
 }
 
 .correct {
@@ -304,13 +307,14 @@
   align-items: center;
   height: 40vh;
   width: 38vw;
-  font-size: 2.5rem;
+  font-size: 2.1rem;
   text-align: center;
   justify-content: space-around;
 }
 
 .explain {
   text-align: center;
+  width: 50vw;
   font-size: 1.3rem;
 }
 
@@ -337,7 +341,7 @@
 
 .question {
   width: 38vw;
-  font-size: 2.75rem;
+  font-size: 2.1rem;
   text-align: center;
   height: 32vh;
   display: flex;
@@ -350,7 +354,7 @@
   display: flex;
   width: 45vw;
   color: black;
-  height: 6vh;
+  height: 6.5vh;
   flex-direction: row;
   justify-content: space-evenly;
 }
@@ -364,7 +368,7 @@
   direction: rtl;
   box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);
   text-align: center;
-  padding: 2vh 2vw;
+  padding: 3vh 2vw;
   font-size: 1.25rem;
 }
 
@@ -374,7 +378,7 @@
 
 .flip-card-container {
   display: flex;
-  width: 40vw;
+  width: 35vw;
   flex-direction: row;
   align-items: center;
   direction: rtl;
@@ -462,28 +466,57 @@
 }
 
 .buttons {
-  font-size: 1.65rem;
-  padding: 2vh 3.5vw;
-  background-color: #0c5341;
-  text-align: center;
-  margin-bottom: 5vh;
-  cursor: pointer;
-  color: white;
   border: none;
-  box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+  cursor: pointer;   
+  height: 6vh;
+  font-size: 1.9rem;
+  color: #ffffff;
+  border-radius: 100px;
+  background-color: #0e5745d8;
+  width: 11vw;
+}
+
+.buttons:hover,
+.buttons:focus {
+	animation: borderPulse 4000ms infinite ease-out,  hoverShine 200ms;
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+  35% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  50% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  } 
+  75% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  100% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+}
+
+@keyframes hoverShine {
+	0%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+	}
+	50%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0) 100%);
+	}
+	100%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,.4) 100%);
+	}
 }
 
 .buttonCont {
   width: 85vw;
   display: flex;
-  margin-top: 6vh;
   align-items: center;
   justify-content: space-between;
   flex-direction: row-reverse;
-}
-
-.buttons:hover {
-  background-color: #116d56;
 }
 
 @-webkit-keyframes scaleScreen {

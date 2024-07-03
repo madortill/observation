@@ -80,9 +80,11 @@
 <style scoped>
 .wrapperNew {
   background-image: url("./assets/goggles.png");
-  background-size: 55% 70%;
+  background-size: 50% 70%;
   background-repeat: no-repeat;
   background-position: center;
+  position: relative;
+  bottom: 6vh;
   height: 100vh;
 }
 

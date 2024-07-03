@@ -144,30 +144,53 @@ p {
     }
 }
 
-.buttons-continue {
-    font-size: 1.65rem;
-    padding: 2vh 3.5vw;
-    background-color: #6f9cb8;
-    text-align: center;
-    position: relative;
-    bottom : 20vh;
-    right: 80.7vw;
-    cursor: pointer;
-    color: white;
+.buttons {
     border: none;
-    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+    cursor: pointer;   
+    height: 6vh;
+    /* left: 10%; */
+    /* bottom: 30%; */
+    font-size: 1.9rem;
+    color: #ffffff;
+    border-radius: 100px;
+    background-color: #0e5745d8;
+    /* min-width: 12%; */
+    width: 11vw;
 }
 
-.buttons {
-    font-size: 1.65rem;
-    padding: 2vh 3.5vw;
-    background-color: #0c5341;
-    text-align: center;
-    margin-bottom: 5vh;
-    cursor: pointer;
-    color: white;
-    border: none;
-    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+.buttons:hover,
+.buttons:focus {
+	animation: borderPulse 4000ms infinite ease-out,  hoverShine 200ms;
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+  35% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  50% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  } 
+  75% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  100% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+}
+
+@keyframes hoverShine {
+	0%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+	}
+	50%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0) 100%);
+	}
+	100%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,.4) 100%);
+	}
 }
 
 .buttonCont {
@@ -178,12 +201,8 @@ p {
     flex-direction: row-reverse;
 }
 
-.buttons:hover, .buttons-continue:hover {
-    background-color: #116d56;
-}
-
 .prepareTitle {
-    margin-top: 13vh;
+    margin-top: 16vh;
     font-size: 3rem;
     color: #083b2e;
     font-weight: 600;
@@ -195,7 +214,7 @@ p {
     display: flex;
     background-color: rgba(255, 255, 255, 0.671);
     /* height: 40vh; */
-    font-size: 2rem;
+    font-size: 1.75rem;
     padding: 1vw;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     border-radius: 2rem;

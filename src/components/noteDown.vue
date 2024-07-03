@@ -333,7 +333,7 @@ import DragQuestion from './dragQuestion.vue'
 }
 
 .basicTitle-3 {
-    margin-top: 2vh;
+    margin-top: 7vh;
     font-size: 3rem;
     font-weight: 600;
 }
@@ -382,9 +382,10 @@ select:disabled {
 
 .questionFilling {
     font-size: 1.3rem;
-    width: 15vw;
+    width: 16vw;
     border-style: solid;
     border-color: black;
+    font-weight: 600;
     border-width: 0.2vh;
     border-radius: 2vh;
     padding: 3vh 1.5vw;
@@ -435,19 +436,52 @@ select:disabled {
 }
 
 .toPractice {
-    margin-top: 4vh;
-    font-size: 1.65rem;
-    padding: 2vh 3.5vw;
-    background-color: #0c5341;
-    text-align: center;
-    cursor: pointer;
-    color: white;
     border: none;
-    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+    cursor: pointer;   
+    height: 5vh;
+    /* left: 10%; */
+    /* bottom: 30%; */
+    font-size: 1.8rem;
+    color: #ffffff;
+    border-radius: 100px;
+    background-color: #0e5745d8;
+    /* min-width: 12%; */
+    width: 10vw;
 }
 
-.toPractice:hover {
-    background-color: #116d56;
+.toPractice:hover,
+.toPractice:focus {
+	animation: borderPulse 4000ms infinite ease-out,  hoverShine 200ms;
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+  35% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  50% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  } 
+  75% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  100% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+}
+
+@keyframes hoverShine {
+	0%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+	}
+	50%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0) 100%);
+	}
+	100%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,.4) 100%);
+	}
 }
 
 .side-note {
@@ -472,7 +506,7 @@ select:disabled {
     width: 64rem;
     background-color: rgba(255, 255, 255, 0.795);
     display: flex;
-    margin-top: 4vh;
+    margin-top: 5vh;
     flex-direction: column;
     align-items: center;
 }
@@ -630,15 +664,52 @@ input[type=checkbox] {
  }
 
 .buttons {
-    font-size: 1.65rem;
-    padding: 2vh 3.5vw;
-    background-color: #0c5341;
-    text-align: center;
-    margin-bottom: 5vh;
-    cursor: pointer;
-    color: white;
     border: none;
-    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+    cursor: pointer;   
+    height: 6vh;
+    /* left: 10%; */
+    /* bottom: 30%; */
+    font-size: 1.9rem;
+    color: #ffffff;
+    border-radius: 100px;
+    background-color: #0e5745d8;
+    /* min-width: 12%; */
+    width: 11vw;
+}
+
+.buttons:hover,
+.buttons:focus {
+	animation: borderPulse 4000ms infinite ease-out,  hoverShine 200ms;
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+  35% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  50% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  } 
+  75% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  100% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+}
+
+@keyframes hoverShine {
+	0%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+	}
+	50%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0) 100%);
+	}
+	100%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,.4) 100%);
+	}
 }
 
 .buttonCont {
@@ -647,10 +718,6 @@ input[type=checkbox] {
     align-items: center;
     justify-content: space-between;
     flex-direction: row-reverse;
-}
-
-.buttons:hover {
-    background-color: #116d56;
 }
 
 .instructions, .explanation {

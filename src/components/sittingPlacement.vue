@@ -10,7 +10,7 @@
         subjectsInfo: [
             {
                 subSubjectTitle: "הוראות בטיחות",
-                subjectText: `שימו <img src="../src/assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> <br> 
+                subjectText: `שימו <img src="../assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> <br> 
                 כגון: תצפית על חניך שטווח בנשק.`
             },
             {
@@ -187,9 +187,9 @@
             <div class="instructions">בזמן שיעור תצפית - <br> באיזה 2 מיקומים בכיתה כדאי למתצפת לשבת לצורך קבלת תצפית מיטבית?</div>
             <div class="message" v-show="correctCounter === 2">כל הכבוד! סיימתם את השלב<img src="../assets/muscle.png" class="muscle" /></div>
             <div class="sitting">
-                <img src="../assets/table2.png" alt="class" class="table2" />
+                <img src="../assets/seatMain.png" alt="class" class="table2" />
                 <div>
-                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat.id" src="../assets/table.png" alt="seats" :class="['seats', !seat.showAnswer ? '' : seat.answer ? 'correctSeating' : 'incorrectSeating']" @click="checkSeating" />
+                    <img v-for="(seat, index) in sittingArr" :key="index" :id="seat.id" src="../assets/seat2.png" alt="seats" :class="['seats', !seat.showAnswer ? '' : seat.answer ? 'correctSeating' : 'incorrectSeating']" @click="checkSeating" />
                 </div>
             </div>
         </div>
@@ -264,15 +264,52 @@
 }
 
 .buttons {
-    font-size: 1.65rem;
-    padding: 2vh 3.5vw;
-    background-color: #083b2e;
-    text-align: center;
-    margin-bottom: 5vh;
-    cursor: pointer;
-    color: white;
     border: none;
-    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
+    cursor: pointer;   
+    height: 6vh;
+    /* left: 10%; */
+    /* bottom: 30%; */
+    font-size: 1.9rem;
+    color: #ffffff;
+    border-radius: 100px;
+    background-color: #0e5745d8;
+    /* min-width: 12%; */
+    width: 11vw;
+}
+
+.buttons:hover,
+.buttons:focus {
+	animation: borderPulse 4000ms infinite ease-out,  hoverShine 200ms;
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+  35% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  50% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  } 
+  75% {
+    box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+  }
+  100% {
+    box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+  }
+}
+
+@keyframes hoverShine {
+	0%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+	}
+	50%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0) 100%);
+	}
+	100%{
+		background-image: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,.4) 100%);
+	}
 }
 
 .buttonCont {
@@ -281,10 +318,6 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: row-reverse;
-}
-
-.buttons:hover {
-    background-color: #0d5744;
 }
 
 .explanation {
@@ -337,7 +370,7 @@
 .sitting {
     transform: scale(0.6);
     display: flex;
-    width: 61vw;
+    width: 56vw;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -348,9 +381,9 @@
 }
 
 .seats {
-    height: 18vh;
+    height: 19vh;
     cursor: pointer;
-    width: 9vw;
+    width: 8vw;
     margin: 4vh 3vw 2vh 3vw;
 }
 
@@ -358,9 +391,9 @@
     -webkit-box-shadow:0px 0px 48px 5px rgba(46,255,70,0.9);
     -moz-box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
     box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
-    height: 18vh;
+    height: 19vh;
     pointer-events: none;
-    width: 9vw;
+    width: 8vw;
     margin: 4vh 3vw 2vh 3vw;
 }
 
@@ -368,9 +401,9 @@
     -webkit-box-shadow:0px 0px 48px 5px rgba(255,46,46,0.6);
     -moz-box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
     box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
-    height: 18vh;
+    height: 19vh;
     pointer-events: none;
-    width: 9vw;
+    width: 8vw;
     margin: 4vh 3vw 2vh 3vw;
 }
 

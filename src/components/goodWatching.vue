@@ -107,12 +107,12 @@ import Involved from './involved.vue';
 
 .instruc {
   position: absolute;
-  top: 19vh;
+  top: 22.5vh;
   font-size: 1.8rem;
 }
 
 .basicTitle {
-  margin-top: 13vh;
+  margin-top: 16vh;
   font-size: 3rem;
   font-weight: 600;
   color: #083b2e;
