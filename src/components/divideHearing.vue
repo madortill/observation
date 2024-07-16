@@ -221,7 +221,7 @@
     position: fixed;
     padding: 3.5%;
     position: absolute;
-    top: 10vh;
+    top: 14vh;    
     right: 25vw;
     z-index: 2;
     cursor: pointer;
@@ -275,7 +275,7 @@
 
 .instructions, .explanation {
     width: 32vw;
-    margin-top: 20vh;
+    margin-top: 24vh;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     font-size: 1.5rem;

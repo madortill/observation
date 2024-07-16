@@ -253,19 +253,19 @@
 }
 
 .explainCont {
-  margin-top: 22vh;
+  margin-top: 21vh;
   transform-origin: top right;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.671);
   font-size: 2rem;
   box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-  padding: 5vh 7vw;
+  padding: 4.5vh 7vw;
   border-radius: 2rem;
   line-height: 1.5;
 }
 
 .correct {
-  background-color: #75d33ed2;
+  background-color: #81e69f;
   border-radius: 2vh;
   cursor: pointer;
   display: flex;
@@ -277,7 +277,7 @@
 }
 
 .incorrect {
-  background-color: #d33e3ed2;
+  background-color: #e68181;
   border-radius: 2vh;
   cursor: pointer;
   box-shadow: 2px 5px 8px 1px rgba(0,0,0,0.5);

@@ -297,11 +297,11 @@ export default {
 }
 
 .correct {
-    background-color: green;
+    background-color: #81e69f;
 }
 
 .wrong {
-    background-color: rgb(176, 6, 6);
+    background-color: #e68181;
 }
 
 .text-success {

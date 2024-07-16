@@ -30,8 +30,8 @@ export default {
                         id: 0
                     },
                     {
-                        option: "עיסוק בשפת גוף של המפקד",
-                        isCorrect: true,
+                        option: "עיסוק בצורת ישיבה של החניכים",
+                        isCorrect: false,
                         clicked: false,
                         seen: true,
                         id: 1
@@ -61,7 +61,7 @@ export default {
                     },
                     {
                         option: "מיקוד בכלי כתיבה של החניכים",
-                        isCorrect: true,
+                        isCorrect: false,
                         clicked: false,
                         seen: true,
                         id: 1
@@ -90,8 +90,8 @@ export default {
                         id: 0
                     },
                     {
-                        option: "עיסוק בתגובות החניכים",
-                        isCorrect: true,
+                        option: "עיסוק בפטפוט החניכים",
+                        isCorrect: false,
                         clicked: false,
                         seen: true,
                         id: 1
@@ -114,7 +114,7 @@ export default {
                 [
                     {
                         option: "עיסוק בכלל הדברים שקורים",
-                        isCorrect: true,
+                        isCorrect: false,
                         clicked: false,
                         seen: true,
                         id: 0
@@ -128,8 +128,8 @@ export default {
                     },
 
                     {
-                        option: "מיקוד בדיגום של המפקד",
-                        isCorrect: true,
+                        option: "מיקוד בדיגום של החיילים",
+                        isCorrect: false,
                         clicked: false,
                         seen: true,
                         id: 2
@@ -144,8 +144,8 @@ export default {
                 ],
                 [
                     {
-                        option: "מיקוד בעזרי הדרכה",
-                        isCorrect: true,
+                        option: "עיסוק במקרן",
+                        isCorrect: false,
                         clicked: false,
                         seen: true,
                         id: 0

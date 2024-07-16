@@ -384,7 +384,6 @@ select:disabled {
     width: 16vw;
     border-style: solid;
     border-color: black;
-    font-weight: 600;
     border-width: 0.2vh;
     border-radius: 2vh;
     padding: 3vh 1.5vw;
@@ -572,15 +571,16 @@ input[type=checkbox] {
 }
 
 .correct {
-    -webkit-box-shadow: 0px 0px 5px 3px rgb(27, 150, 29);
-    -moz-box-shadow: 0px 0px 5px 3px rgb(27, 150, 29);
-    box-shadow: 0px 0px 5px 3px rgb(27, 150, 29);
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(53, 167, 55, 0.836);
+    -moz-box-shadow: 0px 0px 5px 3px rgba(53, 167, 55, 0.836);
+    box-shadow: 0px 0px 5px 3px rgba(53, 167, 55, 0.836);
 }
 
 .incorrect {
-    -webkit-box-shadow: 0px 0px 5px 3px rgb(175, 15, 15);
-    -moz-box-shadow: 0px 0px 5px 3px rgb(175, 15, 15);
-    box-shadow: 0px 0px 5px 3px rgb(175, 15, 15);
+    -webkit-box-shadow: 0px 0px 5px 3px #e68181;
+    -moz-box-shadow: 0px 0px 5px 3px #e68181;
+    box-shadow: 0px 0px 5px 3px #e68181;
+    ;
 }
 
 .question {

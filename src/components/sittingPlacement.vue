@@ -7,10 +7,11 @@
         showBackButton: false,
         correctCounter: 0,
         changeAni: false,
+        showNextButton: false,
         subjectsInfo: [
             {
                 subSubjectTitle: "הוראות בטיחות",
-                subjectText: `שימו <img src="../assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> <br> 
+                subjectText: `שימו <img src="../src/assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> <br> 
                 כגון: תצפית על חניך שטווח בנשק.`
             },
             {
@@ -157,9 +158,9 @@
         }
     },
     mounted() {
-        setTimeout(() => {
-            this.changeAni = true;
-        }, 1250);
+      setTimeout(() => {
+        this.showNextButton = true;
+      }, 1300);
     }
   }
 </script>
@@ -175,7 +176,7 @@
                 <div v-html="subjectsInfo[subjectCounter]['subjectText']"></div>
             </div>
             <div class="buttonCont">
-                <button class="buttons" @click="nextSubject">
+                <button v-show="showNextButton" class="buttons" @click="nextSubject">
                     ממשיכים
                 </button>
                 <button v-show="showBackButton" class="buttons" @click="prevSubject">
@@ -389,9 +390,9 @@
 }
 
 .correctSeating {
-    -webkit-box-shadow:0px 0px 48px 5px rgba(46,255,70,0.9);
-    -moz-box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
-    box-shadow: 0px 0px 48px 5px rgba(46,255,70,0.9);
+    -webkit-box-shadow:0px 0px 48px 5px #81e69f;
+    -moz-box-shadow: 0px 0px 48px 5px #81e69f;
+    box-shadow: 0px 0px 48px 5px #81e69f;
     height: 19vh;
     pointer-events: none;
     width: 8vw;
@@ -399,9 +400,9 @@
 }
 
 .incorrectSeating {
-    -webkit-box-shadow:0px 0px 48px 5px rgba(255,46,46,0.6);
-    -moz-box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
-    box-shadow: 0px 0px 48px 5px rgba(255,46,46,0.6);
+    -webkit-box-shadow:0px 0px 48px 5px #e68181;
+    -moz-box-shadow: 0px 0px 48px 5px #e68181;
+    box-shadow: 0px 0px 48px 5px #e68181;
     height: 19vh;
     pointer-events: none;
     width: 8vw;

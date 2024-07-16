@@ -38,26 +38,10 @@ export default {
     justify-content: space-around;
 }
 
-/* .startingButton {
-    font-size: 1.65rem;
-    padding: 2vh 3.5vw;
-    background-color: #0c5341;
-    text-align: center;
-    cursor: pointer;
-    color: white;
-    border: none;
-    box-shadow: 2px 6px 10px 1px rgba(0,0,0,0.5);
-}
-
-.startingButton:hover {
-    background-color: #116d56;
-} */
-
 .startingButton {
     border: none;
     cursor: pointer;   
     height: 7%;
-    /* left: 10%; */
     bottom: 30%;
     font-size: 2.1rem;
     color: #ffffff;
