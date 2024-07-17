@@ -117,8 +117,8 @@
   height: contain;
   padding: 2vh;
   direction: rtl;
-  left: 5%;
-  top: 5%;
+  left: 4%;
+  top: 10%;
   background: #fff;
   border-radius: 1rem;
   box-shadow: 0 15px 20px -20px #0006;
