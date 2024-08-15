@@ -1,6 +1,6 @@
 <template>
     <div class="hearingContainer">
-        <div class="titleCircle" v-show="subjectCounter !== 2 && subjectCounter !== 5" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
+        <!-- <div class="titleCircle" v-show="subjectCounter !== 2 && subjectCounter !== 5" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
         <div v-if="subjectCounter !== 2" class="textPart">
             <div :class="[changeAni ? 'float': 'scale', subjectCounter < 2 ? 'instructions' : 'explanation']">
                 <div class="basicTitle">
@@ -23,13 +23,15 @@
             </div>
         </div>
         <div class="message" v-show="showEndMessage"><div v-if="showEndingGame">התוצאה הסופית שלכם היא: {{ score }} <br><br></div> {{ endMessage }}<img src="../assets/muscle.png" class="muscle" v-show="this.score > 1200" /></div>
+       -->
+      
         <div class="buttonCont">
-            <button v-show="showNextButton" class="buttons" @click="nextSubject">
+            <button v-show="showNextButton" class="buttons" @click="gilisMethod">
                 ממשיכים
             </button>
-            <button v-show="showBackButton" class="buttons" @click="prevSubject">
+            <!-- <button v-show="showBackButton" class="buttons" @click="prevSubject">
                 חוזרים
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
@@ -45,8 +47,10 @@
             subSubjectTitle: ["דברים קורים בנפרד", "הוראות", "תרגול", "הפרד בין עיקר ותפל", "ביצועים מורכבים / פשוטים", "ביצועים מורכבים / פשוטים"],
             subSubjectText: ["בכתיבה בדף התצפית, <br> הקפידו להפריד בין עיקר ותפל, <br> בין ביצועים מורכבים לפשוטים ובין דבר המפקד לחניכים.", "לפניכם משחק שיעזור לכם לתרגל חלוקת קשב נכונה. <br> יופיעו סיטואציות מגוונות שמתחלפות כל 12 שניות.<br> כדי להצליח בתרגול עליכם לבחור במיקודים הנכונים ביותר של חלוקת קשב.<br><br> שימו לב, המשחק מוגבל בזמן. <br> על כל מענה שגוי, ירדו לכם נקודות מהציון הכולל. על מנת להצליח עליכם לזכות בלפחות 1200 נקודות.", "", 'עליכם לשים <img src="../assets/heart.png" class="heartIcon" /> במה אתם בוחרים להתמקד ובעת בחירתכם מהו הדבר שאתם מפספסים. <br> <br> לדוגמא - אם הינכם מתמקדים רק בתגובת החניכים, אתם יכולים לפספס את טכניקות המסירה של המדריך.', 'שימו <img src="../assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעליכם להשקיע קשב מירבי. <br> <br> כגון: גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.', 'שימו <img src="../assets/heart.png" class="heartIcon" /> כי בתצפית ישנם ביצועים שעליכם להשקיע קשב מירבי. <br> <br> כגון: גילוי מודרך, התנגדויות הלומדים, שאלות החניכים וכו׳.'],
             warning: false,
-            showBackButton: false,
-            showNextButton: false,
+            // showBackButton: false,
+            // showNextButton: false,
+            showBackButton: true,
+            showNextButton: true,
             subjectCounter: 0,
             showEndMessage: false,
             endMessage: '',
@@ -150,6 +154,9 @@
                 this.showEndMessage = false;
                 this.nextSubject();
             }, 2500)
+        },
+        gilisMethod() {
+            this.$emit('backToHomePage', 'חלוקת קשב');
         }
     },
     mounted() {
