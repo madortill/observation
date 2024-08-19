@@ -134,6 +134,7 @@
   <style scoped>
   .container {
     /* width: 30rem; */
+    font-family: 'heebo';
     height: fit-content;
     /* padding: 3vh; */
     display: flex;

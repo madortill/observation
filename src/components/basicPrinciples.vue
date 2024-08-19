@@ -50,6 +50,7 @@ export default {
     justify-content: space-between;
     height: 100vh;
     direction: rtl;
+    font-family: 'heebo';
 }
 
 .basicTitle {
@@ -94,7 +95,8 @@ export default {
 
 .buttons {
     border: none;
-    cursor: pointer;   
+    cursor: pointer;  
+    font-family: 'heebo'; 
     height: 6vh;
     /* left: 10%; */
     /* bottom: 30%; */

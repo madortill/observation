@@ -70,7 +70,7 @@ import Involved from './involved.vue';
 </script>
 
 <template>
-    <div>
+    <div id="container">
       <div class="goodWatch" v-if="currentSubSubject === ''">
         <div class="basicTitle">
           {{ chapter }}
@@ -209,5 +209,9 @@ import Involved from './involved.vue';
 
 .subjectCicle:hover {
   transform: scale(1.1);
+}
+
+#container {
+  font-family: 'heebo';
 }
 </style>

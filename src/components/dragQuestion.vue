@@ -143,6 +143,9 @@ export default {
 </script>
 
 <style>
+#dragging-question {
+    font-family: 'heebo';
+}
 
 .draggable-area {
     position: absolute;

@@ -1,3 +1,11 @@
+<template>
+  <div class="wrapper">
+    <wholeScreen/>
+  </div>
+
+</template>
+
+
 <script>
 import wholeScreen from './wholeScreen.vue';
   
@@ -14,13 +22,6 @@ import wholeScreen from './wholeScreen.vue';
   }
 </script>
 
-<template>
-    <div class="wrapper">
-      <wholeScreen/>
-    </div>
-
-</template>
-
 
 <style scoped>
 @font-face {
@@ -31,6 +32,7 @@ import wholeScreen from './wholeScreen.vue';
 .wrapper {
   background-color: #e2e1e1;
   font-family: 'heebo';
+  direction: rtl;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;

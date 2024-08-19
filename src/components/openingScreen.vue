@@ -1,5 +1,4 @@
 <template>
-
     <div class="openingScreen">
         <div class="openingTitle"><p>לומדת</p><p>תצפית</p></div>
         <button class="startingButton" @click="$emit('changeCurrentScreen'); $emit('changeShrinkBackground', 'backgroundAniShrink')">מתחילים</button>
@@ -39,6 +38,7 @@ export default {
 }
 
 .startingButton {
+  font-family: 'heebo';
     border: none;
     cursor: pointer;   
     height: 7%;

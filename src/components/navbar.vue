@@ -80,5 +80,9 @@ nav ul li.active {
     border-radius: 30px;
     color: white;
 }
+
+#navbar {
+    font-family: 'heebo';
+}
 </style>
   

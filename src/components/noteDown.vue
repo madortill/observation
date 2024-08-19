@@ -304,6 +304,7 @@ import DragQuestion from './dragQuestion.vue'
     height: 100vh;
     direction: rtl;
     overflow: hidden;
+    font-family: 'heebo';
 }
 
 .invisible {
@@ -666,6 +667,7 @@ input[type=checkbox] {
     border: none;
     cursor: pointer;   
     height: 6vh;
+    font-family: 'heebo';
     /* left: 10%; */
     /* bottom: 30%; */
     font-size: 1.9rem;

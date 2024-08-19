@@ -72,6 +72,7 @@ export default {
     justify-content: space-between;
     height: 100vh;
     direction: rtl;
+    font-family: 'heebo';
 }
 
 .basicTitle {

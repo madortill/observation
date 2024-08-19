@@ -208,6 +208,7 @@
     height: 100vh;
     direction: rtl;
     overflow: hidden;
+    font-family: 'heebo';
 }
 
 .basicTitle {
