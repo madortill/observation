@@ -149,8 +149,7 @@ p {
     border: none;
     cursor: pointer;   
     height: 6vh;
-    /* left: 10%; */
-    /* bottom: 30%; */
+    font-family: 'heebo';
     font-size: 1.9rem;
     color: #ffffff;
     border-radius: 100px;

@@ -668,8 +668,7 @@ input[type=checkbox] {
     cursor: pointer;   
     height: 6vh;
     font-family: 'heebo';
-    /* left: 10%; */
-    /* bottom: 30%; */
+    font-family: 'heebo';
     font-size: 1.9rem;
     color: #ffffff;
     border-radius: 100px;

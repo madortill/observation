@@ -474,6 +474,7 @@
   border-radius: 100px;
   background-color: #0e5745d8;
   width: 11vw;
+  font-family: 'heebo';
 }
 
 .buttons:hover,

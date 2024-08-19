@@ -227,6 +227,7 @@
   
   .buttons {
     font-size: 1.65rem;
+    font-family: 'heebo';
     padding: 2vh 3.5vw;
     background-color: #0c5341;
     text-align: center;
