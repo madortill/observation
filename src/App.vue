@@ -49,8 +49,8 @@
 </template>
 
 <script>
-  import BasicPrinciples from '.BasicPrinciples.vue';
-  import OpeningScreen from '.OpeningScreen.vue';
+  import BasicPrinciples from './components/BasicPrinciples.vue';
+  import OpeningScreen from './components/OpeningScreen.vue';
   import Preperation from '@/components/Preperation.vue';
   import Summery from '@/components/Summery.vue';
   import Targets from '@/components/Targets.vue';
