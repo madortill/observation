@@ -62,6 +62,7 @@
     data() {
       return {
         showGoodWatching: false,
+        
         componentOrder: [
           "OpeningScreen",
           "BasicPrinciples",
