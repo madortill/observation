@@ -61,8 +61,9 @@
   export default {
     data() {
       return {
-        showGoodWatching: false,
         
+        showGoodWatching: false,
+
         componentOrder: [
           "OpeningScreen",
           "BasicPrinciples",
