@@ -51,11 +51,11 @@
 
 <script>
   import BasicPrinciples from '@/components/BasicPrinciples.vue';
-  import OpeningScreen from './components/OpeningScreen.vue';
-  import Preperation from './components/Preperation.vue';
-  import Summery from './components/Summery.vue';
-  import Targets from './components/Targets.vue';
-  import Navbar from './components/Navbar.vue';
+  import OpeningScreen from '@/components/OpeningScreen.vue';
+  import Preperation from '@/components/Preperation.vue';
+  import Summery from '@/components/Summery.vue';
+  import Targets from '@/components/Targets.vue';
+  import Navbar from '@/components/Navbar.vue';
   import { KeepAlive } from 'vue';
 
   export default {
