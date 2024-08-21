@@ -50,7 +50,7 @@
 
 
 <script>
-  import BasicPrinciples from 'src/components/BasicPrinciples.vue';
+  import BasicPrinciples from '@/components/BasicPrinciples.vue';
   import OpeningScreen from './components/OpeningScreen.vue';
   import Preperation from './components/Preperation.vue';
   import Summery from './components/Summery.vue';
