@@ -48,7 +48,6 @@
   </div>
 </template>
 
-
 <script>
   import BasicPrinciples from '@/components/BasicPrinciples.vue';
   import OpeningScreen from '@/components/OpeningScreen.vue';
@@ -61,7 +60,7 @@
   export default {
     data() {
       return {
-        
+
         showGoodWatching: false,
 
         componentOrder: [
