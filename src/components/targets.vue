@@ -3,7 +3,7 @@
         <div class="basicTitle">
             {{ chapter }}
         </div>
-        <div >
+        <div class="containerOfAll">
             <div class="flip-card-container">
                 <div v-for="( item, index) in arrayFront" :key="index" :class="['flip-card', this.onStart]">
                     <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 15 + 130}deg`">
@@ -44,8 +44,9 @@ export default {
   methods: {
     changeText(event) {
         if (event.currentTarget.innerText === "ממשיכים") {
-            this.$emit('changeCurrentScreen');
-        } else{
+            this.$emit('CheckIfremoveShow');
+            // this.$emit('switch-screen');
+        } else {
             this.$emit('prevCurrentScreen');
         }
     },
@@ -66,39 +67,52 @@ export default {
 
 <style scoped>
 .basic {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     height: 100vh;
     direction: rtl;
     font-family: 'heebo';
+    text-align: center;
+    position: relative; /* Changed from absolute to relative */
+    overflow: hidden;
 }
 
 .basicTitle {
-    margin-top: 16vh;
-    font-size: 3rem;
+    position: absolute;
+    top: 9rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
     color: #083b2e;
-    font-weight: 600;
+    font-weight: bold;
+    margin: 1rem;
 }
 
 .buttons {
+    margin: 1rem;
     border: none;
-    cursor: pointer;   
-    height: 6vh;
-    font-family: 'heebo';
+    cursor: pointer;  
+    font-family: 'heebo'; 
+    height: 3rem;
     font-size: 1.9rem;
     color: #ffffff;
     border-radius: 100px;
     background-color: #0e5745d8;
-    /* min-width: 12%; */
-    width: 11vw;
+    width: 11rem;
 }
 
 .buttons:hover,
 .buttons:focus {
 	animation: borderPulse 4000ms infinite ease-out,  hoverShine 200ms;
 }
+
+.containerOfAll {
+    margin: 1rem;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80rem;
+}
+
 
 @keyframes borderPulse {
   0% {
@@ -135,21 +149,24 @@ export default {
 }
 
 .buttonCont {
-    width: 85vw;
+    width: 90vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row-reverse;
+    position: absolute;
+    z-index: 10;
+    bottom: -1rem; /* Center buttons at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .flip-card-container {
     display: flex;
-    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
     justify-content: center;
     align-items: center;
     animation: floatAnimation 3s ease-in-out infinite;
     flex-wrap: wrap;
-    background-color: rgba(255, 255, 255, 0.677);
     padding: 10vh;
     border-radius: 5rem;
 }

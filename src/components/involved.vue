@@ -7,7 +7,7 @@
           {
             title: "התערבות עקיפה",
             pics: 'advice.png',
-            explain: 'התערבות זו מגיעה ישירות לאחר ביצוע התצפית, עוד <b>לפני </b> שלב המשוב.<br><br> שימושה בעיקר בעת הסבר של פערים מקצועיים קריטיים שהיו בהדרכה.'
+            explain: 'התערבות זו מגיעה לאחר ביצוע התצפית, לפני שלב המשוב. <br> <br>יש לבחור בהתערבות זו אם היו פערים מקצועיים במהלך ההדרכה.'
           },
           {
             title: "התערבות ישירה",
@@ -121,7 +121,7 @@
           {{ chapter }}
         </div>
         <div v-if="textCounter === 0" class="explainCont scale">
-          <div class="basicTitle-2">קיימים 2 סוגים:</div>
+          <div class="basicTitle-2">קיימים שני סוגים של התערבות:</div>
           <div class="flip-card-container">
             <div v-for="( item, index) in subArr" :key="index" :class="['flip-card', this.onStart]">
                   <div class="flip-card-inner" :style="`--hue: ${(index + 2) * 17 + 120}deg`">
@@ -466,15 +466,16 @@
 }
 
 .buttons {
-  border: none;
-  cursor: pointer;   
-  height: 6vh;
-  font-size: 1.9rem;
-  color: #ffffff;
-  border-radius: 100px;
-  background-color: #0e5745d8;
-  width: 11vw;
-  font-family: 'heebo';
+    margin: 1rem;
+    border: none;
+    cursor: pointer;  
+    font-family: 'heebo'; 
+    height: 3rem;
+    font-size: 1.9rem;
+    color: #ffffff;
+    border-radius: 100px;
+    background-color: #0e5745d8;
+    width: 11rem;
 }
 
 .buttons:hover,

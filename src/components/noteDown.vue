@@ -1,6 +1,137 @@
+<template>
+    <div class="noting">
+        
+        <div class="firstPart" v-if="showPart === 0">     
+            <div :class="changeAni ? 'explanation float' : 'explanation scale'">
+                <div class="titleCircle" v-show="showPart !== 2" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
+                <div class="basicTitle">הגדרה</div>
+                רישום ותיעוד הינו שלב חשוב במהלך התצפית. <br>
+                כלל הדברים שתכתבו ישמשו אתכם בשלב העיבוד. <br><br> 
+                שימו <img src="../assets/heart.png" class="heartIcon" />, ההפך מלרשום הוא לשכוח.
+                <br> <br>
+                במהלך התצפית, התייחסו להכנת השיעור והעברתו - עליו להיות תקף, מהימן ופרקטי הכולל את כל החומר הנדרש.
+            </div>
+        </div>
+        <div class="secondPart" v-else-if="showPart === 1">
+            <div class="instructions float">
+                <div class="title">שימוש בדף תצפית</div>
+                <div class="sections">
+                    <div class="subTitle">מה נרשום?</div>
+                    <div>
+                    </div>
+                </div>
+                <div class="sections">
+                    <div class="subTitle">מתי נרשום?</div>
+                    <div>
+                        זמנים מתים, בסמוך להתנסות
+                    </div>
+                </div>
+                <div class="sections">
+                    <div class="subTitle">איך נרשום?</div>
+                    <div>
+                        באופן אובייקטיבי, בצורה מפורטת
+                    </div>
+                </div>
+                <button class="toPractice" type="button" @click="nextPart">לתרגול</button>
+            </div>
+        </div>
+        <div class="thirdPart" v-else>
+            <div class="test-page">
+                <div class="everythinCont">
+                    <div class="whatWriting" v-show="practiceCount === 0">
+                        <div class="title-practice">
+                            מה נרשום? 
+                        </div>
+                        <div class="connectTwo">
+                            <DragQuestion @change-practice="changePractice"/> 
+                        </div>
+                    </div>
+                    <div class="whenWriting" v-show="practiceCount === 1">
+                        <div class="title-practice">
+                            מתי נרשום? 
+                        </div>
+                        <div class="questionContainer">
+                            <div class="questionFilling">
+                                כדי לקלוט כמה שיותר 
+                                <select 
+                                id="option1" 
+                                class="options" 
+                                @change="checkWhenPractice" 
+                                v-model="select1" 
+                                :disabled="option1.disabled">
+                                    <option v-for="(option, index) in option1.option" :key="index" :disabled="option === 'בחר'">{{ option }}</option>
+                                </select>
+                                <img v-if="option1.isCorrect !== '' && select1 !== undefined" :src='option1.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/> ולהספיק לכתוב כל מה שאנחנו צריכים, נכתוב בזמנים מסויימים הנקראים 
+                                <select 
+                                @change="checkWhenPractice" 
+                                v-model="select2" 
+                                id="option2" class="options" 
+                                :disabled="option2.disabled">
+                                    <option v-for="(option, index) in option2.option" :key="index" :disabled="option === 'בחר'">{{ option }}</option>
+                                </select>
+                                <img v-if="option2.isCorrect !== '' && select2 !== undefined" :src='option2.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>.
+                            </div>
+                            <div class="questionFilling">
+                                על מנת למנוע 
+                                <select 
+                                 @change="checkWhenPractice" 
+                                 :disabled="option3.disabled"
+                                  v-model="select3" 
+                                  id="option3" 
+                                  class="options">
+                                    <option v-for="(option, index) in option3.option" :key="index" :disabled="option === 'בחר'">{{ option }}</option>
+                                </select>
+                                <img v-if="option3.isCorrect !== '' && select3 !== undefined" :src='option3.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>
+                                של פרטים חשובים וקריטיים, ניישם סוג רישום נוסף שלפיו יש לרשום 
+                                <select :disabled="option4.disabled" class="options" 
+                                 @change="checkWhenPractice" 
+                                 v-model="select4" 
+                                 id="option4">
+                                    <option v-for="(option, index) in option4.option" :key="index" :disabled="option === 'בחר'">{{ option }}</option>
+                                </select>
+                                <img v-if="option4.isCorrect !== '' && select4 !== undefined" :src='option4.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="howWriting" v-show="practiceCount === 2 ">
+                        <div class="title-practice">
+                            איך נרשום? 
+                        </div>
+                        <div class="subtitle-practice">
+                            בחרו בתשובה הנכונה
+                        </div>
+                        <div>
+                            <div v-for="(question, index) in howQuestion" :key="index" class="container-howPractice">
+                                <div class="question-howPractice">
+                                    {{ question.title }}
+                                </div>
+                                <div class="optionsContainer">
+                                    <div v-for="(options, id) in question.options" :key="id" :id="question.title" class="option-howPractice" @click="clickedOnOption" :class="options.clickedCorrect">
+                                        {{ options.opt }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message" v-show="finishedLevel">כל הכבוד! סיימתם את השלב<img src="../assets/muscle.png" class="muscle" /></div>
+                <button type="button" v-show="practiceCount === 2 || showButton === true" @click="checkingFunction" class="buttons">{{ messageForButton }}</button>
+            </div>
+        </div>
+        <div class="buttonCont">
+            <button :class="showNextButton ? '' : 'invisible'"  class="buttons" @click="nextPart">
+                ממשיכים
+            </button>
+            <button :class="showBackButton ? '' : 'invisible'" class="buttons" @click="prevPart">
+                חוזרים
+            </button>
+        </div>
+    </div>
+</template>
+
 <script>
 // import ConnectTwo from './connectTwo.vue'
-import DragQuestion from './dragQuestion.vue'
+import DragQuestion from './DragQuestion.vue'
 
   export default {
     props: ["chapter", "colorCode"],
@@ -52,7 +183,7 @@ import DragQuestion from './dragQuestion.vue'
             {
                 title: "בצורה אובייקטבית",
                 options: [{
-                    opt: '"לדעתי הדרך בה המגיב הייתה שגויה."',
+                    opt: '"לדעתי הדרך בה הגיב הייתה שגויה."',
                     id: 0,
                     clickedCorrect: ''
                 }, 
@@ -67,16 +198,16 @@ import DragQuestion from './dragQuestion.vue'
             {
                 title: "בצורה מפורטת",
                 options: [{
-                    opt: '"המדריך עשה סיכום שיעור לא טוב"',
+                    opt: '"הסיכום של השיעור היה לא מספק ולא הייתה סגירת מעגל"',
                     id: 0,
                     clickedCorrect: ''
                 },
                 {
-                    opt: '"סיכום השיעור היה קצר (3 דקות במקום 10), המדריך לא עבר על התכנים שלימד ולא וידא הבנה."',
+                    opt: '"סיכום השיעור היה קצר מדי, ללא "אני מאמין" וללא חזרה על נקודות עיקריות."',
                     id: 1,
                     clickedCorrect: ''
                 } ],
-                correct: '"סיכום השיעור היה קצר (3 דקות במקום 10), המדריך לא עבר על התכנים שלימד ולא וידא הבנה."',
+                correct: '"סיכום השיעור היה קצר מדי, ללא "אני מאמין" וללא חזרה על נקודות עיקריות."',
                 checked: '',
             }
         ],
@@ -84,9 +215,21 @@ import DragQuestion from './dragQuestion.vue'
             "type": "connect-two",
             "question": "התאימו בין המושג להגדרה- לחצו על מושג והגדרה",
             "term": ["תיאורים", "ציטוטים", "שמות", "זמנים", "מקומות", "מידע כמותי"],
-            "definition": ["הכיתה מלוכלכת ואינה מוכנה לקיום שיעור.", "״נכון! בדיוק כמו שאמרת, המנוע צריך להתחמם לפני שמתחילים בנסיעה״", "דנה נרדמה בשיעור", 
-            "מתוך 45 דקות שיעור, המדריך העביר פתיחה במשך 25 דקות.", "השיעור הועבר בחוץ ביום של 35 מעלות חום, זה הקשה מאוד על ריכוז התלמידים.", "3 תלמידים ספציפיים תמיד עונים על כל השאלות."],
-            "correct": {"תיאורים": "הכיתה מלוכלכת ואינה מוכנה לקיום שיעור.", "ציטוטים": "״נכון! בדיוק כמו שאמרת, המנוע צריך להתחמם לפני שמתחילים בנסיעה״", "שמות": "דנה נרדמה בשיעור", "זמנים" : "מתוך 45 דקות שיעור, המדריך העביר פתיחה במשך 25 דקות.", "מקומות" : "השיעור הועבר בחוץ ביום של 35 מעלות חום, זה הקשה מאוד על ריכוז התלמידים.", "מידע כמותי" :  "3 תלמידים ספציפיים תמיד עונים על כל השאלות."}
+            "definition": 
+                    ["הלוח לא מחוק, יש לכלוך על הרצפה, השולחנות לא מסודרים",
+                    "נכון! בדיוק כמו שאמרת, המנוע צריך להתחמם לפני שמתחילים בנסיעה",
+                    "דנה נרדמה בשיעור, ליאור לא השתתף", 
+                    "מתוך 45 דקות שיעור, המדריך העביר פתיחה במשך 25 דקות", 
+                    "השיעור הועבר בחוץ באיזור שאינו מוצל לכן היה קושי להתרכז", 
+                    "שלושה תלמידים ספציפיים תמיד עונים ומשתתפים בשיעור."],
+            "correct": {
+                "תיאורים": "הלוח לא מחוק, יש לכלוך על הרצפה, השולחנות לא מסודרים",
+                 "ציטוטים": "נכון! בדיוק כמו שאמרת, המנוע צריך להתחמם לפני שמתחילים בנסיעה",
+                  "שמות": "דנה נרדמה בשיעור, ליאור לא השתתף",
+                   "זמנים" : "מתוך 45 דקות שיעור, המדריך העביר פתיחה במשך 25 דקות",
+                   "מקומות" : "השיעור הועבר בחוץ באיזור שאינו מוצל לכן היה קושי להתרכז",
+                    "מידע כמותי" :  "שלושה תלמידים ספציפיים תמיד עונים ומשתתפים בשיעור"
+                }
         }
       }
     },
@@ -192,119 +335,15 @@ import DragQuestion from './dragQuestion.vue'
   }
 </script>
 
-<template>
-    <div class="noting">
-        <div class="titleCircle" v-show="showPart !== 2" :class="changeAni ? 'float': ''" :style="`--hue: ${(colorCode) * 20 + 130}deg`">{{ chapter }}</div>
-        <div class="firstPart" v-if="showPart === 0">     
-            <div :class="changeAni ? 'explanation float' : 'explanation scale'">
-                <div class="basicTitle">הגדרה</div>
-                רישום ותיעוד הינו רכיב חשוב במהלך התצפית. <br>
-                כלל הדברים שתכתבו ישמשו עבורכם בשלב העיבוד. <br><br> 
-                שימו <img src="../assets/heart.png" class="heartIcon" />, ההפך מלרשום הוא לשכוח.
-                <br> <br>
-                במהלך התצפית, התייחסו להכנת השיעור והעברתו - תקף, מהימן ופרקטי, כולל את כל החומר הנדרש.
-            </div>
-        </div>
-        <div class="secondPart" v-else-if="showPart === 1">
-            <div class="instructions float">
-                <div class="title">שימוש בדף תצפית</div>
-                <div class="sections">
-                    <div class="subTitle">מה נרשום?</div>
-                    <div>
-                        ציטוטים, שמות, זמנים, מקומות, מידע כמותי
-                    </div>
-                </div>
-                <div class="sections">
-                    <div class="subTitle">מתי נרשום?</div>
-                    <div>
-                        זמנים מתים, בסמוך להתנסות
-                    </div>
-                </div>
-                <div class="sections">
-                    <div class="subTitle">איך נרשום?</div>
-                    <div>
-                        באופן אובייקטיבי, בצורה מפורטת
-                    </div>
-                </div>
-                <button class="toPractice" type="button" @click="nextPart">לתרגול</button>
-            </div>
-        </div>
-        <div class="thirdPart" v-else>
-            <div class="basicTitle-3">תרגול</div>
-            <div class="test-page">
-                <div class="everythinCont">
-                    <div class="whatWriting" v-show="practiceCount === 0">
-                        <div class="title-practice">
-                            מה נרשום? 
-                        </div>
-                        <div class="connectTwo">
-                            <DragQuestion @change-practice="changePractice"/> 
-                            <!-- <ConnectTwo @change-practice="changePractice" :ques="connectArr"/> -->
-                        </div>
-                    </div>
-                    <div class="whenWriting" v-show="practiceCount === 1">
-                        <div class="title-practice">
-                            מתי נרשום? 
-                        </div>
-                        <div class="questionContainer">
-                            <div class="questionFilling">
-                                כדי לקלוט כמה שיותר <select id="option1" class="options" @change="checkWhenPractice" v-model="select1" :disabled="option1.disabled"><option v-for="(option, index) in option1.option" :key="index">{{ option }}</option></select>
-                                <img v-if="option1.isCorrect !== '' && select1 !== undefined" :src='option1.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/> ולהספיק לכתוב כל מה שאנחנו צריכים, נכתוב בזמנים מסויימים הנקראים <select @change="checkWhenPractice" v-model="select2" id="option2" class="options" :disabled="option2.disabled"><option v-for="(option, index) in option2.option" :key="index">{{ option }}</option></select><img v-if="option2.isCorrect !== '' && select2 !== undefined" :src='option2.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>.
-                            </div>
-                            <div class="questionFilling">
-                                על מנת למנוע <select  @change="checkWhenPractice" :disabled="option3.disabled" v-model="select3" id="option3" class="options"><option v-for="(option, index) in option3.option" :key="index">{{ option }}</option></select>
-                                <img v-if="option3.isCorrect !== '' && select3 !== undefined" :src='option3.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>
-                                של פרטים חשובים וקריטיים, ניישם סוג רישום נוסף שלפיו יש לרשום <select :disabled="option4.disabled" class="options"  @change="checkWhenPractice" v-model="select4" id="option4"><option v-for="(option, index) in option4.option" :key="index">{{ option }}</option></select><img v-if="option4.isCorrect !== '' && select4 !== undefined" :src='option4.isCorrect === "check" ? "src/assets/check.png" : "src/assets/cancel.png"' alt="icon" class="checkIcon"/>.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="howWriting" v-show="practiceCount === 2 ">
-                        <div class="title-practice">
-                            איך נרשום? 
-                        </div>
-                        <div class="subtitle-practice">
-                            בחרו בתשובה הנכונה
-                        </div>
-                        <div>
-                            <div v-for="(question, index) in howQuestion" :key="index" class="container-howPractice">
-                                <div class="question-howPractice">
-                                    {{ question.title }}
-                                </div>
-                                <div class="optionsContainer">
-                                    <div v-for="(options, id) in question.options" :key="id" :id="question.title" class="option-howPractice" @click="clickedOnOption" :class="options.clickedCorrect">
-                                        {{ options.opt }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message" v-show="finishedLevel">כל הכבוד! סיימתם את השלב<img src="../assets/muscle.png" class="muscle" /></div>
-                <button type="button" v-show="practiceCount === 2 || showButton === true" @click="checkingFunction" class="buttons">{{ messageForButton }}</button>
-            </div>
-        </div>
-        <div class="buttonCont">
-            <button :class="showNextButton ? '' : 'invisible'"  class="buttons" @click="nextPart">
-                ממשיכים
-            </button>
-            <button :class="showBackButton ? '' : 'invisible'" class="buttons" @click="prevPart">
-                חוזרים
-            </button>
-        </div>
-    </div>
-</template>
-
 
 <style scoped>
 .noting {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
     height: 100vh;
     direction: rtl;
-    overflow: hidden;
     font-family: 'heebo';
+    text-align: center;
+    position: relative; /* Changed from absolute to relative */
+    overflow: hidden;
 }
 
 .invisible {
@@ -361,7 +400,7 @@ select:disabled {
 }
 
 .container-howPractice {
-    margin: 3vh;
+    margin: 2rem;
 }
 
 .options {
@@ -437,15 +476,14 @@ select:disabled {
 .toPractice {
     border: none;
     cursor: pointer;   
-    height: 5vh;
-    /* left: 10%; */
-    /* bottom: 30%; */
+    height: 3rem;
+    font-family: "Heebo";
     font-size: 1.8rem;
     color: #ffffff;
     border-radius: 100px;
     background-color: #0e5745d8;
-    /* min-width: 12%; */
-    width: 10vw;
+    width: 10rem;
+    margin-top: 3rem;
 }
 
 .toPractice:hover,
@@ -491,21 +529,20 @@ select:disabled {
 
 .thirdPart {
     display: flex;
-    flex-direction: column;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: 100vh;
     direction: rtl;
 }
 
 .test-page {
-    height: 78vh;
-    padding: 1vh 0vw;
-    width: 64rem;
+    margin-top: 6rem;
+    padding: 3rem;
+    border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.795);
     display: flex;
-    margin-top: 5vh;
+    /* margin-top: 5vh; */
     flex-direction: column;
     align-items: center;
 }
@@ -528,18 +565,14 @@ select:disabled {
 }
 
 .correctBox {
-    background-color: rgb(27, 150, 29);
-    -webkit-box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
-    -moz-box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
-    box-shadow: 0px 0px 5px 4px rgb(27, 150, 29);
+    background-color: rgb(154, 227, 155);
+    border: none !important;   
     pointer-events: none;
 }
 
 .incorrectBox {
-    background-color: rgb(175, 15, 15);
-    -webkit-box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
-    -moz-box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
-    box-shadow: 0px 0px 5px 4px rgb(175, 15, 15);
+    background-color: rgb(238, 138, 138);
+    border: none !important;   
     pointer-events: none;
 }
 
@@ -654,27 +687,25 @@ input[type=checkbox] {
     box-shadow: 0 5px 7px #0003;
     transition: all .3s ease;
     background-color: hsl(var(--hue),50%,75%);
-    position: fixed;
-    padding: 3.5%;
+    padding: 4rem;
     position: absolute;
-    top: 14vh;
-    right: 25vw;
+    top: -3rem;
+    right: -3rem;
     z-index: 2;
     cursor: pointer;
- }
+ } 
 
-.buttons {
+ .buttons {
+    margin: 1rem;
     border: none;
-    cursor: pointer;   
-    height: 6vh;
-    font-family: 'heebo';
-    font-family: 'heebo';
+    cursor: pointer;  
+    font-family: 'heebo'; 
+    height: 3rem;
     font-size: 1.9rem;
     color: #ffffff;
     border-radius: 100px;
     background-color: #0e5745d8;
-    /* min-width: 12%; */
-    width: 11vw;
+    width: 11rem;
 }
 
 .buttons:hover,
@@ -713,31 +744,34 @@ input[type=checkbox] {
 }
 
 .buttonCont {
-    width: 85vw;
+    width: 90vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row-reverse;
+    position: absolute;
+    z-index: 10;
+    bottom: -1rem; /* Center buttons at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.instructions, .explanation {
-    width: 32vw;
-    margin-top: 24vh;
-    transform-origin: top right;
+
+ .instructions, .explanation {
+    margin: 7rem;
+    margin-top: 16rem;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);
     font-size: 1.5rem;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);
-    padding: 6vh 5vw;
+    padding: 3rem 2rem;
     border-radius: 2rem;
-    line-height: 1.5;
 }
 
 .firstPart, .secondPart  {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: 100vh;
     direction: rtl;
 }
@@ -746,18 +780,6 @@ input[type=checkbox] {
     animation: scaleScreen 1.25s linear forwards;
 }
 
-/* .secondPart  {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: space-between;
-    height: 45vh;
-    padding: 8vh 5vw;
-    border-radius: 2rem;
-    background-color: rgba(255, 255, 255, 0.671);
-    direction: rtl;
-} */
 
 @-moz-keyframes floatAnimation {
     0% {
@@ -803,6 +825,13 @@ input[type=checkbox] {
    100% {
        transform: scale(1);
    }
+}
+
+option, select {
+    font-family: "Heebo";
+    color: black;
+    text-align: center;
+    
 }
 
 </style>

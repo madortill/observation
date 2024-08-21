@@ -1,7 +1,7 @@
 <template>
     <div class="openingScreen">
         <div class="openingTitle"><p>לומדת</p><p>תצפית</p></div>
-        <button class="startingButton" @click="$emit('changeCurrentScreen'); $emit('changeShrinkBackground', 'backgroundAniShrink')">מתחילים</button>
+        <button class="startingButton" @click="$emit('switch-screen'); $emit('changeShrinkBackground', 'backgroundAniShrink')">מתחילים</button>
     </div>
 
 </template>

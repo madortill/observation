@@ -10,13 +10,12 @@
         showNextButton: false,
         subjectsInfo: [
             {
-                subSubjectTitle: "הוראות בטיחות",
-                subjectText: `שימו <img src="../src/assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> <br> 
-                כגון: תצפית על חניך שטווח בנשק.`
+                subSubjectTitle: "שמירה על בטיחות",
+                subjectText: `שימו <img src="../src/assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> `
             },
             {
-                subSubjectTitle: "שאלו את הנחנך",
-                subjectText: `השתדלו להתחשב בבקשות הנחנך בנוגע למיקומנו בשיעור ונפעיל שיקול דעת כדי למנוע משיכת תשומת לב.`
+                subSubjectTitle: "התחשבו בנחנך",
+                subjectText: `השתדלו להתחשב בבקשות הנחנך בנוגע למיקומנו בשיעור והפעילו שיקול דעת על מנת למנוע משיכת תשומת לב.`
             },
             {
                 subSubjectTitle: "רואה ולא נראה",
@@ -189,6 +188,7 @@
             <div class="message" v-show="correctCounter === 2">כל הכבוד! סיימתם את השלב<img src="../assets/muscle.png" class="muscle" /></div>
             <div class="sitting">
                 <img src="../assets/seatMain.png" alt="class" class="table2" />
+                <div class="board-text">לוח</div>
                 <div>
                     <img v-for="(seat, index) in sittingArr" :key="index" :id="seat.id" src="../assets/seat2.png" alt="seats" :class="['seats', !seat.showAnswer ? '' : seat.answer ? 'correctSeating' : 'incorrectSeating']" @click="checkSeating" />
                 </div>
@@ -266,16 +266,16 @@
 }
 
 .buttons {
+    margin: 1rem;
     border: none;
-    cursor: pointer;   
-    height: 6vh;
-    font-family: 'heebo';
+    cursor: pointer;  
+    font-family: 'heebo'; 
+    height: 3rem;
     font-size: 1.9rem;
     color: #ffffff;
     border-radius: 100px;
     background-color: #0e5745d8;
-    /* min-width: 12%; */
-    width: 11vw;
+    width: 11rem;
 }
 
 .buttons:hover,
@@ -458,6 +458,14 @@
    100% {
        transform: scale(1);
    }
+}
+
+.board-text {
+    position: absolute;
+    color: rgb(0, 0, 0);
+    font-size: 3rem;
+    left: 3.7rem;
+    top: -1.3rem;
 }
 
 </style>

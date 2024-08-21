@@ -1,33 +1,41 @@
 <template>
     <div class="prepare">
-        <div class="prepareTitle">
-            {{ chapter }}
-        </div>
-        <div>
-            <div class="prevText">
-                <br>
-                טרם תחילת התצפית, עליכם להערך מראש על מנת שתוכלו לאסוף את הנתונים בצורה מדויקת וברורה.
-                <br><br>
-                <div v-for="(item, index) in preperationTitleList" :key="index" v-show="index <= lineText" :class="index === lineText ? 'typed' : 'stopTyped' " class="checkList typewriter"><img src="../assets/check-mark.png" class="check"/><b>{{item}} -</b> {{ preperationItemList[index] }}</div><br>
-                <br>
-                <div><img src="../assets/pin.png" alt="pin" class="pin" />זכרו - הכנה עצמית תקבע את אופן המוכנות שלכם לביצוע תצפית.</div>
+        <GoodWatching v-show="showGoodWatching" @go-back="goBack"/>
+        <div v-show="!showGoodWatching">
+            <div class="prepareTitle">
+                {{ chapter }}
             </div>
-        </div>
-        <div class="buttonCont">
-            <button v-show="showNextButton || correctCounter === 4" class="buttons" @click="nextText">
-                ממשיכים
-            </button>
-            <button v-show="showBackButton" class="buttons" @click="prevSubject">
-                חוזרים
-            </button>
+            <div class="containerOfAll">
+                <div class="prevText">
+                    <br>
+                    טרם תחילת התצפית, עליכם להערך מראש על מנת שתוכלו לאסוף את הנתונים בצורה מדויקת וברורה.
+                    <br><br>
+                    <div v-for="(item, index) in preperationTitleList" :key="index" v-show="index <= lineText" :class="index === lineText ? 'typed' : 'stopTyped' " class="checkList typewriter"><img src="../assets/check-mark.png" class="check"/><b>{{item}} -</b> {{ preperationItemList[index] }}</div><br>
+                    <br>
+                    <div><img src="../assets/pin.png" alt="pin" class="pin" />זכרו - הכנה עצמית תקבע את אופן המוכנות שלכם לביצוע תצפית.</div>
+                </div>
+            </div>
+            <div class="buttonCont">
+                <button v-show="showNextButton || correctCounter === 4" class="buttons" @click="nextText">
+                    ממשיכים
+                </button>
+                <button v-show="showBackButton" class="buttons" @click="prevSubject">
+                    חוזרים
+                </button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import GoodWatching from './GoodWatching.vue';
 
 export default {
     props: ["chapter"],
+    emits: ['go-back'],
+    components: {
+        GoodWatching
+    },
     data() {
         return {
             showNextButton: true,
@@ -35,11 +43,14 @@ export default {
             lineText : 0,
             preperationItemList: ["בו קוראת התצפית", "דף תצפית, עט, כל פריט נוסף שנדרש.", "כדי להגיע מוכנים ברמה הגבוהה ביותר.", "לחזור על קריטריונים של דף התצפית."],
             preperationTitleList: ["תיאום הזמן והמקום", "הכנת אמצעים", "איסוף רקע ומידע חסר", "חזרה על קריטריונים"],
-            correctCounter: 0
+            correctCounter: 0,
+            showGoodWatching: false,
+            clicked: 0,
     };        
     },
     mounted() {
         this.textAni();
+        this.showGoodWatching = false;
     },
     methods: {
         textAni() {
@@ -54,8 +65,16 @@ export default {
             this.$emit('prevCurrentScreen');
         },
         nextText() {
-            this.$emit('changeCurrentScreen');
+            this.clicked++;
+            if (this.clicked > 0) {
+                this.showGoodWatching = true;
+                this.$emit('sendShow');
+            }
         },
+        goBack() {
+            this.showGoodWatching = false;
+            this.$emit('removeShow');
+        }
 
     },
 }
@@ -63,14 +82,12 @@ export default {
 
 <style scoped>
 .prepare {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     height: 100vh;
     direction: rtl;
-    overflow: hidden;
     font-family: 'heebo';
+    text-align: center;
+    position: relative; /* Changed from absolute to relative */
+    overflow: hidden;
 }
 
 .typewriter {
@@ -93,6 +110,13 @@ export default {
     border-left: .1em solid transparent;
 }
 
+.containerOfAll {
+    margin: 1rem;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
@@ -146,16 +170,16 @@ p {
 }
 
 .buttons {
+    margin: 1rem;
     border: none;
-    cursor: pointer;   
-    height: 6vh;
-    font-family: 'heebo';
+    cursor: pointer;  
+    font-family: 'heebo'; 
+    height: 3rem;
     font-size: 1.9rem;
     color: #ffffff;
     border-radius: 100px;
     background-color: #0e5745d8;
-    /* min-width: 12%; */
-    width: 11vw;
+    width: 11rem;
 }
 
 .buttons:hover,
@@ -194,11 +218,15 @@ p {
 }
 
 .buttonCont {
-    width: 85vw;
+    width: 90vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row-reverse;
+    position: absolute;
+    bottom: -1rem; /* Center buttons at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .prepareTitle {
@@ -209,11 +237,9 @@ p {
 }
 
 .prevText {
-    width: 43vw;
     text-align: center;
     display: flex;
     background-color: rgba(255, 255, 255, 0.671);
-    /* height: 40vh; */
     font-size: 1.75rem;
     padding: 1vw;
     box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.35);

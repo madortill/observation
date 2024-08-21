@@ -1,3 +1,13 @@
+<template>
+    <div id="summery">
+        <div class="text">
+            <p class="first">כל</p><p class="second">הכבוד!</p>
+        </div>
+        <div class="third">סיימתם את הלומדה בהצלחה</div>
+    </div>
+
+</template>
+
 <script>
   export default {
     data() {
@@ -7,23 +17,14 @@
     },
     methods: {
       
-    }
+    },
   }
 </script>
 
-<template>
-    <div class="ending">
-        <div class="text">
-            <p class="first">כל</p><p class="second">הכבוד!</p>
-        </div>
-        <div class="third">סיימתם את הלומדה בהצלחה</div>
-    </div>
-
-</template>
 
 
 <style scoped>
-.ending {
+#summery {
     display: flex;
     flex-direction: column;
     align-items: center;
