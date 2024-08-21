@@ -75,7 +75,6 @@
                 "Preperation":"הכנה עצמית לביצוע תצפית",
                 "Summery": "סיכום",
             },
-        // page: 3,
         page: 0,
         animationType: "",
         showAbout: false,
