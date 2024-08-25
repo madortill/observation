@@ -17,6 +17,7 @@
                 <div class="title">שימוש בדף תצפית</div>
                 <div class="sections">
                     <div class="subTitle">מה נרשום?</div>
+                    תיאורים, ציטוטים, שמות, זמנים מקומות ומידע כמותי
                     <div>
                     </div>
                 </div>
