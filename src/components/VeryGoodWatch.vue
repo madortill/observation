@@ -1,7 +1,7 @@
 <template>
     <div id="container">
       <div class="buttonCont">
-        <button v-show="beenInAll && notInside" class="buttons" @click="changeText">
+        <button v-show="beenInAll && notInside" class="buttons" @click="changePage">
           ממשיכים
         </button>
         <button v-show="notInside" class="buttons beLeft" @click="changeText">
@@ -49,7 +49,7 @@
   
   export default {
     props: ["chapter"],
-    emits: ["hideNav", "setNavShown"],
+    emits: ["hideNav", "setNavShown", 'change-me', 'go-back'],
     data() {
       return {
         beenInAll: false,
@@ -61,7 +61,9 @@
           { title: "התערבות", subtitle: "ישנם שני סוגים", text: ["התערבות עקיפה", "התערבות ישירה"], beenThere: false }
         ],
         currentSubSubject: "",
-        colorCode: 0
+        colorCode: 0,
+        counter: 0,
+        beenInAll: false,
       }
     },
     components: {
@@ -102,6 +104,13 @@
             this.subjectsArr[i]["beenThere"] = true;
             break;
           }
+          if (this.subjectsArr[i]["beenThere"]) {
+              this.counter++;
+          } 
+        }
+
+        if (this.counter >= 4) {
+          this.beenInAll = true;
         }
   
         if (!this.subjectsArr.some(e => e.beenThere === false)) {
@@ -116,6 +125,10 @@
           this.currentSubSubject = "";
           this.notInside = true;
         }
+      },
+      changePage() {
+        this.$emit('change-me');
+        console.log("hi");
       }
     },
     mounted() {

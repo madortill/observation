@@ -378,7 +378,8 @@
 
 .flip-card-container {
   display: flex;
-  width: 35vw;
+  width: 40rem;
+  padding: 1rem;
   flex-direction: row;
   align-items: center;
   direction: rtl;

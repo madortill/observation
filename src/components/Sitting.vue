@@ -234,7 +234,7 @@
     position: fixed;
     padding: 3.5%;
     position: absolute;
-    top: 14vh;
+    top: 17rem;
     right: 25vw;
     z-index: 2;
     cursor: pointer;
@@ -323,7 +323,7 @@
 
 .explanation {
     width: 32vw;
-    margin-top: 24vh;
+    margin-top: 21rem;
     transform-origin: top right;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.671);

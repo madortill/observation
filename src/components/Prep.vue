@@ -1,6 +1,6 @@
 <template>
     <div class="prepare">
-        <VeryGoodWatch v-show="showGoodWatching" @go-back="goBack"/>
+        <VeryGoodWatch v-show="showGoodWatching" @go-back="goBack" @change-me="next"/>
         <div v-show="!showGoodWatching">
             <div class="prepareTitle">
                 {{ chapter }}
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="buttonCont">
-                <button v-show="showNextButton || correctCounter === 4" class="buttons" @click="nextText">
+                <button v-show="showNextButton" class="buttons" @click="nextText">
                     ממשיכים
                 </button>
                 <button v-show="showBackButton" class="buttons" @click="prevSubject">
@@ -35,7 +35,7 @@ import VeryGoodWatch from './VeryGoodWatch.vue';
 
 export default {
     props: ["chapter"],
-    emits: ['go-back'],
+    emits: ['go-back', 'switch-screen'],
     components: {
         VeryGoodWatch
     },
@@ -46,7 +46,8 @@ export default {
             lineText : 0,
             preperationItemList: ["בו קוראת התצפית", "דף תצפית, עט, כל פריט נוסף שנדרש.", "כדי להגיע מוכנים ברמה הגבוהה ביותר.", "לחזור על קריטריונים של דף התצפית."],
             preperationTitleList: ["תיאום הזמן והמקום", "הכנת אמצעים", "איסוף רקע ומידע חסר", "חזרה על קריטריונים"],
-            correctCounter: 0,
+            // correctCounter: 0,
+            next: false,
             showGoodWatching: false,
             clicked: 0,
     };        
@@ -56,6 +57,10 @@ export default {
         this.showGoodWatching = false;
     },
     methods: {
+        next() {
+            this.$emit('switch-screen');
+            console.log("gili")
+        },
         textAni() {
             setInterval(() => {
                 if (this.lineText < 4) {
