@@ -41,7 +41,7 @@ export default {
         "BasicPrince": "הגדרת יסוד",
         "Target": "מאפייני יסוד",
         "Prep": "הכנה עצמית לביצוע תצפית",
-        "Summery": "סיכום",
+        "SummeryLast": "סיכום",
       }
     };
   },

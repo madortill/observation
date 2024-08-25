@@ -22,14 +22,23 @@
         </div>
       </Transition>
 
-      <Navbar
+      <Navbars         
+        v-if="page > 0"
+        :componentName="componentOrder[page]"
+        @go-to-page="goToPage"
+        :whereBeen="whereBeen"
+        :showGoodWatching = "showGoodWatching"
+        :isHamburgerStyle="isBurgerStyle">
+      </Navbars>
+
+      <!-- <Navbar
         v-if="page > 0"
         :componentName="componentOrder[page]"
         @go-to-page="goToPage"
         :whereBeen="whereBeen"
         :showGoodWatching = "showGoodWatching"
         :isHamburgerStyle="isBurgerStyle"
-      />
+      /> -->
 
     <KeepAlive>
         <component
@@ -60,8 +69,9 @@
   import SummeryLast from './components/SummeryLast.vue';
   import Target from './components/Target.vue'
   // import Targets from '@/components/Targets.vue';
-  import Navbar from '@/components/Navbar.vue';
+  // import Navbar from '@/components/Navbar.vue';
   import { KeepAlive } from 'vue';
+  import Navbars from './components/Navbars.vue';
 
   export default {
     data() {
@@ -97,7 +107,7 @@
       Prep,
       SummeryLast,
       Target,
-      Navbar
+      Navbars
     },
     methods: {
       switchPage() {
