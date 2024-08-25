@@ -38,9 +38,9 @@ export default {
     return {
       isMenuOpen: false, // Start with menu closed
       titles: {
-        "BasicPrinciples": "הגדרת יסוד",
+        "BasicPrince": "הגדרת יסוד",
         "Targets": "מאפייני יסוד",
-        "Preperation": "הכנה עצמית לביצוע תצפית",
+        "Prep": "הכנה עצמית לביצוע תצפית",
         "Summery": "סיכום",
       }
     };

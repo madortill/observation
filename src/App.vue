@@ -54,7 +54,8 @@
   import OpenScreen from './components/OpenScreen.vue'
   import BasicPrince from './components/BasicPrince.vue';
   // import OpeningScreen from '@/components/OpeningScreen.vue';
-  import Preperation from '@/components/Preperation.vue';
+  // import Preperation from '@/components/Preperation.vue';
+  import Prep from './components/Prep.vue';
   import Summery from '@/components/Summery.vue';
   import Targets from '@/components/Targets.vue';
   import Navbar from '@/components/Navbar.vue';
@@ -70,13 +71,13 @@
           "OpenScreen",
           "BasicPrince",
           "Targets",
-          "Preperation",
+          "Prep",
           "Summery"
       ],
       titles: {
                 "BasicPrince": "הגדרת יסוד",
                 "Targets": "מאפייני יסוד",
-                "Preperation":"הכנה עצמית לביצוע תצפית",
+                "Prep":"הכנה עצמית לביצוע תצפית",
                 "Summery": "סיכום",
             },
         page: 0,
@@ -91,7 +92,7 @@
     components: {
       OpenScreen,
       BasicPrince,
-      Preperation,
+      Prep,
       Summery,
       Targets,
       Navbar
@@ -108,7 +109,7 @@
         },
         CheckIfremoveShow() {
           this.switchPage();
-          if (this.whereBeen.includes('Preperation')) {
+          if (this.whereBeen.includes('Prep')) {
             this.removeShow()
           }
           if (this.lastBeenIn) {
@@ -118,7 +119,7 @@
         },
         goToPage (name, isMyPage) {
             this.lastBeenIn = isMyPage;
-            if (name === 'Preperation' && this.showGoodWatching){
+            if (name === 'Prep' && this.showGoodWatching){
               this.makeBurger();
             } else {
               this.removeShow()
@@ -148,7 +149,7 @@
     },
     computed: {
       isBurgerStyle() {
-        return this.componentOrder[this.page] === 'Preperation' && this.showGoodWatching;
+        return this.componentOrder[this.page] === 'Prep' && this.showGoodWatching;
       }
     }
   }
