@@ -43,7 +43,7 @@
                             מה נרשום? 
                         </div>
                         <div class="connectTwo">
-                            <DragQuestion @change-practice="changePractice"/> 
+                            <DraggingQuestions @change-practice="changePractice"/> 
                         </div>
                     </div>
                     <div class="whenWriting" v-show="practiceCount === 1">
@@ -131,10 +131,14 @@
 
 <script>
 // import ConnectTwo from './connectTwo.vue'
-import DragQuestion from './DragQuestion.vue'
+// import DragQuestion from './moved/DragQuestion.vue'
+import DraggingQuestions from './DraggingQuestions.vue'
 
   export default {
     props: ["chapter", "colorCode"],
+    components: {
+        DraggingQuestions
+    },
     data() {
       return {
         showBackButton: false,
@@ -232,10 +236,6 @@ import DragQuestion from './DragQuestion.vue'
                 }
         }
       }
-    },
-    components: {
-    //  ConnectTwo,
-        DragQuestion
     },
     methods: {
         clickedOnOption(event) {
