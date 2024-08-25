@@ -30,7 +30,7 @@
 <script>
 // import GoodWatch from './components/GoodWatch.vue';
 // import GoodWatching from './goodWatching.vue';
-import GoodWatching from './GoodWatching.vue';
+import GoodWatching from '@/GoodWatching.vue';
 
 export default {
     props: ["chapter"],
