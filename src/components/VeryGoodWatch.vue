@@ -30,18 +30,22 @@
           </div>
         </div>
       </div>
-      <DivideHearing v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
-      <SittingPlacement v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
-      <NoteDown v-else-if="currentSubSubject === 'רישום ותיעוד'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
-      <Involved v-else-if="currentSubSubject === 'התערבות'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+      <Divide v-else-if="currentSubSubject === 'חלוקת קשב'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+      <Sitting v-else-if="currentSubSubject === 'בחירת מיקום'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+      <Note v-else-if="currentSubSubject === 'רישום ותיעוד'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
+      <Involve v-else-if="currentSubSubject === 'התערבות'" :chapter="currentSubSubject" :colorCode="colorCode" @backToHomePage="backToHomePage"/>
     </div>
   </template>
   
   <script>
-  import DivideHearing from '../DivideHearing.vue';
-  import SittingPlacement from '../SittingPlacement.vue';
+//   import DivideHearing from './moved/DivideHearing.vue';
+//   import SittingPlacement from '../SittingPlacement.vue';
   import NoteDown from '../NoteDown.vue';
-  import Involved from '../Involved.vue';
+//   import Involved from '../Involved.vue';
+  import Divide from './Divide.vue';
+  import Sitting from './Sitting.vue';
+  import Involve from './Involve.vue';
+  import Note from './Note.vue';
   
   export default {
     props: ["chapter"],
@@ -61,10 +65,10 @@
       }
     },
     components: {
-      DivideHearing,
-      SittingPlacement,
-      NoteDown,
-      Involved
+        Divide,
+        Sitting,
+        Note,
+        Involve
     },
     methods: {
       changeSubject(event, index) {

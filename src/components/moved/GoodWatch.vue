@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import DivideHearing from '../DivideHearing.vue';
-import SittingPlacement from '../SittingPlacement.vue';
+import DivideHearing from './DivideHearing.vue';
+import SittingPlacement from './SittingPlacement.vue';
 import NoteDown from '../NoteDown.vue';
-import Involved from '../Involved.vue';
+import Involved from './Involved.vue';
 
 export default {
   props: ["chapter"],
