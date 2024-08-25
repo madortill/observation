@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import GoodWatching from '../GoodWatching.vue';
+import GoodWatching from './GoodWatch.vue';
 
 export default {
     props: ["chapter"],
