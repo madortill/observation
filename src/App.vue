@@ -50,7 +50,8 @@
 
 <script>
   // import BasicPrinciples from './components/BasicPrinciples.vue';
-  import BasicPrinciples from './components/BasicPrinciples.vue';
+  // import BasicPrinciples from './components/BasicPrinciples.vue';
+  import BasicPrince from './components/BasicPrince.vue';
   import OpeningScreen from './components/OpeningScreen.vue';
   import Preperation from '@/components/Preperation.vue';
   import Summery from '@/components/Summery.vue';
@@ -66,13 +67,13 @@
 
         componentOrder: [
           "OpeningScreen",
-          "BasicPrinciples",
+          "BasicPrince",
           "Targets",
           "Preperation",
           "Summery"
       ],
       titles: {
-                "BasicPrinciples": "הגדרת יסוד",
+                "BasicPrince": "הגדרת יסוד",
                 "Targets": "מאפייני יסוד",
                 "Preperation":"הכנה עצמית לביצוע תצפית",
                 "Summery": "סיכום",
@@ -88,7 +89,7 @@
     },
     components: {
       OpeningScreen,
-      BasicPrinciples,
+      BasicPrince,
       Preperation,
       Summery,
       Targets,
