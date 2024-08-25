@@ -56,8 +56,10 @@
   // import OpeningScreen from '@/components/OpeningScreen.vue';
   // import Preperation from '@/components/Preperation.vue';
   import Prep from './components/Prep.vue';
-  import Summery from '@/components/Summery.vue';
-  import Targets from '@/components/Targets.vue';
+  // import Summery from '@/components/Summery.vue';
+  import SummeryLast from './components/SummeryLast.vue';
+  import Target from './components/Target.vue'
+  // import Targets from '@/components/Targets.vue';
   import Navbar from '@/components/Navbar.vue';
   import { KeepAlive } from 'vue';
 
@@ -72,13 +74,13 @@
           "BasicPrince",
           "Target",
           "Prep",
-          "Summery"
+          "SummeryLast"
       ],
       titles: {
                 "BasicPrince": "הגדרת יסוד",
                 "Target": "מאפייני יסוד",
                 "Prep":"הכנה עצמית לביצוע תצפית",
-                "Summery": "סיכום",
+                "SummeryLast": "סיכום",
             },
         page: 0,
         animationType: "",
@@ -93,8 +95,8 @@
       OpenScreen,
       BasicPrince,
       Prep,
-      Summery,
-      Targets,
+      SummeryLast,
+      Target,
       Navbar
     },
     methods: {
