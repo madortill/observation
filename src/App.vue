@@ -49,6 +49,7 @@
 </template>
 
 <script>
+  // import BasicPrinciples from './components/BasicPrinciples.vue';
   import BasicPrinciples from './components/BasicPrinciples.vue';
   import OpeningScreen from './components/OpeningScreen.vue';
   import Preperation from '@/components/Preperation.vue';
