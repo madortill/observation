@@ -70,13 +70,13 @@
         componentOrder: [
           "OpenScreen",
           "BasicPrince",
-          "Targets",
+          "Target",
           "Prep",
           "Summery"
       ],
       titles: {
                 "BasicPrince": "הגדרת יסוד",
-                "Targets": "מאפייני יסוד",
+                "Target": "מאפייני יסוד",
                 "Prep":"הכנה עצמית לביצוע תצפית",
                 "Summery": "סיכום",
             },

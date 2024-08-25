@@ -39,7 +39,7 @@ export default {
       isMenuOpen: false, // Start with menu closed
       titles: {
         "BasicPrince": "הגדרת יסוד",
-        "Targets": "מאפייני יסוד",
+        "Target": "מאפייני יסוד",
         "Prep": "הכנה עצמית לביצוע תצפית",
         "Summery": "סיכום",
       }
