@@ -11,7 +11,7 @@
         subjectsInfo: [
             {
                 subSubjectTitle: "שמירה על בטיחות",
-                subjectText: `שימו <img src="../src/assets/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> `
+                subjectText: `שימו <img src="public/icons/heart.png" class='heartIcon' /> כי הינכם צריכים להיות נוכחים במקום שמאפשר לכם לטפל באירועי בטיחות. <br> `
             },
             {
                 subSubjectTitle: "התחשבו בנחנך",
