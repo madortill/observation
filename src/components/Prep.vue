@@ -1,6 +1,6 @@
 <template>
     <div class="prepare">
-        <GoodWatching v-show="showGoodWatching" @go-back="goBack"/>
+        <VeryGoodWatch v-show="showGoodWatching" @go-back="goBack"/>
         <div v-show="!showGoodWatching">
             <div class="prepareTitle">
                 {{ chapter }}
@@ -30,13 +30,14 @@
 <script>
 // import GoodWatch from './components/GoodWatch.vue';
 // import GoodWatching from './goodWatching.vue';
-import GoodWatching from './components/GoodWatching.vue';
+import VeryGoodWatch from './VeryGoodWatch.vue';
+// import GoodWatching from './components/GoodWatching.vue';
 
 export default {
     props: ["chapter"],
     emits: ['go-back'],
     components: {
-        GoodWatching
+        VeryGoodWatch
     },
     data() {
         return {
