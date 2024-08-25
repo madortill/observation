@@ -40,7 +40,7 @@
   <script>
 //   import DivideHearing from './moved/DivideHearing.vue';
 //   import SittingPlacement from '../SittingPlacement.vue';
-  import NoteDown from '../NoteDown.vue';
+//   import NoteDown from '../NoteDown.vue';
 //   import Involved from '../Involved.vue';
   import Divide from './Divide.vue';
   import Sitting from './Sitting.vue';
