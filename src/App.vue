@@ -51,8 +51,9 @@
 <script>
   // import BasicPrinciples from './components/BasicPrinciples.vue';
   // import BasicPrinciples from './components/BasicPrinciples.vue';
+  import OpenScreen from './components/OpenScreen.vue'
   import BasicPrince from './components/BasicPrince.vue';
-  import OpeningScreen from '@/components/OpeningScreen.vue';
+  // import OpeningScreen from '@/components/OpeningScreen.vue';
   import Preperation from '@/components/Preperation.vue';
   import Summery from '@/components/Summery.vue';
   import Targets from '@/components/Targets.vue';
@@ -66,7 +67,7 @@
         showGoodWatching: false,
 
         componentOrder: [
-          "OpeningScreen",
+          "OpenScreen",
           "BasicPrince",
           "Targets",
           "Preperation",
@@ -88,7 +89,7 @@
       }
     },
     components: {
-      OpeningScreen,
+      OpenScreen,
       BasicPrince,
       Preperation,
       Summery,
