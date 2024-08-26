@@ -1,6 +1,6 @@
 <template>
     <div class="prepare">
-        <VeryGoodWatch v-show="showGoodWatching" @go-back="goBack" @change-me="next"/>
+        <VeryGoodWatch v-show="showGoodWatching" @go-back="goBack" @change-me="nextPage"/>
         <div v-show="!showGoodWatching">
             <div class="prepareTitle">
                 {{ chapter }}
@@ -28,10 +28,7 @@
 </template>
 
 <script>
-// import GoodWatch from './components/GoodWatch.vue';
-// import GoodWatching from './goodWatching.vue';
 import VeryGoodWatch from './VeryGoodWatch.vue';
-// import GoodWatching from './components/GoodWatching.vue';
 
 export default {
     props: ["chapter"],
@@ -57,9 +54,8 @@ export default {
         this.showGoodWatching = false;
     },
     methods: {
-        next() {
+        nextPage() {
             this.$emit('switch-screen');
-            console.log("gili")
         },
         textAni() {
             setInterval(() => {

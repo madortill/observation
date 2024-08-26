@@ -45,7 +45,6 @@ export default {
     changeText(event) {
         if (event.currentTarget.innerText === "ממשיכים") {
             this.$emit('CheckIfremoveShow');
-            // this.$emit('switch-screen');
         } else {
             this.$emit('prevCurrentScreen');
         }

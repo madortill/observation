@@ -32,7 +32,7 @@ export default {
     font-size: 8rem;
     padding-top: 33vh;
     width: 52vw;
-    color: rgb(110, 110, 110);
+    color: rgb(5, 42, 18);
     animation: floatAnimation 3s ease-in-out infinite;
     justify-content: space-around;
 }

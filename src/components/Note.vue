@@ -131,8 +131,7 @@
 </template>
 
 <script>
-// import ConnectTwo from './connectTwo.vue'
-// import DragQuestion from './moved/DragQuestion.vue'
+
 import DraggingQuestions from './DraggingQuestions.vue'
 
   export default {

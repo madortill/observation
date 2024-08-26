@@ -31,15 +31,6 @@
         :isHamburgerStyle="isBurgerStyle">
       </Navbars>
 
-      <!-- <Navbar
-        v-if="page > 0"
-        :componentName="componentOrder[page]"
-        @go-to-page="goToPage"
-        :whereBeen="whereBeen"
-        :showGoodWatching = "showGoodWatching"
-        :isHamburgerStyle="isBurgerStyle"
-      /> -->
-
     <KeepAlive>
         <component
          :is="componentOrder[page]" 
@@ -58,18 +49,11 @@
 </template>
 
 <script>
-  // import BasicPrinciples from './components/BasicPrinciples.vue';
-  // import BasicPrinciples from './components/BasicPrinciples.vue';
   import OpenScreen from './components/OpenScreen.vue'
   import BasicPrince from './components/BasicPrince.vue';
-  // import OpeningScreen from '@/components/OpeningScreen.vue';
-  // import Preperation from '@/components/Preperation.vue';
   import Prep from './components/Prep.vue';
-  // import Summery from '@/components/Summery.vue';
   import SummeryLast from './components/SummeryLast.vue';
   import Target from './components/Target.vue'
-  // import Targets from '@/components/Targets.vue';
-  // import Navbar from '@/components/Navbar.vue';
   import { KeepAlive } from 'vue';
   import Navbars from './components/Navbars.vue';
 

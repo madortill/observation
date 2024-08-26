@@ -1,9 +1,10 @@
 <template>
     <div id="summery">
+        <img  class="glasses" src="../assets/goggles.png"/>
         <div class="text">
             <p class="first">כל</p><p class="second">הכבוד!</p>
         </div>
-        <div class="third">סיימתם את הלומדה בהצלחה</div>
+        <div class="third">בלומדה זו למדנו על השלב השני במעגל החניכה: תצפית. <br> עברנו על מאפייני היסוד של תצפית, וכיצד להתכונן ולבצע אותה. <br> עכשיו, אתם מוכנים להתקדם לשלב הבא, "עיבוד". <br> בהצלחה!</div>
     </div>
 
 </template>
@@ -32,36 +33,40 @@
     height: 100vh;
     direction: rtl;
     overflow: hidden;
-    background-image: url("../assets/goggles.png");
-    background-size: 55% 70%;
-    background-repeat: no-repeat;
-    background-position: center;
     height: 100vh;
+}
+
+.glasses {
+    position: absolute;
+    top: 6rem;
+    height: 60%;
+    width: 45%;
 }
 
 .text {
     font-weight: 700;
     display: flex;
     direction: rtl;
-    font-size: 10rem;
-    padding-top: 36vh;
-    color: rgb(68, 68, 68);
+    font-size: 7rem;
+    padding-top: 16rem;
+    color: rgb(5, 42, 18);
     animation: floatAnimation 3s ease-in-out infinite;
     justify-content: space-between;
 }
 
 .second {
     position: absolute;
-    right: 5.5vw;
+    right: 3.7rem;
 }
 
 .first {
     position: absolute;
-    left: 11vw;
+    left: 10rem;
 }
 
 .third {
-    font-size: 3rem;
+    text-align: center;
+    font-size: 2rem;
     padding-bottom: 4vh;
 }
 

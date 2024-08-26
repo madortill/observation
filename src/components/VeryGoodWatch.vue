@@ -38,10 +38,7 @@
   </template>
   
   <script>
-//   import DivideHearing from './moved/DivideHearing.vue';
-//   import SittingPlacement from '../SittingPlacement.vue';
-//   import NoteDown from '../NoteDown.vue';
-//   import Involved from '../Involved.vue';
+
   import Divide from './Divide.vue';
   import Sitting from './Sitting.vue';
   import Involve from './Involve.vue';
@@ -64,6 +61,7 @@
         colorCode: 0,
         counter: 0,
         beenInAll: false,
+
       }
     },
     components: {
@@ -128,8 +126,7 @@
       },
       changePage() {
         this.$emit('change-me');
-        console.log("hi");
-      }
+       }
     },
     mounted() {
       window.addEventListener('popstate', this.handlePopState);
