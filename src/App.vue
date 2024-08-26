@@ -77,6 +77,7 @@
                 "SummeryLast": "סיכום",
             },
         page: 0,
+        // page: 0,
         animationType: "",
         showAbout: false,
         whereBeen: ["OpeningScreen"],
