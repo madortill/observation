@@ -5,9 +5,9 @@
     <button v-show="page === 0" class = "aboutBtn" @click = "showInfo">i</button>
     <Transition  v-show = "page === 0">
           <div v-show = "showAbout" class="div-about">
-          <h3 class = "list-text-about">מפתחת ראשית:</h3>
+          <h3 class = "list-text-about">מפתחות:</h3>
             <p class = "list-text-about">סמל שירה כהן</p>
-            <h3 class = "list-text-about">מפתחת משנית:</h3>
+            <!-- <h3 class = "list-text-about">מפתחת משנית:</h3> -->
             <p class = "list-text-about">טור' גילי גורדון</p>
             <h3 class = "list-text-about">גרפיקה:</h3>
             <p class = "list-text-about">רב"ט אדוה אבא</p>
